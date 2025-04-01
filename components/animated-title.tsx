@@ -38,7 +38,7 @@ export default function AnimatedTitle({ children, className, delay = 0.2 }: Anim
       ref={headlineRef}
       className={cn(
         "text-5xl md:text-7xl lg:text-8xl font-bold mb-8 leading-tight tracking-tight mix-blend-difference",
-        className,
+        className
       )}
       style={{
         background: "linear-gradient(45deg, #E70E02, #af4261, #D84A05, #373B44)",
