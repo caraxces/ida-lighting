@@ -25,7 +25,7 @@ export default function Home() {
         behavior: 'instant', // Sử dụng 'instant' thay vì 'smooth'
       });
       
-      // Đảm bảo hiển thị FirstElementHpage ngay lập tức
+      // Đảm bảo hiển thị LuxuryRealEstate ngay lập tức (đã đổi index từ 0 thành 0)
       if (sectionRefs.current[0]) {
         sectionRefs.current[0].style.opacity = "1";
         sectionRefs.current[0].classList.add("flip-up-animation");
@@ -102,19 +102,32 @@ export default function Home() {
         className={`snap-y snap-mandatory h-screen overflow-y-auto perspective-1000 ${isLoaded ? "" : "overflow-hidden"}`}
         style={{ scrollBehavior: "smooth" }}
       >
+        {/* LuxuryRealEstate - Đưa lên đầu tiên */}
         <div className="snap-start h-screen w-full">
           <div 
             ref={(el) => (sectionRefs.current[0] = el)} 
             className="h-full" 
             style={{ transformOrigin: "bottom center" }}
           >
+            <LuxuryRealEstate />
+          </div>
+        </div>
+
+        {/* FirstElementHpage - Chuyển xuống vị trí thứ 2 */}
+        <div className="snap-start h-screen w-full relative">
+          <div 
+            ref={(el) => (sectionRefs.current[1] = el)} 
+            className="h-full opacity-0" 
+            style={{ transformOrigin: "bottom center" }}
+          >
             <FirstElementHpage />
           </div>
         </div>
 
+        {/* HeroSection - Chuyển xuống vị trí thứ 3 */}
         <div className="snap-start h-screen w-full relative">
           <div 
-            ref={(el) => (sectionRefs.current[1] = el)} 
+            ref={(el) => (sectionRefs.current[2] = el)} 
             className="h-full opacity-0" 
             style={{ transformOrigin: "bottom center" }}
           >
@@ -122,9 +135,10 @@ export default function Home() {
           </div>
         </div>
 
+        {/* ProjectSlider - Chuyển xuống vị trí thứ 4 */}
         <div className="snap-start h-[calc(100vh+70px)] w-full relative -mt-[50px]">
           <div
-            ref={(el) => (sectionRefs.current[2] = el)}
+            ref={(el) => (sectionRefs.current[3] = el)}
             className="h-full rounded-t-[50px] overflow-hidden opacity-0"
             style={{ background: "#B8BBC1", transformOrigin: "bottom center" }}
           >
@@ -132,9 +146,10 @@ export default function Home() {
           </div>
         </div>
         
+        {/* VideoPlayerSection - Chuyển xuống vị trí thứ 5 */}
         <div className="snap-start h-screen w-full relative -mt-[50px] z-10">
           <div
-            ref={(el) => (sectionRefs.current[3] = el)}
+            ref={(el) => (sectionRefs.current[4] = el)}
             className="h-full rounded-t-[50px] overflow-hidden opacity-0"
             style={{ background: "#B8BBC1", transformOrigin: "bottom center" }}
           >
@@ -147,9 +162,10 @@ export default function Home() {
           </div>
         </div>
         
+        {/* ServicesSection - Chuyển xuống vị trí thứ 6 */}
         <div id="work" className="snap-start h-screen w-full relative -mt-[50px] z-20">
           <div
-            ref={(el) => (sectionRefs.current[4] = el)}
+            ref={(el) => (sectionRefs.current[5] = el)}
             className="h-full rounded-t-[50px] overflow-hidden opacity-0"
             style={{ background: "#B8BBC1", transformOrigin: "bottom center" }}
           >
@@ -157,9 +173,10 @@ export default function Home() {
           </div>
         </div>
 
+        {/* Enhanced3DVideoCard - Chuyển xuống vị trí thứ 7 */}
         <div className="snap-start h-screen w-full relative -mt-[50px] z-15">
           <div
-            ref={(el) => (sectionRefs.current[5] = el)}
+            ref={(el) => (sectionRefs.current[6] = el)}
             className="h-full rounded-t-[50px] overflow-hidden opacity-0"
             style={{ background: "#B8BBC1", transformOrigin: "bottom center" }}
           >
@@ -167,17 +184,7 @@ export default function Home() {
           </div>
         </div>
         
-        <div className="snap-start h-screen w-full relative -mt-[50px] z-20">
-          <div
-            ref={(el) => (sectionRefs.current[6] = el)}
-            className="h-full rounded-t-[50px] overflow-hidden opacity-0"
-            style={{ background: "#B8BBC1", transformOrigin: "bottom center" }}
-          >
-            <LuxuryRealEstate backgroundImage="/red-vintage/7.png"/>
-            <LuxuryRealEstate backgroundImage="/red-vintage/6.png"/>
-          </div>
-        </div>
-        
+        {/* Footer - Giữ ở vị trí cuối cùng */}
         <div className="snap-start w-full relative -mt-[50px] z-[10]">
           <div
             ref={(el) => (sectionRefs.current[7] = el)}

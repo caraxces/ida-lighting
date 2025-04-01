@@ -41,7 +41,7 @@ export default function AnimatedTitle({ children, className, delay = 0.2 }: Anim
         className,
       )}
       style={{
-        background: "linear-gradient(45deg, #f3ec78, #af4261, #4286f4, #373B44)",
+        background: "linear-gradient(45deg, #E70E02, #af4261, #D84A05, #373B44)",
         backgroundSize: "300% 300%",
         WebkitBackgroundClip: "text",
         WebkitTextFillColor: "transparent",

@@ -102,7 +102,7 @@ type ProjectPageProps = {
   params: Promise<{ slug: string }>
 }
 
-export default function ProjectPage({ params }: ProjectPageProps) {
+export default async function ProjectPage({ params }: ProjectPageProps) {
   const slug = params?.slug || '';
 
   // Check if the project exists
