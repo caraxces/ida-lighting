@@ -31,7 +31,7 @@ export default function PartnershipPolicy() {
       <Header />
       <main className="flex-grow bg-gradient-to-r from-black via-black to-[#8B2323] text-white pt-32 pb-16">
         <div className="container mx-auto px-4 md:px-8">
-          <AnimatedTitle className="text-center italic">
+          <AnimatedTitle className="text-center">
             Chính Sách Hợp Tác
           </AnimatedTitle>
 
@@ -107,7 +107,7 @@ export default function PartnershipPolicy() {
               </ul>
             </motion.div>
 
-            <AnimatedTitle delay={0.5} className="text-center italic">
+            <AnimatedTitle delay={0.5} className="text-center">
               CHÍNH SÁCH HỢP TÁC
             </AnimatedTitle>
             

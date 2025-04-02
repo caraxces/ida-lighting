@@ -39,7 +39,7 @@ export default function Footer() {
             <Link href="mailto:idalighting.vn@gmail.com" className="block hover:text-gray-300 transition-colors">
               idalighting.vn@gmail.com
             </Link>
-            <p className="mt-2">+84 24 9876 5432</p>
+            <p className="mt-2">+84 0924.222.888</p>
           </div>
         </div>
 

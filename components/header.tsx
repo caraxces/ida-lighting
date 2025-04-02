@@ -321,14 +321,14 @@ export default function Header({ onButtonClick, onButtonHover }: HeaderProps) {
                   <h3 className="font-medium mb-4 text-white">Hà Tĩnh</h3>
                   <p className="text-gray-400 mb-1">153 Hà Huy Tập</p>
                   <p className="text-gray-400 mb-1">Thành phố Hà Tĩnh, Việt Nam</p>
-                  <p className="text-gray-400 mb-4">+84 (0) 24 1234 5678</p>
+                  <p className="text-gray-400 mb-4">+84 0924.222.888</p>
                 </div>
 
                 <div className="mt-8 relative z-10">
                   <h3 className="font-medium mb-4 text-white">Hà Nội</h3>
                   <p className="text-gray-400 mb-1">Tầng 3, Tòa nhà Vantage</p>
                   <p className="text-gray-400 mb-1">Hoàn Kiếm, Hà Nội, Việt Nam</p>
-                  <p className="text-gray-400">+84 (0) 24 3333 9999</p>
+                  <p className="text-gray-400">+84 0924.222.888</p>
                 </div>
               </div>
             </div>
