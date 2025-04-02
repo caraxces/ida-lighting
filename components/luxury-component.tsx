@@ -100,7 +100,7 @@ export default function HeroSection({
           >
           <AnimatedTitle>
             <span className="block">IDA</span>
-            <span className="font-extrabold italic">Lighting</span>
+            <span className="font-extrabold">Lighting</span>
           </AnimatedTitle>
 
           <p className="text-white/80 text-lg md:text-xl max-w-2xl mx-auto font-light leading-relaxed mt-6">
