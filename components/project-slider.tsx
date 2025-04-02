@@ -82,6 +82,14 @@ export default function ProjectSliderEnhanced() {
   // Add responsive state
   const [isMobile, setIsMobile] = useState(false)
 
+  // Touch handling variables
+  const touchStartY = useRef<number | null>(null)
+  const touchEndY = useRef<number | null>(null)
+  const lastTouchTime = useRef<number>(0)
+  const touchThreshold = 50 // Minimum swipe distance in pixels
+  const touchTimeThreshold = 800 // ms between touch actions
+  const [hasViewedAllSlides, setHasViewedAllSlides] = useState(false)
+
   useEffect(() => {
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 768)
@@ -170,6 +178,90 @@ export default function ProjectSliderEnhanced() {
     window.addEventListener("keydown", handleKeyDown)
     return () => window.removeEventListener("keydown", handleKeyDown)
   }, [activeIndex, isScrolling, isSoundEnabled, playSound])
+
+  // Check if all slides have been viewed
+  useEffect(() => {
+    if (activeIndex === projects.length - 1) {
+      setHasViewedAllSlides(true)
+    }
+  }, [activeIndex])
+
+  // Handle touch events for mobile swipe
+  useEffect(() => {
+    const handleTouchStart = (e: TouchEvent) => {
+      if (!sliderRef.current) return
+      const rect = sliderRef.current.getBoundingClientRect()
+      if (rect.bottom <= 0 || rect.top >= window.innerHeight) return
+
+      // If we've viewed all slides, allow normal scrolling
+      if (hasViewedAllSlides && activeIndex === projects.length - 1) return
+
+      touchStartY.current = e.touches[0].clientY
+    }
+
+    const handleTouchMove = (e: TouchEvent) => {
+      if (!sliderRef.current || touchStartY.current === null) return
+
+      // If we've viewed all slides and are on the last slide, allow normal scrolling
+      if (hasViewedAllSlides && activeIndex === projects.length - 1) return
+
+      // Prevent default to stop page scrolling while in this component
+      e.preventDefault()
+    }
+
+    const handleTouchEnd = (e: TouchEvent) => {
+      if (!sliderRef.current || touchStartY.current === null || isScrolling) return
+
+      const rect = sliderRef.current.getBoundingClientRect()
+      if (rect.bottom <= 0 || rect.top >= window.innerHeight) return
+
+      touchEndY.current = e.changedTouches[0].clientY
+
+      // Check if enough time has passed since last touch action
+      const now = new Date().getTime()
+      if (now - lastTouchTime.current < touchTimeThreshold) return
+
+      // Calculate swipe direction and distance
+      const touchDiff = touchStartY.current - touchEndY.current
+
+      if (Math.abs(touchDiff) > touchThreshold) {
+        lastTouchTime.current = now
+
+        if (touchDiff > 0 && activeIndex < projects.length - 1) {
+          // Swipe up - go to next slide
+          setIsScrolling(true)
+          setActiveIndex((prev) => prev + 1)
+          if (isSoundEnabled) playSound()
+          setTimeout(() => setIsScrolling(false), 800)
+        } else if (touchDiff < 0 && activeIndex > 0) {
+          // Swipe down - go to previous slide
+          setIsScrolling(true)
+          setActiveIndex((prev) => prev - 1)
+          if (isSoundEnabled) playSound()
+          setTimeout(() => setIsScrolling(false), 800)
+        }
+      }
+
+      // Reset touch values
+      touchStartY.current = null
+      touchEndY.current = null
+    }
+
+    // Add touch event listeners
+    if (sliderRef.current) {
+      sliderRef.current.addEventListener("touchstart", handleTouchStart, { passive: false })
+      sliderRef.current.addEventListener("touchmove", handleTouchMove, { passive: false })
+      sliderRef.current.addEventListener("touchend", handleTouchEnd, { passive: false })
+    }
+
+    return () => {
+      if (sliderRef.current) {
+        sliderRef.current.removeEventListener("touchstart", handleTouchStart)
+        sliderRef.current.removeEventListener("touchmove", handleTouchMove)
+        sliderRef.current.removeEventListener("touchend", handleTouchEnd)
+      }
+    }
+  }, [activeIndex, isScrolling, hasViewedAllSlides, isSoundEnabled, playSound])
 
   return (
     <div ref={sliderRef} className="relative w-full h-screen overflow-hidden bg-white">
@@ -342,6 +434,13 @@ export default function ProjectSliderEnhanced() {
           />
         ))}
       </div>
+
+      {/* Scroll indicator for when all slides have been viewed */}
+      {hasViewedAllSlides && activeIndex === projects.length - 1 && (
+        <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 text-white/80 text-xs md:text-sm animate-bounce">
+          Scroll to continue
+        </div>
+      )}
     </div>
   )
 }

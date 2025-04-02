@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from "react"
 import { motion } from "framer-motion"
 import AnimatedTitle from "./animated-title"
 import GlowButton from "./glow-button"
+import { useSound } from "@/hooks/use-sound"
 
 // You can pass the background image URLs as props
 interface HeroSectionProps {
@@ -20,6 +21,7 @@ export default function HeroSection({
   const containerRef = useRef<HTMLDivElement>(null)
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
   const [isDarkMode, setIsDarkMode] = useState(false)
+  const { playSound } = useSound()
 
   // Add custom font for the title
   useEffect(() => {
@@ -41,6 +43,7 @@ export default function HeroSection({
 
   const toggleLights = () => {
     setIsDarkMode(!isDarkMode)
+    playSound() // Play sound when toggling lights
   }
 
   return (

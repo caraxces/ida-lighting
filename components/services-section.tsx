@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react"
 import { motion } from "framer-motion"
+import { useSound } from "@/hooks/use-sound"
 
 // Define the slide type
 type Slide = {
@@ -52,6 +53,7 @@ export default function DoorOpeningSlides() {
   const [hasViewedAllSlides, setHasViewedAllSlides] = useState(false)
   const [viewedSlides, setViewedSlides] = useState<Set<number>>(new Set([0]))
   const sectionRef = useRef<HTMLDivElement>(null)
+  const { playSound } = useSound()
 
   // Touch handling variables
   const touchStartY = useRef<number | null>(null)
@@ -87,8 +89,8 @@ export default function DoorOpeningSlides() {
       const rect = sectionRef.current.getBoundingClientRect()
       if (rect.bottom <= 0 || rect.top >= window.innerHeight) return
 
-      // Nếu đã xem hết tất cả slide, cho phép tiếp tục scroll
-      if (hasViewedAllSlides) return
+      // Nếu đã xem hết tất cả slide và đang ở slide cuối cùng, cho phép tiếp tục scroll
+      if (hasViewedAllSlides && activeSlide === slides.length - 1) return
 
       e.preventDefault()
 
@@ -115,21 +117,31 @@ export default function DoorOpeningSlides() {
       const rect = sectionRef.current.getBoundingClientRect()
       if (rect.bottom <= 0 || rect.top >= window.innerHeight) return
 
-      // If we've viewed all slides, allow normal scrolling
-      if (hasViewedAllSlides) return
+      // If we've viewed all slides and are on the last slide, allow normal scrolling
+      if (hasViewedAllSlides && activeSlide === slides.length - 1) return
 
       touchStartY.current = e.touches[0].clientY
     }
 
     const handleTouchMove = (e: TouchEvent) => {
-      if (!sectionRef.current || touchStartY.current === null || hasViewedAllSlides) return
+      if (!sectionRef.current || touchStartY.current === null) return
+      
+      // If we've viewed all slides and are on the last slide, allow normal scrolling
+      if (hasViewedAllSlides && activeSlide === slides.length - 1) return
 
       // Prevent default to stop page scrolling while in this component
       e.preventDefault()
     }
 
     const handleTouchEnd = (e: TouchEvent) => {
-      if (!sectionRef.current || touchStartY.current === null || isAnimating || hasViewedAllSlides) return
+      if (!sectionRef.current || touchStartY.current === null || isAnimating) return
+
+      // If we've viewed all slides and are on the last slide, allow normal scrolling
+      if (hasViewedAllSlides && activeSlide === slides.length - 1) {
+        touchStartY.current = null
+        touchEndY.current = null
+        return
+      }
 
       const rect = sectionRef.current.getBoundingClientRect()
       if (rect.bottom <= 0 || rect.top >= window.innerHeight) return
@@ -202,15 +214,26 @@ export default function DoorOpeningSlides() {
     newViewedSlides.add(activeSlide)
     setViewedSlides(newViewedSlides)
 
-    if (newViewedSlides.size === slides.length) {
+    // Set hasViewedAllSlides to true when we reach the last slide
+    if (activeSlide === slides.length - 1) {
       setHasViewedAllSlides(true)
     }
   }, [activeSlide])
+
+  // Remove touch-none class when on last slide and all slides viewed
+  useEffect(() => {
+    if (hasViewedAllSlides && activeSlide === slides.length - 1 && sectionRef.current) {
+      sectionRef.current.classList.remove('touch-none')
+    } else if (sectionRef.current) {
+      sectionRef.current.classList.add('touch-none')
+    }
+  }, [hasViewedAllSlides, activeSlide])
 
   const changeSlide = (newIndex: number) => {
     if (isAnimating) return
 
     setIsAnimating(true)
+    playSound() // Play sound when changing slides
 
     // Close the doors
     setIsDoorsOpen(false)
@@ -334,7 +357,7 @@ export default function DoorOpeningSlides() {
         </div>
 
         {/* Scroll indicator */}
-        {hasViewedAllSlides && (
+        {hasViewedAllSlides && activeSlide === slides.length - 1 && (
           <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 text-black/50 text-xs md:text-sm animate-bounce">
             Scroll to continue
           </div>
@@ -343,4 +366,3 @@ export default function DoorOpeningSlides() {
     </div>
   )
 }
-

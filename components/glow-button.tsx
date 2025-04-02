@@ -60,9 +60,9 @@ export default function GlowButton({ text, onClick, className = "" }: GlowButton
               #00ffcc, 
               #00ffff
             )`,
-            filter: `blur(${isHovered ? 5 : 3}px)`,
-            opacity: isHovered ? 1 : 0.8,
-            transform: "scale(1.02)",
+            filter: `blur(${isHovered ? 8 : 6}px) brightness(${isHovered ? 1.2 : 1.1})`,
+            opacity: isHovered ? 1 : 0.95,
+            transform: "scale(1.05)",
           }}
         />
       </div>
@@ -72,8 +72,13 @@ export default function GlowButton({ text, onClick, className = "" }: GlowButton
         onClick={onClick}
         className="relative z-10 px-8 py-3 bg-black bg-opacity-90 text-white font-medium rounded-full w-full transition-all duration-300"
         style={{
-          boxShadow: isHovered ? "0 0 20px rgba(0, 255, 255, 0.5)" : "none",
-          transform: isHovered ? "scale(1.03)" : "scale(1)",
+          boxShadow: isHovered 
+            ? "0 0 30px rgba(0, 255, 255, 0.7), 0 0 60px rgba(0, 255, 255, 0.4)" 
+            : "0 0 20px rgba(0, 255, 255, 0.5), 0 0 40px rgba(0, 255, 255, 0.3)",
+          transform: isHovered ? "scale(1.05)" : "scale(1.02)",
+          textShadow: isHovered 
+            ? "0 0 10px rgba(255, 255, 255, 0.5)" 
+            : "0 0 5px rgba(255, 255, 255, 0.3)",
         }}
       >
         {text}
