@@ -9,7 +9,12 @@ import { Volume2, VolumeX, ArrowRight, ChevronRight } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { useSound } from "@/hooks/use-sound"
 
-export default function Header() {
+interface HeaderProps {
+  onButtonClick?: () => void;
+  onButtonHover?: () => void;
+}
+
+export default function Header({ onButtonClick, onButtonHover }: HeaderProps) {
   const [soundOn, setSoundOn] = useState(true)
   const [scrolled, setScrolled] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -90,6 +95,7 @@ export default function Header() {
               pathname === "/" ? "bg-white text-black" : "text-gray-400 hover:text-white hover:text-shadow-[0_0_15px_rgba(255,255,255,0.7)] bg-white/10 backdrop-blur-sm",
             )}
             onClick={(e) => handleNavClick(e)}
+            onMouseEnter={onButtonHover}
           >
             Home
           </Link>
@@ -106,6 +112,7 @@ export default function Header() {
                     : "text-gray-400 hover:text-white hover:[text-shadow:0_0_15px_rgba(255,255,255,0.7)]"
                 )}
                 onClick={(e) => handleNavClick(e, "work")}
+                onMouseEnter={onButtonHover}
               >
                 Work
               </Link>
@@ -118,6 +125,7 @@ export default function Header() {
                     : "text-gray-400 hover:text-white hover:[text-shadow:0_0_15px_rgba(255,255,255,0.7)]"
                 )}
                 onClick={(e) => handleNavClick(e)}
+                onMouseEnter={onButtonHover}
               >
                 About
               </Link>
@@ -130,6 +138,7 @@ export default function Header() {
                     : "text-gray-400 hover:text-white hover:[text-shadow:0_0_15px_rgba(255,255,255,0.7)]"
                 )}
                 onClick={(e) => handleNavClick(e)}
+                onMouseEnter={onButtonHover}
               >
                 Contacts
               </Link>

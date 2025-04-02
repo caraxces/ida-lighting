@@ -22,17 +22,17 @@ export default function Home() {
     const scrollTimeout = setTimeout(() => {
       window.scrollTo({
         top: 0,
-        behavior: 'instant',
-      });
-      
+        behavior: "instant",
+      })
+
       if (sectionRefs.current[0]) {
-        sectionRefs.current[0].style.opacity = "1";
-        sectionRefs.current[0].classList.add("flip-up-animation");
+        sectionRefs.current[0].style.opacity = "1"
+        sectionRefs.current[0].classList.add("flip-up-animation")
       }
-    }, 50);
-    
-    setIsLoaded(true);
-    
+    }, 50)
+
+    setIsLoaded(true)
+
     const observerOptions = {
       root: null,
       rootMargin: "-10% 0px",
@@ -42,17 +42,17 @@ export default function Home() {
     const sectionObserver = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          const index = sectionRefs.current.findIndex(ref => ref === entry.target)
+          const index = sectionRefs.current.findIndex((ref) => ref === entry.target)
           const delay = index > 0 ? index * 50 : 0
-          
+
           setTimeout(() => {
             if (entry.target instanceof HTMLElement) {
-              entry.target.style.opacity = "1";
+              entry.target.style.opacity = "1"
               entry.target.classList.add("flip-up-animation")
             }
           }, delay)
         } else {
-          const index = sectionRefs.current.findIndex(ref => ref === entry.target)
+          const index = sectionRefs.current.findIndex((ref) => ref === entry.target)
           if (index > 0 && entry.boundingClientRect.y > window.innerHeight * 0.25) {
             if (entry.target instanceof HTMLElement) {
               entry.target.classList.remove("flip-up-animation")
@@ -69,7 +69,7 @@ export default function Home() {
     })
 
     return () => {
-      clearTimeout(scrollTimeout);
+      clearTimeout(scrollTimeout)
       sectionRefs.current.forEach((section) => {
         if (section) {
           sectionObserver.unobserve(section)
@@ -81,35 +81,37 @@ export default function Home() {
   // Thêm một useEffect riêng để đảm bảo vị trí cuộn luôn ở đầu trang khi component mount
   useEffect(() => {
     const forcedScrollTop = () => {
-      window.scrollTo(0, 0);
-    };
-    
-    window.addEventListener('load', forcedScrollTop);
-    
+      window.scrollTo(0, 0)
+    }
+
+    window.addEventListener("load", forcedScrollTop)
+
     // Đặt vị trí cuộn về đầu trang nhiều lần trong vài mili giây đầu tiên
-    const interval = setInterval(forcedScrollTop, 10);
-    setTimeout(() => clearInterval(interval), 200);
-    
+    const interval = setInterval(forcedScrollTop, 10)
+    setTimeout(() => clearInterval(interval), 200)
+
     return () => {
-      window.removeEventListener('load', forcedScrollTop);
-      clearInterval(interval);
-    };
-  }, []);
+      window.removeEventListener("load", forcedScrollTop)
+      clearInterval(interval)
+    }
+  }, [])
 
   return (
     <main className="min-h-screen bg-black text-white relative">
       <Header />
-      
-      <div 
-        ref={containerRef} 
+
+      <div
+        ref={containerRef}
         className={`snap-y snap-mandatory h-screen overflow-y-auto perspective-1000 ${isLoaded ? "" : "overflow-hidden"}`}
         style={{ scrollBehavior: "smooth" }}
       >
         {/* LuxuryRealEstate */}
         <div className="snap-start h-screen w-full">
-          <div 
-            ref={(el) => { sectionRefs.current[0] = el }} 
-            className="h-full" 
+          <div
+            ref={(el) => {
+              sectionRefs.current[0] = el
+            }}
+            className="h-full transition-all duration-1000 ease-in-out"
             style={{ transformOrigin: "bottom center" }}
           >
             <LuxuryRealEstate />
@@ -118,9 +120,11 @@ export default function Home() {
 
         {/* FirstElementHpage */}
         <div className="snap-start h-screen w-full relative">
-          <div 
-            ref={(el) => { sectionRefs.current[1] = el }} 
-            className="h-full opacity-0" 
+          <div
+            ref={(el) => {
+              sectionRefs.current[1] = el
+            }}
+            className="h-full opacity-0 transition-all duration-1000 ease-in-out"
             style={{ transformOrigin: "bottom center" }}
           >
             <FirstElementHpage />
@@ -129,9 +133,11 @@ export default function Home() {
 
         {/* SecondElementHpage */}
         <div className="snap-start h-screen w-full relative">
-          <div 
-            ref={(el) => { sectionRefs.current[2] = el }} 
-            className="h-full opacity-0" 
+          <div
+            ref={(el) => {
+              sectionRefs.current[2] = el
+            }}
+            className="h-full opacity-0 transition-all duration-1000 ease-in-out"
             style={{ transformOrigin: "bottom center" }}
           >
             <SecondElementHpage />
@@ -140,9 +146,11 @@ export default function Home() {
 
         {/* HeroSection */}
         <div className="snap-start h-screen w-full relative">
-          <div 
-            ref={(el) => { sectionRefs.current[3] = el }} 
-            className="h-full opacity-0" 
+          <div
+            ref={(el) => {
+              sectionRefs.current[3] = el
+            }}
+            className="h-full opacity-0 transition-all duration-1000 ease-in-out"
             style={{ transformOrigin: "bottom center" }}
           >
             <HeroSection />
@@ -150,32 +158,38 @@ export default function Home() {
         </div>
 
         {/* ProjectSlider */}
-        <div className="snap-start h-[calc(100vh+70px)] w-full relative -mt-[50px]">
+        <div className="snap-start h-screen w-full relative">
           <div
-            ref={(el) => { sectionRefs.current[4] = el }}
-            className="h-full rounded-t-[50px] overflow-hidden opacity-0"
+            ref={(el) => {
+              sectionRefs.current[4] = el
+            }}
+            className="h-full opacity-0 transition-all duration-1000 ease-in-out"
             style={{ background: "#B8BBC1", transformOrigin: "bottom center" }}
           >
             <ProjectSlider />
           </div>
         </div>
-        
+
         {/* VideoPlayerSection */}
-        <div className="snap-start h-screen w-full relative -mt-[50px] z-10">
+        <div className="snap-start h-screen w-full relative">
           <div
-            ref={(el) => { sectionRefs.current[5] = el }}
-            className="h-full rounded-t-[50px] overflow-hidden opacity-0"
+            ref={(el) => {
+              sectionRefs.current[5] = el
+            }}
+            className="h-full opacity-0 transition-all duration-1000 ease-in-out"
             style={{ background: "#B8BBC1", transformOrigin: "bottom center" }}
           >
             <VideoPlayerSection />
           </div>
         </div>
-        
+
         {/* ServicesSection */}
-        <div id="work" className="snap-start h-screen w-full relative -mt-[50px] z-20">
+        <div id="work" className="snap-start h-screen w-full relative">
           <div
-            ref={(el) => { sectionRefs.current[6] = el }}
-            className="h-full rounded-t-[50px] overflow-hidden opacity-0"
+            ref={(el) => {
+              sectionRefs.current[6] = el
+            }}
+            className="h-full opacity-0 transition-all duration-1000 ease-in-out"
             style={{ background: "#B8BBC1", transformOrigin: "bottom center" }}
           >
             <ServicesSection />
@@ -183,21 +197,25 @@ export default function Home() {
         </div>
 
         {/* Enhanced3DVideoCard */}
-        <div className="snap-start h-screen w-full relative -mt-[50px] z-15">
+        <div className="snap-start h-screen w-full relative">
           <div
-            ref={(el) => { sectionRefs.current[7] = el }}
-            className="h-full rounded-t-[50px] overflow-hidden opacity-0"
+            ref={(el) => {
+              sectionRefs.current[7] = el
+            }}
+            className="h-full opacity-0 transition-all duration-1000 ease-in-out"
             style={{ background: "#B8BBC1", transformOrigin: "bottom center" }}
           >
             <Enhanced3DVideoCard />
           </div>
         </div>
-        
+
         {/* Footer */}
-        <div className="snap-start w-full relative -mt-[50px] z-[10]">
+        <div className="snap-start w-full relative -mt-[50px]">
           <div
-            ref={(el) => { sectionRefs.current[8] = el }}
-            className="rounded-t-[50px] overflow-hidden shadow-2xl opacity-0"
+            ref={(el) => {
+              sectionRefs.current[8] = el
+            }}
+            className="rounded-t-[10px] overflow-hidden shadow-2xl opacity-0"
             style={{ transformOrigin: "bottom center" }}
           >
             <Footer />
