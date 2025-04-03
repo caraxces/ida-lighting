@@ -30,6 +30,7 @@ export default function FirstElementHpage() {
   const { playSound } = useSound()
   const containerRef = useRef<HTMLDivElement>(null)
   const touchStartX = useRef<number | null>(null)
+  const touchStartY = useRef<number | null>(null)
 
   // Scroll animation
   const { scrollYProgress } = useScroll({
@@ -128,38 +129,47 @@ export default function FirstElementHpage() {
     setCurrentSlide(wrappedPage)
   }
 
-  // Prevent horizontal swiping on mobile
+  // Handle touch events to prevent horizontal swiping but allow vertical
   useEffect(() => {
-    const preventHorizontalSwipe = (e: TouchEvent) => {
-      // Only prevent horizontal swipes, allow vertical scrolling
-      if (!touchStartX.current) return
+    const handleTouchStart = (e: TouchEvent) => {
+      touchStartX.current = e.touches[0].clientX
+      touchStartY.current = e.touches[0].clientY
+    }
 
-      const touchEndX = e.touches[0].clientX
-      const diffX = touchStartX.current - touchEndX
+    const handleTouchMove = (e: TouchEvent) => {
+      if (!touchStartX.current || !touchStartY.current) return
 
-      // If horizontal movement is greater than vertical, prevent default
-      if (Math.abs(diffX) > 10) {
+      const touchCurrentX = e.touches[0].clientX
+      const touchCurrentY = e.touches[0].clientY
+
+      const diffX = touchStartX.current - touchCurrentX
+      const diffY = touchStartY.current - touchCurrentY
+
+      // Chỉ chặn vuốt ngang, cho phép vuốt dọc
+      // Nếu chuyển động ngang lớn hơn chuyển động dọc và đủ lớn để được coi là vuốt
+      if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 10) {
         e.preventDefault()
       }
     }
 
-    const handleTouchStart = (e: TouchEvent) => {
-      touchStartX.current = e.touches[0].clientX
-    }
-
     const handleTouchEnd = () => {
       touchStartX.current = null
+      touchStartY.current = null
     }
 
-    // Add event listeners to the document to catch all touch events
-    document.addEventListener("touchstart", handleTouchStart, { passive: true })
-    document.addEventListener("touchmove", preventHorizontalSwipe, { passive: false })
-    document.addEventListener("touchend", handleTouchEnd, { passive: true })
+    // Thêm event listeners vào component
+    if (containerRef.current) {
+      containerRef.current.addEventListener("touchstart", handleTouchStart, { passive: true })
+      containerRef.current.addEventListener("touchmove", handleTouchMove, { passive: false })
+      containerRef.current.addEventListener("touchend", handleTouchEnd, { passive: true })
+    }
 
     return () => {
-      document.removeEventListener("touchstart", handleTouchStart)
-      document.removeEventListener("touchmove", preventHorizontalSwipe)
-      document.removeEventListener("touchend", handleTouchEnd)
+      if (containerRef.current) {
+        containerRef.current.removeEventListener("touchstart", handleTouchStart)
+        containerRef.current.removeEventListener("touchmove", handleTouchMove)
+        containerRef.current.removeEventListener("touchend", handleTouchEnd)
+      }
     }
   }, [])
 
@@ -171,7 +181,7 @@ export default function FirstElementHpage() {
       animate={{ opacity: 1 }}
       transition={{ duration: 1 }}
       className={cn(
-        "relative w-full min-h-screen overflow-hidden bg-[#FFDAB9] touch-none",
+        "relative w-full min-h-screen overflow-hidden bg-[#FFDAB9]", // Removed touch-none class
         hasLoaded ? "transition-all duration-1000" : "",
       )}
       onMouseEnter={() => {
@@ -182,8 +192,6 @@ export default function FirstElementHpage() {
         setIsPaused(false)
         setIsHovering(false)
       }}
-      onTouchStart={() => setIsPaused(true)}
-      onTouchEnd={() => setIsPaused(false)}
       onMouseMove={handleMouseMove}
     >
       {/* Loading animation */}
