@@ -29,6 +29,7 @@ export default function FirstElementHpage() {
   const [hasLoaded, setHasLoaded] = useState(false)
   const { playSound } = useSound()
   const containerRef = useRef<HTMLDivElement>(null)
+  const touchStartX = useRef<number | null>(null)
 
   // Scroll animation
   const { scrollYProgress } = useScroll({
@@ -127,6 +128,41 @@ export default function FirstElementHpage() {
     setCurrentSlide(wrappedPage)
   }
 
+  // Prevent horizontal swiping on mobile
+  useEffect(() => {
+    const preventHorizontalSwipe = (e: TouchEvent) => {
+      // Only prevent horizontal swipes, allow vertical scrolling
+      if (!touchStartX.current) return
+
+      const touchEndX = e.touches[0].clientX
+      const diffX = touchStartX.current - touchEndX
+
+      // If horizontal movement is greater than vertical, prevent default
+      if (Math.abs(diffX) > 10) {
+        e.preventDefault()
+      }
+    }
+
+    const handleTouchStart = (e: TouchEvent) => {
+      touchStartX.current = e.touches[0].clientX
+    }
+
+    const handleTouchEnd = () => {
+      touchStartX.current = null
+    }
+
+    // Add event listeners to the document to catch all touch events
+    document.addEventListener("touchstart", handleTouchStart, { passive: true })
+    document.addEventListener("touchmove", preventHorizontalSwipe, { passive: false })
+    document.addEventListener("touchend", handleTouchEnd, { passive: true })
+
+    return () => {
+      document.removeEventListener("touchstart", handleTouchStart)
+      document.removeEventListener("touchmove", preventHorizontalSwipe)
+      document.removeEventListener("touchend", handleTouchEnd)
+    }
+  }, [])
+
   return (
     <motion.div
       ref={containerRef}
@@ -135,7 +171,7 @@ export default function FirstElementHpage() {
       animate={{ opacity: 1 }}
       transition={{ duration: 1 }}
       className={cn(
-        "relative w-full min-h-screen overflow-hidden bg-[#FFDAB9]",
+        "relative w-full min-h-screen overflow-hidden bg-[#FFDAB9] touch-none",
         hasLoaded ? "transition-all duration-1000" : "",
       )}
       onMouseEnter={() => {
@@ -218,9 +254,9 @@ export default function FirstElementHpage() {
         style={{ y: backgroundY }}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ 
-          duration: 1.5, 
-          ease: "easeOut"
+        transition={{
+          duration: 1.5,
+          ease: "easeOut",
         }}
         className="absolute left-0 md:top-[5%] top-0 md:h-[95%] h-full w-full md:w-[65%] bg-gradient-to-r from-[#8B2323] via-[#A52A2A] to-[#CD5C5C] md:rounded-tr-[250px] z-0"
       >
@@ -310,6 +346,7 @@ export default function FirstElementHpage() {
               animate="center"
               exit="exit"
               className="relative z-10 md:ml-[100px] lg:ml-[100px] w-full max-w-[80vw] md:max-w-[50vw] lg:max-w-[45vw] xl:max-w-[40vw] flex justify-center"
+              drag={false}
             >
               {/* 3D transform effect on hover */}
               <motion.div
@@ -320,6 +357,7 @@ export default function FirstElementHpage() {
                   transition: { duration: 0.3 },
                 }}
                 className="w-full h-full perspective-1000"
+                drag={false}
               >
                 <Image
                   src={images[page] || "/placeholder.svg"}
@@ -334,6 +372,7 @@ export default function FirstElementHpage() {
                     const img = e.currentTarget
                     img.classList.add("animate-fadeIn")
                   }}
+                  draggable={false}
                 />
               </motion.div>
             </motion.div>
