@@ -104,14 +104,14 @@ export default function Header({ onButtonClick, onButtonHover }: HeaderProps) {
           <div className="relative group bg-white/10 backdrop-blur-sm rounded-full">
             <div className="flex items-center px-2">
               <Link
-                href={pathname === "/" ? "#work" : "/work"}
+                href="/work"
                 className={cn(
                   "px-3 py-2 font-medium transition-all duration-300 relative",
                   pathname === "/work" 
                     ? "text-white [text-shadow:0_0_15px_rgba(255,255,255,0.7)]" 
                     : "text-gray-400 hover:text-white hover:[text-shadow:0_0_15px_rgba(255,255,255,0.7)]"
                 )}
-                onClick={(e) => handleNavClick(e, "work")}
+                onClick={(e) => handleNavClick(e)}
                 onMouseEnter={onButtonHover}
               >
                 Work
@@ -250,10 +250,10 @@ export default function Header({ onButtonClick, onButtonHover }: HeaderProps) {
               </Link>
 
               <Link
-                href={pathname === "/" ? "#work" : "/work"}
+                href="/work"
                 className="py-6 px-8 text-left text-xl font-medium bg-white/10 backdrop-blur-xl text-white rounded-full transform transition-all duration-300 hover:scale-[1.02] hover:translate-y-[-4px] hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] hover:bg-white/20 animate-slide-down group relative overflow-hidden"
                 style={{ animationDelay: '200ms' }}
-                onClick={(e) => handleNavClick(e, "work")}
+                onClick={(e) => handleNavClick(e)}
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent group-hover:translate-x-full transition-transform duration-700 ease-in-out"></div>
                 Works

@@ -46,7 +46,7 @@ const slides: Slide[] = [
   },
 ]
 
-export default function DoorOpeningSlides() {
+export default function DoorOpeningSlides({ onSlideChange }: { onSlideChange?: (isAtLastSlide: boolean) => void }) {
   const [activeSlide, setActiveSlide] = useState(0)
   const [isDoorsOpen, setIsDoorsOpen] = useState(false)
   const [isAnimating, setIsAnimating] = useState(false)
@@ -208,17 +208,25 @@ export default function DoorOpeningSlides() {
     }, 500)
   }, [])
 
-  // Check if all slides have been viewed
+  // Cập nhật useEffect để kiểm tra trạng thái slide cuối
   useEffect(() => {
     const newViewedSlides = new Set(viewedSlides)
     newViewedSlides.add(activeSlide)
     setViewedSlides(newViewedSlides)
 
+    // Kiểm tra xem có đang ở slide cuối không
+    const isLastSlide = activeSlide === slides.length - 1
+    
     // Set hasViewedAllSlides to true when we reach the last slide
-    if (activeSlide === slides.length - 1) {
+    if (isLastSlide) {
       setHasViewedAllSlides(true)
     }
-  }, [activeSlide])
+    
+    // Thông báo cho parent component
+    if (onSlideChange) {
+      onSlideChange(isLastSlide)
+    }
+  }, [activeSlide, onSlideChange])
 
   // Remove touch-none class when on last slide and all slides viewed
   useEffect(() => {
