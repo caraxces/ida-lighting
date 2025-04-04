@@ -5,10 +5,10 @@ import { Facebook, Linkedin } from 'lucide-react'
 
 export default function Footer() {
   return (
-    <footer className="w-full bg-gradient-to-r from-black via-black to-[#8B2323] text-white pt-16 pb-8 relative overflow-hidden">
-      <div className="container mx-auto px-4 md:px-8">
+    <footer className="w-full h-full md:h-screen bg-gradient-to-r from-black via-black to-[#8B2323] text-white flex flex-col justify-between pt-16 pb-8 relative overflow-hidden">
+      <div className="container mx-auto px-4 md:px-8 flex-1 flex flex-col justify-between">
         {/* Top section with navigation and address */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16 mt-8 md:mt-16">
           {/* Navigation links */}
           <div className="space-y-2">
             <Link href="/" className="block text-lg hover:text-gray-300 transition-colors">
@@ -44,7 +44,7 @@ export default function Footer() {
         </div>
 
         {/* Social media icons */}
-        <div className="flex justify-center space-x-4 mb-16">
+        <div className="flex justify-center space-x-4 mb-16 md:mb-auto md:flex-grow flex-shrink-0 items-center">
           <a 
             href="https://www.facebook.com/idalighting" 
             target="_blank" 
@@ -82,7 +82,7 @@ export default function Footer() {
         </div>
 
         {/* Bottom section with copyright and privacy */}
-        <div className="flex flex-col md:flex-row justify-between items-center">
+        <div className="flex flex-col md:flex-row justify-between items-center mt-16 md:mt-auto">
           <div className="mb-4 md:mb-0">
             <p className="text-sm text-gray-400">©2025 IDA Lighting</p>
             <p className="text-sm text-gray-400">All rights reserved</p>

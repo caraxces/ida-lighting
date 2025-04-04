@@ -28,7 +28,7 @@ export default function VideoPlayerSection() {
       </div>
       
       {/* Rounded corners mask - similar to hero section */}
-      <div className="absolute bottom-0 left-0 right-0 h-[50px] bg-black z-50" style={{ borderRadius: '50px 50px 0 0' }}></div>
+      {/* <div className="absolute bottom-0 left-0 right-0 h-[50px] bg-black z-50" style={{ borderRadius: '50px 50px 0 0' }}></div> */}
     </section>
   )
 } 

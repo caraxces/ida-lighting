@@ -71,7 +71,7 @@ const projects: Project[] = [
   },
 ]
 
-export default function ProjectSliderEnhanced() {
+export default function ProjectSliderEnhanced({ onSlideChange }: { onSlideChange?: (isAtLastSlide: boolean) => void }) {
   const [activeIndex, setActiveIndex] = useState(0)
   const [prevIndex, setPrevIndex] = useState(0)
   const [isScrolling, setIsScrolling] = useState(false)
@@ -179,12 +179,22 @@ export default function ProjectSliderEnhanced() {
     return () => window.removeEventListener("keydown", handleKeyDown)
   }, [activeIndex, isScrolling, isSoundEnabled, playSound])
 
-  // Check if all slides have been viewed
+  // Cập nhật useEffect để báo khi đến slide cuối
   useEffect(() => {
-    if (activeIndex === projects.length - 1) {
-      setHasViewedAllSlides(true)
+    // activeIndex === projects.length - 1 nghĩa là đang ở slide cuối cùng
+    const isLastSlide = activeIndex === projects.length - 1;
+    
+    console.log("ProjectSlider - Current slide:", activeIndex, "Is last slide:", isLastSlide);
+    
+    if (isLastSlide) {
+      setHasViewedAllSlides(true);
     }
-  }, [activeIndex])
+    
+    // Thông báo cho parent component về trạng thái hiện tại
+    if (onSlideChange) {
+      onSlideChange(isLastSlide);
+    }
+  }, [activeIndex, onSlideChange, projects.length]);
 
   // Handle touch events for mobile swipe
   useEffect(() => {

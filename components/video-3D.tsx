@@ -2,7 +2,7 @@
 
 import type React from "react"
 import { useState, useRef, useEffect } from "react"
-import { motion, useMotionValue, useSpring, useTransform, useAnimationControls } from "framer-motion"
+import { motion, useMotionValue, useSpring, useTransform, useAnimationControls, HTMLMotionProps } from "framer-motion"
 import { ArrowRight, Circle } from "lucide-react"
 
 interface Enhanced3DVideoCardProps {
@@ -89,11 +89,11 @@ export default function Enhanced3DVideoCard({
   }
 
   return (
-    <div className={`flex flex-col items-center ${className} mt-[110px] p-4`}>
+    <div className={`flex flex-col items-center ${className} mt-[70px] p-4 w-full`}>
       {/* 3D Card */}
       <motion.div
         ref={cardRef}
-        className="relative w-full max-w-2xl h-[300px] rounded-2xl overflow-hidden shadow-xl bg-black"
+        className="relative w-full max-w-4xl h-[450px] rounded-2xl overflow-hidden shadow-xl bg-black mx-auto"
         style={{
           perspective: 1200,
           transformStyle: "preserve-3d",
@@ -147,9 +147,9 @@ export default function Enhanced3DVideoCard({
       </motion.div>
 
       {/* Text content below the card */}
-      <div className="w-full max-w-2xl mt-6 px-4 text-white">
-        <h3 className="text-xl font-medium mb-2">{title}</h3>
-        <p className="text-sm text-gray-300 mb-4 max-w-md">{description}</p>
+      <div className="w-full max-w-4xl mt-8 px-4 text-white mx-auto">
+        <h3 className="text-2xl font-medium mb-3">{title}</h3>
+        <p className="text-sm text-gray-300 mb-4 max-w-lg">{description}</p>
 
         <div className="flex justify-between items-center">
           <div className="flex items-center">

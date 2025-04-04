@@ -11,218 +11,400 @@ import Enhanced3DVideoCard from "@/components/video-3D"
 import FirstElementHpage from "@/components/first-element-hpage"
 import SecondElementHpage from "@/components/second-element-hpage"
 import LuxuryRealEstate from "@/components/luxury-component"
-// import PulsePreloader from "@/components/preload"
 
 export default function Home() {
-  const sectionRefs = useRef<(HTMLDivElement | null)[]>([])
   const containerRef = useRef<HTMLDivElement | null>(null)
-  const [isLoaded, setIsLoaded] = useState(false)
+  const sectionRefs = useRef<(HTMLDivElement | null)[]>([])
+  const [currentSection, setCurrentSection] = useState(0)
+  const [isScrolling, setIsScrolling] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
+  const lastScrollTimeRef = useRef(0)
+  const [projectSliderAtLastSlideRef, setProjectSliderAtLastSlide] = useState(false)
+  const [servicesSliderAtLastSlideRef, setServicesSliderAtLastSlide] = useState(false)
 
+  // Danh sách index của các component có slide riêng
+  const independentComponentIndices = [1, 2, 4, 6] // FirstElementHpage, SecondElementHpage, ProjectSlider, ServicesSection
+
+  // Kiểm tra thiết bị di động khi trang được tải
   useEffect(() => {
-    const scrollTimeout = setTimeout(() => {
-      window.scrollTo({
-        top: 0,
-        behavior: "instant",
-      })
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768)
+    }
+    checkMobile()
+    window.addEventListener("resize", checkMobile)
+    return () => window.removeEventListener("resize", checkMobile)
+  }, [])
 
-      if (sectionRefs.current[0]) {
-        sectionRefs.current[0].style.opacity = "1"
-        sectionRefs.current[0].classList.add("flip-up-animation")
-      }
-    }, 50)
+  // Kiểm tra xem component hiện tại có phải là component độc lập không
+  const isIndependentComponent = (sectionIndex) => {
+    return independentComponentIndices.includes(sectionIndex)
+  }
 
-    setIsLoaded(true)
+  // Hàm chuyển đến section
+  const navigateToSection = (index) => {
+    // Kiểm tra thời gian giữa các lần scroll để tránh scroll quá nhanh
+    const now = Date.now()
+    if (now - lastScrollTimeRef.current < 800) return
+    lastScrollTimeRef.current = now
 
-    const observerOptions = {
-      root: null,
-      rootMargin: "-10% 0px",
-      threshold: 0.1,
+    // Nếu đang scrolling, bỏ qua
+    if (isScrolling) return
+
+    // Kiểm tra index hợp lệ
+    if (index < 0 || index >= sectionRefs.current.length) return
+
+    // Nếu đang ở section cuối và cố gắng chuyển đến section sau
+    if (currentSection === sectionRefs.current.length - 1 && index > currentSection) {
+      return
     }
 
-    const sectionObserver = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          const index = sectionRefs.current.findIndex((ref) => ref === entry.target)
-          const delay = index > 0 ? index * 50 : 0
+    // Nếu đang ở section đầu và cố gắng chuyển đến section trước
+    if (currentSection === 0 && index < 0) {
+      return
+    }
 
-          setTimeout(() => {
-            if (entry.target instanceof HTMLElement) {
-              entry.target.style.opacity = "1"
-              entry.target.classList.add("flip-up-animation")
-            }
-          }, delay)
-        } else {
-          const index = sectionRefs.current.findIndex((ref) => ref === entry.target)
-          if (index > 0 && entry.boundingClientRect.y > window.innerHeight * 0.25) {
-            if (entry.target instanceof HTMLElement) {
-              entry.target.classList.remove("flip-up-animation")
-            }
+    // THÊM KIỂM TRA CHO COMPONENT CÓ SLIDE
+    if (isIndependentComponent(currentSection)) {
+      const direction = index - currentSection;
+      
+      // Kiểm tra xem có thể chuyển từ component hiện tại không
+      if (!canNavigateFromIndependentComponent(direction, currentSection)) {
+        console.log(`Prevented navigation from component ${currentSection} in direction ${direction}`);
+        return; // Chặn việc chuyển nếu chưa đạt điều kiện
+      }
+    }
+
+    // Nếu mọi điều kiện đều hợp lệ, chuyển section
+    setIsScrolling(true)
+    setCurrentSection(index)
+
+    // Sau khi chuyển xong, reset trạng thái scrolling
+    setTimeout(() => {
+      setIsScrolling(false)
+    }, 800)
+  }
+
+  // Xử lý sự kiện wheel (cuộn chuột) cho desktop
+  useEffect(() => {
+    const handleWheel = (e) => {
+      // Ngăn cản scroll mặc định
+      e.preventDefault()
+
+      // Xác định hướng cuộn
+      const direction = e.deltaY > 0 ? 1 : -1;
+      
+      // Nếu đang ở component độc lập, kiểm tra trước
+      if (isIndependentComponent(currentSection)) {
+        if (!canNavigateFromIndependentComponent(direction, currentSection)) {
+          console.log(`Wheel: Blocked navigation from component ${currentSection}`);
+          return; // Chặn ngay từ đầu nếu chưa đủ điều kiện
+        }
+      }
+
+      // Nếu qua được điều kiện, mới chuyển section
+      if (direction > 0) {
+        navigateToSection(currentSection + 1)
+      } else {
+        navigateToSection(currentSection - 1)
+      }
+    }
+
+    const container = containerRef.current
+    if (container) {
+      container.addEventListener("wheel", handleWheel, { passive: false })
+    }
+
+    return () => {
+      if (container) {
+        container.removeEventListener("wheel", handleWheel)
+      }
+    }
+  }, [currentSection, isScrolling, projectSliderAtLastSlideRef, servicesSliderAtLastSlideRef])
+
+  // Xử lý sự kiện touch cho mobile
+  useEffect(() => {
+    let touchStartY = 0
+
+    const handleTouchStart = (e) => {
+      touchStartY = e.touches[0].clientY
+    }
+
+    const handleTouchEnd = (e) => {
+      const touchEndY = e.changedTouches[0].clientY
+      const diff = touchStartY - touchEndY
+
+      // Nếu vuốt đủ khoảng cách (50px)
+      if (Math.abs(diff) > 50) {
+        // Xác định hướng vuốt
+        const direction = diff > 0 ? 1 : -1;
+        
+        // Nếu đang ở component độc lập, kiểm tra trước
+        if (isIndependentComponent(currentSection)) {
+          if (!canNavigateFromIndependentComponent(direction, currentSection)) {
+            console.log(`Touch: Blocked navigation from component ${currentSection}`);
+            return; // Chặn ngay từ đầu nếu chưa đủ điều kiện
           }
         }
-      })
-    }, observerOptions)
 
-    sectionRefs.current.forEach((section, index) => {
-      if (section && index > 0) {
-        sectionObserver.observe(section)
-      }
-    })
-
-    return () => {
-      clearTimeout(scrollTimeout)
-      sectionRefs.current.forEach((section) => {
-        if (section) {
-          sectionObserver.unobserve(section)
+        // Nếu qua được điều kiện, mới chuyển section
+        if (direction > 0) {
+          navigateToSection(currentSection + 1)
+        } else {
+          navigateToSection(currentSection - 1)
         }
-      })
-    }
-  }, [])
-
-  // Thêm một useEffect riêng để đảm bảo vị trí cuộn luôn ở đầu trang khi component mount
-  useEffect(() => {
-    const forcedScrollTop = () => {
-      window.scrollTo(0, 0)
+      }
     }
 
-    window.addEventListener("load", forcedScrollTop)
-
-    // Đặt vị trí cuộn về đầu trang nhiều lần trong vài mili giây đầu tiên
-    const interval = setInterval(forcedScrollTop, 10)
-    setTimeout(() => clearInterval(interval), 200)
+    window.addEventListener("touchstart", handleTouchStart, { passive: true })
+    window.addEventListener("touchend", handleTouchEnd, { passive: true })
 
     return () => {
-      window.removeEventListener("load", forcedScrollTop)
-      clearInterval(interval)
+      window.removeEventListener("touchstart", handleTouchStart)
+      window.removeEventListener("touchend", handleTouchEnd)
+    }
+  }, [currentSection, isScrolling, projectSliderAtLastSlideRef, servicesSliderAtLastSlideRef])
+
+  // Xử lý phím mũi tên
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (isScrolling) return
+
+      if (e.key === "ArrowDown") {
+        navigateToSection(currentSection + 1)
+      } else if (e.key === "ArrowUp") {
+        navigateToSection(currentSection - 1)
+      }
+    }
+
+    window.addEventListener("keydown", handleKeyDown)
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown)
+    }
+  }, [currentSection, isScrolling])
+
+  // Cuộn về đầu trang khi tải
+  useEffect(() => {
+    window.scrollTo(0, 0)
+
+    // Tránh overflow cho html và body
+    document.documentElement.style.overflow = "hidden"
+    document.body.style.overflow = "hidden"
+
+    return () => {
+      document.documentElement.style.overflow = ""
+      document.body.style.overflow = ""
     }
   }, [])
+
+  // Hàm xử lý thông báo từ các component
+  const handleComponentSlideChange = (componentIndex, isAtLastSlide) => {
+    console.log(`Component ${componentIndex} at last slide: ${isAtLastSlide}`);
+    
+    if (componentIndex === 4) { // ProjectSlider
+      setProjectSliderAtLastSlide(isAtLastSlide);
+    } else if (componentIndex === 6) { // ServicesSection 
+      setServicesSliderAtLastSlide(isAtLastSlide);
+    }
+  }
+
+  // Kiểm tra xem có thể chuyển từ component độc lập không
+  const canNavigateFromIndependentComponent = (direction, sectionIndex) => {
+    // Chỉ áp dụng khi muốn chuyển xuống (direction > 0)
+    if (direction > 0) {
+      // Với ProjectSlider (index 4)
+      if (sectionIndex === 4) {
+        console.log("Can navigate from ProjectSlider:", projectSliderAtLastSlideRef);
+        return projectSliderAtLastSlideRef;
+      }
+      
+      // Với ServicesSection (index 6)
+      if (sectionIndex === 6) {
+        console.log("Can navigate from ServicesSection:", servicesSliderAtLastSlideRef);
+        return servicesSliderAtLastSlideRef;
+      }
+    }
+    
+    // Cho phép chuyển đối với các trường hợp khác
+    return true;
+  }
 
   return (
-    <main className="min-h-screen bg-black text-white relative">
-      <Header />
+    <div className="w-full h-screen relative overflow-hidden">
+      {/* CSS để làm mượt chuyển động và ẩn scrollbar */}
+      <style jsx global>{`
+        /* Ẩn scrollbar */
+        ::-webkit-scrollbar {
+          display: none;
+          width: 0;
+        }
+        
+        html, body {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+          max-width: 100vw;
+          overscroll-behavior: none;
+          height: 100%;
+          width: 100%;
+        }
+        
+        /* Thêm transition cho các section */
+        .section {
+          transition: transform 0.8s cubic-bezier(0.645, 0.045, 0.355, 1.000);
+          position: absolute;
+          height: 100vh;
+          width: 100vw;
+          will-change: transform;
+        }
+        
+        /* Hiệu ứng mượt cho dots navigation */
+        .dot {
+          transition: all 0.3s ease;
+        }
+        
+        .dot.active {
+          transform: scale(1.5);
+        }
+        
+        /* Đặt z-index cao hơn cho các component độc lập */
+        .independent-section {
+          z-index: 20;
+        }
+      `}</style>
 
-      <div
-        ref={containerRef}
-        className={`snap-y snap-mandatory h-screen overflow-y-auto perspective-1000 ${isLoaded ? "" : "overflow-hidden"}`}
-        style={{ scrollBehavior: "smooth" }}
-      >
-        {/* LuxuryRealEstate */}
-        <div className="snap-start h-screen w-full">
+      <main className="w-full h-screen relative overflow-hidden">
+        <Header />
+
+        <div ref={containerRef} className="w-full h-screen relative">
+          {/* LuxuryRealEstate */}
           <div
             ref={(el) => {
               sectionRefs.current[0] = el
             }}
-            className="h-full transition-all duration-1000 ease-in-out"
-            style={{ transformOrigin: "bottom center" }}
+            className="section"
+            style={{ transform: `translateY(${(currentSection - 0) * -100}vh)` }}
+            data-index={0}
           >
             <LuxuryRealEstate />
           </div>
-        </div>
 
-        {/* FirstElementHpage */}
-        <div className="snap-start h-screen w-full relative">
+          {/* FirstElementHpage - component không tác động */}
           <div
             ref={(el) => {
               sectionRefs.current[1] = el
             }}
-            className="h-full opacity-0 transition-all duration-1000 ease-in-out"
-            style={{ transformOrigin: "bottom center" }}
+            className="section independent-section"
+            style={{ transform: `translateY(${(currentSection - 1) * -100}vh)` }}
+            data-index={1}
           >
-            <FirstElementHpage />
+            <FirstElementHpage onSlideChange={(isAtLastSlide) => handleComponentSlideChange(1, isAtLastSlide)} />
           </div>
-        </div>
 
-        {/* SecondElementHpage */}
-        <div className="snap-start h-screen w-full relative">
+          {/* SecondElementHpage - component không tác động */}
           <div
             ref={(el) => {
               sectionRefs.current[2] = el
             }}
-            className="h-full opacity-0 transition-all duration-1000 ease-in-out"
-            style={{ transformOrigin: "bottom center" }}
+            className="section independent-section"
+            style={{ transform: `translateY(${(currentSection - 2) * -100}vh)` }}
+            data-index={2}
           >
-            <SecondElementHpage />
+            <SecondElementHpage onSlideChange={(isAtLastSlide) => handleComponentSlideChange(2, isAtLastSlide)} />
           </div>
-        </div>
 
-        {/* HeroSection */}
-        <div className="snap-start h-screen w-full relative">
+          {/* HeroSection */}
           <div
             ref={(el) => {
               sectionRefs.current[3] = el
             }}
-            className="h-full opacity-0 transition-all duration-1000 ease-in-out"
-            style={{ transformOrigin: "bottom center" }}
+            className="section"
+            style={{ transform: `translateY(${(currentSection - 3) * -100}vh)` }}
+            data-index={3}
           >
             <HeroSection />
           </div>
-        </div>
 
-        {/* ProjectSlider */}
-        <div className="snap-start h-screen w-full relative">
+          {/* ProjectSlider */}
           <div
             ref={(el) => {
               sectionRefs.current[4] = el
             }}
-            className="h-full opacity-0 transition-all duration-1000 ease-in-out"
-            style={{ background: "#B8BBC1", transformOrigin: "bottom center" }}
+            className="section independent-section"
+            style={{ transform: `translateY(${(currentSection - 4) * -100}vh)`, background: "#B8BBC1" }}
+            data-index={4}
           >
-            <ProjectSlider />
+            <ProjectSlider onSlideChange={(isAtLastSlide) => handleComponentSlideChange(4, isAtLastSlide)} />
           </div>
-        </div>
 
-        {/* VideoPlayerSection */}
-        <div className="snap-start h-screen w-full relative">
+          {/* VideoPlayerSection */}
           <div
             ref={(el) => {
               sectionRefs.current[5] = el
             }}
-            className="h-full opacity-0 transition-all duration-1000 ease-in-out"
-            style={{ background: "#B8BBC1", transformOrigin: "bottom center" }}
+            className="section"
+            style={{ transform: `translateY(${(currentSection - 5) * -100}vh)`, background: "#B8BBC1" }}
+            data-index={5}
           >
             <VideoPlayerSection />
           </div>
-        </div>
 
-        {/* ServicesSection */}
-        <div id="work" className="snap-start h-screen w-full relative">
+          {/* ServicesSection */}
           <div
+            id="work"
             ref={(el) => {
               sectionRefs.current[6] = el
             }}
-            className="h-full opacity-0 transition-all duration-1000 ease-in-out"
-            style={{ background: "#B8BBC1", transformOrigin: "bottom center" }}
+            className="section independent-section"
+            style={{ transform: `translateY(${(currentSection - 6) * -100}vh)`, background: "#B8BBC1" }}
+            data-index={6}
           >
-            <ServicesSection />
+            <ServicesSection onSlideChange={(isAtLastSlide) => handleComponentSlideChange(6, isAtLastSlide)} />
           </div>
-        </div>
 
-        {/* Enhanced3DVideoCard */}
-        <div className="snap-start h-screen w-full relative">
+          {/* Enhanced3DVideoCard */}
           <div
             ref={(el) => {
               sectionRefs.current[7] = el
             }}
-            className="h-full opacity-0 transition-all duration-1000 ease-in-out"
-            style={{ background: "#B8BBC1", transformOrigin: "bottom center" }}
+            className="section"
+            style={{ transform: `translateY(${(currentSection - 7) * -100}vh)`, background: "#B8BBC1" }}
+            data-index={7}
           >
             <Enhanced3DVideoCard />
           </div>
-        </div>
 
-        {/* Footer */}
-        <div className="snap-start w-full relative -mt-[50px]">
+          {/* Footer */}
           <div
             ref={(el) => {
               sectionRefs.current[8] = el
             }}
-            className="rounded-t-[10px] overflow-hidden shadow-2xl opacity-0"
-            style={{ transformOrigin: "bottom center" }}
+            className="section"
+            style={{ transform: `translateY(${(currentSection - 8) * -100}vh)` }}
+            data-index={8}
           >
-            <Footer />
+            <div className="rounded-t-[10px] overflow-hidden shadow-2xl h-full">
+              <Footer />
+            </div>
           </div>
         </div>
-      </div>
-    </main>
+
+        {/* Chấm chỉ báo section */}
+        <div className="fixed right-4 top-1/2 transform -translate-y-1/2 z-50 flex flex-col gap-2">
+          {Array(9)
+            .fill(0)
+            .map((_, index) => (
+              <button
+                key={index}
+                className={`w-2 h-2 rounded-full transition-all duration-300 dot ${
+                  currentSection === index ? "bg-white scale-150 active" : "bg-white/40"
+                }`}
+                onClick={() => navigateToSection(index)}
+                aria-label={`Go to section ${index + 1}`}
+              />
+            ))}
+        </div>
+      </main>
+    </div>
   )
 }
 

@@ -11,6 +11,7 @@ import { AnimatedRoundedGrid } from "@/components/animated-rounded-grid"
 import Image from "next/image"
 import CommunitySection from "@/components/who-are-we"
 import AnimatedTitle from "@/components/animated-title"
+import NavigationSlides from "@/components/nav-slides"
 
 // Combine projects from sections 2 and 3
 const categories = [
@@ -466,7 +467,14 @@ export default function WorkPage() {
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 bg-orange-500/20 rounded-full blur-[60px] -z-10"></div>
           </div>
 
-          {/* Sử dụng CommunitySection từ who-are-we.tsx */}
+          {/* Thêm NavigationSlides ở đây */}
+          <div className="my-16">
+            <div className="bg-black/40 backdrop-blur-md rounded-2xl overflow-hidden border border-white/10 shadow-[0_0_30px_rgba(0,0,0,0.5)]">
+              <NavigationSlides />
+            </div>
+          </div>
+
+          {/* CommunitySection hiện tại */}
           <div className="bg-black/40 backdrop-blur-md rounded-2xl overflow-hidden border border-white/10 shadow-[0_0_30px_rgba(0,0,0,0.5)] my-16">
             <CommunitySection />
           </div>
