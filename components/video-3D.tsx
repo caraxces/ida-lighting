@@ -17,7 +17,7 @@ export default function Enhanced3DVideoCard({
   className = "",
   title = "IDA Lighting",
   description = "IDA Lighting is a lighting design company that specializes in creating unique and innovative lighting solutions for residential and commercial spaces.",
-  videoSrc = "/3d-vid.mp4",
+  videoSrc = "/13387624005549159.mp4",
   nextProject = "Next project",
 }: Enhanced3DVideoCardProps) {
   const [isHovered, setIsHovered] = useState(false)

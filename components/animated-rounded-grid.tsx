@@ -90,11 +90,12 @@ export function AnimatedRoundedGrid({ images, className }: AnimatedRoundedGridPr
   const closePopup = useCallback(() => {
     setIsClosing(true)
 
+    // Increase the timeout duration for a smoother transition
     setTimeout(() => {
       setIsPopupOpen(false)
       setIsClosing(false)
       document.body.style.overflow = "" // Re-enable scrolling when popup is closed
-    }, 500)
+    }, 500) // Increased from 300ms to 500ms for smoother animation
   }, [])
 
   // Ensure we have exactly 8 images
@@ -288,7 +289,7 @@ export function AnimatedRoundedGrid({ images, className }: AnimatedRoundedGridPr
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
+            transition={{ duration: 0.4 }} // Increased from 0.3 to 0.4
           >
             <motion.div
               className="relative w-[90vw] sm:w-[400px] max-w-md rounded-3xl overflow-hidden shadow-2xl bg-[#1A1A1A]"
@@ -296,11 +297,19 @@ export function AnimatedRoundedGrid({ images, className }: AnimatedRoundedGridPr
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
-              transition={{ duration: 0.3 }}
+              transition={{
+                duration: 0.4,
+                ease: "easeInOut",
+              }}
             >
               {/* Top icons */}
               <div className="absolute top-0 left-0 right-0 z-20 flex justify-between p-4">
-                <button className="w-10 h-10 rounded-full bg-black/30 backdrop-blur-sm flex items-center justify-center text-white">
+                <a 
+                  href="https://m.me/855258281507149" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="w-10 h-10 rounded-full bg-black/30 backdrop-blur-sm flex items-center justify-center text-white hover:bg-black/50 transition-all duration-300"
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="h-5 w-5"
@@ -312,12 +321,12 @@ export function AnimatedRoundedGrid({ images, className }: AnimatedRoundedGridPr
                       strokeLinecap="round"
                       strokeLinejoin="round"
                       strokeWidth={2}
-                      d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+                      d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
                     />
                   </svg>
-                </button>
+                </a>
                 <button
-                  className="w-10 h-10 rounded-full bg-[#4D5D4A]/80 backdrop-blur-sm flex items-center justify-center text-white"
+                  className="w-10 h-10 rounded-full bg-black/30 backdrop-blur-sm flex items-center justify-center text-white hover:bg-black/50 transition-all duration-300"
                   onClick={closePopup}
                 >
                   <svg
@@ -327,21 +336,21 @@ export function AnimatedRoundedGrid({ images, className }: AnimatedRoundedGridPr
                     viewBox="0 0 24 24"
                     stroke="currentColor"
                   >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                   </svg>
                 </button>
               </div>
 
               {/* Project title */}
               <div className="pt-16 px-6 pb-4 text-center">
-                <h2 className="text-white text-3xl font-bold tracking-wider uppercase">
+                <h2 className="text-white text-2xl sm:text-3xl font-bold tracking-wider uppercase">
                   {selectedImage?.alt || "Project Name"}
                 </h2>
               </div>
 
               {/* Main image */}
               <div className="px-4">
-                <div className="relative w-full h-56 rounded-xl overflow-hidden">
+                <div className="relative w-full h-48 sm:h-56 rounded-xl overflow-hidden">
                   <img
                     src={selectedImage?.src || "/placeholder.svg"}
                     alt={selectedImage?.alt || "Gallery image"}
@@ -352,18 +361,22 @@ export function AnimatedRoundedGrid({ images, className }: AnimatedRoundedGridPr
 
               {/* Action button */}
               <div className="flex justify-center mt-4">
-                <button className="bg-black/30 backdrop-blur-sm text-white px-6 py-2 rounded-full flex items-center">
-                  <span className="mr-2">$</span>
+                <a 
+                  href="https://zaloapp.com/qr/p/o4teuv9ez56m" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="bg-black/30 backdrop-blur-sm text-white px-6 py-2 rounded-full flex items-center hover:bg-black/50 transition-all duration-300"
+                >
                   <span>Đầu tư vào tương lai</span>
-                </button>
+                </a>
               </div>
 
               {/* Description */}
-              <div className="p-6 text-center">
-                <p className="text-gray-300 text-sm leading-relaxed">
+              <div className="p-4 sm:p-6 text-center">
+                <p className="text-gray-300 text-xs sm:text-sm leading-relaxed">
                   {selectedImage?.location
                     ? `${selectedImage.location}. ${selectedImage.address || ""}`
-                    : "Một viên ngọc ven biển chưa được khám phá ở Vịnh Aqaba gần Biển Đỏ. Magna sẽ là một nơi không giống bất kỳ đâu trên trái đất."}
+                    : "Chúng tôi cung cấp các giải pháp chiếu sáng hiện đại, tiết kiệm năng lượng và nâng cao không gian sống. IDA Lighting - Thắp sáng không gian của bạn."}
                 </p>
               </div>
             </motion.div>

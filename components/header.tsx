@@ -166,8 +166,9 @@ export default function Header({ onButtonClick, onButtonHover }: HeaderProps) {
           </button>
 
           <a
-            href="/catalogue.pdf"
-            download="IDA LIGHTING 02 03 2025.pdf"
+            href="/IDA LIGHTING 02 03 2025.pdf" 
+            target="_blank"
+            rel="noopener noreferrer"
             className="flex items-center space-x-2 px-5 py-2 bg-white/20 backdrop-blur-sm rounded-full hover:bg-white/30 transition-all duration-300 hover:shadow-[0_0_15px_rgba(255,255,255,0.5)]"
             onClick={() => playSound()}
           >
@@ -343,8 +344,9 @@ export default function Header({ onButtonClick, onButtonHover }: HeaderProps) {
               </button>
 
               <a
-                href="/catalogue.pdf"
-                download="IDA LIGHTING 02 03 2025.pdf"
+                href="/IDA LIGHTING 02 03 2025.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="flex items-center space-x-2 px-5 py-2 bg-white/20 hover:bg-white/30 transition-all duration-300 hover:translate-y-[-2px] hover:shadow-[0_0_15px_rgba(255,255,255,0.5)] rounded-full text-white"
                 onClick={() => playSound()}
               >

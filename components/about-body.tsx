@@ -137,6 +137,32 @@ export default function AboutBodyEnhanced() {
     },
   ]
 
+  // State cho nút Liên hệ ngay
+  const [isButtonHovered, setIsButtonHovered] = useState(false)
+  const [rotation, setRotation] = useState(0)
+  
+  // Animate cho hiệu ứng xoay gradient
+  useEffect(() => {
+    let animationFrame: number
+    let startTime: number | null = null
+    
+    const animate = (timestamp: number) => {
+      if (!startTime) startTime = timestamp
+      const elapsed = timestamp - startTime
+      
+      // Hoàn thành một vòng xoay mỗi 3 giây
+      setRotation((elapsed / 3000) % 1)
+      
+      animationFrame = requestAnimationFrame(animate)
+    }
+    
+    animationFrame = requestAnimationFrame(animate)
+    
+    return () => {
+      cancelAnimationFrame(animationFrame)
+    }
+  }, [])
+
   useEffect(() => {
     if (!logoRef.current) return;
     
@@ -214,7 +240,7 @@ export default function AboutBodyEnhanced() {
   }, []);
 
   return (
-    <section className="py-16 md:py-24 bg-[#f5f2ea] text-[#1a1a1a] overflow-hidden rounded-t-3xl">
+    <section className="py-16 md:py-24 bg-gradient-to-r from-black via-black to-[#8B2323] text-white overflow-hidden rounded-t-3xl">
       <div className="container mx-auto px-4 md:px-8">
         {/* Main Headline */}
         <motion.h1
@@ -223,7 +249,7 @@ export default function AboutBodyEnhanced() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          DISCOVER OUR JOURNEY
+          KHÁM PHÁ HÀNH TRÌNH CỦA CHÚNG TÔI
         </motion.h1>
 
         {/* First Content Row - Company Overview */}
@@ -251,19 +277,19 @@ export default function AboutBodyEnhanced() {
                 />
                 
                 {/* Scanning effect */}
-                <motion.div
-                  className="absolute inset-0 bg-gradient-to-b from-transparent via-[#C73E1D]/20 to-transparent h-[30%] w-full"
+                <motion.div 
                   initial={{ top: "-30%" }}
                   animate={{ top: "100%" }}
                   transition={{ duration: 2.5, repeat: Infinity, repeatType: "loop", ease: "linear", repeatDelay: 1 }}
+                  className="absolute inset-0 bg-gradient-to-b from-transparent via-[#C73E1D]/20 to-transparent h-[30%] w-full"
                 />
                 
                 {/* Horizontal laser line */}
                 <motion.div
-                  className="absolute left-0 right-0 h-[2px] bg-[#C73E1D] opacity-70"
                   initial={{ top: "-10%" }}
                   animate={{ top: "110%" }}
                   transition={{ duration: 2.5, repeat: Infinity, repeatType: "loop", ease: "linear", repeatDelay: 1 }}
+                  className="absolute left-0 right-0 h-[2px] bg-[#C73E1D] opacity-70"
                 >
                   {/* Glow effect */}
                   <div className="absolute inset-0 blur-[2px] bg-[#C73E1D]" />
@@ -272,10 +298,8 @@ export default function AboutBodyEnhanced() {
             </motion.div>
 
             <div className="mt-4">
-              <p className="text-sm text-gray-700">
+              <p className="text-sm text-gray-300">
                 Biến ánh sáng thành linh hồn của không gian
-                <br />
-                <span className="italic">Transform light into the soul of space</span>
               </p>
             </div>
           </div>
@@ -283,7 +307,7 @@ export default function AboutBodyEnhanced() {
           {/* Right Column - Text */}
           <div className="flex flex-col justify-between">
             <div>
-              <p className="text-sm mb-4">
+              <p className="text-sm mb-4 text-gray-300">
                 Công ty TNHH Tư vấn thiết kế và cung cấp giải pháp ánh sáng IDA LIGHTING
                 <br />
                 Thành lập năm 2019
@@ -297,21 +321,21 @@ export default function AboutBodyEnhanced() {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8, delay: 0.4 }}
               >
-                REDEFINING
+                ĐỊNH NGHĨA LẠI
                 <br />
-                EXCELLENCE
+                SỰ XUẤT SẮC
                 {/* Animated underline */}
                 <motion.div
-                  className="absolute -bottom-2 left-0 h-0.5 bg-black"
                   initial={{ width: 0 }}
                   animate={{ width: "40%" }}
                   transition={{ duration: 1, delay: 1 }}
+                  className="absolute -bottom-2 left-0 h-0.5 bg-white"
                 />
               </motion.h2>
             </div>
 
             <div className="mt-8 md:mt-0">
-              <span className="text-xs uppercase">Since 2019</span>
+              <span className="text-xs uppercase text-gray-400">Từ năm 2019</span>
             </div>
           </div>
         </div>
@@ -324,11 +348,11 @@ export default function AboutBodyEnhanced() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
               viewport={{ once: false, amount: 0.3 }}
-              className="bg-white/50 p-8 rounded-xl"
+              className="bg-black/30 p-8 rounded-xl border border-gray-800"
             >
               <h3 className="text-2xl font-light mb-4">Sứ mệnh</h3>
-              <p className="text-lg italic mb-4">Biến ánh sáng thành linh hồn của không gian.</p>
-              <p className="text-sm text-gray-700">
+              <p className="text-lg italic mb-4 text-gray-300">Biến ánh sáng thành linh hồn của không gian.</p>
+              <p className="text-sm text-gray-400">
                 Chúng tôi tin rằng ánh sáng không chỉ là nguồn sáng, mà còn là yếu tố quan trọng tạo nên cảm xúc và trải
                 nghiệm trong không gian sống.
               </p>
@@ -339,10 +363,10 @@ export default function AboutBodyEnhanced() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
               viewport={{ once: false, amount: 0.3 }}
-              className="bg-white/50 p-8 rounded-xl"
+              className="bg-black/30 p-8 rounded-xl border border-gray-800"
             >
               <h3 className="text-2xl font-light mb-4">Tầm nhìn</h3>
-              <p className="text-sm text-gray-700">
+              <p className="text-sm text-gray-400">
                 Trở thành địa chỉ hàng đầu về tư vấn thiết kế và cung cấp giải pháp chiếu sáng chuyên nghiệp tại Việt
                 Nam, kết nối các sản phẩm quốc tế tới thị trường nội địa và ngược lại.
               </p>
@@ -387,8 +411,7 @@ export default function AboutBodyEnhanced() {
             <AnimatedTitle>
               <span className="text-4xl md:text-6xl font-light italic block">IDA Lighting</span>
               <span className="text-xl md:text-2xl tracking-wider">
-                Your <span className="font-extrabold italic text-[#C73E1D]">light</span> - Your{" "}
-                <span className="font-extrabold italic text-[#C73E1D]">style</span>
+                Ánh sáng của bạn - <span className="font-extrabold italic text-[#FF5733]">Phong cách</span> của bạn
               </span>
             </AnimatedTitle>
           </motion.div>
@@ -405,11 +428,11 @@ export default function AboutBodyEnhanced() {
           >
             Sản phẩm và Dịch vụ
             <motion.div
-              className="absolute -bottom-2 left-0 h-0.5 bg-black"
               initial={{ width: 0 }}
               whileInView={{ width: "100%" }}
               transition={{ duration: 1, delay: 0.5 }}
               viewport={{ once: false, amount: 0.3 }}
+              className="absolute -bottom-2 left-0 h-0.5 bg-white"
             />
           </motion.h2>
 
@@ -421,7 +444,7 @@ export default function AboutBodyEnhanced() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: false, amount: 0.3 }}
-                className="bg-white/30 p-6 rounded-xl hover:bg-white/50 transition-colors duration-300 transform-gpu hover:shadow-lg"
+                className="bg-black/20 p-6 rounded-xl hover:bg-black/40 transition-colors duration-300 transform-gpu hover:shadow-lg border border-gray-800"
                 whileHover={{ y: -5, transition: { duration: 0.2 } }}
               >
                 <h3 className="text-xl font-medium mb-4">{service.title}</h3>
@@ -429,7 +452,7 @@ export default function AboutBodyEnhanced() {
                   {service.items.map((item, i) => (
                     <li key={i} className="flex items-start">
                       <span className="text-yellow-500 mr-2">•</span>
-                      <span className="text-sm">{item}</span>
+                      <span className="text-sm text-gray-300">{item}</span>
                     </li>
                   ))}
                 </ul>
@@ -443,8 +466,8 @@ export default function AboutBodyEnhanced() {
           {/* Left Column - Small Images */}
           <div className="space-y-4">
             <div className="flex space-x-4">
-              <span className="text-sm uppercase">ABOUT</span>
-              <span className="text-sm uppercase">IDA LIGHTING</span>
+              <span className="text-sm uppercase text-gray-400">ABOUT</span>
+              <span className="text-sm uppercase text-gray-400">IDA LIGHTING</span>
             </div>
 
             <div className="grid grid-cols-3 gap-2 mt-8 perspective-[1000px]">
@@ -532,11 +555,11 @@ export default function AboutBodyEnhanced() {
           >
             Giá trị cốt lõi
             <motion.div
-              className="absolute -bottom-2 left-0 h-0.5 bg-black"
               initial={{ width: 0 }}
               whileInView={{ width: "100%" }}
               transition={{ duration: 1, delay: 0.5 }}
               viewport={{ once: false, amount: 0.3 }}
+              className="absolute -bottom-2 left-0 h-0.5 bg-white"
             />
           </motion.h2>
 
@@ -549,16 +572,16 @@ export default function AboutBodyEnhanced() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.1 }}
                 viewport={{ once: false, amount: 0.1 }}
-                className="bg-[#f9f6ee] p-6 rounded-xl hover:shadow-md transition-all duration-300"
+                className="bg-black/30 p-6 rounded-xl hover:shadow-md transition-all duration-300 border border-gray-800"
                 whileHover={{ y: -5, transition: { duration: 0.2 } }}
               >
                 <div className="flex items-center mb-3">
-                  <div className="w-8 h-8 rounded-full bg-yellow-400/20 flex items-center justify-center mr-3 text-yellow-600">
+                  <div className="w-8 h-8 rounded-full bg-yellow-600/20 flex items-center justify-center mr-3 text-yellow-500">
                     {coreValues[0].icon}
                   </div>
                   <h3 className="text-lg font-medium">{coreValues[0].title}</h3>
                 </div>
-                <p className="text-sm text-gray-700">{coreValues[0].description}</p>
+                <p className="text-sm text-gray-300">{coreValues[0].description}</p>
               </motion.div>
 
               <motion.div
@@ -566,16 +589,16 @@ export default function AboutBodyEnhanced() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
                 viewport={{ once: false, amount: 0.1 }}
-                className="bg-[#f9f6ee] p-6 rounded-xl hover:shadow-md transition-all duration-300"
+                className="bg-black/30 p-6 rounded-xl hover:shadow-md transition-all duration-300 border border-gray-800"
                 whileHover={{ y: -5, transition: { duration: 0.2 } }}
               >
                 <div className="flex items-center mb-3">
-                  <div className="w-8 h-8 rounded-full bg-yellow-400/20 flex items-center justify-center mr-3 text-yellow-600">
+                  <div className="w-8 h-8 rounded-full bg-yellow-600/20 flex items-center justify-center mr-3 text-yellow-500">
                     {coreValues[1].icon}
                   </div>
                   <h3 className="text-lg font-medium">{coreValues[1].title}</h3>
                 </div>
-                <p className="text-sm text-gray-700">{coreValues[1].description}</p>
+                <p className="text-sm text-gray-300">{coreValues[1].description}</p>
               </motion.div>
 
               <motion.div
@@ -583,16 +606,16 @@ export default function AboutBodyEnhanced() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.3 }}
                 viewport={{ once: false, amount: 0.1 }}
-                className="bg-[#f9f6ee] p-6 rounded-xl hover:shadow-md transition-all duration-300"
+                className="bg-black/30 p-6 rounded-xl hover:shadow-md transition-all duration-300 border border-gray-800"
                 whileHover={{ y: -5, transition: { duration: 0.2 } }}
               >
                 <div className="flex items-center mb-3">
-                  <div className="w-8 h-8 rounded-full bg-yellow-400/20 flex items-center justify-center mr-3 text-yellow-600">
+                  <div className="w-8 h-8 rounded-full bg-yellow-600/20 flex items-center justify-center mr-3 text-yellow-500">
                     {coreValues[2].icon}
                   </div>
                   <h3 className="text-lg font-medium">{coreValues[2].title}</h3>
                 </div>
-                <p className="text-sm text-gray-700">{coreValues[2].description}</p>
+                <p className="text-sm text-gray-300">{coreValues[2].description}</p>
               </motion.div>
 
               {/* Second row */}
@@ -601,16 +624,16 @@ export default function AboutBodyEnhanced() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.4 }}
                 viewport={{ once: false, amount: 0.1 }}
-                className="bg-[#f9f6ee] p-6 rounded-xl hover:shadow-md transition-all duration-300"
+                className="bg-black/30 p-6 rounded-xl hover:shadow-md transition-all duration-300 border border-gray-800"
                 whileHover={{ y: -5, transition: { duration: 0.2 } }}
               >
                 <div className="flex items-center mb-3">
-                  <div className="w-8 h-8 rounded-full bg-yellow-400/20 flex items-center justify-center mr-3 text-yellow-600">
+                  <div className="w-8 h-8 rounded-full bg-yellow-600/20 flex items-center justify-center mr-3 text-yellow-500">
                     {coreValues[3].icon}
                   </div>
                   <h3 className="text-lg font-medium">{coreValues[3].title}</h3>
                 </div>
-                <p className="text-sm text-gray-700">{coreValues[3].description}</p>
+                <p className="text-sm text-gray-300">{coreValues[3].description}</p>
               </motion.div>
 
               {/* Center cell - Empty for the image */}
@@ -623,7 +646,7 @@ export default function AboutBodyEnhanced() {
                   className="w-full h-full relative"
                 >
                   <img
-                    src="/about/Ida B.png"
+                    src="/Ida B-W2.png"
                     alt="Brain visualization"
                     className="w-full h-full object-contain"
                   />
@@ -635,16 +658,16 @@ export default function AboutBodyEnhanced() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.5 }}
                 viewport={{ once: false, amount: 0.1 }}
-                className="bg-[#f9f6ee] p-6 rounded-xl hover:shadow-md transition-all duration-300"
+                className="bg-black/30 p-6 rounded-xl hover:shadow-md transition-all duration-300 border border-gray-800"
                 whileHover={{ y: -5, transition: { duration: 0.2 } }}
               >
                 <div className="flex items-center mb-3">
-                  <div className="w-8 h-8 rounded-full bg-yellow-400/20 flex items-center justify-center mr-3 text-yellow-600">
+                  <div className="w-8 h-8 rounded-full bg-yellow-600/20 flex items-center justify-center mr-3 text-yellow-500">
                     {coreValues[4].icon}
                   </div>
                   <h3 className="text-lg font-medium">{coreValues[4].title}</h3>
                 </div>
-                <p className="text-sm text-gray-700">{coreValues[4].description}</p>
+                <p className="text-sm text-gray-300">{coreValues[4].description}</p>
               </motion.div>
 
               {/* Third row */}
@@ -653,16 +676,16 @@ export default function AboutBodyEnhanced() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.6 }}
                 viewport={{ once: false, amount: 0.1 }}
-                className="bg-[#f9f6ee] p-6 rounded-xl hover:shadow-md transition-all duration-300"
+                className="bg-black/30 p-6 rounded-xl hover:shadow-md transition-all duration-300 border border-gray-800"
                 whileHover={{ y: -5, transition: { duration: 0.2 } }}
               >
                 <div className="flex items-center mb-3">
-                  <div className="w-8 h-8 rounded-full bg-yellow-400/20 flex items-center justify-center mr-3 text-yellow-600">
+                  <div className="w-8 h-8 rounded-full bg-yellow-600/20 flex items-center justify-center mr-3 text-yellow-500">
                     {coreValues[5].icon}
                   </div>
                   <h3 className="text-lg font-medium">{coreValues[5].title}</h3>
                 </div>
-                <p className="text-sm text-gray-700">{coreValues[5].description}</p>
+                <p className="text-sm text-gray-300">{coreValues[5].description}</p>
               </motion.div>
 
               <motion.div
@@ -670,16 +693,16 @@ export default function AboutBodyEnhanced() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.7 }}
                 viewport={{ once: false, amount: 0.1 }}
-                className="bg-[#f9f6ee] p-6 rounded-xl hover:shadow-md transition-all duration-300"
+                className="bg-black/30 p-6 rounded-xl hover:shadow-md transition-all duration-300 border border-gray-800"
                 whileHover={{ y: -5, transition: { duration: 0.2 } }}
               >
                 <div className="flex items-center mb-3">
-                  <div className="w-8 h-8 rounded-full bg-yellow-400/20 flex items-center justify-center mr-3 text-yellow-600">
+                  <div className="w-8 h-8 rounded-full bg-yellow-600/20 flex items-center justify-center mr-3 text-yellow-500">
                     {coreValues[6].icon}
                   </div>
                   <h3 className="text-lg font-medium">{coreValues[6].title}</h3>
                 </div>
-                <p className="text-sm text-gray-700">{coreValues[6].description}</p>
+                <p className="text-sm text-gray-300">{coreValues[6].description}</p>
               </motion.div>
 
               <motion.div
@@ -687,16 +710,16 @@ export default function AboutBodyEnhanced() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.8 }}
                 viewport={{ once: false, amount: 0.1 }}
-                className="bg-[#f9f6ee] p-6 rounded-xl hover:shadow-md transition-all duration-300"
+                className="bg-black/30 p-6 rounded-xl hover:shadow-md transition-all duration-300 border border-gray-800"
                 whileHover={{ y: -5, transition: { duration: 0.2 } }}
               >
                 <div className="flex items-center mb-3">
-                  <div className="w-8 h-8 rounded-full bg-yellow-400/20 flex items-center justify-center mr-3 text-yellow-600">
+                  <div className="w-8 h-8 rounded-full bg-yellow-600/20 flex items-center justify-center mr-3 text-yellow-500">
                     {coreValues[7].icon}
                   </div>
                   <h3 className="text-lg font-medium">{coreValues[7].title}</h3>
                 </div>
-                <p className="text-sm text-gray-700">{coreValues[7].description}</p>
+                <p className="text-sm text-gray-300">{coreValues[7].description}</p>
               </motion.div>
             </div>
           </div>
@@ -712,7 +735,7 @@ export default function AboutBodyEnhanced() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
             >
-              LIGHTING STRATEGIST
+              CHIẾN LƯỢC GIA CHIẾU SÁNG
             </motion.h2>
           </div>
 
@@ -737,28 +760,28 @@ export default function AboutBodyEnhanced() {
           {/* Text Content */}
           <div className="md:col-span-1 z-0">
             <div className="mt-8 md:mt-0">
-              <span className="text-xs uppercase">Since 2019</span>
+              <span className="text-xs uppercase text-gray-400">Từ năm 2019</span>
             </div>
           </div>
 
           <div className="md:col-span-1 z-0">
-            <p className="text-sm max-w-xs">
+            <p className="text-sm max-w-xs text-gray-300">
               Với sứ mệnh biến ánh sáng thành linh hồn của không gian, chúng tôi cung cấp các giải pháp chiếu sáng
               chuyên nghiệp, sáng tạo và cá nhân hóa.
             </p>
 
             <Link
               href="/contacts"
-              className="inline-flex items-center mt-8 px-4 py-2 border border-gray-800 text-sm relative overflow-hidden group"
+              className="inline-flex items-center mt-8 px-4 py-2 border border-gray-500 text-sm relative overflow-hidden group"
             >
               <span className="relative z-10 transition-transform duration-300 group-hover:translate-x-1">
-                Explore More{" "}
+                Khám Phá Thêm{" "}
                 <ArrowRight size={14} className="ml-2 transition-transform duration-300 group-hover:translate-x-1" />
               </span>
-              <span className="absolute inset-0 bg-black w-0 group-hover:w-full transition-all duration-300 ease-out -z-0"></span>
+              <span className="absolute inset-0 bg-white w-0 group-hover:w-full transition-all duration-300 ease-out -z-0"></span>
               <span className="absolute inset-0 bg-transparent group-hover:bg-transparent transition-colors duration-300 ease-out z-0"></span>
-              <span className="absolute inset-0 w-full h-full text-black opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center group-hover:text-white z-10">
-                Explore More <ArrowRight size={14} className="ml-2" />
+              <span className="absolute inset-0 w-full h-full text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center group-hover:text-black z-10">
+                Khám Phá Thêm <ArrowRight size={14} className="ml-2" />
               </span>
             </Link>
           </div>
@@ -781,11 +804,11 @@ export default function AboutBodyEnhanced() {
           >
             Thành tựu nổi bật
             <motion.div
-              className="absolute -bottom-2 left-0 h-0.5 bg-black"
               initial={{ width: 0 }}
               whileInView={{ width: "100%" }}
               transition={{ duration: 1, delay: 0.5 }}
               viewport={{ once: false, amount: 0.3 }}
+              className="absolute -bottom-2 left-0 h-0.5 bg-white"
             />
           </motion.h2>
 
@@ -874,7 +897,7 @@ export default function AboutBodyEnhanced() {
 
         {/* Branding Tagline with Animation - MATCHED WITH HERO STYLE */}
         <motion.div
-          className="text-center mb-24 md:mb-40 py-12 border-y border-gray-300"
+          className="text-center mb-24 md:mb-40 py-12 border-y border-gray-700"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ duration: 1 }}
@@ -889,8 +912,8 @@ export default function AboutBodyEnhanced() {
           >
             <AnimatedTitle>
               <span className="text-5xl md:text-7xl lg:text-8xl block mb-2">IDA Lighting</span>
-              <span className="font-extrabold italic">Your Light - </span>
-              <span className="font-extrabold italic">Your Style</span>
+              <span className="font-extrabold ">Your Light - </span>
+              <span className="font-extrabold ">Your Style</span>
             </AnimatedTitle>
 
             {/* Animated light beam effect */}
@@ -907,30 +930,68 @@ export default function AboutBodyEnhanced() {
         {/* Contact Section */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 mb-24 md:mb-40">
           <div>
-            <h3 className="text-xl font-light mb-4">
+            <h3 className="text-xl font-light mb-4 text-white">
               Liên hệ với chúng tôi
               <br />
               để nhận tư vấn miễn phí
             </h3>
 
             <div className="mt-6">
-              <button className="px-6 py-2 border border-gray-800 text-sm relative overflow-hidden group">
-                <span className="relative z-10 transition-colors duration-300 group-hover:text-white">
+              <div 
+                className="relative inline-block"
+                onMouseEnter={() => setIsButtonHovered(true)}
+                onMouseLeave={() => setIsButtonHovered(false)}
+              >
+                {/* Hiệu ứng glow viền */}
+                <div className="absolute inset-0 overflow-hidden">
+                  <div
+                    className="absolute inset-[-2px]"
+                    style={{
+                      background: `conic-gradient(
+                        from ${rotation * 360}deg,
+                        #ff0066, 
+                        #ff3300, 
+                        #ffcc00, 
+                        #C73E1D, 
+                        #8B2323, 
+                        #ff0066
+                      )`,
+                      filter: `blur(${isButtonHovered ? 8 : 6}px) brightness(${isButtonHovered ? 1.2 : 1.1})`,
+                      opacity: isButtonHovered ? 1 : 0.85,
+                    }}
+                  />
+                </div>
+                
+                {/* Nút với link */}
+                <a
+                  href="https://m.me/855258281507149"
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="relative z-10 inline-block px-8 py-3 bg-black bg-opacity-90 text-white font-medium transition-all duration-300"
+                  style={{
+                    boxShadow: isButtonHovered 
+                      ? "0 0 30px rgba(199, 62, 29, 0.7), 0 0 60px rgba(199, 62, 29, 0.4)" 
+                      : "0 0 20px rgba(199, 62, 29, 0.5), 0 0 40px rgba(199, 62, 29, 0.3)",
+                    transform: isButtonHovered ? "scale(1.03)" : "scale(1)",
+                    textShadow: isButtonHovered 
+                      ? "0 0 10px rgba(255, 255, 255, 0.5)" 
+                      : "0 0 5px rgba(255, 255, 255, 0.3)",
+                  }}
+                >
                   Liên hệ ngay
-                </span>
-                <span className="absolute inset-0 bg-black w-0 group-hover:w-full transition-all duration-300 ease-out"></span>
-              </button>
+                </a>
+              </div>
             </div>
           </div>
 
           <div className="grid grid-cols-3 gap-8">
             <div>
-              <h4 className="text-sm font-medium mb-4">DỊCH VỤ</h4>
+              <h4 className="text-sm font-medium mb-4 text-gray-300">DỊCH VỤ</h4>
               <ul className="space-y-2 text-sm">
                 <li>
                   <Link
                     href="#"
-                    className="hover:underline relative inline-block after:absolute after:bottom-0 after:left-0 after:h-px after:w-0 after:bg-black hover:after:w-full after:transition-all after:duration-300"
+                    className="hover:underline relative inline-block after:absolute after:bottom-0 after:left-0 after:h-px after:w-0 after:bg-white hover:after:w-full after:transition-all after:duration-300 text-gray-400 hover:text-white"
                   >
                     TƯ VẤN
                   </Link>
@@ -938,7 +999,7 @@ export default function AboutBodyEnhanced() {
                 <li>
                   <Link
                     href="#"
-                    className="hover:underline relative inline-block after:absolute after:bottom-0 after:left-0 after:h-px after:w-0 after:bg-black hover:after:w-full after:transition-all after:duration-300"
+                    className="hover:underline relative inline-block after:absolute after:bottom-0 after:left-0 after:h-px after:w-0 after:bg-white hover:after:w-full after:transition-all after:duration-300 text-gray-400 hover:text-white"
                   >
                     THIẾT KẾ
                   </Link>
@@ -946,7 +1007,7 @@ export default function AboutBodyEnhanced() {
                 <li>
                   <Link
                     href="#"
-                    className="hover:underline relative inline-block after:absolute after:bottom-0 after:left-0 after:h-px after:w-0 after:bg-black hover:after:w-full after:transition-all after:duration-300"
+                    className="hover:underline relative inline-block after:absolute after:bottom-0 after:left-0 after:h-px after:w-0 after:bg-white hover:after:w-full after:transition-all after:duration-300 text-gray-400 hover:text-white"
                   >
                     SẢN PHẨM
                   </Link>
@@ -955,12 +1016,12 @@ export default function AboutBodyEnhanced() {
             </div>
 
             <div>
-              <h4 className="text-sm font-medium mb-4">SẢN PHẨM</h4>
+              <h4 className="text-sm font-medium mb-4 text-gray-300">SẢN PHẨM</h4>
               <ul className="space-y-2 text-sm">
                 <li>
                   <Link
                     href="#"
-                    className="hover:underline relative inline-block after:absolute after:bottom-0 after:left-0 after:h-px after:w-0 after:bg-black hover:after:w-full after:transition-all after:duration-300"
+                    className="hover:underline relative inline-block after:absolute after:bottom-0 after:left-0 after:h-px after:w-0 after:bg-white hover:after:w-full after:transition-all after:duration-300 text-gray-400 hover:text-white"
                   >
                     INDOOR
                   </Link>
@@ -968,7 +1029,7 @@ export default function AboutBodyEnhanced() {
                 <li>
                   <Link
                     href="#"
-                    className="hover:underline relative inline-block after:absolute after:bottom-0 after:left-0 after:h-px after:w-0 after:bg-black hover:after:w-full after:transition-all after:duration-300"
+                    className="hover:underline relative inline-block after:absolute after:bottom-0 after:left-0 after:h-px after:w-0 after:bg-white hover:after:w-full after:transition-all after:duration-300 text-gray-400 hover:text-white"
                   >
                     OUTDOOR
                   </Link>
@@ -976,7 +1037,7 @@ export default function AboutBodyEnhanced() {
                 <li>
                   <Link
                     href="#"
-                    className="hover:underline relative inline-block after:absolute after:bottom-0 after:left-0 after:h-px after:w-0 after:bg-black hover:after:w-full after:transition-all after:duration-300"
+                    className="hover:underline relative inline-block after:absolute after:bottom-0 after:left-0 after:h-px after:w-0 after:bg-white hover:after:w-full after:transition-all after:duration-300 text-gray-400 hover:text-white"
                   >
                     DECORATIVE
                   </Link>
@@ -985,12 +1046,12 @@ export default function AboutBodyEnhanced() {
             </div>
 
             <div>
-              <h4 className="text-sm font-medium mb-4">LIÊN HỆ</h4>
+              <h4 className="text-sm font-medium mb-4 text-gray-300">LIÊN HỆ</h4>
               <ul className="space-y-2 text-sm">
                 <li>
                   <Link
                     href="mailto:idalighting.vn@gmail.com"
-                    className="hover:underline relative inline-block after:absolute after:bottom-0 after:left-0 after:h-px after:w-0 after:bg-black hover:after:w-full after:transition-all after:duration-300"
+                    className="hover:underline relative inline-block after:absolute after:bottom-0 after:left-0 after:h-px after:w-0 after:bg-white hover:after:w-full after:transition-all after:duration-300 text-gray-400 hover:text-white"
                   >
                     EMAIL
                   </Link>
@@ -998,17 +1059,17 @@ export default function AboutBodyEnhanced() {
                 <li>
                   <Link
                     href="#"
-                    className="hover:underline relative inline-block after:absolute after:bottom-0 after:left-0 after:h-px after:w-0 after:bg-black hover:after:w-full after:transition-all after:duration-300"
+                    className="hover:underline relative inline-block after:absolute after:bottom-0 after:left-0 after:h-px after:w-0 after:bg-white hover:after:w-full after:transition-all after:duration-300 text-gray-400 hover:text-white"
                   >
-                    SHOWROOM
+                    PHÒNG TRƯNG BÀY
                   </Link>
                 </li>
                 <li>
                   <Link
                     href="#"
-                    className="hover:underline relative inline-block after:absolute after:bottom-0 after:left-0 after:h-px after:w-0 after:bg-black hover:after:w-full after:transition-all after:duration-300"
+                    className="hover:underline relative inline-block after:absolute after:bottom-0 after:left-0 after:h-px after:w-0 after:bg-white hover:after:w-full after:transition-all after:duration-300 text-gray-400 hover:text-white"
                   >
-                    FAQ
+                    CÂU HỎI THƯỜNG GẶP
                   </Link>
                 </li>
               </ul>
@@ -1019,7 +1080,8 @@ export default function AboutBodyEnhanced() {
         {/* Address Section */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-16 mb-24 md:mb-40">
           <div className="md:col-span-1">
-            <p className="text-sm">
+            <p className="text-sm text-gray-300">
+              Trụ Sở 
               153 Hà Huy Tập,
               <br />
               Thành phố Hà Tĩnh, Việt Nam
@@ -1027,12 +1089,12 @@ export default function AboutBodyEnhanced() {
           </div>
 
           <div className="md:col-span-1">
-            <p className="text-sm">+84 (0) 24 1234 5678</p>
+            <p className="text-sm text-gray-300">+84 0924.222.888</p>
           </div>
 
-          <div className="md:col-span-1">
-            <p className="text-sm">MADE IN VIETNAM</p>
-          </div>
+          {/* <div className="md:col-span-1">
+            <p className="text-sm">SẢN XUẤT TẠI VIỆT NAM</p>
+          </div> */}
         </div>
 
         {/* Bottom Large Text */}
