@@ -1,8 +1,22 @@
 "use client"
 
+import type React from "react"
+
 import Image from "next/image"
 import { motion, AnimatePresence } from "framer-motion"
 import { useState, useCallback, useEffect } from "react"
+
+// Add keyframe animation for RGB border
+const rgbAnimation = `
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
+`
 
 interface AnimatedRoundedGridProps {
   images: {
@@ -16,198 +30,9 @@ interface AnimatedRoundedGridProps {
     lightingTypes?: string[]
     designer?: string
     photographer?: string
+    onClick?: (image: any) => void
   }[]
   className?: string
-}
-
-// Component for image popup with RGB border
-function ImagePopup({
-  isOpen,
-  image,
-  onClose,
-}: {
-  isOpen: boolean
-  image: AnimatedRoundedGridProps["images"][0] | null
-  onClose: () => void
-}) {
-  // Use image data if available, otherwise use default data
-  const projectData = {
-    location: image?.location || "Hà Nội, Việt Nam",
-    address: image?.address || "Số 123 Đường Nguyễn Huệ, Quận 1",
-    client: image?.client || "Công ty ABC",
-    area: image?.area || "1,200 m²",
-    constructionTime: image?.constructionTime || "6 tháng (01/2023 - 06/2023)",
-    lightingTypes: image?.lightingTypes || [
-      "Đèn LED âm trần",
-      "Đèn treo trang trí",
-      "Đèn pha ngoài trời",
-      "Đèn LED dây",
-    ],
-    designer: image?.designer || "Nguyễn Văn A",
-    photographer: image?.photographer || "Trần Thị B",
-  }
-
-  if (!isOpen) return null
-
-  return (
-    <>
-        {/* RGB border effect */}
-        <div className="absolute -inset-[2px] rounded-xl overflow-hidden z-0">
-          <div
-            className="absolute inset-0 bg-gradient-to-r from-purple-500 via-pink-500 via-red-500 via-yellow-500 via-green-500 via-blue-500 to-purple-500 animate-rgb-float-1"
-            style={{
-              backgroundSize: "200% 200%",
-            }}
-          ></div>
-        </div>
-
-        {/* Main container */}
-        <div className="absolute inset-0 bg-black/90 rounded-xl overflow-hidden flex flex-col md:flex-row z-10">
-          {/* Left section - Image */}
-          <div className="w-full md:w-1/2 p-6 flex items-center justify-center bg-[#1A1A1A] relative overflow-hidden">
-            {/* Background gradient */}
-            <div className="absolute -right-20 top-1/4 w-64 h-64 rounded-full bg-gradient-to-br from-orange-300 to-pink-300 opacity-20 blur-xl"></div>
-
-            {/* Main image */}
-            <div className="relative w-full h-full rounded-lg overflow-hidden flex items-center justify-center">
-              <img
-                src={image?.src || "/placeholder.svg"}
-                alt={image?.alt || "Gallery image"}
-                className="max-w-full max-h-full object-contain"
-              />
-
-              {/* Shine overlay */}
-              <div
-                className="absolute inset-0 w-full h-full z-10 mix-blend-overlay pointer-events-none"
-                style={{
-                  background: `radial-gradient(circle at 50% 50%, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 60%)`,
-                }}
-              ></div>
-            </div>
-          </div>
-
-          {/* Right section - Project information */}
-          <div className="w-full md:w-1/2 p-8 flex flex-col justify-between bg-[#2A2A2A] relative overflow-hidden">
-            <div>
-              <h3 className="text-white text-2xl font-bold mb-6">{image?.alt || "Project Name"}</h3>
-
-              <div className="space-y-6">
-                <div>
-                  <p className="text-gray-400 text-sm">Vị trí</p>
-                  <p className="text-white">{projectData.location}</p>
-                </div>
-
-                <div>
-                  <p className="text-gray-400 text-sm">Địa chỉ</p>
-                  <p className="text-white">{projectData.address}</p>
-                </div>
-
-                <div>
-                  <p className="text-gray-400 text-sm">Khách hàng</p>
-                  <p className="text-white">{projectData.client}</p>
-                </div>
-
-                <div>
-                  <p className="text-gray-400 text-sm">Diện tích</p>
-                  <p className="text-white">{projectData.area}</p>
-                </div>
-
-                <div>
-                  <p className="text-gray-400 text-sm">Thời gian thi công</p>
-                  <p className="text-white">{projectData.constructionTime}</p>
-                </div>
-
-                <div>
-                  <p className="text-gray-400 text-sm">Loại đèn sử dụng</p>
-                  <ul className="text-white list-disc pl-5 mt-1">
-                    {projectData.lightingTypes.map((type, index) => (
-                      <li key={index}>{type}</li>
-                    ))}
-                  </ul>
-                </div>
-
-                <div>
-                  <p className="text-gray-400 text-sm">Thiết kế</p>
-                  <p className="text-white">{projectData.designer}</p>
-                </div>
-
-                <div>
-                  <p className="text-gray-400 text-sm">Nhiếp ảnh</p>
-                  <p className="text-white">{projectData.photographer}</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="mt-auto pt-6 flex space-x-2">
-              <button className="flex-1 py-2 px-3 bg-white/10 hover:bg-white/20 rounded-lg text-white transition-colors">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5 mx-auto"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-                  />
-                </svg>
-              </button>
-              <button className="flex-1 py-2 px-3 bg-white/10 hover:bg-white/20 rounded-lg text-white transition-colors">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5 mx-auto"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"
-                  />
-                </svg>
-              </button>
-              <button className="flex-1 py-2 px-3 bg-white/10 hover:bg-white/20 rounded-lg text-white transition-colors">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5 mx-auto"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"
-                  />
-                </svg>
-              </button>
-            </div>
-          </div>
-        </div>
-
-        {/* Close button */}
-        <button
-          className="absolute top-4 right-4 w-10 h-10 rounded-full bg-black/50 backdrop-blur-sm flex items-center justify-center text-white border border-white/20 hover:bg-white/20 transition-colors z-20"
-          onClick={onClose}
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-          </svg>
-        </button>
-    </>
-  )
 }
 
 export function AnimatedRoundedGrid({ images, className }: AnimatedRoundedGridProps) {
@@ -218,37 +43,57 @@ export function AnimatedRoundedGrid({ images, className }: AnimatedRoundedGridPr
   const [isMounted, setIsMounted] = useState(false)
   const [windowSize, setWindowSize] = useState({ width: 0, height: 0 })
 
+  // Add style element for keyframe animation
   useEffect(() => {
     setIsMounted(true)
     setWindowSize({
       width: window.innerWidth,
-      height: window.innerHeight
+      height: window.innerHeight,
     })
 
     const handleResize = () => {
       setWindowSize({
         width: window.innerWidth,
-        height: window.innerHeight
+        height: window.innerHeight,
       })
     }
 
-    window.addEventListener('resize', handleResize)
-    return () => window.removeEventListener('resize', handleResize)
+    window.addEventListener("resize", handleResize)
+    return () => window.removeEventListener("resize", handleResize)
   }, [])
+
+  useEffect(() => {
+    if (isMounted) {
+      const styleElement = document.createElement("style")
+      styleElement.innerHTML = rgbAnimation
+      document.head.appendChild(styleElement)
+
+      return () => {
+        document.head.removeChild(styleElement)
+      }
+    }
+  }, [isMounted])
 
   const handleImageClick = useCallback((image: AnimatedRoundedGridProps["images"][0], event: React.MouseEvent) => {
     setClickPosition({ x: event.clientX, y: event.clientY })
     setSelectedImage(image)
     setIsPopupOpen(true)
     setIsClosing(false)
+    document.body.style.overflow = "hidden" // Prevent scrolling when popup is open
+
+    // Call the onClick handler if provided
+    if (image.onClick) {
+      image.onClick(image)
+    }
   }, [])
 
   const closePopup = useCallback(() => {
     setIsClosing(true)
-    
+
     setTimeout(() => {
-    setIsPopupOpen(false)
+      setIsPopupOpen(false)
       setIsClosing(false)
+      document.body.style.overflow = "" // Re-enable scrolling when popup is closed
     }, 500)
   }, [])
 
@@ -287,7 +132,8 @@ export function AnimatedRoundedGrid({ images, className }: AnimatedRoundedGridPr
         initial="hidden"
         animate="visible"
       >
-        <div className="grid grid-cols-3 gap-2 md:gap-3">
+        {/* Desktop layout (hiện trên >= md screens) */}
+        <div className="hidden md:grid grid-cols-3 gap-3">
           {/* Left column - tall rounded rectangle */}
           <motion.div
             className="relative col-span-1 row-span-2 rounded-[30px] overflow-hidden h-[400px] group cursor-pointer"
@@ -304,7 +150,7 @@ export function AnimatedRoundedGrid({ images, className }: AnimatedRoundedGridPr
             <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300"></div>
           </motion.div>
 
-          {/* Top middle - rounded square */}
+          {/* Remaining desktop layout items... */}
           <motion.div
             className="relative col-span-1 rounded-[30px] overflow-hidden h-[195px] group cursor-pointer"
             variants={itemVariants}
@@ -320,7 +166,6 @@ export function AnimatedRoundedGrid({ images, className }: AnimatedRoundedGridPr
             <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300"></div>
           </motion.div>
 
-          {/* Top right - circle */}
           <motion.div
             className="relative col-span-1 rounded-full overflow-hidden h-[195px] group cursor-pointer"
             variants={itemVariants}
@@ -336,7 +181,6 @@ export function AnimatedRoundedGrid({ images, className }: AnimatedRoundedGridPr
             <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300"></div>
           </motion.div>
 
-          {/* Middle row - left side (under top middle) */}
           <motion.div
             className="relative col-span-1 rounded-tl-[30px] rounded-bl-[30px] overflow-hidden h-[195px] group cursor-pointer"
             variants={itemVariants}
@@ -352,7 +196,6 @@ export function AnimatedRoundedGrid({ images, className }: AnimatedRoundedGridPr
             <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300"></div>
           </motion.div>
 
-          {/* Middle row - right side (under top right) */}
           <motion.div
             className="relative col-span-1 rounded-tr-[30px] rounded-br-[30px] overflow-hidden h-[195px] group cursor-pointer"
             variants={itemVariants}
@@ -368,7 +211,6 @@ export function AnimatedRoundedGrid({ images, className }: AnimatedRoundedGridPr
             <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300"></div>
           </motion.div>
 
-          {/* Bottom row - left side */}
           <motion.div
             className="relative col-span-1 rounded-full overflow-hidden h-[195px] group cursor-pointer"
             variants={itemVariants}
@@ -384,7 +226,6 @@ export function AnimatedRoundedGrid({ images, className }: AnimatedRoundedGridPr
             <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300"></div>
           </motion.div>
 
-          {/* Bottom row - middle */}
           <motion.div
             className="relative col-span-1 rounded-tl-[30px] rounded-bl-[30px] overflow-hidden h-[195px] group cursor-pointer"
             variants={itemVariants}
@@ -400,7 +241,6 @@ export function AnimatedRoundedGrid({ images, className }: AnimatedRoundedGridPr
             <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300"></div>
           </motion.div>
 
-          {/* Bottom row - right side */}
           <motion.div
             className="relative col-span-1 rounded-tr-[30px] rounded-br-[30px] overflow-hidden h-[195px] group cursor-pointer"
             variants={itemVariants}
@@ -416,199 +256,120 @@ export function AnimatedRoundedGrid({ images, className }: AnimatedRoundedGridPr
             <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300"></div>
           </motion.div>
         </div>
+
+        {/* Mobile layout (chỉ hiện trên < md screens) - Tất cả là hình vuông với 2 hình mỗi hàng */}
+        <div className="grid grid-cols-2 gap-3 md:hidden">
+          {gridImages.map((image, index) => (
+            <motion.div
+              key={`mobile-image-${index}`}
+              className="relative aspect-square rounded-[20px] overflow-hidden group cursor-pointer"
+              variants={itemVariants}
+              whileHover={{ scale: 1.03 }}
+              onClick={(e) => handleImageClick(image, e)}
+            >
+              <Image
+                src={image.src || "/placeholder.svg"}
+                alt={image.alt}
+                fill
+                className="object-cover transition-transform duration-500 group-hover:scale-110"
+              />
+              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300"></div>
+            </motion.div>
+          ))}
+        </div>
       </motion.div>
 
-      {isMounted && (
-        <AnimatePresence>
-          {(isPopupOpen || isClosing) && (
+      {/* Popup with animation */}
+      <AnimatePresence>
+        {isMounted && isPopupOpen && (
+          <motion.div
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md"
+            onClick={closePopup}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+          >
             <motion.div
-              className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0, transition: { duration: 0.5 } }}
-              onClick={closePopup}
+              className="relative w-[90vw] sm:w-[400px] max-w-md rounded-3xl overflow-hidden shadow-2xl bg-[#1A1A1A]"
+              onClick={(e) => e.stopPropagation()}
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              transition={{ duration: 0.3 }}
             >
-              <motion.div
-                className="relative w-[95vw] sm:w-[90vw] md:w-[80vw] max-h-[95vh] sm:max-h-[90vh] md:max-h-[80vh] rounded-xl overflow-hidden shadow-2xl bg-black/90"
-                onClick={(e) => e.stopPropagation()}
-                initial={{ 
-                  opacity: 0,
-                  scale: 0.5,
-                  x: clickPosition.x - windowSize.width / 2,
-                  y: clickPosition.y - windowSize.height / 2,
-                }}
-                animate={{ 
-                  opacity: 1,
-                  scale: 1,
-                  x: 0,
-                  y: 0,
-                  transition: { duration: 0.4, ease: [0.23, 1, 0.32, 1] }
-                }}
-                exit={{ 
-                  opacity: 0,
-                  scale: 0.5,
-                  x: isClosing ? (clickPosition.x - windowSize.width / 2) : 0,
-                  y: isClosing ? (clickPosition.y - windowSize.height / 2) : 0,
-                  transition: { duration: 0.5, ease: [0.32, 0, 0.67, 0] }
-                }}
-              >
-                {/* RGB border effect */}
-                <div className="absolute -inset-[2px] rounded-xl overflow-hidden z-0">
-                  <motion.div
-                    className="absolute inset-0 bg-gradient-to-r from-purple-500 via-pink-500 via-red-500 via-yellow-500 via-green-500 via-blue-500 to-purple-500"
-                    style={{
-                      backgroundSize: "200% 200%",
-                    }}
-                    animate={{
-                      backgroundPosition: isClosing ? ["0% 50%", "100% 50%"] : ["0% 50%", "100% 50%"],
-                    }}
-                    transition={{
-                      duration: 2,
-                      ease: "linear",
-                      repeat: Infinity,
-                      repeatType: "reverse",
-                    }}
-                  ></motion.div>
-                </div>
-
-                {/* Main container - Optimize for mobile with better overflow handling */}
-                <div className="absolute inset-0 bg-black/90 rounded-xl overflow-hidden flex flex-col md:flex-row z-10">
-                  {/* Image section - Optimize height for mobile vertical layout */}
-                  <div className="w-full md:w-1/2 p-3 sm:p-4 md:p-6 flex items-center justify-center bg-[#1A1A1A] relative overflow-hidden h-[40vh] md:h-auto">
-                    {/* Background gradient */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-black/5 to-black/5 bg-[length:20px_20px] opacity-10"></div>
-
-                    {/* Noise effect */}
-                    <div className="absolute inset-0 bg-[radial-gradient(#333_1px,transparent_1px)] bg-[length:4px_4px] opacity-5 mix-blend-overlay"></div>
-
-                    {/* Main image - Improved object-fit handling */}
-                    <motion.div 
-                      className="relative w-full h-full rounded-lg overflow-hidden flex items-center justify-center"
-                      initial={{ scale: 0.9, opacity: 0 }}
-                      animate={{ scale: 1, opacity: 1 }}
-                      exit={{ scale: 0.9, opacity: 0 }}
-                      transition={{ duration: 0.3 }}
-                    >
-                      <img
-                        src={selectedImage?.src || "/placeholder.svg"}
-                        alt={selectedImage?.alt || "Gallery image"}
-                        className="max-w-full max-h-full object-contain"
-                      />
-
-                      {/* Shine overlay */}
-                      <div
-                        className="absolute inset-0 w-full h-full z-10 mix-blend-overlay pointer-events-none"
-                        style={{
-                          background: `radial-gradient(circle at 50% 50%, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 60%)`,
-                        }}
-                      ></div>
-                    </motion.div>
-                  </div>
-
-                  {/* Info section - Add scrollable container for mobile */}
-                  <motion.div 
-                    className="w-full md:w-1/2 p-4 sm:p-6 md:p-8 flex flex-col bg-[#2A2A2A] relative overflow-hidden h-[55vh] md:h-auto"
-                    initial={{ x: 20, opacity: 0 }}
-                    animate={{ x: 0, opacity: 1 }}
-                    exit={{ x: 20, opacity: 0 }}
-                    transition={{ duration: 0.3, delay: 0.1 }}
+              {/* Top icons */}
+              <div className="absolute top-0 left-0 right-0 z-20 flex justify-between p-4">
+                <button className="w-10 h-10 rounded-full bg-black/30 backdrop-blur-sm flex items-center justify-center text-white">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-5 w-5"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
                   >
-                    {/* Scrollable content container */}
-                    <div className="overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-white/20 scrollbar-track-transparent">
-                      <h3 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-6 text-white">{selectedImage?.alt || "Project Name"}</h3>
-
-                      <div className="space-y-3 sm:space-y-4 md:space-y-6 text-sm sm:text-base">
-                        {/* Project info rows - Optimized spacing for mobile */}
-                        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
-                          <p className="text-gray-400 text-xs sm:text-sm">Vị trí</p>
-                          <p className="text-white">{selectedImage?.location || "Hà Tĩnh, Việt Nam"}</p>
-                        </div>
-
-                        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
-                          <p className="text-gray-400 text-xs sm:text-sm">Địa chỉ</p>
-                          <p className="text-white">{selectedImage?.address || "Hà Huy Tập, Hà Tĩnh, Việt Nam"}</p>
-                        </div>
-
-                        {/* Continue with similar pattern for other info fields */}
-                        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
-                          <p className="text-gray-400 text-xs sm:text-sm">Khách hàng</p>
-                          <p className="text-white">{selectedImage?.client || "Ẩn danh"}</p>
-                        </div>
-
-                        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
-                          <p className="text-gray-400 text-xs sm:text-sm">Diện tích</p>
-                          <p className="text-white">{selectedImage?.area || "1,200 m²"}</p>
-                        </div>
-
-                        <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between">
-                          <p className="text-gray-400 text-xs sm:text-sm">Thời gian thi công</p>
-                          <p className="text-white">{selectedImage?.constructionTime || "6 tháng (01/2023 - 06/2023)"}</p>
-                        </div>
-
-                        <div className="flex flex-col">
-                          <p className="text-gray-400 text-xs sm:text-sm mb-1">Loại đèn sử dụng</p>
-                          <ul className="text-white list-disc pl-5 text-sm">
-                            {selectedImage?.lightingTypes?.map((type, index) => (
-                              <li key={index}>{type}</li>
-                            )) || ["Đèn LED âm trần", "Đèn treo trang trí", "Đèn pha ngoài trời", "Đèn LED dây"].map((type, index) => (
-                              <li key={index}>{type}</li>
-                            ))}
-                          </ul>
-                        </div>
-
-                        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
-                          <p className="text-gray-400 text-xs sm:text-sm">Thiết kế</p>
-                          <p className="text-white">{selectedImage?.designer || "Ẩn danh"}</p>
-                        </div>
-
-                        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
-                          <p className="text-gray-400 text-xs sm:text-sm">Nhiếp ảnh</p>
-                          <p className="text-white">{selectedImage?.photographer || "IDA Lighting"}</p>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Action buttons - Fixed at bottom for easier mobile access */}
-                    <div className="mt-auto pt-3 sm:pt-4 md:pt-6 flex space-x-2 sticky bottom-0 bg-[#2A2A2A]">
-                      <button className="flex-1 py-2 px-3 bg-white/10 hover:bg-white/20 rounded-lg text-white transition-colors">
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                        </svg>
-                      </button>
-                      <button className="flex-1 py-2 px-3 bg-white/10 hover:bg-white/20 rounded-lg text-white transition-colors">
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
-                        </svg>
-                      </button>
-                      <button className="flex-1 py-2 px-3 bg-white/10 hover:bg-white/20 rounded-lg text-white transition-colors">
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
-                        </svg>
-                      </button>
-                    </div>
-                  </motion.div>
-                </div>
-
-                {/* Close button - Made larger for mobile */}
-                <motion.button
-                  className="absolute top-2 right-2 sm:top-4 sm:right-4 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-black/50 backdrop-blur-sm flex items-center justify-center text-white border border-white/20 hover:bg-white/20 transition-colors z-20"
-                  onClick={closePopup}
-                  whileHover={{ scale: 1.1, backgroundColor: "rgba(255,255,255,0.3)" }}
-                  whileTap={{ scale: 0.95 }}
-                  initial={{ opacity: 0, rotate: -90 }}
-                  animate={{ opacity: 1, rotate: 0 }}
-                  exit={{ opacity: 0, rotate: 90 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 sm:h-6 sm:w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+                    />
                   </svg>
-                </motion.button>
-              </motion.div>
+                </button>
+                <button
+                  className="w-10 h-10 rounded-full bg-[#4D5D4A]/80 backdrop-blur-sm flex items-center justify-center text-white"
+                  onClick={closePopup}
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-5 w-5"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                  </svg>
+                </button>
+              </div>
+
+              {/* Project title */}
+              <div className="pt-16 px-6 pb-4 text-center">
+                <h2 className="text-white text-3xl font-bold tracking-wider uppercase">
+                  {selectedImage?.alt || "Project Name"}
+                </h2>
+              </div>
+
+              {/* Main image */}
+              <div className="px-4">
+                <div className="relative w-full h-56 rounded-xl overflow-hidden">
+                  <img
+                    src={selectedImage?.src || "/placeholder.svg"}
+                    alt={selectedImage?.alt || "Gallery image"}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              </div>
+
+              {/* Action button */}
+              <div className="flex justify-center mt-4">
+                <button className="bg-black/30 backdrop-blur-sm text-white px-6 py-2 rounded-full flex items-center">
+                  <span className="mr-2">$</span>
+                  <span>Đầu tư vào tương lai</span>
+                </button>
+              </div>
+
+              {/* Description */}
+              <div className="p-6 text-center">
+                <p className="text-gray-300 text-sm leading-relaxed">
+                  {selectedImage?.location
+                    ? `${selectedImage.location}. ${selectedImage.address || ""}`
+                    : "Một viên ngọc ven biển chưa được khám phá ở Vịnh Aqaba gần Biển Đỏ. Magna sẽ là một nơi không giống bất kỳ đâu trên trái đất."}
+                </p>
+              </div>
             </motion.div>
-          )}
-        </AnimatePresence>
-      )}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   )
 }
