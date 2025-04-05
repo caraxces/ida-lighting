@@ -112,217 +112,217 @@ function EnhancedFooter() {
   )
 }
 
-// Component hiệu ứng popup 3D cho hình ảnh
-function ImagePopup({ isOpen, image, onClose }) {
-  const [rotation, setRotation] = useState({ x: 0, y: 0 });
-  const cardRef = useRef(null);
+// // Component hiệu ứng popup 3D cho hình ảnh
+// function ImagePopup({ isOpen, image, onClose }) {
+//   const [rotation, setRotation] = useState({ x: 0, y: 0 });
+//   const cardRef = useRef(null);
   
-  // Xử lý hiệu ứng 3D khi di chuyển chuột
-  const handleMouseMove = useCallback((e) => {
-    if (!cardRef.current) return;
+//   // Xử lý hiệu ứng 3D khi di chuyển chuột
+//   const handleMouseMove = useCallback((e) => {
+//     if (!cardRef.current) return;
     
-    const card = cardRef.current.getBoundingClientRect();
-    const centerX = card.left + card.width / 2;
-    const centerY = card.top + card.height / 2;
-    const posX = e.clientX - centerX;
-    const posY = e.clientY - centerY;
+//     const card = cardRef.current.getBoundingClientRect();
+//     const centerX = card.left + card.width / 2;
+//     const centerY = card.top + card.height / 2;
+//     const posX = e.clientX - centerX;
+//     const posY = e.clientY - centerY;
     
-    // Tính toán góc xoay (giới hạn trong khoảng ±10 độ)
-    const rotateY = Math.max(Math.min(posX / (card.width / 2) * 10, 10), -10);
-    const rotateX = Math.max(Math.min(-posY / (card.height / 2) * 10, 10), -10);
+//     // Tính toán góc xoay (giới hạn trong khoảng ±10 độ)
+//     const rotateY = Math.max(Math.min(posX / (card.width / 2) * 10, 10), -10);
+//     const rotateX = Math.max(Math.min(-posY / (card.height / 2) * 10, 10), -10);
     
-    setRotation({ x: rotateX, y: rotateY });
-  }, []);
+//     setRotation({ x: rotateX, y: rotateY });
+//   }, []);
   
-  // Reset góc xoay khi rời chuột
-  const handleMouseLeave = useCallback(() => {
-    setRotation({ x: 0, y: 0 });
-  }, []);
+//   // Reset góc xoay khi rời chuột
+//   const handleMouseLeave = useCallback(() => {
+//     setRotation({ x: 0, y: 0 });
+//   }, []);
   
-  // Dữ liệu mẫu về dự án (trong thực tế sẽ lấy từ image object)
-  const projectData = {
-    location: "Hà Tĩnh, Việt Nam",
-    address: "Ha Huy Tập, Hà Tĩnh",
-    client: "IDA Lighting Hà Tĩnh",
-    area: "~1,200 m²",
-    constructionTime: "6 tháng (01/2023 - 06/2023)",
-    lightingTypes: [
-      "Đèn LED âm trần",
-      "Đèn treo trang trí",
-      "Đèn pha ngoài trời",
-      "Đèn LED dây"
-    ],
-    designer: "Kim Tiền",
-    photographer: "Thiên Ngân"
-  };
+//   // Dữ liệu mẫu về dự án (trong thực tế sẽ lấy từ image object)
+//   const projectData = {
+//     location: "Hà Tĩnh, Việt Nam",
+//     address: "Ha Huy Tập, Hà Tĩnh",
+//     client: "IDA Lighting Hà Tĩnh",
+//     area: "~1,200 m²",
+//     constructionTime: "6 tháng (01/2023 - 06/2023)",
+//     lightingTypes: [
+//       "Đèn LED âm trần",
+//       "Đèn treo trang trí",
+//       "Đèn pha ngoài trời",
+//       "Đèn LED dây"
+//     ],
+//     designer: "Kim Tiền",
+//     photographer: "Thiên Ngân"
+//   };
   
-  if (!isOpen) return null;
+//   if (!isOpen) return null;
   
-  return (
-    <div 
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md"
-      onClick={onClose}
-    >
-      <div 
-        ref={cardRef}
-        className="relative w-[80vw] h-[80vh] rounded-xl overflow-hidden shadow-2xl cursor-grab active:cursor-grabbing bg-black/90"
-        onClick={(e) => e.stopPropagation()}
-        onMouseMove={handleMouseMove}
-        onMouseLeave={handleMouseLeave}
-        style={{
-          perspective: '1500px',
-          transformStyle: 'preserve-3d',
-          transform: `rotateX(${rotation.x}deg) rotateY(${rotation.y}deg)`,
-          transition: 'transform 0.1s ease-out'
-        }}
-      >
-        {/* Hiệu ứng ánh sáng trắng xung quanh viền */}
-        <div className="absolute -inset-1 bg-white rounded-xl blur-md opacity-30"></div>
+//   return (
+//     <div 
+//       className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md"
+//       onClick={onClose}
+//     >
+//       <div 
+//         ref={cardRef}
+//         className="relative w-[80vw] h-[80vh] rounded-xl overflow-hidden shadow-2xl cursor-grab active:cursor-grabbing bg-black/90"
+//         onClick={(e) => e.stopPropagation()}
+//         onMouseMove={handleMouseMove}
+//         onMouseLeave={handleMouseLeave}
+//         style={{
+//           perspective: '1500px',
+//           transformStyle: 'preserve-3d',
+//           transform: `rotateX(${rotation.x}deg) rotateY(${rotation.y}deg)`,
+//           transition: 'transform 0.1s ease-out'
+//         }}
+//       >
+//         {/* Hiệu ứng ánh sáng trắng xung quanh viền */}
+//         <div className="absolute -inset-1 bg-white rounded-xl blur-md opacity-30"></div>
         
-        {/* Container chính */}
-        <div className="absolute inset-0 bg-black/90 rounded-xl p-4 overflow-hidden flex flex-col md:flex-row">
-          {/* Phần bên trái - Thông tin vị trí công trình */}
-          <div 
-            className="w-full md:w-1/4 p-4 flex flex-col justify-between border-r border-white/10"
-            style={{
-              transform: `translateZ(30px)`,
-              transformStyle: 'preserve-3d'
-            }}
-          >
-            <div>
-              <h3 className="text-white text-xl font-bold mb-4">{image?.alt || 'Project Name'}</h3>
+//         {/* Container chính */}
+//         <div className="absolute inset-0 bg-black/90 rounded-xl p-4 overflow-hidden flex flex-col md:flex-row">
+//           {/* Phần bên trái - Thông tin vị trí công trình */}
+//           <div 
+//             className="w-full md:w-1/4 p-4 flex flex-col justify-between border-r border-white/10"
+//             style={{
+//               transform: `translateZ(30px)`,
+//               transformStyle: 'preserve-3d'
+//             }}
+//           >
+//             <div>
+//               <h3 className="text-white text-xl font-bold mb-4">{image?.alt || 'Project Name'}</h3>
               
-              <div className="space-y-4">
-                <div>
-                  <p className="text-gray-400 text-sm">Vị trí</p>
-                  <p className="text-white">{projectData.location}</p>
-                </div>
+//               <div className="space-y-4">
+//                 <div>
+//                   <p className="text-gray-400 text-sm">Vị trí</p>
+//                   <p className="text-white">{projectData.location}</p>
+//                 </div>
                 
-                <div>
-                  <p className="text-gray-400 text-sm">Địa chỉ</p>
-                  <p className="text-white">{projectData.address}</p>
-                </div>
+//                 <div>
+//                   <p className="text-gray-400 text-sm">Địa chỉ</p>
+//                   <p className="text-white">{projectData.address}</p>
+//                 </div>
                 
-                <div>
-                  <p className="text-gray-400 text-sm">Khách hàng</p>
-                  <p className="text-white">{projectData.client}</p>
-                </div>
+//                 <div>
+//                   <p className="text-gray-400 text-sm">Khách hàng</p>
+//                   <p className="text-white">{projectData.client}</p>
+//                 </div>
                 
-                <div>
-                  <p className="text-gray-400 text-sm">Diện tích</p>
-                  <p className="text-white">{projectData.area}</p>
-                </div>
-              </div>
-            </div>
+//                 <div>
+//                   <p className="text-gray-400 text-sm">Diện tích</p>
+//                   <p className="text-white">{projectData.area}</p>
+//                 </div>
+//               </div>
+//             </div>
             
-            <div className="mt-auto pt-4">
-              <button className="w-full py-2 px-4 bg-white/10 hover:bg-white/20 rounded-lg text-white transition-colors">
-                Xem chi tiết dự án
-              </button>
-            </div>
-          </div>
+//             <div className="mt-auto pt-4">
+//               <button className="w-full py-2 px-4 bg-white/10 hover:bg-white/20 rounded-lg text-white transition-colors">
+//                 Xem chi tiết dự án
+//               </button>
+//             </div>
+//           </div>
           
-          {/* Phần giữa - Hình ảnh */}
-          <div 
-            className="w-full md:w-2/4 p-4 flex items-center justify-center"
-            style={{
-              transform: `translateZ(20px)`,
-              transformStyle: 'preserve-3d'
-            }}
-          >
-            <div className="relative w-full h-full rounded-lg overflow-hidden">
-              {/* Hiệu ứng shine */}
-              <div 
-                className="absolute inset-0 w-full h-full z-10 mix-blend-overlay pointer-events-none"
-                style={{
-                  background: `radial-gradient(circle at ${50 + rotation.y / 2}% ${50 + rotation.x / 2}%, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 60%)`
-                }}
-              ></div>
+//           {/* Phần giữa - Hình ảnh */}
+//           <div 
+//             className="w-full md:w-2/4 p-4 flex items-center justify-center"
+//             style={{
+//               transform: `translateZ(20px)`,
+//               transformStyle: 'preserve-3d'
+//             }}
+//           >
+//             <div className="relative w-full h-full rounded-lg overflow-hidden">
+//               {/* Hiệu ứng shine */}
+//               <div 
+//                 className="absolute inset-0 w-full h-full z-10 mix-blend-overlay pointer-events-none"
+//                 style={{
+//                   background: `radial-gradient(circle at ${50 + rotation.y / 2}% ${50 + rotation.x / 2}%, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 60%)`
+//                 }}
+//               ></div>
               
-              {/* Hình ảnh chính */}
-              <img 
-                src={image?.src || '/placeholder.svg'} 
-                alt={image?.alt || 'Gallery image'} 
-                className="w-full h-full object-contain"
-              />
-            </div>
-          </div>
+//               {/* Hình ảnh chính */}
+//               <img 
+//                 src={image?.src || '/placeholder.svg'} 
+//                 alt={image?.alt || 'Gallery image'} 
+//                 className="w-full h-full object-contain"
+//               />
+//             </div>
+//           </div>
           
-          {/* Phần bên phải - Thông tin thời gian thi công, loại đèn */}
-          <div 
-            className="w-full md:w-1/4 p-4 flex flex-col justify-between border-l border-white/10"
-            style={{
-              transform: `translateZ(30px)`,
-              transformStyle: 'preserve-3d'
-            }}
-          >
-            <div>
-              <h3 className="text-white text-xl font-bold mb-4">Thông tin kỹ thuật</h3>
+//           {/* Phần bên phải - Thông tin thời gian thi công, loại đèn */}
+//           <div 
+//             className="w-full md:w-1/4 p-4 flex flex-col justify-between border-l border-white/10"
+//             style={{
+//               transform: `translateZ(30px)`,
+//               transformStyle: 'preserve-3d'
+//             }}
+//           >
+//             <div>
+//               <h3 className="text-white text-xl font-bold mb-4">Thông tin kỹ thuật</h3>
               
-              <div className="space-y-4">
-                <div>
-                  <p className="text-gray-400 text-sm">Thời gian thi công</p>
-                  <p className="text-white">{projectData.constructionTime}</p>
-                </div>
+//               <div className="space-y-4">
+//                 <div>
+//                   <p className="text-gray-400 text-sm">Thời gian thi công</p>
+//                   <p className="text-white">{projectData.constructionTime}</p>
+//                 </div>
                 
-                <div>
-                  <p className="text-gray-400 text-sm">Loại đèn sử dụng</p>
-                  <ul className="text-white list-disc pl-5 mt-1">
-                    {projectData.lightingTypes.map((type, index) => (
-                      <li key={index}>{type}</li>
-                    ))}
-                  </ul>
-                </div>
+//                 <div>
+//                   <p className="text-gray-400 text-sm">Loại đèn sử dụng</p>
+//                   <ul className="text-white list-disc pl-5 mt-1">
+//                     {projectData.lightingTypes.map((type, index) => (
+//                       <li key={index}>{type}</li>
+//                     ))}
+//                   </ul>
+//                 </div>
                 
-                <div>
-                  <p className="text-gray-400 text-sm">Thiết kế</p>
-                  <p className="text-white">{projectData.designer}</p>
-                </div>
+//                 <div>
+//                   <p className="text-gray-400 text-sm">Thiết kế</p>
+//                   <p className="text-white">{projectData.designer}</p>
+//                 </div>
                 
-                <div>
-                  <p className="text-gray-400 text-sm">Nhiếp ảnh</p>
-                  <p className="text-white">{projectData.photographer}</p>
-                </div>
-              </div>
-            </div>
+//                 <div>
+//                   <p className="text-gray-400 text-sm">Nhiếp ảnh</p>
+//                   <p className="text-white">{projectData.photographer}</p>
+//                 </div>
+//               </div>
+//             </div>
             
-            <div className="mt-auto pt-4 flex space-x-2">
-              <button className="flex-1 py-2 px-3 bg-white/10 hover:bg-white/20 rounded-lg text-white transition-colors">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                </svg>
-              </button>
-              <button className="flex-1 py-2 px-3 bg-white/10 hover:bg-white/20 rounded-lg text-white transition-colors">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
-                </svg>
-              </button>
-              <button className="flex-1 py-2 px-3 bg-white/10 hover:bg-white/20 rounded-lg text-white transition-colors">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
-                </svg>
-              </button>
-            </div>
-          </div>
-        </div>
+//             <div className="mt-auto pt-4 flex space-x-2">
+//               <button className="flex-1 py-2 px-3 bg-white/10 hover:bg-white/20 rounded-lg text-white transition-colors">
+//                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+//                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+//                 </svg>
+//               </button>
+//               <button className="flex-1 py-2 px-3 bg-white/10 hover:bg-white/20 rounded-lg text-white transition-colors">
+//                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+//                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
+//                 </svg>
+//               </button>
+//               <button className="flex-1 py-2 px-3 bg-white/10 hover:bg-white/20 rounded-lg text-white transition-colors">
+//                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+//                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
+//                 </svg>
+//               </button>
+//             </div>
+//           </div>
+//         </div>
         
-        {/* Nút đóng */}
-        <button 
-          className="absolute top-4 right-4 w-10 h-10 rounded-full bg-black/50 backdrop-blur-sm flex items-center justify-center text-white border border-white/20 hover:bg-white/20 transition-colors z-10"
-          onClick={onClose}
-          style={{
-            transform: `translateZ(50px)`,
-            transformStyle: 'preserve-3d'
-          }}
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-          </svg>
-        </button>
-      </div>
-    </div>
-  );
-}
+//         {/* Nút đóng */}
+//         <button 
+//           className="absolute top-4 right-4 w-10 h-10 rounded-full bg-black/50 backdrop-blur-sm flex items-center justify-center text-white border border-white/20 hover:bg-white/20 transition-colors z-10"
+//           onClick={onClose}
+//           style={{
+//             transform: `translateZ(50px)`,
+//             transformStyle: 'preserve-3d'
+//           }}
+//         >
+//           <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+//             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+//           </svg>
+//         </button>
+//       </div>
+//     </div>
+//   );
+// }
 
 // Wrapper component cho AnimatedRoundedGrid để thêm chức năng popup
 function EnhancedAnimatedRoundedGrid({ images }) {
@@ -349,13 +349,6 @@ function EnhancedAnimatedRoundedGrid({ images }) {
           }))}
         />
       </div>
-      
-      {/* Popup component */}
-      <ImagePopup 
-        isOpen={isPopupOpen} 
-        image={selectedImage} 
-        onClose={closePopup} 
-      />
     </>
   );
 }
