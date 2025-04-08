@@ -2,10 +2,8 @@
 
 import { useEffect, useRef, useState } from "react"
 import Header from "@/components/header"
-import HeroSection from "@/components/hero-section"
 import VideoPlayerSection from "@/components/video-section"
 import ProjectSlider from "@/components/project-slider"
-import ServicesSection from "@/components/services-section"
 import Footer from "@/components/footer"
 import Enhanced3DVideoCard from "@/components/video-3D"
 import FirstElementHpage from "@/components/first-element-hpage"
@@ -23,7 +21,7 @@ export default function Home() {
   const [servicesSliderAtLastSlideRef, setServicesSliderAtLastSlide] = useState(false)
 
   // Danh sách index của các component có slide riêng
-  const independentComponentIndices = [1, 2, 4, 6] // FirstElementHpage, SecondElementHpage, ProjectSlider, ServicesSection
+  const independentComponentIndices = [1, 2, 3] // FirstElementHpage, SecondElementHpage, ProjectSlider
 
   // Kiểm tra thiết bị di động khi trang được tải
   useEffect(() => {
@@ -36,12 +34,12 @@ export default function Home() {
   }, [])
 
   // Kiểm tra xem component hiện tại có phải là component độc lập không
-  const isIndependentComponent = (sectionIndex) => {
+  const isIndependentComponent = (sectionIndex: number) => {
     return independentComponentIndices.includes(sectionIndex)
   }
 
   // Hàm chuyển đến section
-  const navigateToSection = (index) => {
+  const navigateToSection = (index: number) => {
     // Kiểm tra thời gian giữa các lần scroll để tránh scroll quá nhanh
     const now = Date.now()
     if (now - lastScrollTimeRef.current < 800) return
@@ -86,7 +84,7 @@ export default function Home() {
 
   // Xử lý sự kiện wheel (cuộn chuột) cho desktop
   useEffect(() => {
-    const handleWheel = (e) => {
+    const handleWheel = (e: WheelEvent) => {
       // Ngăn cản scroll mặc định
       e.preventDefault()
 
@@ -125,11 +123,11 @@ export default function Home() {
   useEffect(() => {
     let touchStartY = 0
 
-    const handleTouchStart = (e) => {
+    const handleTouchStart = (e: TouchEvent) => {
       touchStartY = e.touches[0].clientY
     }
 
-    const handleTouchEnd = (e) => {
+    const handleTouchEnd = (e: TouchEvent) => {
       const touchEndY = e.changedTouches[0].clientY
       const diff = touchStartY - touchEndY
 
@@ -166,7 +164,7 @@ export default function Home() {
 
   // Xử lý phím mũi tên
   useEffect(() => {
-    const handleKeyDown = (e) => {
+    const handleKeyDown = (e: KeyboardEvent) => {
       if (isScrolling) return
 
       if (e.key === "ArrowDown") {
@@ -198,31 +196,31 @@ export default function Home() {
   }, [])
 
   // Hàm xử lý thông báo từ các component
-  const handleComponentSlideChange = (componentIndex, isAtLastSlide) => {
+  const handleComponentSlideChange = (componentIndex: number, isAtLastSlide: boolean) => {
     console.log(`Component ${componentIndex} at last slide: ${isAtLastSlide}`);
     
-    if (componentIndex === 4) { // ProjectSlider
+    if (componentIndex === 3) { // ProjectSlider (updated index)
       setProjectSliderAtLastSlide(isAtLastSlide);
-    } else if (componentIndex === 6) { // ServicesSection 
+    } else if (componentIndex === 5) { // ServicesSection (updated index)
       setServicesSliderAtLastSlide(isAtLastSlide);
     }
   }
 
   // Kiểm tra xem có thể chuyển từ component độc lập không
-  const canNavigateFromIndependentComponent = (direction, sectionIndex) => {
+  const canNavigateFromIndependentComponent = (direction: number, sectionIndex: number) => {
     // Chỉ áp dụng khi muốn chuyển xuống (direction > 0)
     if (direction > 0) {
-      // Với ProjectSlider (index 4)
-      if (sectionIndex === 4) {
+      // Với ProjectSlider (updated index 3)
+      if (sectionIndex === 3) {
         console.log("Can navigate from ProjectSlider:", projectSliderAtLastSlideRef);
         return projectSliderAtLastSlideRef;
       }
       
-      // Với ServicesSection (index 6)
-      if (sectionIndex === 6) {
-        console.log("Can navigate from ServicesSection:", servicesSliderAtLastSlideRef);
-        return servicesSliderAtLastSlideRef;
-      }
+      // ServicesSection đã bị comment
+      // if (sectionIndex === 5) {
+      //   console.log("Can navigate from ServicesSection:", servicesSliderAtLastSlideRef);
+      //   return servicesSliderAtLastSlideRef;
+      // }
     }
     
     // Cho phép chuyển đối với các trường hợp khác
@@ -297,7 +295,7 @@ export default function Home() {
             style={{ transform: `translateY(${(currentSection - 1) * -100}vh)` }}
             data-index={1}
           >
-            <FirstElementHpage onSlideChange={(isAtLastSlide) => handleComponentSlideChange(1, isAtLastSlide)} />
+            <FirstElementHpage onSlideChange={(isAtLastSlide: boolean) => handleComponentSlideChange(1, isAtLastSlide)} />
           </div>
 
           {/* SecondElementHpage - component không tác động */}
@@ -309,66 +307,56 @@ export default function Home() {
             style={{ transform: `translateY(${(currentSection - 2) * -100}vh)` }}
             data-index={2}
           >
-            <SecondElementHpage onSlideChange={(isAtLastSlide) => handleComponentSlideChange(2, isAtLastSlide)} />
-          </div>
-
-          {/* HeroSection */}
-          <div
-            ref={(el) => {
-              sectionRefs.current[3] = el
-            }}
-            className="section"
-            style={{ transform: `translateY(${(currentSection - 3) * -100}vh)` }}
-            data-index={3}
-          >
-            <HeroSection />
+            <SecondElementHpage onSlideChange={(isAtLastSlide: boolean) => handleComponentSlideChange(2, isAtLastSlide)} />
           </div>
 
           {/* ProjectSlider */}
           <div
             ref={(el) => {
-              sectionRefs.current[4] = el
+              sectionRefs.current[3] = el
             }}
             className="section independent-section"
-            style={{ transform: `translateY(${(currentSection - 4) * -100}vh)`, background: "#B8BBC1" }}
-            data-index={4}
+            style={{ transform: `translateY(${(currentSection - 3) * -100}vh)`, background: "#B8BBC1" }}
+            data-index={3}
           >
-            <ProjectSlider onSlideChange={(isAtLastSlide) => handleComponentSlideChange(4, isAtLastSlide)} />
+            <ProjectSlider onSlideChange={(isAtLastSlide: boolean) => handleComponentSlideChange(3, isAtLastSlide)} />
           </div>
 
           {/* VideoPlayerSection */}
           <div
             ref={(el) => {
-              sectionRefs.current[5] = el
+              sectionRefs.current[4] = el
             }}
             className="section"
-            style={{ transform: `translateY(${(currentSection - 5) * -100}vh)`, background: "#B8BBC1" }}
-            data-index={5}
+            style={{ transform: `translateY(${(currentSection - 4) * -100}vh)`, background: "#B8BBC1" }}
+            data-index={4}
           >
             <VideoPlayerSection />
           </div>
 
           {/* ServicesSection */}
+          {/* 
           <div
             id="work"
             ref={(el) => {
-              sectionRefs.current[6] = el
+              sectionRefs.current[5] = el
             }}
             className="section independent-section"
-            style={{ transform: `translateY(${(currentSection - 6) * -100}vh)`, background: "#B8BBC1" }}
-            data-index={6}
+            style={{ transform: `translateY(${(currentSection - 5) * -100}vh)`, background: "#B8BBC1" }}
+            data-index={5}
           >
-            <ServicesSection onSlideChange={(isAtLastSlide) => handleComponentSlideChange(6, isAtLastSlide)} />
+            <ServicesSection onSlideChange={(isAtLastSlide) => handleComponentSlideChange(5, isAtLastSlide)} />
           </div>
+          */}
 
           {/* Enhanced3DVideoCard */}
           <div
             ref={(el) => {
-              sectionRefs.current[7] = el
+              sectionRefs.current[5] = el 
             }}
             className="section"
-            style={{ transform: `translateY(${(currentSection - 7) * -100}vh)`, background: "#B8BBC1" }}
-            data-index={7}
+            style={{ transform: `translateY(${(currentSection - 5) * -100}vh)`, background: "#B8BBC1" }}
+            data-index={5}
           >
             <Enhanced3DVideoCard />
           </div>
@@ -376,11 +364,11 @@ export default function Home() {
           {/* Footer */}
           <div
             ref={(el) => {
-              sectionRefs.current[8] = el
+              sectionRefs.current[6] = el
             }}
             className="section"
-            style={{ transform: `translateY(${(currentSection - 8) * -100}vh)` }}
-            data-index={8}
+            style={{ transform: `translateY(${(currentSection - 6) * -100}vh)` }}
+            data-index={6}
           >
             <div className="rounded-t-[10px] overflow-hidden shadow-2xl h-full">
               <Footer />
@@ -390,7 +378,7 @@ export default function Home() {
 
         {/* Chấm chỉ báo section */}
         <div className="fixed right-4 top-1/2 transform -translate-y-1/2 z-50 flex flex-col gap-2">
-          {Array(9)
+          {Array(7) /* Giảm từ 8 xuống 7 vì đã xóa HeroSection */
             .fill(0)
             .map((_, index) => (
               <button

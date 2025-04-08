@@ -338,8 +338,7 @@ export default function FirstElementHpage() {
               >
                 <h3 className="text-white font-medium mb-2">Your light - Your style.</h3>
                 <p className="text-white/80 text-sm leading-relaxed">
-                  The IDA collection is part of IDA's commitment to working with companies to lower their impact on the
-                  environment with uniquely but responsibly new products.
+                Bộ sưu tập IDA là một phần trong cam kết của IDA trong việc hợp tác cùng các doanh nghiệp nhằm giảm thiểu tác động đến môi trường thông qua những sản phẩm mới độc đáo mang giá trị bền vững cho không gian sống.
                 </p>
               </motion.div>
 

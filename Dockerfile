@@ -1,49 +1,37 @@
-# Stage 1: Build stage
+# Sử dụng Node.js 18 LTS
 FROM node:18-alpine AS builder
+
+# Thiết lập thư mục làm việc
 WORKDIR /app
 
-# Cài đặt dependencies
-COPY package*.json ./
-RUN npm ci --legacy-peer-deps
-# Cài đặt howler bỏ qua kiểm tra peer dependencies
-RUN npm install howler @types/howler --legacy-peer-deps
+# Sao chép file package.json và package-lock.json (nếu có)
+COPY package.json package-lock.json* ./
 
-# Copy source code
+# Cài đặt dependencies với legacy-peer-deps để tránh xung đột
+RUN npm install --legacy-peer-deps
+
+# Sao chép tất cả code nguồn
 COPY . .
 
-# Copy public files
-COPY public ./public
-
-# Build application
-ENV NEXT_TELEMETRY_DISABLED=1
+# Build ứng dụng
 RUN npm run build
 
-# Stage 2: Production stage
+# Giai đoạn sản phẩm để giảm kích thước image
 FROM node:18-alpine AS runner
 WORKDIR /app
 
-ENV NODE_ENV=production
-ENV NEXT_TELEMETRY_DISABLED=1
-
-# Tạo non-root user
-RUN addgroup --system --gid 1001 nodejs
-RUN adduser --system --uid 1001 nextjs
-
-# Sao chép các file cần thiết từ builder
+# Sao chép node_modules và các file đã build
+COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/.next ./.next
 COPY --from=builder /app/public ./public
 COPY --from=builder /app/package.json ./package.json
-COPY --from=builder /app/.next/standalone ./
-COPY --from=builder /app/.next/static ./.next/static
 
-# Thiết lập quyền truy cập
-RUN chown -R nextjs:nodejs /app
+# Thiết lập biến môi trường cho sản xuất
+ENV NODE_ENV production
+ENV PORT 3000
 
-USER nextjs
-
+# Expose port 3000
 EXPOSE 3000
 
-ENV PORT=3000
-ENV HOSTNAME="0.0.0.0"
-
-# Command để chạy ứng dụng
-CMD ["node", "server.js"] 
+# Chạy ứng dụng
+CMD ["npm", "start"] 
