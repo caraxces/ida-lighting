@@ -13,7 +13,7 @@ export default function AboutHero() {
       <div className="container mx-auto text-center z-10 max-w-4xl">
         <motion.div initial={{ opacity: 0, y: 50 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
           <AnimatedTitle>
-            Về <span className="font-extrabold">IDA Lighting</span>
+            About <span className="font-extrabold">IDA Lighting</span>
           </AnimatedTitle>
 
           <p className="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto mb-12">

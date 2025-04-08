@@ -104,7 +104,7 @@ export default function HeroSection({
           </AnimatedTitle>
 
           <p className="text-white/80 text-lg md:text-xl max-w-2xl mx-auto font-light leading-relaxed mt-6">
-            IDA Lighting - Bringing innovative lighting solutions to transform spaces with elegance and efficiency.
+            IDA Lighting - Mang đến những giải pháp chiếu sáng đột phá, kiến tạo không gian với sự tinh tế trong mức tối ưu kinh tế mang lại giá trị thực tế.
           </p>
 
           {/* Glow Button CTA */}

@@ -16,7 +16,7 @@ interface Enhanced3DVideoCardProps {
 export default function Enhanced3DVideoCard({
   className = "",
   title = "IDA Lighting",
-  description = "IDA Lighting is a lighting design company that specializes in creating unique and innovative lighting solutions for residential and commercial spaces.",
+  description = "IDA Lighting là một công ty thiết kế ánh sáng, chuyên kiến tạo những giải pháp chiếu sáng độc đáo và đầy sáng tạo, thổi hồn vào từng không gian sống và thương mại bằng ánh sáng nghệ thuật.",
   videoSrc = "/13387624005549159.mp4",
   nextProject = "Next project",
 }: Enhanced3DVideoCardProps) {
@@ -168,10 +168,12 @@ export default function Enhanced3DVideoCard({
       <div className="w-full overflow-hidden mt-16 mb-4 relative">
         <motion.div ref={marqueeRef} className="inline-flex items-center whitespace-nowrap" animate={marqueeControls}>
           <h2 className="text-[100px] font-light text-white flex items-center whitespace-nowrap">
-            {nextProject} <ArrowRight className="ml-2 mr-8" />
-            {nextProject} <ArrowRight className="ml-2 mr-8" />
-            {nextProject} <ArrowRight className="ml-2 mr-8" />
-            {nextProject} <ArrowRight className="ml-2 mr-8" />
+            <a href="https://m.me/855258281507149" target="_blank" rel="noopener noreferrer">
+              Tác phẩm tiếp theo thuộc về bạn <ArrowRight className="ml-2 mr-8" />
+            </a>
+            <a href="https://m.me/855258281507149" target="_blank" rel="noopener noreferrer">
+              Tác phẩm tiếp theo thuộc về bạn <ArrowRight className="ml-2 mr-8" />
+            </a>
           </h2>
         </motion.div>
       </div>

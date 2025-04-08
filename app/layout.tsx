@@ -5,6 +5,7 @@ import "./globals.css"
 import { SoundProvider } from "@/hooks/use-sound"
 import Script from "next/script"
 import PulsePreloader from "@/components/preload"
+import FloatingContactButton from "@/components/floating-contact-button"
 // import SoundTest from "@/components/sound-test"
 
 const inter = Inter({ subsets: ["latin"] })
@@ -126,6 +127,8 @@ export default function RootLayout({
           src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"
           strategy="beforeInteractive"
         />
+
+        <FloatingContactButton />
       </body>
     </html>
   )

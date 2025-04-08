@@ -5,13 +5,15 @@ import type React from "react"
 import { useState, useEffect } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { Volume2, VolumeX, ArrowRight, ChevronRight } from "lucide-react"
+import { Volume2, VolumeX } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { useSound } from "@/hooks/use-sound"
+import { useRouter } from "next/navigation"
+import HeaderButtons from "@/components/header-buttons"
 
 interface HeaderProps {
-  onButtonClick?: () => void;
-  onButtonHover?: () => void;
+  onButtonClick?: () => void
+  onButtonHover?: () => void
 }
 
 export default function Header({ onButtonClick, onButtonHover }: HeaderProps) {
@@ -20,6 +22,7 @@ export default function Header({ onButtonClick, onButtonHover }: HeaderProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const pathname = usePathname()
   const { playSound, toggleSound, isSoundEnabled } = useSound()
+  const router = useRouter()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -74,7 +77,7 @@ export default function Header({ onButtonClick, onButtonHover }: HeaderProps) {
     { title: "Tác Phẩm", href: "/work" },
     { title: "Blog", href: "/blog" },
     { title: "Liên Hệ", href: "/contacts" },
-  ];
+  ]
 
   return (
     <header
@@ -92,7 +95,9 @@ export default function Header({ onButtonClick, onButtonHover }: HeaderProps) {
             href="/"
             className={cn(
               "px-5 py-2 rounded-full font-medium transition-all duration-300",
-              pathname === "/" ? "bg-white text-black" : "text-gray-400 hover:text-white hover:text-shadow-[0_0_15px_rgba(255,255,255,0.7)] bg-white/10 backdrop-blur-sm",
+              pathname === "/"
+                ? "bg-white text-black"
+                : "text-gray-400 hover:text-white hover:text-shadow-[0_0_15px_rgba(255,255,255,0.7)] bg-white/10 backdrop-blur-sm",
             )}
             onClick={(e) => handleNavClick(e)}
             onMouseEnter={onButtonHover}
@@ -107,9 +112,9 @@ export default function Header({ onButtonClick, onButtonHover }: HeaderProps) {
                 href="/work"
                 className={cn(
                   "px-3 py-2 font-medium transition-all duration-300 relative",
-                  pathname === "/work" 
-                    ? "text-white [text-shadow:0_0_15px_rgba(255,255,255,0.7)]" 
-                    : "text-gray-400 hover:text-white hover:[text-shadow:0_0_15px_rgba(255,255,255,0.7)]"
+                  pathname === "/work"
+                    ? "text-white [text-shadow:0_0_15px_rgba(255,255,255,0.7)]"
+                    : "text-gray-400 hover:text-white hover:[text-shadow:0_0_15px_rgba(255,255,255,0.7)]",
                 )}
                 onClick={(e) => handleNavClick(e)}
                 onMouseEnter={onButtonHover}
@@ -120,9 +125,9 @@ export default function Header({ onButtonClick, onButtonHover }: HeaderProps) {
                 href="/about"
                 className={cn(
                   "px-3 py-2 font-medium transition-all duration-300 relative",
-                  pathname === "/about" 
-                    ? "text-white [text-shadow:0_0_15px_rgba(255,255,255,0.7)]" 
-                    : "text-gray-400 hover:text-white hover:[text-shadow:0_0_15px_rgba(255,255,255,0.7)]"
+                  pathname === "/about"
+                    ? "text-white [text-shadow:0_0_15px_rgba(255,255,255,0.7)]"
+                    : "text-gray-400 hover:text-white hover:[text-shadow:0_0_15px_rgba(255,255,255,0.7)]",
                 )}
                 onClick={(e) => handleNavClick(e)}
                 onMouseEnter={onButtonHover}
@@ -133,9 +138,9 @@ export default function Header({ onButtonClick, onButtonHover }: HeaderProps) {
                 href="/contacts"
                 className={cn(
                   "px-3 py-2 font-medium transition-all duration-300 relative",
-                  pathname === "/contacts" 
-                    ? "text-white [text-shadow:0_0_15px_rgba(255,255,255,0.7)]" 
-                    : "text-gray-400 hover:text-white hover:[text-shadow:0_0_15px_rgba(255,255,255,0.7)]"
+                  pathname === "/contacts"
+                    ? "text-white [text-shadow:0_0_15px_rgba(255,255,255,0.7)]"
+                    : "text-gray-400 hover:text-white hover:[text-shadow:0_0_15px_rgba(255,255,255,0.7)]",
                 )}
                 onClick={(e) => handleNavClick(e)}
                 onMouseEnter={onButtonHover}
@@ -148,42 +153,15 @@ export default function Header({ onButtonClick, onButtonHover }: HeaderProps) {
 
         {/* Center Logo */}
         <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2">
-          <img 
-            src="/Ida B-W2.png" 
+          <img
+            src="/Ida B-W2.png"
             alt="IDA Lighting Logo"
             className="h-12 w-auto transition-all duration-300 hover:shadow-[0_0_20px_rgba(255,255,255,0.7)] cursor-pointer"
           />
         </div>
 
-        {/* Right Buttons */}
-        <div className="flex items-center space-x-3">
-          <button
-            onClick={handleSoundToggle}
-            className="p-2 rounded-full bg-white/10 backdrop-blur-sm hover:bg-white/30 transition-all duration-300 hover:shadow-[0_0_15px_rgba(255,255,255,0.5)]"
-            aria-label={soundOn ? "Mute sound" : "Enable sound"}
-          >
-            {soundOn ? <Volume2 size={20} /> : <VolumeX size={20} />}
-          </button>
-
-          <a
-            href="/IDA LIGHTING 02 03 2025.pdf" 
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center space-x-2 px-5 py-2 bg-white/20 backdrop-blur-sm rounded-full hover:bg-white/30 transition-all duration-300 hover:shadow-[0_0_15px_rgba(255,255,255,0.5)]"
-            onClick={() => playSound()}
-          >
-            Download Catalogue
-            <ArrowRight size={16} className="ml-1" />
-          </a>
-
-          <Link
-            href="/contacts"
-            className="px-5 py-2 bg-white text-black rounded-full font-medium hover:bg-opacity-90 transition-all duration-300 hover:shadow-[0_0_15px_rgba(255,255,255,0.7)]"
-            onClick={(e) => handleNavClick(e)}
-          >
-            Let&apos;s talk
-          </Link>
-        </div>
+        {/* Right Buttons - Using the new HeaderButtons component */}
+        <HeaderButtons soundOn={soundOn} onSoundToggle={handleSoundToggle} playSound={playSound} />
       </div>
 
       {/* Mobile Navigation - New 3-button layout */}
@@ -198,52 +176,50 @@ export default function Header({ onButtonClick, onButtonHover }: HeaderProps) {
         </button>
 
         {/* Center Logo */}
-        <img 
-            src="/Ida B-W2.png" 
-            alt="IDA Lighting Logo"
-            className="h-12 w-auto transition-all duration-300 hover:shadow-[0_0_20px_rgba(255,255,255,0.7)] cursor-pointer"
-          />
+        <img
+          src="/Ida B-W2.png"
+          alt="IDA Lighting Logo"
+          className="h-12 w-auto transition-all duration-300 hover:shadow-[0_0_20px_rgba(255,255,255,0.7)] cursor-pointer"
+        />
 
-        {/* Let's Talk Button */}
-        <Link
-          href="/contacts"
-          className="px-5 py-2 bg-white text-black rounded-full font-medium hover:bg-opacity-90 transition-all duration-300 hover:shadow-[0_0_15px_rgba(255,255,255,0.7)]"
-          onClick={(e) => handleNavClick(e)}
+        {/* Contact Button - Using the same style as desktop buttons */}
+        <button
+          onClick={() => router.push("/contacts")}
+          className="flex items-center px-5 py-2 bg-white/10 backdrop-blur-sm rounded-full hover:bg-white/20 transition-all duration-300 hover:shadow-[0_0_15px_rgba(255,255,255,0.5)] text-white"
         >
-          Let&apos;s talk
-        </Link>
+          Liên hệ
+        </button>
 
         {/* Mobile Menu - Updated with rounded corners and two-column layout */}
         {mobileMenuOpen && (
           <div className="fixed inset-0 bg-black/90 z-50 overflow-y-auto">
             <div className="flex items-center justify-between p-4 animate-slide-down">
-              <button 
-                onClick={toggleMobileMenu} 
+              <button
+                onClick={toggleMobileMenu}
                 className="px-5 py-2 bg-white/10 backdrop-blur-sm text-white rounded-full font-medium hover:bg-white/20 hover:shadow-[0_0_15px_rgba(255,255,255,0.5)] transition-all duration-300 hover:translate-y-[-2px]"
               >
                 Close
               </button>
 
-              <img 
-            src="/Ida B-W2.png" 
-            alt="IDA Lighting Logo"
-            className="h-12 w-auto transition-all duration-300 hover:shadow-[0_0_20px_rgba(255,255,255,0.7)] cursor-pointer"
-          />
+              <img
+                src="/Ida B-W2.png"
+                alt="IDA Lighting Logo"
+                className="h-12 w-auto transition-all duration-300 hover:shadow-[0_0_20px_rgba(255,255,255,0.7)] cursor-pointer"
+              />
 
-              <Link
-                href="/contacts"
-                className="px-5 py-2 bg-white text-black rounded-full font-medium hover:shadow-[0_0_15px_rgba(255,255,255,0.7)] hover:bg-opacity-90 transition-all duration-300 hover:translate-y-[-2px]"
-                onClick={(e) => handleNavClick(e)}
+              <button
+                onClick={() => router.push("/contacts")}
+                className="flex items-center px-5 py-2 bg-white/10 backdrop-blur-sm rounded-full hover:bg-white/20 transition-all duration-300 hover:shadow-[0_0_15px_rgba(255,255,255,0.5)] text-white"
               >
-                Let&apos;s talk
-              </Link>
+                Liên hệ
+              </button>
             </div>
 
             <div className="flex flex-col mt-4 px-4 space-y-4">
               <Link
                 href="/"
                 className="py-6 px-8 text-left text-xl font-medium bg-white/10 backdrop-blur-xl text-white rounded-full transform transition-all duration-300 hover:scale-[1.02] hover:translate-y-[-4px] hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] hover:bg-white/20 animate-slide-down group relative overflow-hidden"
-                style={{ animationDelay: '100ms' }}
+                style={{ animationDelay: "100ms" }}
                 onClick={(e) => handleNavClick(e)}
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent group-hover:translate-x-full transition-transform duration-700 ease-in-out"></div>
@@ -253,7 +229,7 @@ export default function Header({ onButtonClick, onButtonHover }: HeaderProps) {
               <Link
                 href="/work"
                 className="py-6 px-8 text-left text-xl font-medium bg-white/10 backdrop-blur-xl text-white rounded-full transform transition-all duration-300 hover:scale-[1.02] hover:translate-y-[-4px] hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] hover:bg-white/20 animate-slide-down group relative overflow-hidden"
-                style={{ animationDelay: '200ms' }}
+                style={{ animationDelay: "200ms" }}
                 onClick={(e) => handleNavClick(e)}
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent group-hover:translate-x-full transition-transform duration-700 ease-in-out"></div>
@@ -263,7 +239,7 @@ export default function Header({ onButtonClick, onButtonHover }: HeaderProps) {
               <Link
                 href="/about"
                 className="py-6 px-8 text-left text-xl font-medium bg-white/10 backdrop-blur-xl text-white rounded-full transform transition-all duration-300 hover:scale-[1.02] hover:translate-y-[-4px] hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] hover:bg-white/20 animate-slide-down group relative overflow-hidden"
-                style={{ animationDelay: '300ms' }}
+                style={{ animationDelay: "300ms" }}
                 onClick={(e) => handleNavClick(e)}
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent group-hover:translate-x-full transition-transform duration-700 ease-in-out"></div>
@@ -273,7 +249,7 @@ export default function Header({ onButtonClick, onButtonHover }: HeaderProps) {
               <Link
                 href="/contacts"
                 className="py-6 px-8 text-left text-xl font-medium bg-white/10 backdrop-blur-xl text-white rounded-full transform transition-all duration-300 hover:scale-[1.02] hover:translate-y-[-4px] hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] hover:bg-white/20 animate-slide-down group relative overflow-hidden"
-                style={{ animationDelay: '400ms' }}
+                style={{ animationDelay: "400ms" }}
                 onClick={(e) => handleNavClick(e)}
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent group-hover:translate-x-full transition-transform duration-700 ease-in-out"></div>
@@ -282,41 +258,60 @@ export default function Header({ onButtonClick, onButtonHover }: HeaderProps) {
             </div>
 
             <div className="p-8 mt-8 grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div className="bg-white/10 backdrop-blur-xl rounded-[30px] p-8 transform transition-all duration-300 hover:scale-[1.02] hover:translate-y-[-4px] hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] hover:bg-white/20 animate-slide-down group relative overflow-hidden"
-                style={{ animationDelay: '500ms' }}>
+              <div
+                className="bg-white/10 backdrop-blur-xl rounded-[30px] p-8 transform transition-all duration-300 hover:scale-[1.02] hover:translate-y-[-4px] hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] hover:bg-white/20 animate-slide-down group relative overflow-hidden"
+                style={{ animationDelay: "500ms" }}
+              >
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent group-hover:translate-x-full transition-transform duration-700 ease-in-out"></div>
                 <h3 className="font-medium mb-4 text-white relative z-10">Social media</h3>
                 <ul className="space-y-4 relative z-10">
                   <li>
-                    <a href="#" className="text-gray-400 hover:text-white transition-all duration-300 hover:shadow-[0_0_10px_rgba(255,255,255,0.3)] inline-block">
+                    <a
+                      href="#"
+                      className="text-gray-400 hover:text-white transition-all duration-300 hover:shadow-[0_0_10px_rgba(255,255,255,0.3)] inline-block"
+                    >
                       Vimeo
                     </a>
                   </li>
                   <li>
-                    <a href="#" className="text-gray-400 hover:text-white transition-all duration-300 hover:shadow-[0_0_10px_rgba(255,255,255,0.3)] inline-block">
+                    <a
+                      href="#"
+                      className="text-gray-400 hover:text-white transition-all duration-300 hover:shadow-[0_0_10px_rgba(255,255,255,0.3)] inline-block"
+                    >
                       LinkedIn
                     </a>
                   </li>
                   <li>
-                    <a href="#" className="text-gray-400 hover:text-white transition-all duration-300 hover:shadow-[0_0_10px_rgba(255,255,255,0.3)] inline-block">
+                    <a
+                      href="#"
+                      className="text-gray-400 hover:text-white transition-all duration-300 hover:shadow-[0_0_10px_rgba(255,255,255,0.3)] inline-block"
+                    >
                       X Twitter
                     </a>
                   </li>
                   <li>
-                    <a href="#" className="text-gray-400 hover:text-white transition-all duration-300 hover:shadow-[0_0_10px_rgba(255,255,255,0.3)] inline-block">
+                    <a
+                      href="#"
+                      className="text-gray-400 hover:text-white transition-all duration-300 hover:shadow-[0_0_10px_rgba(255,255,255,0.3)] inline-block"
+                    >
                       Instagram
                     </a>
                   </li>
                   <li>
-                    <a href="#" className="text-gray-400 hover:text-white transition-all duration-300 hover:shadow-[0_0_10px_rgba(255,255,255,0.3)] inline-block">
+                    <a
+                      href="#"
+                      className="text-gray-400 hover:text-white transition-all duration-300 hover:shadow-[0_0_10px_rgba(255,255,255,0.3)] inline-block"
+                    >
                       Behance
                     </a>
                   </li>
                 </ul>
               </div>
 
-              <div className="bg-white/10 backdrop-blur-xl rounded-[30px] p-8 transform transition-all duration-300 hover:scale-[1.02] hover:translate-y-[-4px] hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] hover:bg-white/20 animate-slide-down group relative overflow-hidden"
-                style={{ animationDelay: '600ms' }}>
+              <div
+                className="bg-white/10 backdrop-blur-xl rounded-[30px] p-8 transform transition-all duration-300 hover:scale-[1.02] hover:translate-y-[-4px] hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] hover:bg-white/20 animate-slide-down group relative overflow-hidden"
+                style={{ animationDelay: "600ms" }}
+              >
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent group-hover:translate-x-full transition-transform duration-700 ease-in-out"></div>
                 <div className="relative z-10">
                   <h3 className="font-medium mb-4 text-white">Hà Tĩnh</h3>
@@ -347,11 +342,10 @@ export default function Header({ onButtonClick, onButtonHover }: HeaderProps) {
                 href="/IDA LIGHTING 02 03 2025.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center space-x-2 px-5 py-2 bg-white/20 hover:bg-white/30 transition-all duration-300 hover:translate-y-[-2px] hover:shadow-[0_0_15px_rgba(255,255,255,0.5)] rounded-full text-white"
+                className="text-white hover:text-gray-200 transition-colors duration-300"
                 onClick={() => playSound()}
               >
-                Download Catalogue
-                <ChevronRight size={16} className="ml-1" />
+                Download catalogue
               </a>
             </div>
           </div>
@@ -360,4 +354,3 @@ export default function Header({ onButtonClick, onButtonHover }: HeaderProps) {
     </header>
   )
 }
-

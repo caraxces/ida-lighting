@@ -36,7 +36,7 @@ export default function ContactPage() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    console.log("Form submitted:", formData)
+    console.log("Đã gửi biểu mẫu:", formData)
     // Reset form
     setFormData({
       name: "",
@@ -64,8 +64,8 @@ export default function ContactPage() {
         <div className="container mx-auto">
           <div className="mb-16">
             <AnimatedTitle>
-              <span className="text-5xl md:text-7xl lg:text-8xl">Get in </span>
-              <span className="font-extrabold italic">touch</span>
+              <span className="text-5xl md:text-7xl lg:text-8xl">Liên hệ </span>
+              <span className="font-extrabold italic">với chúng tôi</span>
             </AnimatedTitle>
           </div>
 
@@ -76,9 +76,9 @@ export default function ContactPage() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.1 }}
               >
-                <h2 className="text-lg font-medium mb-2">Connect with us on Zalo</h2>
+                <h2 className="text-lg font-medium mb-2">Kết nối với chúng tôi qua Zalo</h2>
                 <p className="text-gray-600 text-sm mb-6">
-                  Scan the QR code below to connect with our customer service team on Zalo for quick responses.
+                  Quét mã QR bên dưới để kết nối với đội ngũ chăm sóc khách hàng của chúng tôi trên Zalo để nhận phản hồi nhanh chóng.
                 </p>
 
                 <div className="flex flex-col items-center">
@@ -94,25 +94,25 @@ export default function ContactPage() {
                   </div>
                   
                   <div className="text-center mb-6">
-                    <p className="text-gray-700 font-medium mb-2">Benefits of connecting on Zalo:</p>
+                    <p className="text-gray-700 font-medium mb-2">Lợi ích khi kết nối qua Zalo:</p>
                     <ul className="text-gray-600 text-sm space-y-2">
                       <li className="flex items-center">
                         <svg className="w-4 h-4 text-orange-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
                           <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                         </svg>
-                        Instant messaging with our team
+                        Nhắn tin tức thời với đội ngũ của chúng tôi
                       </li>
                       <li className="flex items-center">
                         <svg className="w-4 h-4 text-orange-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
                           <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                         </svg>
-                        Share photos of your space for consultation
+                        Chia sẻ hình ảnh không gian của bạn để được tư vấn
                       </li>
                       <li className="flex items-center">
                         <svg className="w-4 h-4 text-orange-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
                           <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                         </svg>
-                        Receive exclusive offers and updates
+                        Nhận ưu đãi độc quyền và cập nhật mới nhất
                       </li>
                     </ul>
                   </div>
@@ -132,7 +132,7 @@ export default function ContactPage() {
                       className="w-full h-full flex items-center justify-center py-3 px-6 space-x-2 z-10"
                     >
                       <span className="relative transition-all duration-300 text-white text-lg font-medium">
-                        Open Zalo
+                        Mở Zalo
                       </span>
                     </a>
                     <div className="absolute inset-0 bg-gradient-to-r from-red-500 via-orange-500 to-amber-500 opacity-100 hover:opacity-90 transition-opacity duration-300 rounded-[10px]"></div>
@@ -149,14 +149,14 @@ export default function ContactPage() {
                 transition={{ duration: 0.5, delay: 0.2 }}
                 className="mb-12"
               >
-                <h2 className="text-lg font-medium mb-2">Call Us</h2>
+                <h2 className="text-lg font-medium mb-2">Gọi cho chúng tôi</h2>
                 <p className="text-gray-600 text-sm mb-4">
-                  Our team is available to answer your questions during business hours.
+                  Đội ngũ của chúng tôi luôn sẵn sàng trả lời câu hỏi của bạn trong giờ làm việc.
                 </p>
                 <div className="flex items-center">
                   <Phone className="w-5 h-5 text-orange-500 mr-2" />
-                  <a href="tel:+842812345678" className="text-gray-800 hover:text-gray-600">
-                    +84 28 1234 5678
+                  <a href="tel:+84924222888" className="text-gray-800 hover:text-gray-600">
+                    0924.222.888
                   </a>
                 </div>
               </MotionDiv>
@@ -167,14 +167,14 @@ export default function ContactPage() {
                 transition={{ duration: 0.5, delay: 0.3 }}
                 className="mb-12"
               >
-                <h2 className="text-lg font-medium mb-2">Email Us</h2>
+                <h2 className="text-lg font-medium mb-2">Gửi email cho chúng tôi</h2>
                 <p className="text-gray-600 text-sm mb-4">
-                  Send us an email and we'll get back to you within 24 hours.
+                  Gửi email cho chúng tôi và chúng tôi sẽ phản hồi trong vòng 24 giờ.
                 </p>
                 <div className="flex items-center">
                   <Mail className="w-5 h-5 text-orange-500 mr-2" />
-                  <a href="mailto:info@idalighting.vn" className="text-gray-800 hover:text-gray-600">
-                    info@idalighting.vn
+                  <a href="mailto:idalighting.vn@gmail.com" className="text-gray-800 hover:text-gray-600">
+                    idalighting.vn@gmail.com
                   </a>
                 </div>
               </MotionDiv>
@@ -184,9 +184,9 @@ export default function ContactPage() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.4 }}
               >
-                <h2 className="text-lg font-medium mb-2">Visit Us</h2>
+                <h2 className="text-lg font-medium mb-2">Ghé thăm chúng tôi</h2>
                 <p className="text-gray-600 text-sm mb-4">
-                  Come visit our showroom to see our lighting solutions in person.
+                  Hãy đến showroom của chúng tôi để xem trực tiếp các giải pháp chiếu sáng.
                 </p>
                 <div className="flex items-center mb-6">
                   <MapPin className="w-5 h-5 text-orange-500 mr-2" />
@@ -214,33 +214,30 @@ export default function ContactPage() {
             transition={{ duration: 0.5, delay: 0.5 }}
             className="mt-24"
           >
-            <h2 className="text-3xl font-bold mb-8">Frequently asked questions.</h2>
+            <h2 className="text-3xl font-bold mb-8">Câu hỏi thường gặp</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div>
-                <h3 className="text-lg font-medium mb-2">What types of lighting solutions do you offer?</h3>
+                <h3 className="text-lg font-medium mb-2">Các loại giải pháp chiếu sáng nào bạn cung cấp?</h3>
                 <p className="text-gray-600">
-                  We offer a comprehensive range of lighting solutions including residential, commercial, industrial,
-                  outdoor, smart, and decorative lighting options.
+                  Chúng tôi cung cấp đa dạng các giải pháp chiếu sáng bao gồm nhà ở, thương mại, công nghiệp, ngoài trời, thông minh và chiếu sáng trang trí.
                 </p>
               </div>
               <div>
-                <h3 className="text-lg font-medium mb-2">Do you provide installation services?</h3>
+                <h3 className="text-lg font-medium mb-2">Bạn có cung cấp dịch vụ lắp đặt không?</h3>
                 <p className="text-gray-600">
-                  Yes, we provide professional installation services for all our lighting solutions to ensure optimal
-                  performance and safety.
+                  Có, chúng tôi cung cấp dịch vụ lắp đặt chuyên nghiệp cho tất cả các giải pháp chiếu sáng để đảm bảo hiệu suất và an toàn tối ưu.
                 </p>
               </div>
               <div>
-                <h3 className="text-lg font-medium mb-2">What is your warranty policy?</h3>
+                <h3 className="text-lg font-medium mb-2">Chính sách bảo hành của bạn là gì?</h3>
                 <p className="text-gray-600">
-                  Our products come with warranties ranging from 1-5 years depending on the type of lighting solution.
-                  Please contact us for specific warranty information.
+                  Sản phẩm của chúng tôi đi kèm với bảo hành từ 1-5 năm tùy thuộc vào loại giải pháp chiếu sáng. Vui lòng liên hệ với chúng tôi để biết thông tin bảo hành cụ thể.
                 </p>
               </div>
               <div>
-                <h3 className="text-lg font-medium mb-2">Can you create custom lighting designs?</h3>
+                <h3 className="text-lg font-medium mb-2">Bạn có thể tạo thiết kế chiếu sáng tùy chỉnh không?</h3>
                 <p className="text-gray-600">
-                  We specialize in creating custom lighting designs tailored to your specific needs and preferences.
+                  Chúng tôi chuyên thiết kế chiếu sáng tùy chỉnh phù hợp với nhu cầu và sở thích cụ thể của bạn.
                 </p>
               </div>
             </div>

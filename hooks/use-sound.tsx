@@ -1,6 +1,6 @@
 "use client"
 
-import { useCallback, createContext, useContext, ReactNode, useState, useEffect, useRef } from "react"
+import React, { useCallback, createContext, useContext, ReactNode, useState, useEffect, useRef } from "react"
 
 // Tạo sound context
 type SoundContextType = {
@@ -12,7 +12,7 @@ type SoundContextType = {
 const SoundContext = createContext<SoundContextType | undefined>(undefined);
 
 // Sound provider component
-export function SoundProvider({ children }: { children: ReactNode }) {
+export function SoundProvider({ children }: { children: ReactNode }): React.ReactElement {
   const [isSoundEnabled, setIsSoundEnabled] = useState(true);
   const [isInitialized, setIsInitialized] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);

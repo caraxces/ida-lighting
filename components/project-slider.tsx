@@ -7,7 +7,7 @@ import { useSound } from "@/hooks/use-sound"
 import { ChevronRight } from "lucide-react"
 
 // Types
-type Project = {
+type Testimonial = {
   id: number
   title: string
   description: string
@@ -18,60 +18,100 @@ type Project = {
 }
 
 // Sample data
-const projects: Project[] = [
+const testimonials: Testimonial[] = [
   {
     id: 1,
-    title: "Luxury Villa",
+    title: "Thiết Kế Xuất Sắc",
     description:
-      "A comprehensive lighting solution for a luxury villa in District 2, featuring smart controls and energy-efficient fixtures.",
-    image: "/home-page/luxury-villa-lighting.jpeg",
+      "IDA Lighting đã biến đổi ngôi nhà của chúng tôi với các giải pháp chiếu sáng đổi mới. Sự chú ý đến từng chi tiết và các tùy chọn cá nhân hóa đã vượt quá mong đợi của chúng tôi.",
+    image: "/home-page/_TRC7620.jpg",
     category: "Residential",
     year: "2023",
-    details: ["Smart Home Integration", "Energy Monitoring", "Scene Presets", "Voice Control"],
+    details: ["Tích hợp Nhà Thông Minh", "Giám sát Năng Lượng", "Cài đặt Cảnh Quan", "Điều Khiển Bằng Giọng Nói"],
   },
   {
     id: 2,
-    title: "Office Tower",
+    title: "Không Khí Hoàn Hảo",
     description:
-      "Complete lighting design and implementation for a 20-story office tower, balancing aesthetics with functionality and energy efficiency.",
-    image: "/home-page/signature-it-offices-tel-aviv-1024x732.jpg",
-    category: "Commercial",
-    year: "2022",
-    details: ["Occupancy Sensing", "Daylight Harvesting", "Energy Analytics", "Centralized Control"],
+      "Thiết kế chiếu sáng đã tạo ra bầu không khí hoàn hảo cho không gian sống của chúng tôi. Đội ngũ của họ đã hiểu chính xác những gì chúng tôi muốn và mang đến kết quả vượt ngoài mong đợi.",
+    image: "/home-page/_TRC7706.jpg",
+    category: "Residential",
+    year: "2023",
+    details: ["Cảm Biến Hiện Diện", "Tận Dụng Ánh Sáng Tự Nhiên", "Phân Tích Năng Lượng", "Điều Khiển Tập Trung"],
   },
   {
     id: 3,
-    title: "Manufacturing Plant",
+    title: "Dịch Vụ Chuyên Nghiệp",
     description:
-      "High-performance industrial lighting solution for a manufacturing facility, ensuring optimal visibility, safety, and energy savings.",
-    image: "/home-page/download (6).jpeg",
-    category: "Industrial",
+      "Từ tư vấn đến lắp đặt, IDA Lighting đã cung cấp dịch vụ xuất sắc. Chuyên môn và tính chuyên nghiệp của họ đã giúp toàn bộ quá trình diễn ra suôn sẻ.",
+    image: "/home-page/_TRC7712.jpg",
+    category: "Commercial",
     year: "2023",
-    details: ["High-Bay Solutions", "Emergency Lighting", "Hazardous Area Lighting", "Automated Maintenance"],
+    details: ["Giải Pháp Chiếu Sáng Trần Cao", "Chiếu Sáng Khẩn Cấp", "Chiếu Sáng Khu Vực Nguy Hiểm", "Bảo Trì Tự Động"],
   },
   {
     id: 4,
-    title: "Smart Home",
+    title: "Tiết Kiệm Năng Lượng",
     description:
-      "Comprehensive smart lighting system for a modern residence, featuring voice control, scheduling, and seamless integration with home automation.",
-    image: "/home-page/original-44eb0b36a75ab4ede89daf4d656efcb8.jpg",
+      "Chúng tôi đã thấy sự giảm đáng kể trong hóa đơn năng lượng kể từ khi triển khai giải pháp của IDA Lighting. Các tùy chọn thân thiện với môi trường của họ không làm giảm chất lượng hay tính thẩm mỹ.",
+    image: "/home-page/_TRC7748-Pano.jpg",
     category: "Smart Lighting",
     year: "2023",
-    details: ["IoT Integration", "Mobile App Control", "Adaptive Lighting", "Predictive Analytics"],
+    details: ["Tích Hợp IoT", "Điều Khiển Qua Ứng Dụng Di Động", "Chiếu Sáng Thích Ứng", "Phân Tích Dự Đoán"],
   },
   {
     id: 5,
-    title: "Retail Store",
+    title: "Kết Quả Tuyệt Đẹp",
     description:
-      "Custom lighting design for a high-end retail store, enhancing product displays and creating an inviting shopping environment.",
-    image: "/home-page/klee_klee_photographed_by_Dirk_Weiblen_09.jpg",
-    category: "Commercial",
+      "Thiết kế chiếu sáng đã hoàn toàn biến đổi không gian của chúng tôi. Cách tiếp cận sáng tạo của IDA Lighting đã mang lại tầm nhìn của chúng tôi và làm nổi bật các đặc điểm kiến trúc mà chúng tôi không biết mình có!",
+    image: "/home-page/271597302_464562588516617_461312111088783072_n.jpg",
+    category: "Residential",
     year: "2022",
-    details: ["Product Highlighting", "Ambiance Control", "Energy Efficiency", "Customer Experience"],
+    details: ["Làm Nổi Bật Sản Phẩm", "Kiểm Soát Không Khí", "Hiệu Quả Năng Lượng", "Trải Nghiệm Khách Hàng"],
+  },
+  {
+    id: 6,
+    title: "Giải Pháp Sáng Tạo",
+    description:
+      "IDA Lighting đã mang đến những ý tưởng đổi mới cho không gian thách thức của chúng tôi. Các giải pháp tùy chỉnh của họ đã đáp ứng tất cả nhu cầu của chúng tôi đồng thời tạo thêm yếu tố thẩm mỹ đẹp mắt cho ngôi nhà.",
+    image: "/home-page/272795484_476970173942525_8341974085553444627_n.jpg",
+    category: "Residential",
+    year: "2022",
+    details: ["Thiết Bị Tùy Chỉnh", "Chiếu Sáng Tạo Cảm Xúc", "Điều Khiển Thông Minh", "Hiệu Quả Năng Lượng"],
+  },
+  {
+    id: 7,
+    title: "Giao Hàng Đúng Hẹn",
+    description:
+      "Dự án đã hoàn thành đúng lịch trình và trong phạm vi ngân sách. Đội ngũ IDA Lighting luôn phản hồi nhanh chóng và cập nhật thông tin cho chúng tôi trong suốt quá trình.",
+    image: "/home-page/272896867_476969750609234_168858909764072575_n.jpg",
+    category: "Commercial",
+    year: "2023",
+    details: ["Quản Lý Dự Án", "Kiểm Soát Ngân Sách", "Tuân Thủ Thời Gian", "Đảm Bảo Chất Lượng"],
+  },
+  {
+    id: 8,
+    title: "Chất Lượng Vượt Trội",
+    description:
+      "Chất lượng của cả sản phẩm và lắp đặt đã vượt quá mong đợi của chúng tôi. Hai năm sau, mọi thứ vẫn hoạt động hoàn hảo và trông đẹp như ngày đầu tiên.",
+    image: "/home-page/272950380_476970063942536_1891645111920650179_n.jpg",
+    category: "Residential",
+    year: "2022",
+    details: ["Sản Phẩm Cao Cấp", "Lắp Đặt Chuyên Nghiệp", "Độ Tin Cậy Lâu Dài", "Hỗ Trợ Bảo Hành"],
+  },
+  {
+    id: 9,
+    title: "Thiết Kế Đột Phá",
+    description:
+      "Không gian lỗi thời của chúng tôi đã được chuyển đổi hoàn toàn nhờ thiết kế của IDA Lighting. Hệ thống chiếu sáng đã trở thành điểm nhấn thu hút mỗi khi chúng tôi có khách.",
+    image: "/home-page/272997168_476963463943196_4364219283871969024_n.jpg",
+    category: "Residential",
+    year: "2023",
+    details: ["Tư Vấn Thiết Kế", "Giải Pháp Tùy Chỉnh", "Tăng Cường Thẩm Mỹ", "Chiếu Sáng Trọng Điểm"],
   },
 ]
 
-export default function ProjectSliderEnhanced({ onSlideChange }: { onSlideChange?: (isAtLastSlide: boolean) => void }) {
+export default function TestimonialSlider({ onSlideChange }: { onSlideChange?: (isAtLastSlide: boolean) => void }) {
   const [activeIndex, setActiveIndex] = useState(0)
   const [prevIndex, setPrevIndex] = useState(0)
   const [isScrolling, setIsScrolling] = useState(false)
@@ -100,9 +140,9 @@ export default function ProjectSliderEnhanced({ onSlideChange }: { onSlideChange
     return () => window.removeEventListener("resize", checkMobile)
   }, [])
 
-  // Current and next project (with safety check)
-  const currentProject = projects[activeIndex] || projects[0]
-  const nextProject = projects[(activeIndex + 1) % projects.length] || projects[0]
+  // Current and next testimonial (with safety check)
+  const currentTestimonial = testimonials[activeIndex] || testimonials[0]
+  const nextTestimonial = testimonials[(activeIndex + 1) % testimonials.length] || testimonials[0]
 
   // Track direction of slide change
   useEffect(() => {
@@ -122,7 +162,7 @@ export default function ProjectSliderEnhanced({ onSlideChange }: { onSlideChange
     document.head.appendChild(link)
   }, [])
 
-  // Handle scroll events to navigate through projects
+  // Handle scroll events to navigate through testimonials
   useEffect(() => {
     const handleWheel = (e: WheelEvent) => {
       if (isScrolling) return
@@ -135,12 +175,12 @@ export default function ProjectSliderEnhanced({ onSlideChange }: { onSlideChange
       e.preventDefault()
       setIsScrolling(true)
 
-      if (e.deltaY > 0 && activeIndex < projects.length - 1) {
-        // Scroll down - go to next project
+      if (e.deltaY > 0 && activeIndex < testimonials.length - 1) {
+        // Scroll down - go to next testimonial
         setActiveIndex((prev) => prev + 1)
         if (isSoundEnabled) playSound()
       } else if (e.deltaY < 0 && activeIndex > 0) {
-        // Scroll up - go to previous project
+        // Scroll up - go to previous testimonial
         setActiveIndex((prev) => prev - 1)
         if (isSoundEnabled) playSound()
       }
@@ -159,7 +199,7 @@ export default function ProjectSliderEnhanced({ onSlideChange }: { onSlideChange
       if (isScrolling) return
 
       if (e.key === "ArrowDown" || e.key === "ArrowRight") {
-        if (activeIndex < projects.length - 1) {
+        if (activeIndex < testimonials.length - 1) {
           setIsScrolling(true)
           setActiveIndex((prev) => prev + 1)
           if (isSoundEnabled) playSound()
@@ -181,10 +221,10 @@ export default function ProjectSliderEnhanced({ onSlideChange }: { onSlideChange
 
   // Cập nhật useEffect để báo khi đến slide cuối
   useEffect(() => {
-    // activeIndex === projects.length - 1 nghĩa là đang ở slide cuối cùng
-    const isLastSlide = activeIndex === projects.length - 1;
+    // activeIndex === testimonials.length - 1 nghĩa là đang ở slide cuối cùng
+    const isLastSlide = activeIndex === testimonials.length - 1;
     
-    console.log("ProjectSlider - Current slide:", activeIndex, "Is last slide:", isLastSlide);
+    console.log("TestimonialSlider - Current slide:", activeIndex, "Is last slide:", isLastSlide);
     
     if (isLastSlide) {
       setHasViewedAllSlides(true);
@@ -194,7 +234,7 @@ export default function ProjectSliderEnhanced({ onSlideChange }: { onSlideChange
     if (onSlideChange) {
       onSlideChange(isLastSlide);
     }
-  }, [activeIndex, onSlideChange, projects.length]);
+  }, [activeIndex, onSlideChange, testimonials.length]);
 
   // Handle touch events for mobile swipe
   useEffect(() => {
@@ -204,7 +244,7 @@ export default function ProjectSliderEnhanced({ onSlideChange }: { onSlideChange
       if (rect.bottom <= 0 || rect.top >= window.innerHeight) return
 
       // If we've viewed all slides, allow normal scrolling
-      if (hasViewedAllSlides && activeIndex === projects.length - 1) return
+      if (hasViewedAllSlides && activeIndex === testimonials.length - 1) return
 
       touchStartY.current = e.touches[0].clientY
     }
@@ -213,7 +253,7 @@ export default function ProjectSliderEnhanced({ onSlideChange }: { onSlideChange
       if (!sliderRef.current || touchStartY.current === null) return
 
       // If we've viewed all slides and are on the last slide, allow normal scrolling
-      if (hasViewedAllSlides && activeIndex === projects.length - 1) return
+      if (hasViewedAllSlides && activeIndex === testimonials.length - 1) return
 
       // Prevent default to stop page scrolling while in this component
       e.preventDefault()
@@ -237,7 +277,7 @@ export default function ProjectSliderEnhanced({ onSlideChange }: { onSlideChange
       if (Math.abs(touchDiff) > touchThreshold) {
         lastTouchTime.current = now
 
-        if (touchDiff > 0 && activeIndex < projects.length - 1) {
+        if (touchDiff > 0 && activeIndex < testimonials.length - 1) {
           // Swipe up - go to next slide
           setIsScrolling(true)
           setActiveIndex((prev) => prev + 1)
@@ -308,25 +348,25 @@ export default function ProjectSliderEnhanced({ onSlideChange }: { onSlideChange
               <div className="relative w-full h-full p-8 flex flex-col justify-between">
                 {/* Top info row */}
                 <div className="flex justify-between text-xs text-white/80 uppercase tracking-widest">
-                  <div>DESIGN</div>
-                  <div>BY IDA LIGHTING</div>
+                  <div>PHẢN HỒI</div>
+                  <div>TỪ IDA LIGHTING</div>
                 </div>
 
                 {/* Studio label */}
                 <div className="absolute top-[10%] left-8 text-white/60 text-sm">
-                  <div>BON Studio</div>
+                  <div>Khách Hàng Hài Lòng</div>
                 </div>
 
                 {/* Bottom info row */}
                 <div className="mt-auto flex justify-between items-end">
-                  <div className="text-xs text-white/80 uppercase tracking-widest">3D VISUALIZATION</div>
+                  <div className="text-xs text-white/80 uppercase tracking-widest">ĐÁNH GIÁ KHÁCH HÀNG</div>
 
                   {/* Discover button */}
                   <Link
-                    href={`/work/${currentProject.category.toLowerCase()}`}
+                    href={`/work/${currentTestimonial.category.toLowerCase()}`}
                     className="flex items-center text-white text-xs uppercase tracking-widest group"
                   >
-                    <span>DISCOVER</span>
+                    <span>XEM DỰ ÁN</span>
                     <ChevronRight size={14} className="ml-1 group-hover:translate-x-1 transition-transform" />
                   </Link>
                 </div>
@@ -350,10 +390,10 @@ export default function ProjectSliderEnhanced({ onSlideChange }: { onSlideChange
               }}
               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             >
-              {currentProject && (
+              {currentTestimonial && (
                 <img
-                  src={currentProject.image || "/placeholder.svg"}
-                  alt={currentProject.title}
+                  src={currentTestimonial.image || "/placeholder.svg"}
+                  alt={currentTestimonial.title}
                   className="w-full h-full object-cover"
                 />
               )}
@@ -376,12 +416,12 @@ export default function ProjectSliderEnhanced({ onSlideChange }: { onSlideChange
               }}
               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             >
-              {nextProject && (
+              {nextTestimonial && (
                 <div className="w-full h-full relative opacity-70">
                   <div className="absolute inset-0 bg-[#8B0000]/50 mix-blend-multiply z-10"></div>
                   <img
-                    src={nextProject.image || "/placeholder.svg"}
-                    alt={nextProject.title}
+                    src={nextTestimonial.image || "/placeholder.svg"}
+                    alt={nextTestimonial.title}
                     className="w-full h-full object-cover"
                   />
                 </div>
@@ -408,18 +448,18 @@ export default function ProjectSliderEnhanced({ onSlideChange }: { onSlideChange
                 textShadow: "0 2px 10px rgba(0,0,0,0.2)",
               }}
             >
-              {currentProject.title}
+              {currentTestimonial.title}
             </h1>
 
             {/* Description underneath */}
             <motion.p
-              className="text-white/80 text-sm max-w-xs mx-8 md:ml-[calc(15%+2rem)] md:mr-16 mt-4 leading-relaxed"
+              className="text-white/80 text-[1.2rem] max-w-xs mx-8 md:ml-[calc(15%+2rem)] md:mr-16 mt-4 leading-relaxed"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.5, delay: 0.4 }}
             >
-              {currentProject.description.slice(0, 100)}...
+              {currentTestimonial.description.slice(0, 100)}...
             </motion.p>
           </motion.div>
         </motion.div>
@@ -427,7 +467,7 @@ export default function ProjectSliderEnhanced({ onSlideChange }: { onSlideChange
 
       {/* Navigation indicators */}
       <div className="absolute bottom-8 right-8 flex space-x-2 z-50">
-        {projects.map((_, index) => (
+        {testimonials.map((_, index) => (
           <button
             key={index}
             onClick={() => {
@@ -440,15 +480,15 @@ export default function ProjectSliderEnhanced({ onSlideChange }: { onSlideChange
             className={`w-2 h-2 rounded-full transition-all duration-300 ${
               index === activeIndex ? "bg-white scale-125" : "bg-white/40"
             }`}
-            aria-label={`Go to slide ${index + 1}`}
+            aria-label={`Di chuyển đến slide ${index + 1}`}
           />
         ))}
       </div>
 
       {/* Scroll indicator for when all slides have been viewed */}
-      {hasViewedAllSlides && activeIndex === projects.length - 1 && (
+      {hasViewedAllSlides && activeIndex === testimonials.length - 1 && (
         <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 text-white/80 text-xs md:text-sm animate-bounce">
-          Scroll to continue
+          Cuộn để tiếp tục
         </div>
       )}
     </div>
