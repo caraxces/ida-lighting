@@ -75,8 +75,10 @@ export default function RootLayout({
     <html lang="vi" suppressHydrationWarning>
       <head>
         <meta charSet="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
         <meta name="theme-color" content="#ffffff" />
         <link rel="canonical" href="https://idalighting.vn" />
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
         
         <script
           type="application/ld+json"

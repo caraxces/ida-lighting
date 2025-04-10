@@ -210,9 +210,6 @@ html {
   font-display: swap;
 }
 
-/* Import từ Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
-
 /* Thêm utility class cho font */
 .font-inter {
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
