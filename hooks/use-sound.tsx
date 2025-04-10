@@ -12,7 +12,7 @@ type SoundContextType = {
 const SoundContext = createContext<SoundContextType | undefined>(undefined);
 
 // Sound provider component
-export function SoundProvider({ children }: { children: ReactNode }): React.ReactElement {
+export function SoundProvider({ children }: { children: ReactNode }) {
   const [isSoundEnabled, setIsSoundEnabled] = useState(true);
   const [isInitialized, setIsInitialized] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
