@@ -6,12 +6,12 @@ import { useState, useEffect, useRef } from "react"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion"
-import { ChevronRight, ChevronLeft } from "lucide-react"
+import { ChevronRight } from "lucide-react"
 import AnimatedTitle from "./animated-title"
-import { useSound } from "@/hooks/use-sound"
 import FloatingElements from "./floating-elements"
 import { cn } from "@/lib/utils"
 import MobileLayout from "./mobile-layout"
+import Link from "next/link"
 
 // Image array
 const images = [
@@ -24,15 +24,15 @@ const images = [
 
 export default function FirstElementHpage() {
   const [currentSlide, setCurrentSlide] = useState(0)
-  const [isPaused, setIsPaused] = useState(false)
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 })
   const [isHovering, setIsHovering] = useState(false)
   const [hasLoaded, setHasLoaded] = useState(false)
-  const { playSound } = useSound()
+  const [isAnimating, setIsAnimating] = useState(false)
   const containerRef = useRef<HTMLDivElement>(null)
   const touchStartX = useRef<number | null>(null)
   const touchStartY = useRef<number | null>(null)
   const [isMobile, setIsMobile] = useState(false)
+  const carouselRef = useRef<HTMLDivElement>(null)
 
   // Scroll animation
   const { scrollYProgress } = useScroll({
@@ -53,85 +53,63 @@ export default function FirstElementHpage() {
     })
   }
 
-  // Auto slide with pause on hover/touch
-  useEffect(() => {
-    if (isPaused) return
-
-    const timer = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % images.length)
-    }, 5000)
-
-    return () => clearInterval(timer)
-  }, [isPaused])
-
-  // Handle slide change
-  const handleSlideChange = (direction: "prev" | "next") => {
-    playSound()
-    if (direction === "prev") {
-      setCurrentSlide((prev) => (prev - 1 + images.length) % images.length)
-    } else {
-      setCurrentSlide((prev) => (prev + 1) % images.length)
-    }
-  }
-
-  // Handle keyboard navigation
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "ArrowLeft") {
-        handleSlideChange("prev")
-      } else if (e.key === "ArrowRight") {
-        handleSlideChange("next")
-      }
-    }
-
-    window.addEventListener("keydown", handleKeyDown)
-    return () => window.removeEventListener("keydown", handleKeyDown)
-  }, [])
-
   // Set loaded state after initial render
   useEffect(() => {
     const timer = setTimeout(() => setHasLoaded(true), 500)
     return () => clearTimeout(timer)
   }, [])
 
-  // Slide variants for animation
-  const slideVariants = {
-    enter: (direction: number) => ({
-      x: direction > 0 ? 100 : -100,
-      opacity: 0,
-      scale: 0.9,
-    }),
-    center: {
-      x: 0,
-      opacity: 1,
-      scale: 1,
-      transition: {
-        duration: 0.5,
-        ease: [0.16, 1, 0.3, 1],
-      },
-    },
-    exit: (direction: number) => ({
-      x: direction < 0 ? 100 : -100,
-      opacity: 0,
-      scale: 0.9,
-      transition: {
-        duration: 0.5,
-        ease: [0.16, 1, 0.3, 1],
-      },
-    }),
+  // Get previous and next slide indices
+  const getPrevSlide = (current: number) => (current - 1 + images.length) % images.length
+  const getNextSlide = (current: number) => (current + 1) % images.length
+
+  // Handle slide change
+  const goToNextSlide = () => {
+    if (isAnimating) return
+    setIsAnimating(true)
+    setCurrentSlide(getNextSlide(currentSlide))
+
+    setTimeout(() => {
+      setIsAnimating(false)
+    }, 600)
   }
 
-  // Track slide direction
-  const [[page, direction], setPage] = useState([0, 0])
+  const goToPrevSlide = () => {
+    if (isAnimating) return
+    setIsAnimating(true)
+    setCurrentSlide(getPrevSlide(currentSlide))
 
-  const paginate = (newDirection: number) => {
-    const newPage = page + newDirection
-    const wrappedPage = ((newPage % images.length) + images.length) % images.length
-    setPage([wrappedPage, newDirection])
-    setCurrentSlide(wrappedPage)
+    setTimeout(() => {
+      setIsAnimating(false)
+    }, 600)
   }
 
-  // Handle touch events to prevent horizontal swiping but allow vertical
+  // Auto-slide functionality
+  useEffect(() => {
+    const autoSlideTimer = setInterval(() => {
+      if (!isAnimating) {
+        goToNextSlide()
+      }
+    }, 2000)
+
+    return () => clearInterval(autoSlideTimer)
+  }, [currentSlide, isAnimating])
+
+  // Handle keyboard navigation
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "ArrowLeft") {
+        goToPrevSlide()
+      } else if (e.key === "ArrowRight") {
+        goToNextSlide()
+      }
+    }
+
+    window.addEventListener("keydown", handleKeyDown)
+    return () => window.removeEventListener("keydown", handleKeyDown)
+  }, [currentSlide, isAnimating])
+
+  // Handle touch events
   useEffect(() => {
     const handleTouchStart = (e: TouchEvent) => {
       touchStartX.current = e.touches[0].clientX
@@ -154,7 +132,21 @@ export default function FirstElementHpage() {
       }
     }
 
-    const handleTouchEnd = () => {
+    const handleTouchEnd = (e: TouchEvent) => {
+      if (!touchStartX.current) return
+
+      const touchEndX = e.changedTouches[0].clientX
+      const diffX = touchStartX.current - touchEndX
+
+      // Swipe detection
+      if (Math.abs(diffX) > 50) {
+        if (diffX > 0) {
+          goToNextSlide()
+        } else {
+          goToPrevSlide()
+        }
+      }
+
       touchStartX.current = null
       touchStartY.current = null
     }
@@ -173,7 +165,7 @@ export default function FirstElementHpage() {
         containerRef.current.removeEventListener("touchend", handleTouchEnd)
       }
     }
-  }, [])
+  }, [currentSlide, isAnimating])
 
   // Thêm useEffect để kiểm tra kích thước màn hình
   useEffect(() => {
@@ -182,8 +174,8 @@ export default function FirstElementHpage() {
     }
 
     checkMobile()
-    window.addEventListener('resize', checkMobile)
-    return () => window.removeEventListener('resize', checkMobile)
+    window.addEventListener("resize", checkMobile)
+    return () => window.removeEventListener("resize", checkMobile)
   }, [])
 
   return (
@@ -191,10 +183,9 @@ export default function FirstElementHpage() {
       {isMobile ? (
         <MobileLayout
           hasLoaded={hasLoaded}
-          page={page}
-          direction={direction}
-          paginate={paginate}
-          playSound={playSound}
+          page={currentSlide}
+          direction={1}
+          paginate={goToNextSlide}
           images={images}
         />
       ) : (
@@ -209,11 +200,9 @@ export default function FirstElementHpage() {
             hasLoaded ? "transition-all duration-1000" : "",
           )}
           onMouseEnter={() => {
-            setIsPaused(true)
             setIsHovering(true)
           }}
           onMouseLeave={() => {
-            setIsPaused(false)
             setIsHovering(false)
           }}
           onMouseMove={handleMouseMove}
@@ -262,7 +251,10 @@ export default function FirstElementHpage() {
           <FloatingElements />
 
           {/* Grid lines overlay with parallax */}
-          <motion.div style={{ y: backgroundY }} className="absolute inset-0 grid grid-cols-12 z-10 pointer-events-none">
+          <motion.div
+            style={{ y: backgroundY }}
+            className="absolute inset-0 grid grid-cols-12 z-10 pointer-events-none"
+          >
             {Array(13)
               .fill(0)
               .map((_, i) => (
@@ -324,7 +316,9 @@ export default function FirstElementHpage() {
               <div className="mb-4">
                 <AnimatedTitle>
                   <span className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl block text-white">This is</span>
-                  <span className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold italic text-white">IDA</span>
+                  <span className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-white">
+                    IDA
+                  </span>
                   <span className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-white"> Lighting.</span>
                 </AnimatedTitle>
               </div>
@@ -338,7 +332,10 @@ export default function FirstElementHpage() {
               >
                 <h3 className="text-white font-medium mb-2">Your light - Your style.</h3>
                 <p className="text-white/80 text-sm leading-relaxed">
-                Bộ sưu tập IDA là một phần trong cam kết của IDA trong việc hợp tác cùng các doanh nghiệp nhằm giảm thiểu tác động đến môi trường thông qua những sản phẩm mới độc đáo mang giá trị bền vững cho không gian sống.
+                IDA làm chủ được công nghệ sản xuất, lắp ráp tại Trung Quốc, các nước Châu Âu như Đức, Czech ... 
+với lựa chọn các nhà thầu cung cáp linh kiện - phụ kiện hàng đầu thế giới. Không chỉ mang lại những sản phẩm chất 
+lượng cao mà chi phí phù hợp với thị trường Việt Nam, đáp ứng nhu cầu cá nhân hóa ngày càng được giới tinh hoa 
+lựa chọn.
                 </p>
               </motion.div>
 
@@ -348,134 +345,137 @@ export default function FirstElementHpage() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.8 }}
               >
-                <Button
-                  variant="ghost"
-                  className="w-fit text-white hover:bg-white/10 hover:text-white group transition-all duration-300 shadow-[0_4px_8px_rgba(0,0,0,0.1)] hover:shadow-[0_6px_12px_rgba(0,0,0,0.2)] transform hover:-translate-y-1 px-0 relative overflow-hidden"
-                >
-                  <span className="border-b border-white/40 pb-1 flex items-center relative z-10">
-                    See collection
-                    <ChevronRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                  </span>
-                  <motion.div
-                    className="absolute inset-0 bg-white/10 -z-0"
-                    initial={{ x: "-100%" }}
-                    whileHover={{ x: 0 }}
-                    transition={{ duration: 0.3 }}
-                  />
-                </Button>
+                <Link href="/products">
+                  <Button
+                    variant="ghost"
+                    className="w-fit text-white hover:bg-white/10 hover:text-white group transition-all duration-300 shadow-[0_4px_8px_rgba(0,0,0,0.1)] hover:shadow-[0_6px_12px_rgba(0,0,0,0.2)] transform hover:-translate-y-1 px-0 relative overflow-hidden"
+                  >
+                    <span className="border-b border-white/40 pb-1 flex items-center relative z-10">
+                      Xem bộ sưu tập
+                      <ChevronRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                    </span>
+                    <motion.div
+                      className="absolute inset-0 bg-white/10 -z-0"
+                      initial={{ x: "-100%" }}
+                      whileHover={{ x: 0 }}
+                      transition={{ duration: 0.3 }}
+                    />
+                  </Button>
+                </Link>
               </motion.div>
             </div>
 
-            {/* Center/Right section with image */}
+            {/* Center/Right section with carousel */}
             <div className="md:col-span-7 lg:col-span-8 relative flex items-center justify-center md:justify-start">
-              <AnimatePresence mode="wait" custom={direction}>
-                <motion.div
-                  key={page}
-                  custom={direction}
-                  variants={slideVariants}
-                  initial="enter"
-                  animate="center"
-                  exit="exit"
-                  className="relative z-10 md:ml-[100px] lg:ml-[100px] w-full max-w-[80vw] md:max-w-[50vw] lg:max-w-[45vw] xl:max-w-[40vw] flex justify-center"
-                  drag={false}
-                >
-                  {/* 3D transform effect on hover */}
-                  <motion.div
-                    whileHover={{
-                      rotateY: 5,
-                      rotateX: -5,
-                      scale: 1.05,
-                      transition: { duration: 0.3 },
-                    }}
-                    className="w-full h-full perspective-1000"
-                    drag={false}
-                  >
-                    <Image
-                      src={images[page] || "/placeholder.svg"}
-                      alt={`IDA Lighting - Slide ${page + 1}`}
-                      width={600}
-                      height={600}
-                      priority={page === 0}
-                      className="drop-shadow-[0_20px_20px_rgba(0,0,0,0.25)] object-contain h-auto transform transition-transform duration-300"
-                      sizes="(max-width: 768px) 80vw, (max-width: 1200px) 50vw, 40vw"
-                      onLoad={(e) => {
-                        // Add a subtle animation when image loads
-                        const img = e.currentTarget
-                        img.classList.add("animate-fadeIn")
-                      }}
-                      draggable={false}
-                    />
-                  </motion.div>
-                </motion.div>
-              </AnimatePresence>
-            </div>
-          </div>
+              {/* Carousel Container */}
+              <div
+                ref={carouselRef}
+                className="relative z-50 md:ml-[100px] lg:ml-[100px] w-full max-w-[80vw] md:max-w-none lg:max-w-none xl:max-w-none flex justify-center overflow-visible"
+              >
+                <div className="relative w-full h-[400px] md:h-[600px] lg:h-[800px] overflow-visible">
+                  {/* Carousel Track */}
+                  <div className="absolute w-full h-full flex items-center justify-center">
+                    {/* Previous Slide (Left) */}
+                    <AnimatePresence mode="wait">
+                      <motion.div
+                        key={`prev-${currentSlide}`}
+                        initial={{ x: "-100%", opacity: 0, scale: 0.8 }}
+                        animate={{
+                          x: "-60%",
+                          opacity: 0.8,
+                          scale: 0.8,
+                          rotateY: 15,
+                        }}
+                        exit={{ x: "-120%", opacity: 0, scale: 0.7 }}
+                        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                        className="absolute transform-gpu"
+                        style={{ transformStyle: "preserve-3d" }}
+                      >
+                        <Image
+                          src={images[getPrevSlide(currentSlide)] || "/placeholder.svg"}
+                          alt={`IDA Lighting - Previous Slide`}
+                          width={350}
+                          height={350}
+                          className="object-contain drop-shadow-[0_10px_10px_rgba(0,0,0,0.2)]"
+                          draggable={false}
+                        />
+                      </motion.div>
+                    </AnimatePresence>
 
-          {/* Navigation buttons with hover effects */}
-          <div className="absolute md:right-8 right-4 top-1/2 transform -translate-y-1/2 flex flex-col gap-4 z-20">
-            <motion.button
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
-              className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-white/90 flex items-center justify-center shadow-lg transform transition-all hover:bg-white focus:outline-none focus:ring-2 focus:ring-[#CD5C5C]"
-              onClick={() => {
-                paginate(-1)
-                playSound()
-              }}
-              aria-label="Previous slide"
-            >
-              <ChevronLeft className="h-4 w-4 md:h-5 md:w-5 text-[#CD5C5C]" />
-            </motion.button>
-            <motion.button
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
-              className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-white/90 flex items-center justify-center shadow-lg transform transition-all hover:bg-white focus:outline-none focus:ring-2 focus:ring-[#CD5C5C]"
-              onClick={() => {
-                paginate(1)
-                playSound()
-              }}
-              aria-label="Next slide"
-            >
-              <ChevronRight className="h-4 w-4 md:h-5 md:w-5 text-[#CD5C5C]" />
-            </motion.button>
+                    {/* Current Slide (Center) */}
+                    <AnimatePresence mode="wait">
+                      <motion.div
+                        key={`current-${currentSlide}`}
+                        initial={{ x: "100%", opacity: 0, scale: 0.8 }}
+                        animate={{
+                          x: "0%",
+                          opacity: 1,
+                          scale: 1,
+                          rotateY: 0,
+                        }}
+                        exit={{ x: "-100%", opacity: 0, scale: 0.8 }}
+                        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                        className="absolute transform-gpu"
+                        style={{ transformStyle: "preserve-3d", zIndex: 10 }}
+                      >
+                        <Image
+                          src={images[currentSlide] || "/placeholder.svg"}
+                          alt={`IDA Lighting - Current Slide`}
+                          width={500}
+                          height={500}
+                          priority
+                          className="object-contain drop-shadow-[0_20px_20px_rgba(0,0,0,0.3)]"
+                          draggable={false}
+                        />
+                      </motion.div>
+                    </AnimatePresence>
+
+                    {/* Next Slide (Right) */}
+                    <AnimatePresence mode="wait">
+                      <motion.div
+                        key={`next-${currentSlide}`}
+                        initial={{ x: "100%", opacity: 0, scale: 0.8 }}
+                        animate={{
+                          x: "60%",
+                          opacity: 0.8,
+                          scale: 0.8,
+                          rotateY: -15,
+                        }}
+                        exit={{ x: "120%", opacity: 0, scale: 0.7 }}
+                        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                        className="absolute transform-gpu"
+                        style={{ transformStyle: "preserve-3d" }}
+                      >
+                        <Image
+                          src={images[getNextSlide(currentSlide)] || "/placeholder.svg"}
+                          alt={`IDA Lighting - Next Slide`}
+                          width={350}
+                          height={350}
+                          className="object-contain drop-shadow-[0_10px_10px_rgba(0,0,0,0.2)]"
+                          draggable={false}
+                        />
+                      </motion.div>
+                    </AnimatePresence>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
 
           {/* Slide indicators with animations */}
           <div className="absolute bottom-4 md:bottom-8 left-1/2 transform -translate-x-1/2 flex gap-2 z-20">
             {images.map((_, index) => (
-              <motion.button
+              <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 * index, duration: 0.5 }}
-                className={`h-2 rounded-full transition-all ${page === index ? "w-6 md:w-8 bg-white" : "w-2 bg-white/50"}`}
-                onClick={() => {
-                  playSound()
-                  setPage([index, page < index ? 1 : -1])
-                }}
-                whileHover={{ scale: 1.2 }}
-                whileTap={{ scale: 0.9 }}
-                aria-label={`Go to slide ${index + 1}`}
-                aria-current={page === index ? "true" : "false"}
+                className={`h-2 rounded-full transition-all ${currentSlide === index ? "w-6 md:w-8 bg-white" : "w-2 bg-white/50"}`}
+                aria-label={`Slide ${index + 1}`}
+                aria-current={currentSlide === index ? "true" : "false"}
               />
             ))}
           </div>
-
-          {/* Right side text with parallax */}
-          <motion.div
-            style={{ y: backgroundY }}
-            className="hidden md:block absolute right-16 top-1/2 transform -translate-y-1/2 text-[#CD5C5C]/20 text-6xl lg:text-8xl font-bold leading-none z-10"
-          >
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 1, delay: 0.5 }}
-              className="rotate-90 origin-center whitespace-nowrap"
-            >
-              Scan
-              <br />
-              Wow
-            </motion.div>
-          </motion.div>
 
           {/* Page indicator with animation */}
           <motion.div
@@ -484,11 +484,10 @@ export default function FirstElementHpage() {
             transition={{ duration: 0.8, delay: 0.3 }}
             className="absolute top-6 md:top-16 right-6 md:right-16 text-[#8B2323]/70 text-xs"
           >
-            {String(page + 1).padStart(2, "0")} of {String(images.length).padStart(2, "0")}
+            {String(currentSlide + 1).padStart(2, "0")} of {String(images.length).padStart(2, "0")}
           </motion.div>
         </motion.div>
       )}
     </>
   )
 }
-

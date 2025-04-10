@@ -29,15 +29,9 @@ export default function HeaderButtons({ soundOn, onSoundToggle, playSound }: Hea
         className="flex items-center px-5 py-2 bg-white/10 backdrop-blur-sm rounded-full hover:bg-white/20 transition-all duration-300 hover:shadow-[0_0_15px_rgba(255,255,255,0.5)] text-white"
         onClick={() => playSound()}
       >
-        Download catalogue
+        Download catalogue  
       </a>
 
-      <button
-        onClick={() => router.push("/contacts")}
-        className="flex items-center px-5 py-2 bg-white/10 backdrop-blur-sm rounded-full hover:bg-white/20 transition-all duration-300 hover:shadow-[0_0_15px_rgba(255,255,255,0.5)] text-white"
-      >
-        Liên hệ với chúng tôi
-      </button>
     </div>
   )
 }

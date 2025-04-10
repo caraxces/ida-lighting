@@ -176,16 +176,6 @@ export default function AboutPage() {
               <Footer />
             </div>
           </div>
-          
-          {/* Back to top indicator - Chỉ hiển thị khi ở phần body và ở trên cùng */}
-          {activeSection === 1 && !hasScrolledInBody && (
-            <div className="absolute top-20 left-1/2 transform -translate-x-1/2 flex flex-col items-center cursor-pointer z-30" onClick={scrollToNextSection}>
-              <div className="w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center">
-                <ChevronUp className="w-6 h-6 text-white animate-bounce" />
-              </div>
-              <p className="text-white/70 mt-2 text-sm">Về trang giới thiệu</p>
-            </div>
-          )}
         </div>
       </main>
     </div>

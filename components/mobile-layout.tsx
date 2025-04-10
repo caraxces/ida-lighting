@@ -4,6 +4,8 @@ import { Button } from "@/components/ui/button"
 import { motion, AnimatePresence } from "framer-motion"
 import { ChevronRight, ChevronLeft } from "lucide-react"
 import AnimatedTitle from "./animated-title"
+import { useState, useEffect } from "react"
+import Link from "next/link"
 
 // Props for the mobile layout
 interface MobileLayoutProps {
@@ -11,34 +13,31 @@ interface MobileLayoutProps {
   page: number
   direction: number
   paginate: (direction: number) => void
-  playSound: () => void
   images: string[]
 }
 
-export default function MobileLayout({ hasLoaded, page, direction, paginate, playSound, images }: MobileLayoutProps) {
-  // Mobile-specific slide variants
-  const mobileSlideVariants = {
-    enter: (direction: number) => ({
-      x: direction > 0 ? 100 : -100,
-      opacity: 0,
-    }),
-    center: {
-      x: 0,
-      opacity: 1,
-      transition: {
-        duration: 0.4,
-        ease: [0.16, 1, 0.3, 1],
-      },
-    },
-    exit: (direction: number) => ({
-      x: direction < 0 ? 100 : -100,
-      opacity: 0,
-      transition: {
-        duration: 0.4,
-        ease: [0.16, 1, 0.3, 1],
-      },
-    }),
-  }
+export default function MobileLayout({ hasLoaded, page, direction, paginate, images }: MobileLayoutProps) {
+  // Get previous and next slide indices
+  const getPrevSlide = (current: number) => (current - 1 + images.length) % images.length
+  const getNextSlide = (current: number) => (current + 1) % images.length
+  
+  // State for animation
+  const [isAnimating, setIsAnimating] = useState(false)
+
+  // Auto-slide functionality
+  useEffect(() => {
+    const autoSlideTimer = setInterval(() => {
+      if (!isAnimating) {
+        setIsAnimating(true)
+        paginate(1)
+        setTimeout(() => {
+          setIsAnimating(false)
+        }, 600)
+      }
+    }, 2000)
+
+    return () => clearInterval(autoSlideTimer)
+  }, [page, isAnimating, paginate])
 
   return (
     <motion.div
@@ -104,9 +103,7 @@ export default function MobileLayout({ hasLoaded, page, direction, paginate, pla
           {/* Main title - smaller for mobile */}
           <div className="mt-1">
             <AnimatedTitle>
-              <span className="text-3xl block text-white">This is</span>
-              <span className="text-3xl font-extrabold italic text-white">IDA</span>
-              <span className="text-3xl text-white"> Lighting.</span>
+              <span className="text-3xl block text-white">This is IDA Lighting</span>
             </AnimatedTitle>
           </div>
 
@@ -121,106 +118,138 @@ export default function MobileLayout({ hasLoaded, page, direction, paginate, pla
             <p className="text-white/80 text-xs leading-relaxed">
               IDA's commitment to creating unique, responsible lighting solutions.
             </p>
+            
+            {/* CTA Button - moved directly under description text */}
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.6 }}
+              className="mt-4"
+            >
+              <Link href="/products">
+                <Button
+                  variant="ghost"
+                  className="w-fit text-white hover:bg-white/10 hover:text-white group transition-all duration-300 shadow-[0_4px_8px_rgba(0,0,0,0.1)] px-0 relative overflow-hidden"
+                > 
+                  <span className="border-b border-white/40 pb-1 flex items-center relative z-10">
+                    Xem bộ sưu tập
+                    <ChevronRight className="ml-2 h-4 w-4" />
+                  </span>
+                </Button>
+              </Link>
+            </motion.div>
           </motion.div>
         </div>
 
-        {/* Middle section with image - moved up and centered */}
+        {/* Middle section with carousel */}
         <div className="flex-1 flex items-center justify-center mt-[-5%]">
-          <AnimatePresence mode="wait" custom={direction}>
-            <motion.div
-              key={page}
-              custom={direction}
-              variants={mobileSlideVariants}
-              initial="enter"
-              animate="center"
-              exit="exit"
-              className="relative z-10 w-full flex justify-center"
-              drag={false}
-            >
-              <Image
-                src={images[page] || "/placeholder.svg"}
-                alt={`IDA Lighting - Slide ${page + 1}`}
-                width={570} // 5% smaller (600 * 0.95 = 570)
-                height={570}
-                priority={page === 0}
-                className="drop-shadow-[0_20px_20px_rgba(0,0,0,0.25)] object-contain"
-                sizes="95vw"
-                style={{
-                  maxHeight: "40vh",
-                  objectFit: "contain",
-                }}
-                draggable={false}
-              />
-            </motion.div>
-          </AnimatePresence>
+          <div className="relative z-50 w-full max-w-[95vw] flex justify-center overflow-visible">
+            <div className="relative w-full h-[280px] overflow-visible">
+              {/* Carousel Track */}
+              <div className="absolute w-full h-full flex items-center justify-center">
+                {/* Previous Slide (Left) */}
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={`prev-${page}`}
+                    initial={{ x: "-100%", opacity: 0, scale: 0.8 }}
+                    animate={{
+                      x: "-60%",
+                      opacity: 0.8,
+                      scale: 0.8,
+                      rotateY: 15,
+                    }}
+                    exit={{ x: "-120%", opacity: 0, scale: 0.7 }}
+                    transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                    className="absolute transform-gpu"
+                    style={{ transformStyle: "preserve-3d" }}
+                  >
+                    <Image
+                      src={images[getPrevSlide(page)] || "/placeholder.svg"}
+                      alt={`IDA Lighting - Previous Slide`}
+                      width={250}
+                      height={250}
+                      className="object-contain drop-shadow-[0_10px_10px_rgba(0,0,0,0.2)]"
+                      draggable={false}
+                    />
+                  </motion.div>
+                </AnimatePresence>
+
+                {/* Current Slide (Center) */}
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={`current-${page}`}
+                    initial={{ x: "100%", opacity: 0, scale: 0.8 }}
+                    animate={{
+                      x: "0%",
+                      opacity: 1,
+                      scale: 1,
+                      rotateY: 0,
+                    }}
+                    exit={{ x: "-100%", opacity: 0, scale: 0.8 }}
+                    transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                    className="absolute transform-gpu"
+                    style={{ transformStyle: "preserve-3d", zIndex: 10 }}
+                  >
+                    <Image
+                      src={images[page] || "/placeholder.svg"}
+                      alt={`IDA Lighting - Current Slide`}
+                      width={350}
+                      height={350}
+                      priority
+                      className="object-contain drop-shadow-[0_20px_20px_rgba(0,0,0,0.3)]"
+                      draggable={false}
+                    />
+                  </motion.div>
+                </AnimatePresence>
+
+                {/* Next Slide (Right) */}
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={`next-${page}`}
+                    initial={{ x: "100%", opacity: 0, scale: 0.8 }}
+                    animate={{
+                      x: "60%",
+                      opacity: 0.8,
+                      scale: 0.8,
+                      rotateY: -15,
+                    }}
+                    exit={{ x: "120%", opacity: 0, scale: 0.7 }}
+                    transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                    className="absolute transform-gpu"
+                    style={{ transformStyle: "preserve-3d" }}
+                  >
+                    <Image
+                      src={images[getNextSlide(page)] || "/placeholder.svg"}
+                      alt={`IDA Lighting - Next Slide`}
+                      width={250}
+                      height={250}
+                      className="object-contain drop-shadow-[0_10px_10px_rgba(0,0,0,0.2)]"
+                      draggable={false}
+                    />
+                  </motion.div>
+                </AnimatePresence>
+              </div>
+            </div>
+          </div>
         </div>
 
-        {/* Bottom section with navigation - compact */}
+        {/* Bottom section without navigation buttons */}
         <div className="flex flex-col items-center pb-6">
-          {/* Navigation buttons - horizontal layout for mobile */}
-          <div className="flex flex-row gap-4 z-20 mb-3">
-            <motion.button
-              whileTap={{ scale: 0.95 }}
-              className="w-8 h-8 rounded-full bg-white/90 flex items-center justify-center shadow-lg"
-              onClick={() => {
-                paginate(-1)
-                playSound()
-              }}
-              aria-label="Previous slide"
-            >
-              <ChevronLeft className="h-4 w-4 text-[#CD5C5C]" />
-            </motion.button>
-            <motion.button
-              whileTap={{ scale: 0.95 }}
-              className="w-8 h-8 rounded-full bg-white/90 flex items-center justify-center shadow-lg"
-              onClick={() => {
-                paginate(1)
-                playSound()
-              }}
-              aria-label="Next slide"
-            >
-              <ChevronRight className="h-4 w-4 text-[#CD5C5C]" />
-            </motion.button>
-          </div>
-
           {/* Slide indicators */}
-          <div className="flex gap-2 z-20">
+          <div className="flex gap-2 z-20 mb-6">
             {images.map((_, index) => (
-              <motion.button
+              <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 * index, duration: 0.5 }}
                 className={`h-1.5 rounded-full transition-all ${page === index ? "w-5 bg-white" : "w-1.5 bg-white/50"}`}
-                onClick={() => {
-                  playSound()
-                  paginate(index > page ? 1 : -1)
-                }}
-                whileTap={{ scale: 0.9 }}
-                aria-label={`Go to slide ${index + 1}`}
+                aria-label={`Slide ${index + 1}`}
                 aria-current={page === index ? "true" : "false"}
               />
             ))}
           </div>
         </div>
-
-        {/* CTA Button - moved to bottom for better thumb reach */}
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
-          className="absolute bottom-16 left-3 z-20"
-        >
-          <Button
-            variant="ghost"
-            className="w-fit text-white hover:bg-white/10 hover:text-white group transition-all duration-300 shadow-[0_4px_8px_rgba(0,0,0,0.1)] px-0 relative overflow-hidden"
-          >
-            <span className="border-b border-white/40 pb-1 flex items-center relative z-10">
-              See collection
-              <ChevronRight className="ml-2 h-4 w-4" />
-            </span>
-          </Button>
-        </motion.div>
 
         {/* Page indicator */}
         <motion.div

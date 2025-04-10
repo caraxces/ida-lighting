@@ -243,14 +243,14 @@ export default function AboutBodyEnhanced() {
     <section className="py-16 md:py-24 bg-gradient-to-r from-black via-black to-[#8B2323] text-white overflow-hidden rounded-t-3xl">
       <div className="container mx-auto px-4 md:px-8">
         {/* Main Headline */}
-        <motion.h1
+        {/* <motion.h1
           className="text-5xl md:text-7xl lg:text-8xl font-light mb-20 md:mb-32"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
           KHÁM PHÁ HÀNH TRÌNH CỦA CHÚNG TÔI
-        </motion.h1>
+        </motion.h1> */}
 
         {/* First Content Row - Company Overview */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 mb-24 md:mb-40">
