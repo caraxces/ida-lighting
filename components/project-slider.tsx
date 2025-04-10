@@ -244,7 +244,7 @@ export default function TestimonialSlider({ onSlideChange }: { onSlideChange?: (
   return (
     <div ref={sliderRef} className="relative w-full h-screen overflow-hidden bg-white">
       {/* Tagline cố định */}
-      <div className="absolute top-8 left-8 md:top-12 md:left-12 pt-[80px] z-50 text-white/90 font-bold tracking-wider text-sl md:text-base">
+      <div className="absolute top-8 left-8 md:top-12 md:left-12 z-50 text-white/90 font-bold tracking-wider text-sm md:text-base">
         DỊCH VỤ – THẾ MẠNH – SẢN PHẨM
       </div>
       
@@ -260,7 +260,7 @@ export default function TestimonialSlider({ onSlideChange }: { onSlideChange?: (
         >
           {/* Main container for precise layout control */}
           <div className={`absolute inset-0 ${isMobile ? "flex flex-col" : "flex flex-row"}`}>
-            {/* RED COLOR BLOCK with animated width */}
+            {/* COLOR BLOCK with animated width */}
             <motion.div
               className="relative h-full bg-black z-30 overflow-hidden"
               initial={{
@@ -279,6 +279,11 @@ export default function TestimonialSlider({ onSlideChange }: { onSlideChange?: (
             >
               {/* Color block content */}
               <div className="relative w-full h-full p-8 pt-[80px] flex flex-col justify-between">
+                {/* Top info row */}
+                <div className="flex justify-between text-xs text-white/80 uppercase tracking-widest">
+                  <div>DỊCH VỤ</div>
+                  <div>IDA LIGHTING</div>
+                </div>
 
                 {/* Studio label */}
                 <div className="absolute top-[calc(20%+45px)] left-8 text-white/60 text-sm">
@@ -329,7 +334,7 @@ export default function TestimonialSlider({ onSlideChange }: { onSlideChange?: (
 
             {/* NEXT SLIDE PREVIEW with animated width */}
             <motion.div
-              className="relative bg-[#5A0000] z-10 overflow-hidden"
+              className="relative bg-black/80 z-10 overflow-hidden"
               initial={{
                 width: isMobile ? "100%" : direction >= 0 ? "0%" : "20%",
                 height: isMobile ? "0%" : "100%",
@@ -346,7 +351,7 @@ export default function TestimonialSlider({ onSlideChange }: { onSlideChange?: (
             >
               {nextService && (
                 <div className="w-full h-full relative opacity-70">
-                  <div className="absolute inset-0 bg-[#8B0000]/50 mix-blend-multiply z-10"></div>
+                  <div className="absolute inset-0 bg-black/50 mix-blend-multiply z-10"></div>
                   <img
                     src={nextService.image || "/placeholder.svg"}
                     alt={nextService.title}
