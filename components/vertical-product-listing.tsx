@@ -12,7 +12,7 @@ interface ProductVariant {
   id: string
   name: string
   image: string
-  price: number
+  price?: number
   specs: ProductSpec[]
 }
 
@@ -79,9 +79,6 @@ export default function VerticalProductListing({ products, showcaseImage }: Vert
                 <Link href={`/products/${product.slug}`} className="text-white font-medium hover:text-red-400 transition-colors">
                   {variant.name}
                 </Link>
-                <p className="text-white font-medium">
-                  GIÁ BÁN: {new Intl.NumberFormat("vi-VN").format(variant.price)} VNĐ
-                </p>
               </div>
               {index < productItems.length - 1 && (
                 <div className="border-t border-dashed border-white opacity-30 w-full mt-4"></div>

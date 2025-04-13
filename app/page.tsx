@@ -1,11 +1,10 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useRef, useState, useCallback } from "react"
 import Header from "@/components/header"
 import VideoPlayerSection from "@/components/video-section"
 import ProjectSlider from "@/components/project-slider"
 import Footer from "@/components/footer"
-import Enhanced3DVideoCard from "@/components/video-3D"
 import FirstElementHpage from "@/components/first-element-hpage"
 import SecondElementHpage from "@/components/second-element-hpage"
 import LuxuryRealEstate from "@/components/luxury-component"
@@ -18,10 +17,9 @@ export default function Home() {
   const [isMobile, setIsMobile] = useState(false)
   const lastScrollTimeRef = useRef(0)
   const [projectSliderAtLastSlideRef, setProjectSliderAtLastSlide] = useState(false)
-  const [servicesSliderAtLastSlideRef, setServicesSliderAtLastSlide] = useState(false)
 
   // Danh sách index của các component có slide riêng
-  const independentComponentIndices = [1, 2, 3] // FirstElementHpage, SecondElementHpage, ProjectSlider
+  const independentComponentIndices = [2, 3, 4] // FirstElementHpage, SecondElementHpage, ProjectSlider
 
   // Kiểm tra thiết bị di động khi trang được tải
   useEffect(() => {
@@ -34,12 +32,27 @@ export default function Home() {
   }, [])
 
   // Kiểm tra xem component hiện tại có phải là component độc lập không
-  const isIndependentComponent = (sectionIndex: number) => {
+  const isIndependentComponent = useCallback((sectionIndex: number) => {
     return independentComponentIndices.includes(sectionIndex)
-  }
+  }, [])
+
+  // Kiểm tra xem có thể chuyển từ component độc lập không
+  const canNavigateFromIndependentComponent = useCallback((direction: number, sectionIndex: number) => {
+    // Chỉ áp dụng khi muốn chuyển xuống (direction > 0)
+    if (direction > 0) {
+      // Với ProjectSlider (index 4)
+      if (sectionIndex === 4) {
+        console.log("Can navigate from ProjectSlider:", projectSliderAtLastSlideRef);
+        return projectSliderAtLastSlideRef;
+      }
+    }
+    
+    // Cho phép chuyển đối với các trường hợp khác
+    return true;
+  }, [projectSliderAtLastSlideRef])
 
   // Hàm chuyển đến section
-  const navigateToSection = (index: number) => {
+  const navigateToSection = useCallback((index: number) => {
     // Kiểm tra thời gian giữa các lần scroll để tránh scroll quá nhanh
     const now = Date.now()
     if (now - lastScrollTimeRef.current < 800) return
@@ -50,16 +63,6 @@ export default function Home() {
 
     // Kiểm tra index hợp lệ
     if (index < 0 || index >= sectionRefs.current.length) return
-
-    // Nếu đang ở section cuối và cố gắng chuyển đến section sau
-    if (currentSection === sectionRefs.current.length - 1 && index > currentSection) {
-      return
-    }
-
-    // Nếu đang ở section đầu và cố gắng chuyển đến section trước
-    if (currentSection === 0 && index < 0) {
-      return
-    }
 
     // THÊM KIỂM TRA CHO COMPONENT CÓ SLIDE
     if (isIndependentComponent(currentSection)) {
@@ -80,14 +83,19 @@ export default function Home() {
     setTimeout(() => {
       setIsScrolling(false)
     }, 800)
-  }
+  }, [currentSection, isScrolling, isIndependentComponent, canNavigateFromIndependentComponent])
 
   // Xử lý sự kiện wheel (cuộn chuột) cho desktop
   useEffect(() => {
+    let wheelDebounceTimer: NodeJS.Timeout | null = null;
+    
     const handleWheel = (e: WheelEvent) => {
-      // Ngăn cản scroll mặc định
-      e.preventDefault()
-
+      // Ngăn chặn xử lý nhiều sự kiện wheel liên tiếp
+      if (wheelDebounceTimer !== null) return;
+      
+      // Ngăn chặn hành vi scroll mặc định
+      e.preventDefault();
+      
       // Xác định hướng cuộn
       const direction = e.deltaY > 0 ? 1 : -1;
       
@@ -105,10 +113,16 @@ export default function Home() {
       } else {
         navigateToSection(currentSection - 1)
       }
+      
+      // Thiết lập debounce để ngăn nhiều sự kiện wheel xảy ra quá nhanh
+      wheelDebounceTimer = setTimeout(() => {
+        wheelDebounceTimer = null;
+      }, 800);
     }
 
     const container = containerRef.current
     if (container) {
+      // Sử dụng passive: false để có thể gọi preventDefault()
       container.addEventListener("wheel", handleWheel, { passive: false })
     }
 
@@ -116,25 +130,57 @@ export default function Home() {
       if (container) {
         container.removeEventListener("wheel", handleWheel)
       }
+      if (wheelDebounceTimer) {
+        clearTimeout(wheelDebounceTimer);
+      }
     }
-  }, [currentSection, isScrolling, projectSliderAtLastSlideRef, servicesSliderAtLastSlideRef])
+  }, [currentSection, navigateToSection, isIndependentComponent, canNavigateFromIndependentComponent])
 
   // Xử lý sự kiện touch cho mobile
   useEffect(() => {
-    let touchStartY = 0
+    let touchStartY = 0;
+    let touchStartX = 0;
+    let touchDebounceTimer: NodeJS.Timeout | null = null;
+    const minSwipeDistance = 50; // khoảng cách vuốt tối thiểu (px)
 
     const handleTouchStart = (e: TouchEvent) => {
-      touchStartY = e.touches[0].clientY
+      // Chỉ xử lý khi không có timer debounce đang chạy
+      if (touchDebounceTimer !== null) return;
+      
+      touchStartY = e.touches[0].clientY;
+      touchStartX = e.touches[0].clientX; // Lưu vị trí X để phân biệt vuốt dọc/ngang
+    }
+
+    const handleTouchMove = (e: TouchEvent) => {
+      // Ngăn scroll mặc định của trình duyệt nếu đang trong component
+      if (containerRef.current?.contains(e.target as Node)) {
+        // Chỉ ngăn scroll dọc, cho phép scroll ngang
+        const touchCurrentY = e.touches[0].clientY;
+        const touchCurrentX = e.touches[0].clientX;
+        const deltaY = Math.abs(touchCurrentY - touchStartY);
+        const deltaX = Math.abs(touchCurrentX - touchStartX);
+        
+        // Nếu vuốt dọc nhiều hơn vuốt ngang, ngăn hành vi mặc định
+        if (deltaY > deltaX) {
+          e.preventDefault();
+        }
+      }
     }
 
     const handleTouchEnd = (e: TouchEvent) => {
-      const touchEndY = e.changedTouches[0].clientY
-      const diff = touchStartY - touchEndY
-
-      // Nếu vuốt đủ khoảng cách (50px)
-      if (Math.abs(diff) > 50) {
+      // Bỏ qua nếu đang có một debounce timer
+      if (touchDebounceTimer !== null) return;
+      
+      const touchEndY = e.changedTouches[0].clientY;
+      const touchEndX = e.changedTouches[0].clientX;
+      
+      const diffY = touchStartY - touchEndY;
+      const diffX = touchStartX - touchEndX;
+      
+      // Chỉ xử lý vuốt dọc (khi vuốt dọc nhiều hơn ngang)
+      if (Math.abs(diffY) > Math.abs(diffX) && Math.abs(diffY) > minSwipeDistance) {
         // Xác định hướng vuốt
-        const direction = diff > 0 ? 1 : -1;
+        const direction = diffY > 0 ? 1 : -1;
         
         // Nếu đang ở component độc lập, kiểm tra trước
         if (isIndependentComponent(currentSection)) {
@@ -146,21 +192,35 @@ export default function Home() {
 
         // Nếu qua được điều kiện, mới chuyển section
         if (direction > 0) {
-          navigateToSection(currentSection + 1)
+          navigateToSection(currentSection + 1);
         } else {
-          navigateToSection(currentSection - 1)
+          navigateToSection(currentSection - 1);
         }
+        
+        // Thiết lập debounce để ngăn nhiều sự kiện touch xảy ra quá nhanh
+        touchDebounceTimer = setTimeout(() => {
+          touchDebounceTimer = null;
+        }, 800);
       }
     }
 
-    window.addEventListener("touchstart", handleTouchStart, { passive: true })
-    window.addEventListener("touchend", handleTouchEnd, { passive: true })
+    if (typeof window !== 'undefined') {
+      window.addEventListener("touchstart", handleTouchStart, { passive: true });
+      window.addEventListener("touchmove", handleTouchMove, { passive: false });
+      window.addEventListener("touchend", handleTouchEnd, { passive: true });
+    }
 
     return () => {
-      window.removeEventListener("touchstart", handleTouchStart)
-      window.removeEventListener("touchend", handleTouchEnd)
+      if (typeof window !== 'undefined') {
+        window.removeEventListener("touchstart", handleTouchStart);
+        window.removeEventListener("touchmove", handleTouchMove);
+        window.removeEventListener("touchend", handleTouchEnd);
+      }
+      if (touchDebounceTimer) {
+        clearTimeout(touchDebounceTimer);
+      }
     }
-  }, [currentSection, isScrolling, projectSliderAtLastSlideRef, servicesSliderAtLastSlideRef])
+  }, [currentSection, navigateToSection, isIndependentComponent, canNavigateFromIndependentComponent])
 
   // Xử lý phím mũi tên
   useEffect(() => {
@@ -179,56 +239,19 @@ export default function Home() {
     return () => {
       window.removeEventListener("keydown", handleKeyDown)
     }
-  }, [currentSection, isScrolling])
-
-  // Cuộn về đầu trang khi tải
-  useEffect(() => {
-    window.scrollTo(0, 0)
-
-    // Tránh overflow cho html và body
-    document.documentElement.style.overflow = "hidden"
-    document.body.style.overflow = "hidden"
-
-    return () => {
-      document.documentElement.style.overflow = ""
-      document.body.style.overflow = ""
-    }
-  }, [])
+  }, [currentSection, isScrolling, navigateToSection])
 
   // Hàm xử lý thông báo từ các component
   const handleComponentSlideChange = (componentIndex: number, isAtLastSlide: boolean) => {
     console.log(`Component ${componentIndex} at last slide: ${isAtLastSlide}`);
     
-    if (componentIndex === 3) { // ProjectSlider (updated index)
+    if (componentIndex === 4) { // ProjectSlider
       setProjectSliderAtLastSlide(isAtLastSlide);
-    } else if (componentIndex === 5) { // ServicesSection (updated index)
-      setServicesSliderAtLastSlide(isAtLastSlide);
     }
-  }
-
-  // Kiểm tra xem có thể chuyển từ component độc lập không
-  const canNavigateFromIndependentComponent = (direction: number, sectionIndex: number) => {
-    // Chỉ áp dụng khi muốn chuyển xuống (direction > 0)
-    if (direction > 0) {
-      // Với ProjectSlider (updated index 3)
-      if (sectionIndex === 3) {
-        console.log("Can navigate from ProjectSlider:", projectSliderAtLastSlideRef);
-        return projectSliderAtLastSlideRef;
-      }
-      
-      // ServicesSection đã bị comment
-      // if (sectionIndex === 5) {
-      //   console.log("Can navigate from ServicesSection:", servicesSliderAtLastSlideRef);
-      //   return servicesSliderAtLastSlideRef;
-      // }
-    }
-    
-    // Cho phép chuyển đối với các trường hợp khác
-    return true;
   }
 
   return (
-    <div className="w-full h-screen relative overflow-hidden">
+    <div className="w-full h-full relative">
       {/* CSS để làm mượt chuyển động và ẩn scrollbar */}
       <style jsx global>{`
         /* Ẩn scrollbar */
@@ -242,8 +265,6 @@ export default function Home() {
           scrollbar-width: none;
           max-width: 100vw;
           overscroll-behavior: none;
-          height: 100%;
-          width: 100%;
         }
         
         /* Thêm transition cho các section */
@@ -270,11 +291,11 @@ export default function Home() {
         }
       `}</style>
 
-      <main className="w-full h-screen relative overflow-hidden">
+      <main className="w-full min-h-screen relative">
         <Header />
 
-        <div ref={containerRef} className="w-full h-screen relative">
-          {/* LuxuryRealEstate */}
+        <div ref={containerRef} className="w-full relative">
+          {/* VideoPlayerSection - Now first */}
           <div
             ref={(el) => {
               sectionRefs.current[0] = el
@@ -283,22 +304,22 @@ export default function Home() {
             style={{ transform: `translateY(${(currentSection - 0) * -100}vh)` }}
             data-index={0}
           >
-            <LuxuryRealEstate />
+            <VideoPlayerSection />
           </div>
 
-          {/* FirstElementHpage - component không tác động */}
+          {/* LuxuryRealEstate */}
           <div
             ref={(el) => {
               sectionRefs.current[1] = el
             }}
-            className="section independent-section"
+            className="section"
             style={{ transform: `translateY(${(currentSection - 1) * -100}vh)` }}
             data-index={1}
           >
-            <FirstElementHpage onSlideChange={(isAtLastSlide: boolean) => handleComponentSlideChange(1, isAtLastSlide)} />
+            <LuxuryRealEstate />
           </div>
 
-          {/* SecondElementHpage - component không tác động */}
+          {/* FirstElementHpage */}
           <div
             ref={(el) => {
               sectionRefs.current[2] = el
@@ -307,68 +328,41 @@ export default function Home() {
             style={{ transform: `translateY(${(currentSection - 2) * -100}vh)` }}
             data-index={2}
           >
-            <SecondElementHpage onSlideChange={(isAtLastSlide: boolean) => handleComponentSlideChange(2, isAtLastSlide)} />
+            <FirstElementHpage />
           </div>
 
-          {/* ProjectSlider */}
+          {/* SecondElementHpage */}
           <div
             ref={(el) => {
               sectionRefs.current[3] = el
             }}
             className="section independent-section"
-            style={{ transform: `translateY(${(currentSection - 3) * -100}vh)`, background: "#B8BBC1" }}
+            style={{ transform: `translateY(${(currentSection - 3) * -100}vh)` }}
             data-index={3}
           >
-            <ProjectSlider onSlideChange={(isAtLastSlide: boolean) => handleComponentSlideChange(3, isAtLastSlide)} />
+            <SecondElementHpage />
           </div>
 
-          {/* VideoPlayerSection */}
+          {/* ProjectSlider */}
           <div
             ref={(el) => {
               sectionRefs.current[4] = el
             }}
-            className="section"
+            className="section independent-section"
             style={{ transform: `translateY(${(currentSection - 4) * -100}vh)`, background: "#B8BBC1" }}
             data-index={4}
           >
-            <VideoPlayerSection />
-          </div>
-
-          {/* ServicesSection */}
-          {/* 
-          <div
-            id="work"
-            ref={(el) => {
-              sectionRefs.current[5] = el
-            }}
-            className="section independent-section"
-            style={{ transform: `translateY(${(currentSection - 5) * -100}vh)`, background: "#B8BBC1" }}
-            data-index={5}
-          >
-            <ServicesSection onSlideChange={(isAtLastSlide) => handleComponentSlideChange(5, isAtLastSlide)} />
-          </div>
-          */}
-
-          {/* Enhanced3DVideoCard */}
-          <div
-            ref={(el) => {
-              sectionRefs.current[5] = el 
-            }}
-            className="section"
-            style={{ transform: `translateY(${(currentSection - 5) * -100}vh)`, background: "#B8BBC1" }}
-            data-index={5}
-          >
-            <Enhanced3DVideoCard />
+            <ProjectSlider onSlideChange={(isAtLastSlide: boolean) => handleComponentSlideChange(4, isAtLastSlide)} />
           </div>
 
           {/* Footer */}
           <div
             ref={(el) => {
-              sectionRefs.current[6] = el
+              sectionRefs.current[5] = el
             }}
             className="section"
-            style={{ transform: `translateY(${(currentSection - 6) * -100}vh)` }}
-            data-index={6}
+            style={{ transform: `translateY(${(currentSection - 5) * -100}vh)` }}
+            data-index={5}
           >
             <div className="rounded-t-[10px] overflow-hidden shadow-2xl h-full">
               <Footer />
@@ -378,7 +372,7 @@ export default function Home() {
 
         {/* Chấm chỉ báo section */}
         <div className="fixed right-4 top-1/2 transform -translate-y-1/2 z-50 flex flex-col gap-2">
-          {Array(7) /* Giảm từ 8 xuống 7 vì đã xóa HeroSection */
+          {Array(5)
             .fill(0)
             .map((_, index) => (
               <button

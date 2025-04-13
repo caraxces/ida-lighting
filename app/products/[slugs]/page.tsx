@@ -246,6 +246,24 @@ const getProductBySlug = (slug: string): Product | undefined => {
   return allProducts.find(product => product.slug === slug);
 };
 
+// Get suggested products (2 random products from the same category if possible, otherwise any 2 random products)
+const getSuggestedProducts = (currentProduct: Product): Product[] => {
+  const allProducts = getAllProducts();
+  const filteredProducts = allProducts.filter(p => p.id !== currentProduct.id);
+  
+  // First try to get products from the same category
+  if (currentProduct.category) {
+    const sameCategory = filteredProducts.filter(p => p.category === currentProduct.category);
+    if (sameCategory.length >= 2) {
+      // Shuffle and get 2 random products from same category
+      return [...sameCategory].sort(() => 0.5 - Math.random()).slice(0, 2);
+    }
+  }
+  
+  // If not enough products in the same category, get any random products
+  return [...filteredProducts].sort(() => 0.5 - Math.random()).slice(0, 2);
+};
+
 // Define a type for the params
 interface PageParams {
   slugs: string;
@@ -270,6 +288,18 @@ export default function ProductPage({ params }: { params: PageParams }) {
   const allProductImages = [product.mainImage, ...product.variants.map(v => v.image)];
   // Filter out duplicates
   const uniqueProductImages = [...new Set(allProductImages)];
+  
+  // Get suggested products
+  const suggestedProducts = getSuggestedProducts(product);
+
+  // Format price function
+  const formatPrice = (price: number): string => {
+    return new Intl.NumberFormat('vi-VN', { 
+      style: 'currency', 
+      currency: 'VND',
+      maximumFractionDigits: 0 
+    }).format(price);
+  };
 
   return (
     <div className="min-h-screen bg-black text-white">
@@ -431,7 +461,7 @@ export default function ProductPage({ params }: { params: PageParams }) {
                       }`}
                     >
                       {variant.name}
-                    </button>
+              </button>
                   ))}
                 </div>
             </div>
@@ -457,11 +487,11 @@ export default function ProductPage({ params }: { params: PageParams }) {
                     height={80}
                     className="w-full h-full object-cover"
                   />
-                  </button>
+              </button>
                 ))}
             </div>
           )}
-          
+
           {/* Contact Button for mobile */}
           <Link href="https://m.me/855258281507149" target="_blank" rel="noopener noreferrer">
             <Button className="w-full bg-red-600 hover:bg-red-700 text-white rounded-md py-3 flex items-center justify-center space-x-2">
@@ -482,7 +512,7 @@ export default function ProductPage({ params }: { params: PageParams }) {
                 <span className="font-bold">LIÊN HỆ VÀ NHẬN ƯU ĐÃI</span>
             </Button>
           </Link>
-        </div>
+          </div>
 
         {/* Back to Products Button */}
         <div className="mt-12">
@@ -492,6 +522,45 @@ export default function ProductPage({ params }: { params: PageParams }) {
             </Button>
           </Link>
         </div>
+        
+        {/* Suggested Products Section */}
+        {suggestedProducts.length > 0 && (
+          <div className="mt-20">
+            <div className="mb-8">
+              <div className="relative">
+                <div className="absolute -left-4 top-0 h-full w-1 bg-red-600"></div>
+                <h2 className="text-3xl font-bold">Sản phẩm gợi ý</h2>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {suggestedProducts.map((suggestedProduct) => (
+                <Link key={suggestedProduct.id} href={`/products/${suggestedProduct.slug}`}>
+                  <div className="group bg-gradient-to-br from-zinc-900 to-black rounded-lg overflow-hidden transition-all duration-300 hover:shadow-lg hover:shadow-red-500/20 border border-zinc-800 hover:border-red-500/30">
+                    <div className="aspect-[4/3] overflow-hidden">
+                      <Image
+                        src={suggestedProduct.image || "/placeholder.svg"}
+                        alt={suggestedProduct.title}
+                        width={600}
+                        height={450}
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                      />
+                    </div>
+                    <div className="p-6">
+                      <h3 className="text-xl font-semibold mb-2 group-hover:text-red-400 transition-colors">
+                        {suggestedProduct.title}
+                      </h3>
+                      <p className="text-gray-400 line-clamp-2 mb-3 text-sm">{suggestedProduct.description}</p>
+                      <div className="flex justify-end items-center">
+                        <span className="text-white text-sm bg-red-600 rounded-full px-3 py-1">Xem chi tiết</span>
+                      </div>
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
       
       <Footer />
