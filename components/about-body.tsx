@@ -50,11 +50,9 @@ export default function IDALightingProfile() {
               transition={{ duration: 0.6, delay: 0.4 }}
               className="text-sm md:text-base text-gray-300 leading-relaxed"
             >
-              Với tầm nhìn sáng tạo và đột phá, <span className="text-yellow-500">IDA LIGHTING</span> được thành lập vào
-              năm 2019 bởi Tiến sĩ Nguyễn Điền Dương. Sau nhiều năm làm việc trong lĩnh vực thiết kế và thi công kiến
-              trúc, ông nhận thấy nhu cầu của thiết kế những giải pháp chiếu sáng hiện đại, tinh tế và có nhận thức cao
-              cho các công trình. Đây chính là động lực để <span className="text-yellow-500">IDA LIGHTING</span> ra đời
-              vào năm 2019 với sứ mệnh:
+              Với tầm nhìn sáng tạo và đột phá, IDA LIGHTING được thành lập vào năm 2019 bởi Ths.Kts Nguyễn Đình Dương. Sau nhiều năm làm việc 
+trong lĩnh vực thiết kế và thi công kiến trúc, nhận thấy nhu cầu cấp thiết về những giải pháp chiếu sáng hiện đại, tinh tế và cá nhân hóa 
+cao cho các công trình. Đây chính là động lực để IDA LIGHTING ra đời vào năm 2019 với sứ mệnh:
               <span className="block italic mt-2">"Biến ánh sáng thành lên nhân của không gian".</span>
             </motion.p>
 
@@ -64,12 +62,10 @@ export default function IDALightingProfile() {
               transition={{ duration: 0.6, delay: 0.6 }}
               className="text-sm md:text-base text-gray-300 leading-relaxed"
             >
-              <span className="text-yellow-500">IDA LIGHTING</span> không chỉ cung cấp sản phẩm mà còn mang đến giải
-              pháp chiếu sáng tối ưu, đáp ứng các không gian kiến trúc từ nhỏ đến hoàn hảo, ấn tượng và tiện nghi. Chúng
-              tôi luôn hướng đến việc kết hợp tính thẩm mỹ với sự hiệu quả, tạo ra những sản phẩm đẳng cấp quốc tế và
-              khả năng làm nổi bật các chi tiết kiến trúc trong mọi không gian. Từ hoạch định, ý thiết kế và giải pháp
-              chiếu sáng đáp ứng được nhu cầu của các kiến trúc sư và khách hàng, mang đến những trải nghiệm cao nhất về
-              ánh sáng thân thiện giữa thị trường Việt Nam.
+              IDA LIGHTING không chỉ cung cấp ánh sáng mà còn mang đến giải pháp chiếu sáng tối ưu, giúp các không gian kiến trúc trở nên hoàn 
+              hảo, ấn tượng và tiện nghi. Chúng tôi luôn hướng đến việc kết hợp tính thẩm mỹ và sự hiệu quả, tạo ra những sản phẩm đẳng cấp quốc 
+              tế với khả năng làm nổi bật các chi tiết kiến trúc trong mọi không gian. Trở thành đơn vị thiết kế và giải pháp chiếu sáng đáp ứng được 
+              nhu cầu của các Kiến trúc sư và khách hàng, mang đến những trải nghiệm cao nhất về ánh sáng trên thế giới về thị trường Việt Nam.
             </motion.p>
 
             <motion.p
@@ -79,10 +75,10 @@ export default function IDALightingProfile() {
               className="text-sm md:text-base text-gray-300 leading-relaxed"
             >
               Với đội ngũ chuyên gia và các đối tác quốc tế uy tín,{" "}
-              <span className="text-yellow-500">IDA LIGHTING</span> cam kết mang đến những sản phẩm chiếu sách chất
+              IDA LIGHTING cam kết mang đến những sản phẩm chiếu sách chất
               lượng cao, đáp ứng mọi yêu cầu từ các dự án kiến trúc phức tạp đến các công trình có yêu cầu cao về công
               năng và thẩm mỹ. Và trên hết là sự thỏa mãn nhu cầu, đạt đến thủy cảm hứng của{" "}
-              <span className="text-yellow-500">IDA LIGHTING</span> là điểm cho hành công trình. Chính là thành công là
+              IDA LIGHTING là điểm cho hành công trình. Chính là thành công là
               đích đến của IDA muốn hướng tới.
             </motion.p>
           </div>
@@ -101,7 +97,7 @@ export default function IDALightingProfile() {
               kế - thi công. Và nhận thấy một vấn đề lớn trong ngành: Thị trường chiếu sáng thiếu vắng những giải pháp
               không chỉ đẹp mắt mà còn cần hiệu quả và tiết kiệm năng lượng. Bên cạnh đó, trong quá trình làm việc, bản
               thân gặp khó khăn trong việc tìm ra những sản phẩm chiếu sáng vừa có thể tôn vinh không gian, vừa đảm bảo
-              chất lượng và tính bền vững. <span className="text-yellow-500">Ánh sáng</span> là thành tố chính tạo nên
+              chất lượng và tính bền vững. Ánh sáng là thành tố chính tạo nên
               chất lượng thẩm mỹ, góp phần tạo chiều sâu và cảm xúc cho những giải kiến trúc.
             </p>
           </motion.div>
