@@ -12,6 +12,7 @@ type Service = {
   title: string
   image: string
   category: string
+  description?: string
 }
 
 // Dữ liệu dịch vụ
@@ -20,25 +21,29 @@ const services: Service[] = [
     id: 1,
     title: "Tư vấn thiết kế chiếu sáng",
     image: "/home-page/_TRC7620.jpg",
-    category: "residential"
+    category: "residential",
+    description: "IDA LIGHTING mang đến các giải pháp thiết kế chiếu sáng chuyên nghiệp, phù hợp cho từng không gian kiến trúc như: Nhà ở, Văn phòng, Khách sạn, Resort nghỉ dưỡng, Nhà hàng... và các công trình Công cộng. Chúng tôi đảm bảo sự hài hòa giữa thẩm mỹ và công năng, tối ưu hóa ánh sáng để nâng cao trải nghiệm và tiết kiệm năng lượng."
   },
   {
     id: 2,
     title: "Cung cấp giải pháp chiếu sáng toàn diện",
     image: "/home-page/_TRC7706.jpg",
-    category: "commercial"
+    category: "commercial",
+    description: "Chiếu sáng không đơn thuần là ánh sáng mà còn là cách chúng ta kiểm soát và sử dụng ánh sáng như thế nào để phục vụ - nuông chiều cảm xúc của mình nhất. IDA cung cấp một giải pháp tổng thể cho công trình và tương thích với các ngôn ngữ điều khiển tân tiến nhất hiện nay."
   },
   {
     id: 3,
     title: "Bespoke Lighting",
     image: "/home-page/_TRC7712.jpg",
-    category: "industrial"
+    category: "industrial",
+    description: "IDA làm chủ được công nghệ sản xuất, lắp ráp tại Trung Quốc, các nước Châu Âu như Đức, Czech... với lựa chọn các nhà thầu cung cáp linh kiện - phụ kiện hàng đầu thế giới. Không chỉ mang lại những sản phẩm chất lượng cao mà chi phí phù hợp với thị trường Việt Nam, đáp ứng nhu cầu cá nhân hóa ngày càng được giới tinh hoa lựa chọn."
   },
   {
     id: 4,
     title: "Cung cấp thiết bị chiếu sáng",
     image: "/home-page/_TRC7748-Pano.jpg",
-    category: "smart"
+    category: "smart",
+    description: "IDA LIGHTING mang đến những dòng sản phẩm đa dạng, đáp ứng đầu đủ nhu cầu chiếu sáng cho nhiều không gian khác nhau. Luôn lựa chọn và mang đến cho khách hàng những sản phẩm với tiêu chí: - Cùng một chất lượng thì chi phí thấp nhất. - Cùng một chi phí thì chất lượng cao nhất."
   }
 ]
 
@@ -91,7 +96,7 @@ const ProjectSlider = ({ onSlideChange }: ProjectSliderProps) => {
     };
 
     // Start auto-slide timer
-    autoSlideTimerRef.current = setInterval(moveToNextSlide, 2000);
+    autoSlideTimerRef.current = setInterval(moveToNextSlide, 6500);
 
     // Pause on mouse enter, resume on mouse leave
     const sliderElement = sliderRef.current;
@@ -352,7 +357,7 @@ const ProjectSlider = ({ onSlideChange }: ProjectSliderProps) => {
             transition={{ duration: 0.5, delay: 0.2 }}
           >
             <h1
-              className="text-4xl md:text-6xl lg:text-[7rem] font-black text-white leading-none mx-8 md:ml-[calc(15%)] md:mr-16"
+              className="text-4xl md:text-6xl lg:text-[40px] font-black text-white leading-none mx-8 md:ml-[calc(15%)] md:mr-16"
               style={{
                 fontFamily: "'Inter', sans-serif",
                 letterSpacing: "-0.02em",
@@ -360,6 +365,11 @@ const ProjectSlider = ({ onSlideChange }: ProjectSliderProps) => {
               }}
             >
               {services[currentIndex].title}
+              {services[currentIndex].description && (
+                <p className="text-base md:text-lg mt-4 font-normal max-w-2xl">
+                  {services[currentIndex].description}
+                </p>
+              )}
             </h1>
           </motion.div>
         </motion.div>

@@ -203,7 +203,7 @@ export default function SecondElementHpage() {
           animate={{ opacity: 1 }}
           transition={{ duration: 1 }}
           className={cn(
-            "relative w-full min-h-screen overflow-hidden bg-[#8B2323]",
+            "relative w-full min-h-screen overflow-hidden bg-gradient-to-r from-black via-black to-[#8B2323]",
             hasLoaded ? "transition-all duration-1000" : "",
           )}
           onMouseEnter={() => {
@@ -222,7 +222,7 @@ export default function SecondElementHpage() {
           <AnimatePresence>
             {!hasLoaded && (
               <motion.div
-                className="absolute inset-0 z-50 bg-[#FFDAB9] flex items-center justify-center"
+                className="absolute inset-0 z-50 bg-gradient-to-r from-black via-black to-[#8B2323] flex items-center justify-center"
                 exit={{
                   opacity: 0,
                   transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] },
@@ -240,7 +240,7 @@ export default function SecondElementHpage() {
                     scale: 1.2,
                     transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] },
                   }}
-                  className="text-[#8B2323] text-4xl font-bold"
+                  className="text-white text-4xl font-bold"
                 >
                   IDA Lighting
                 </motion.div>
@@ -276,33 +276,12 @@ export default function SecondElementHpage() {
                     ease: [0.16, 1, 0.3, 1],
                   }}
                   className="h-full w-px bg-white/10"
-                  style={{ marginLeft: `${(i * 100) / 12}%` }}
+                  style={{ marginLeft: `${(i as number) * 100 / 12}%` }}
                 />
               ))}
           </motion.div>
 
-          {/* Background gradient with parallax and fade-in - INVERTED POSITION AND COLOR */}
-          <motion.div
-            style={{ y: backgroundY }}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{
-              duration: 1.5,
-              ease: "easeOut",
-            }}
-            className="absolute right-0 md:top-[5%] top-0 md:h-[95%] h-full w-full md:w-[65%] bg-gradient-to-l from-[#FFDAB9] via-[#FFE4C4] to-[#FFEFD5] md:rounded-tl-[250px] z-0"
-          >
-            {/* Animated gradient overlay */}
-            <div className="absolute inset-0 bg-gradient-to-bl from-transparent to-black/20 opacity-70" />
-
-            {/* Animated border */}
-            <motion.div
-              className="absolute top-0 left-0 w-1 h-full bg-white/20 hidden md:block"
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: "100%", opacity: 1 }}
-              transition={{ duration: 2, ease: "easeOut", delay: 0.5 }}
-            />
-          </motion.div>
+          {/* Background gradient with parallax and fade-in - INVERTED POSITION AND COLOR - REMOVED */}
 
           {/* Content container */}
           <div className="relative z-10 grid md:grid-cols-12 grid-cols-1 min-h-screen">
