@@ -196,7 +196,7 @@ export default function FirstElementHpage() {
           animate={{ opacity: 1 }}
           transition={{ duration: 1 }}
           className={cn(
-            "relative w-full min-h-screen overflow-hidden bg-[#FFDAB9]", // Removed touch-none class
+            "relative w-full min-h-screen overflow-hidden bg-gradient-to-r from-black via-black to-[#8B2323]", // Removed touch-none class
             hasLoaded ? "transition-all duration-1000" : "",
           )}
           onMouseEnter={() => {
@@ -211,7 +211,7 @@ export default function FirstElementHpage() {
           <AnimatePresence>
             {!hasLoaded && (
               <motion.div
-                className="absolute inset-0 z-50 bg-[#8B2323] flex items-center justify-center"
+                className="absolute inset-0 z-50 bg-gradient-to-r from-black via-black to-[#8B2323] flex items-center justify-center"
                 exit={{
                   opacity: 0,
                   transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] },
@@ -271,29 +271,6 @@ export default function FirstElementHpage() {
                   style={{ marginLeft: `${(i * 100) / 12}%` }}
                 />
               ))}
-          </motion.div>
-
-          {/* Background gradient with parallax and fade-in */}
-          <motion.div
-            style={{ y: backgroundY }}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{
-              duration: 1.5,
-              ease: "easeOut",
-            }}
-            className="absolute left-0 md:top-[5%] top-0 md:h-[95%] h-full w-full md:w-[65%] bg-gradient-to-r from-[#8B2323] via-[#A52A2A] to-[#CD5C5C] md:rounded-tr-[250px] z-0"
-          >
-            {/* Animated gradient overlay */}
-            <div className="absolute inset-0 bg-gradient-to-br from-transparent to-black/20 opacity-70" />
-
-            {/* Animated border */}
-            <motion.div
-              className="absolute top-0 right-0 w-1 h-full bg-white/20 hidden md:block"
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: "100%", opacity: 1 }}
-              transition={{ duration: 2, ease: "easeOut", delay: 0.5 }}
-            />
           </motion.div>
 
           {/* Content container */}

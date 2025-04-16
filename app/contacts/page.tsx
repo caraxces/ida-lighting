@@ -9,6 +9,7 @@ import { motion, HTMLMotionProps } from "framer-motion"
 import { Phone, Mail, MapPin } from "lucide-react"
 import AnimatedTitle from "@/components/animated-title"
 import type { ComponentProps } from "react"
+import GlowButton from "@/components/glow-button"
 
 // Định nghĩa type cho MotionDiv
 const MotionDiv = motion.div as React.FC<ComponentProps<"div"> & HTMLMotionProps<"div">>;
@@ -117,27 +118,17 @@ export default function ContactPage() {
                     </ul>
                   </div>
                   
-                  <MotionDiv
-                    initial={false}
-                    whileHover={{
-                      scale: 1.05,
-                      textShadow: "0 0 15px rgba(255,255,255,0.7)",
-                    }}
-                    className="relative flex items-center hover:text-primary rounded-[10px] w-48"
+                  <a
+                    href="https://zaloapp.com/qr/p/o4teuv9ez56m"
+                    target="_blank"
+                    rel="noopener noreferrer"
                   >
-                    <a
-                      href="https://zaloapp.com/qr/p/o4teuv9ez56m"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-full h-full flex items-center justify-center py-3 px-6 space-x-2 z-10"
-                    >
-                      <span className="relative transition-all duration-300 text-white text-lg font-medium">
-                        Mở Zalo
-                      </span>
-                    </a>
-                    <div className="absolute inset-0 bg-gradient-to-r from-black via-black to-[#8B2323] opacity-100 hover:opacity-90 transition-opacity duration-300 rounded-[10px]"></div>
-                    <div className="absolute inset-0 bg-gradient-to-r from-black via-black to-[#8B2323] opacity-100 hover:opacity-90 transition-opacity duration-300"></div>
-                  </MotionDiv>
+                    <GlowButton 
+                      text="Mở Zalo"
+                      className="w-48"
+                      onClick={() => window.open("https://zaloapp.com/qr/p/o4teuv9ez56m", "_blank")}
+                    />
+                  </a>
                 </div>
               </motion.div>
             </div>

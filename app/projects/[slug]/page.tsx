@@ -4,7 +4,8 @@ import Header from "@/components/header"
 import Footer from "@/components/footer"
 import Image from "next/image"
 import { notFound } from "next/navigation"
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion"
 
 // Define project item type
 type ProjectItem = {
@@ -357,6 +358,34 @@ export default function ProjectPage({ params }: ProjectPageProps) {
 
   const project = projects[slug as keyof typeof projects]
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null)
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [isZooming, setIsZooming] = useState(false);
+  
+  // Parallax scroll effect references
+  const { scrollYProgress } = useScroll();
+  const bannerY = useTransform(scrollYProgress, [0, 1], [0, 100]);
+  const sliderScale = useTransform(scrollYProgress, [0, 0.5], [1, 1.1]);
+  
+  // Zoom animation timing
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIsZooming(prev => !prev);
+    }, 5000);
+    
+    return () => clearInterval(interval);
+  }, []);
+  
+  // Tạo mảng tất cả hình ảnh từ gallery để sử dụng cho slider
+  const allImages = project ? [project.banner, ...project.items.map(item => item.image)] : [];
+  
+  // Hàm điều hướng hình ảnh
+  const goToNextImage = () => {
+    setCurrentImageIndex((prev) => (prev + 1) % allImages.length);
+  };
+  
+  const goToPrevImage = () => {
+    setCurrentImageIndex((prev) => (prev === 0 ? allImages.length - 1 : prev - 1));
+  };
 
   // Set default selected product
   if (project.products.length > 0 && !selectedProduct) {
@@ -370,27 +399,40 @@ export default function ProjectPage({ params }: ProjectPageProps) {
       {/* New layout based on Lucelight.it */}
       <div className="container mx-auto pt-32 pb-16 px-4 md:px-8">
         {/* Project title */}
-        <h1 className="text-4xl md:text-5xl font-bold mb-8">{project.title}</h1>
+        <motion.h1 
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="text-4xl md:text-5xl font-bold mb-8"
+        >
+          {project.title}
+        </motion.h1>
         
         <div className="flex flex-col lg:flex-row gap-8">
           {/* Main image */}
           <div className="lg:w-2/3">
-            <div className="relative aspect-[16/9] mb-8">
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 1 }}
+              className="relative aspect-[16/9] mb-4 overflow-hidden rounded-md"
+            >
               {project.banner.endsWith('.mp4') ? (
                 <video 
                   src={project.banner} 
-                  className="w-full h-full object-cover rounded-md"
+                  className="w-full h-full object-cover"
                   autoPlay
                   loop
                   muted
                   playsInline
                 />
               ) : (
-                <div className="relative h-full">
-                  <img 
+                <div className="relative h-full overflow-hidden">
+                  <motion.img 
+                    style={{ y: bannerY }}
                     src={project.banner} 
                     alt={project.title}
-                    className="w-full h-full object-cover rounded-md"
+                    className="w-full h-full object-cover"
                   />
                   
                   {/* Product indicators */}
@@ -412,10 +454,68 @@ export default function ProjectPage({ params }: ProjectPageProps) {
                   ))}
                 </div>
               )}
-            </div>
+            </motion.div>
+            
+            {/* Image slider with navigation arrows */}
+            <motion.div 
+              style={{ scale: sliderScale }}
+              className="relative aspect-[16/9] mb-8 overflow-hidden rounded-md"
+            >
+              <div className="relative h-full">
+                <AnimatePresence mode="wait">
+                  <motion.img 
+                    key={currentImageIndex}
+                    initial={{ opacity: 0, scale: 1.05 }}
+                    animate={{ 
+                      opacity: 1, 
+                      scale: isZooming ? 1.05 : 1 
+                    }}
+                    exit={{ opacity: 0 }}
+                    transition={{ 
+                      opacity: { duration: 0.5 },
+                      scale: { duration: 5, ease: "easeInOut" }
+                    }}
+                    src={allImages[currentImageIndex]} 
+                    alt={`Gallery image ${currentImageIndex + 1}`}
+                    className="w-full h-full object-cover"
+                  />
+                </AnimatePresence>
+                
+                {/* Navigation arrows */}
+                <button 
+                  onClick={goToPrevImage}
+                  className="absolute left-2 top-1/2 -translate-y-1/2 w-10 h-10 bg-black/50 hover:bg-black/70 rounded-full flex items-center justify-center text-white transition-all"
+                  aria-label="Previous image"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                  </svg>
+                </button>
+                
+                <button 
+                  onClick={goToNextImage}
+                  className="absolute right-2 top-1/2 -translate-y-1/2 w-10 h-10 bg-black/50 hover:bg-black/70 rounded-full flex items-center justify-center text-white transition-all"
+                  aria-label="Next image"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </button>
+                
+                {/* Image counter */}
+                <div className="absolute bottom-4 right-4 bg-black/60 text-white text-sm px-3 py-1 rounded-full">
+                  {currentImageIndex + 1} / {allImages.length}
+                </div>
+              </div>
+            </motion.div>
             
             {/* Project description */}
-            <div className="mb-12">
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.3 }}
+              className="mb-12"
+            >
               <p className="text-lg leading-relaxed mb-8 text-gray-200">{project.description}</p>
               
               {/* Products section - visible only on mobile/tablet */}
@@ -460,7 +560,7 @@ export default function ProjectPage({ params }: ProjectPageProps) {
                   ))}
                 </div>
               </div>
-            </div>
+            </motion.div>
           </div>
           
           {/* Project details sidebar */}
@@ -536,23 +636,44 @@ export default function ProjectPage({ params }: ProjectPageProps) {
         </div>
         
         {/* Project gallery */}
-        <div className="mt-12">
+        <motion.div 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.5 }}
+          className="mt-12"
+        >
           <h2 className="text-2xl font-bold mb-6">Project Gallery</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {project.items.map((item) => (
-              <div key={item.id} className="group relative">
+            {project.items.map((item, idx) => (
+              <motion.div 
+                key={item.id} 
+                className="group relative"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.1 * idx }}
+              >
                 <div className="relative aspect-[4/3] overflow-hidden rounded-md">
-                  <img 
+                  <motion.img 
                     src={item.image} 
                     alt={item.title}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    className="w-full h-full object-cover"
+                    whileHover={{ 
+                      scale: 1.1,
+                      transition: { duration: 0.5 }
+                    }}
+                  />
+                  <motion.div 
+                    className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                    initial={{ opacity: 0 }}
+                    whileHover={{ opacity: 1 }}
+                    transition={{ duration: 0.3 }}
                   />
                 </div>
                 <h3 className="mt-2 font-medium">{item.title}</h3>
-              </div>
+              </motion.div>
             ))}
           </div>
-        </div>
+        </motion.div>
       </div>
       
       <Footer />
