@@ -19,6 +19,27 @@ type ProductSet = {
   images: string[]
 }
 
+// Frame images from frames folder
+const frameImages = [
+  "/home-page/frames/N048080.png",
+  "/home-page/frames/N04075.png",
+  "/home-page/frames/N02075.png",
+  "/home-page/frames/N01075.png",
+  "/home-page/frames/N0875A.png",
+  "/home-page/frames/N0575.png",
+]
+
+// LED module images from LED modules folder
+const ledModuleImages = [
+  "/home-page/led modules/1.png",
+  "/home-page/led modules/2.png",
+  "/home-page/led modules/4.png",
+  "/home-page/led modules/5.png",
+  "/home-page/led modules/6.png",
+  "/home-page/led modules/7.png",
+  "/home-page/led modules/9.png",
+]
+
 // Default images if no productSet is provided
 const defaultImages = [
   "/work/IDA_Starlake/TRC_7559.jpg",
@@ -103,10 +124,31 @@ export default function ThirdElementHpage({ productSet }: ThirdElementHpageProps
     }
   }, [images.length])
 
+  // Randomly select unique frame images
+  const [selectedFrameImages, setSelectedFrameImages] = useState<string[]>([])
+  // Randomly select unique LED module images
+  const [selectedLedImages, setSelectedLedImages] = useState<string[]>([])
+
+  // Initialize selected images on component mount
+  useEffect(() => {
+    // Function to shuffle array and take first n elements
+    const getRandomUniqueImages = (imgArray: string[], count: number) => {
+      const shuffled = [...imgArray].sort(() => 0.5 - Math.random())
+      return shuffled.slice(0, count)
+    }
+
+    // Select unique images from each folder
+    setSelectedFrameImages(getRandomUniqueImages(frameImages, 4))
+    setSelectedLedImages(getRandomUniqueImages(ledModuleImages, 4))
+  }, [])
+
   // Helper function to get previous, current, and next image indices
-  const getImageIndices = (currentPosition: number) => {
-    const prev = (currentPosition - 1 + images.length) % images.length
-    const next = (currentPosition + 1) % images.length
+  const getImageIndices = (currentPosition: number, isLedModule: boolean) => {
+    const imagesArray = isLedModule ? selectedLedImages : selectedFrameImages
+    if (imagesArray.length === 0) return { prev: 0, current: 0, next: 0 }
+    
+    const prev = (currentPosition - 1 + imagesArray.length) % imagesArray.length
+    const next = (currentPosition + 1) % imagesArray.length
     return { prev, current: currentPosition, next }
   }
 
@@ -201,8 +243,12 @@ export default function ThirdElementHpage({ productSet }: ThirdElementHpageProps
                 <div className="flex space-x-5 px-2 min-w-max">
                   {[0, 1, 2, 3].map((colIndex) => {
                     const currentPos = currentPositions[colIndex];
-                    const { prev, current, next } = getImageIndices(currentPos);
-                    const isReversed = colIndex % 2 === 1;
+                    const isLedModule = colIndex % 2 === 1; // Column 2 and 4 (index 1 and 3) are LED modules
+                    const { prev, current, next } = getImageIndices(currentPos % (isLedModule ? selectedLedImages.length : selectedFrameImages.length), isLedModule);
+                    const isReversed = colIndex % 2 === 1; // Columns 2 and 4 (index 1 and 3) will be reversed
+                    
+                    // Select the appropriate image array based on column
+                    const imageArray = isLedModule ? selectedLedImages : selectedFrameImages;
                     
                     return (
                       <div key={colIndex} className="flex-shrink-0 flex flex-col items-center h-[250px] justify-center w-[140px]">
@@ -226,13 +272,15 @@ export default function ThirdElementHpage({ productSet }: ThirdElementHpageProps
                               transition={{ duration: 0.5 }}
                               className="w-[50px] h-[50px] mb-2 opacity-60"
                             >
-                              <Image
-                                src={images[prev]}
-                                alt={`Product Image ${prev}`}
-                                width={50}
-                                height={50}
-                                className="object-contain rounded-lg"
-                              />
+                              {imageArray.length > 0 && (
+                                <Image
+                                  src={imageArray[prev]}
+                                  alt={`Product Image ${prev}`}
+                                  width={50}
+                                  height={50}
+                                  className="object-contain rounded-lg"
+                                />
+                              )}
                             </motion.div>
                           </AnimatePresence>
 
@@ -246,14 +294,16 @@ export default function ThirdElementHpage({ productSet }: ThirdElementHpageProps
                               transition={{ duration: 0.5 }}
                               className="w-[100px] h-[100px] my-2 z-10 relative"
                             >
-                              <Image
-                                src={images[current]}
-                                alt={`Product Image ${current}`}
-                                width={100}
-                                height={100}
-                                className="object-contain rounded-lg"
-                                style={{ filter: "drop-shadow(0 0 8px rgba(255,255,255,0.2))" }}
-                              />
+                              {imageArray.length > 0 && (
+                                <Image
+                                  src={imageArray[current]}
+                                  alt={`Product Image ${current}`}
+                                  width={100}
+                                  height={100}
+                                  className="object-contain rounded-lg"
+                                  style={{ filter: "drop-shadow(0 0 8px rgba(255,255,255,0.2))" }}
+                                />
+                              )}
                             </motion.div>
                           </AnimatePresence>
 
@@ -276,13 +326,15 @@ export default function ThirdElementHpage({ productSet }: ThirdElementHpageProps
                               transition={{ duration: 0.5 }}
                               className="w-[50px] h-[50px] mt-2 opacity-60"
                             >
-                              <Image
-                                src={images[next]}
-                                alt={`Product Image ${next}`}
-                                width={50}
-                                height={50}
-                                className="object-contain rounded-lg"
-                              />
+                              {imageArray.length > 0 && (
+                                <Image
+                                  src={imageArray[next]}
+                                  alt={`Product Image ${next}`}
+                                  width={50}
+                                  height={50}
+                                  className="object-contain rounded-lg"
+                                />
+                              )}
                             </motion.div>
                           </AnimatePresence>
                         </div>
@@ -413,10 +465,10 @@ export default function ThirdElementHpage({ productSet }: ThirdElementHpageProps
               ))}
           </motion.div>
 
-          {/* Content container - Changed to grid with 2 columns for desktop */}
-          <div className="relative z-10 grid md:grid-cols-2 min-h-screen">
-            {/* Left section with text - Added flex-col and justify-center for vertical alignment */}
-            <div className="flex flex-col justify-center px-6 py-16 md:py-12">
+          {/* Content container - Changed to grid with custom column sizing for 30/70 split */}
+          <div className="relative z-10 grid md:grid-cols-10 min-h-screen">
+            {/* Left section with text - Now takes 3/10 columns (30%) */}
+            <div className="md:col-span-3 flex flex-col justify-center px-6 py-16 md:py-12">
               {/* Small header text with reveal animation */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -433,9 +485,6 @@ export default function ThirdElementHpage({ productSet }: ThirdElementHpageProps
               <div className="mb-4">
                 <AnimatedTitle>
                   <span className="text-3xl sm:text-4xl md:text-5xl block text-white">Downlight</span>
-                  <span className="text-3xl sm:text-4xl md:text-5xl font-extrabold italic text-white">
-                    {productSet?.title || "IDA"}
-                  </span>
                   <span className="text-3xl sm:text-4xl md:text-5xl text-white"> Collection.</span>
                 </AnimatedTitle>
               </div>
@@ -479,16 +528,20 @@ export default function ThirdElementHpage({ productSet }: ThirdElementHpageProps
               </motion.div>
             </div>
 
-            {/* Right section with image carousel - Three images visible with center one larger */}
-            <div className="flex items-center justify-center py-8 px-4 md:px-8">
-              <div className="grid grid-cols-4 gap-6 w-full max-w-xl mx-auto">
+            {/* Right section with image carousel - Now takes 7/10 columns (70%) */}
+            <div className="md:col-span-7 flex items-center justify-center py-8 px-4 md:px-8">
+              <div className="grid grid-cols-4 gap-4 w-full max-w-[550px] mx-auto">
                 {[0, 1, 2, 3].map((colIndex) => {
                   const currentPos = currentPositions[colIndex];
-                  const { prev, current, next } = getImageIndices(currentPos);
-                  const isReversed = colIndex % 2 === 1; // Cột 1 và 3 (index 1 và 3) sẽ bị đảo ngược
+                  const isLedModule = colIndex % 2 === 1; // Column 2 and 4 (index 1 and 3) are LED modules
+                  const { prev, current, next } = getImageIndices(currentPos % (isLedModule ? selectedLedImages.length : selectedFrameImages.length), isLedModule);
+                  const isReversed = colIndex % 2 === 1; // Columns 2 and 4 (index 1 and 3) will be reversed
+                  
+                  // Select the appropriate image array based on column
+                  const imageArray = isLedModule ? selectedLedImages : selectedFrameImages;
                   
                   return (
-                    <div key={colIndex} className="flex flex-col items-center h-[280px] justify-center">
+                    <div key={colIndex} className="flex flex-col items-center h-[240px] justify-center">
                       <div className="relative h-full flex flex-col items-center justify-center">
                         {/* Previous image (smaller) */}
                         <AnimatePresence mode="popLayout">
@@ -507,15 +560,17 @@ export default function ThirdElementHpage({ productSet }: ThirdElementHpageProps
                               y: isReversed ? 20 : -20 
                             }}
                             transition={{ duration: 0.5 }}
-                            className="w-[70px] h-[70px] mb-2 opacity-60"
+                            className="w-[60px] h-[60px] mb-2 opacity-60"
                           >
-                            <Image
-                              src={images[prev]}
-                              alt={`Product Image ${prev}`}
-                              width={70}
-                              height={70}
-                              className="object-contain rounded-lg"
-                            />
+                            {imageArray.length > 0 && (
+                              <Image
+                                src={imageArray[prev]}
+                                alt={`Product Image ${prev}`}
+                                width={60}
+                                height={60}
+                                className="object-contain rounded-lg"
+                              />
+                            )}
                           </motion.div>
                         </AnimatePresence>
 
@@ -527,16 +582,18 @@ export default function ThirdElementHpage({ productSet }: ThirdElementHpageProps
                             animate={{ opacity: 1, scale: 1 }}
                             exit={{ opacity: 0, scale: 0.8 }}
                             transition={{ duration: 0.5 }}
-                            className="w-[200px] h-[200px] my-2 z-10 relative"
+                            className="w-[170px] h-[170px] my-2 z-10 relative"
                           >
-                            <Image
-                              src={images[current]}
-                              alt={`Product Image ${current}`}
-                              width={200}
-                              height={200}
-                              className="object-contain rounded-lg"
-                              style={{ filter: "drop-shadow(0 0 8px rgba(255,255,255,0.2))" }}
-                            />
+                            {imageArray.length > 0 && (
+                              <Image
+                                src={imageArray[current]}
+                                alt={`Product Image ${current}`}
+                                width={170}
+                                height={170}
+                                className="object-contain rounded-lg"
+                                style={{ filter: "drop-shadow(0 0 8px rgba(255,255,255,0.2))" }}
+                              />
+                            )}
                           </motion.div>
                         </AnimatePresence>
 
@@ -557,15 +614,17 @@ export default function ThirdElementHpage({ productSet }: ThirdElementHpageProps
                               y: isReversed ? -20 : 20 
                             }}
                             transition={{ duration: 0.5 }}
-                            className="w-[70px] h-[70px] mt-2 opacity-60"
+                            className="w-[60px] h-[60px] mt-2 opacity-60"
                           >
-                            <Image
-                              src={images[next]}
-                              alt={`Product Image ${next}`}
-                              width={70}
-                              height={70}
-                              className="object-contain rounded-lg"
-                            />
+                            {imageArray.length > 0 && (
+                              <Image
+                                src={imageArray[next]}
+                                alt={`Product Image ${next}`}
+                                width={60}
+                                height={60}
+                                className="object-contain rounded-lg"
+                              />
+                            )}
                           </motion.div>
                         </AnimatePresence>
                       </div>

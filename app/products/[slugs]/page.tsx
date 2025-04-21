@@ -234,10 +234,442 @@ const getAllProducts = (): Product[] => {
         { name: "PRO.S60 (S)", image: "/collections/Downlight/IDA0075.JPG" },
       ],
       category: "downlight"
+    },
+    // Đèn outdoor mới cập nhật
+    {
+      id: 16,
+      title: "CP20183",
+      slug: "cp20183",
+      image: "/collections/out-door/CP20183/1.jpg",
+      price: 1950000,
+      description: "Đèn trụ sân vườn CP20183 với thiết kế hiện đại, thân đèn làm từ hợp kim nhôm cao cấp với lớp sơn tĩnh điện Sand black. Với kích thước Ø150mm và chiều cao 600mm, đèn mang đến vẻ đẹp sang trọng cho không gian ngoại thất.",
+      mainImage: "/collections/out-door/CP20183/1.jpg",
+      variants: [
+        { name: "Góc nhìn 1", image: "/collections/out-door/CP20183/1.jpg" },
+        { name: "Góc nhìn 2", image: "/collections/out-door/CP20183/2.jpg" },
+        { name: "Góc nhìn 3", image: "/collections/out-door/CP20183/3.jpg" }
+      ],
+      category: "outdoor"
+    },
+    {
+      id: 17,
+      title: "CP20184",
+      slug: "cp20184",
+      image: "/collections/out-door/CP20184/6.jpg",
+      price: 1850000,
+      description: "Đèn trụ sân vườn CP20184 với kiểu dáng tinh tế, kích thước Ø200*400mm, công suất 7W và sử dụng chip LED COB. Thân đèn làm từ nhôm nguyên khối sơn tĩnh điện, chống oxy hóa, thích hợp cho điều kiện thời tiết khắc nghiệt.",
+      mainImage: "/collections/out-door/CP20184/6.jpg",
+      variants: [
+        { name: "Góc nhìn 1", image: "/collections/out-door/CP20184/6.jpg" },
+        { name: "Góc nhìn 2", image: "/collections/out-door/CP20184/2.jpg" },
+        { name: "Góc nhìn 3", image: "/collections/out-door/CP20184/3.jpg" },
+        { name: "Góc nhìn 4", image: "/collections/out-door/CP20184/4.jpg" }
+      ],
+      category: "outdoor"
+    },
+    {
+      id: 18,
+      title: "CP20188",
+      slug: "cp20188",
+      image: "/collections/out-door/CP20188/4.jpg",
+      price: 2100000,
+      description: "Đèn trụ sân vườn CP20188 với thiết kế độc đáo, kích thước 160*55*600mm và công suất 10W. Đèn sử dụng chip LED COB với nhiệt độ màu 3000K, tạo ánh sáng ấm áp cho khu vực sân vườn vào buổi tối.",
+      mainImage: "/collections/out-door/CP20188/4.jpg",
+      variants: [
+        { name: "Góc nhìn 1", image: "/collections/out-door/CP20188/4.jpg" },
+        { name: "Góc nhìn 2", image: "/collections/out-door/CP20188/1.jpg" },
+        { name: "Góc nhìn 3", image: "/collections/out-door/CP20188/2.jpg" },
+        { name: "Góc nhìn 4", image: "/collections/out-door/CP20188/3.jpg" }
+      ],
+      category: "outdoor"
+    },
+    {
+      id: 19,
+      title: "CP20196",
+      slug: "cp20196",
+      image: "/collections/out-door/CP20196/6.jpg",
+      price: 2250000,
+      description: "Đèn trụ sân vườn CP20196 có kích thước 150*150*600mm, công suất 7W làm từ nhôm sơn tĩnh điện màu đen cát. Đèn sử dụng chip LED COB với nhiệt độ màu 3000K, mang đến ánh sáng ấm cúng và sang trọng cho không gian ngoại thất.",
+      mainImage: "/collections/out-door/CP20196/6.jpg",
+      variants: [
+        { name: "Góc nhìn 1", image: "/collections/out-door/CP20196/6.jpg" },
+        { name: "Góc nhìn 2", image: "/collections/out-door/CP20196/2.jpg" },
+        { name: "Góc nhìn 3", image: "/collections/out-door/CP20196/3.jpg" },
+        { name: "Góc nhìn 4", image: "/collections/out-door/CP20196/4.jpg" }
+      ],
+      category: "outdoor"
+    },
+    {
+      id: 20,
+      title: "CP20199",
+      slug: "cp20199",
+      image: "/collections/out-door/CP20199/2.jpg",
+      price: 1980000,
+      description: "Đèn trụ sân vườn CP20199 với kích thước 150*150*600mm, công suất 10W, điện áp 24V. Thân đèn được làm từ hợp kim nhôm sơn tĩnh điện màu đen cát, chống thấm nước và oxy hóa, phù hợp cho không gian ngoại thất.",
+      mainImage: "/collections/out-door/CP20199/2.jpg",
+      variants: [
+        { name: "Góc nhìn 1", image: "/collections/out-door/CP20199/2.jpg" },
+        { name: "Góc nhìn 2", image: "/collections/out-door/CP20199/1.jpg" },
+        { name: "Góc nhìn 3", image: "/collections/out-door/CP20199/3.jpg" },
+        { name: "Góc nhìn ban đêm", image: "/collections/out-door/CP20199/4.jpg" }
+      ],
+      category: "outdoor"
+    },
+    {
+      id: 21,
+      title: "CP20205",
+      slug: "cp20205",
+      image: "/collections/out-door/CP20205/3.jpg",
+      price: 1750000,
+      description: "Đèn trụ sân vườn CP20205 với kích thước nhỏ gọn 100*78mm, chiều cao 600mm phù hợp cho lối đi trong vườn. Công suất 7W với ánh sáng ấm 3000K mang đến không gian ngoại thất sang trọng vào buổi tối.",
+      mainImage: "/collections/out-door/CP20205/3.jpg",
+      variants: [
+        { name: "Góc nhìn 1", image: "/collections/out-door/CP20205/3.jpg" },
+        { name: "Góc nhìn 2", image: "/collections/out-door/CP20205/1.jpg" },
+        { name: "Góc nhìn 3", image: "/collections/out-door/CP20205/2.jpg" },
+        { name: "Góc nhìn ban đêm", image: "/collections/out-door/CP20205/4.jpg" }
+      ],
+      category: "outdoor"
+    },
+    {
+      id: 22,
+      title: "CP20219",
+      slug: "cp20219",
+      image: "/collections/out-door/CP20219/3.jpg",
+      price: 1820000,
+      description: "Đèn trụ sân vườn CP20219 với thiết kế đặc biệt, kích thước 120*40mm và chiều cao 600mm. Công suất 7W với ánh sáng LED COB 3000K tạo hiệu ứng chiếu sáng độc đáo cho không gian sân vườn vào buổi tối.",
+      mainImage: "/collections/out-door/CP20219/3.jpg",
+      variants: [
+        { name: "Góc nhìn 1", image: "/collections/out-door/CP20219/3.jpg" },
+        { name: "Góc nhìn 2", image: "/collections/out-door/CP20219/1.jpg" },
+        { name: "Góc nhìn 3", image: "/collections/out-door/CP20219/2.jpg" },
+        { name: "Góc nhìn ban đêm", image: "/collections/out-door/CP20219/4.jpg" }
+      ],
+      category: "outdoor"
+    },
+    {
+      id: 23,
+      title: "CP201812",
+      slug: "cp201812",
+      image: "/collections/out-door/CP201812/2.jpg",
+      price: 2450000,
+      description: "Đèn trụ sân vườn CP201812 với thiết kế sang trọng, kích thước Ø140mm và chiều cao 600mm. Đèn sử dụng 2 bóng LED COB 8W, tổng công suất 16W, mang đến hiệu ứng chiếu sáng hai hướng độc đáo cho không gian ngoại thất.",
+      mainImage: "/collections/out-door/CP201812/2.jpg",
+      variants: [
+        { name: "Góc nhìn 1", image: "/collections/out-door/CP201812/2.jpg" },
+        { name: "Góc nhìn 2", image: "/collections/out-door/CP201812/1.jpg" },
+        { name: "Góc nhìn 3", image: "/collections/out-door/CP201812/3.jpg" },
+        { name: "Góc nhìn ban đêm", image: "/collections/out-door/CP201812/4.jpg" }
+      ],
+      category: "outdoor"
+    },
+    {
+      id: 24,
+      title: "CP202112",
+      slug: "cp202112",
+      image: "/collections/out-door/CP202112/4.jpg",
+      price: 2400000,
+      description: "Đèn trụ sân vườn CP202112 với thiết kế hiện đại, kích thước Ø140mm và chiều cao 600mm. Đèn sử dụng công nghệ LED tiên tiến với công suất 12W, độ hoàn màu CRI>80 và nhiệt độ màu 3000K, tạo ánh sáng ấm áp cho không gian ngoại thất.",
+      mainImage: "/collections/out-door/CP202112/4.jpg",
+      variants: [
+        { name: "Góc nhìn ban đêm", image: "/collections/out-door/CP202112/4.jpg" },
+        { name: "Góc nhìn 1", image: "/collections/out-door/CP202112/1.jpg" },
+        { name: "Góc nhìn 2", image: "/collections/out-door/CP202112/2.jpg" },
+        { name: "Góc nhìn 3", image: "/collections/out-door/CP202112/3.jpg" }
+      ],
+      category: "outdoor"
+    },
+    {
+      id: 25,
+      title: "CP202113",
+      slug: "cp202113",
+      image: "/collections/out-door/CP202113/2.jpg",
+      price: 1800000,
+      description: "Đèn trụ sân vườn CP202113 với thiết kế hình khối độc đáo, kích thước 160*55*600mm. Đèn sử dụng chip LED COB công suất 16W, nhiệt độ màu 3000K mang đến ánh sáng ấm áp và sang trọng cho không gian ngoại thất vào buổi tối.",
+      mainImage: "/collections/out-door/CP202113/2.jpg",
+      variants: [
+        { name: "Góc nhìn 1", image: "/collections/out-door/CP202113/2.jpg" },
+        { name: "Góc nhìn 2", image: "/collections/out-door/CP202113/1.jpg" },
+        { name: "Góc nhìn 3", image: "/collections/out-door/CP202113/3.jpg" },
+        { name: "Góc nhìn ban đêm", image: "/collections/out-door/CP202113/4.jpg" }
+      ],
+      category: "outdoor"
+    },
+    {
+      id: 26,
+      title: "CP202455",
+      slug: "cp202455",
+      image: "/products/outdoor/garden-light-5.png",
+      price: 4200000,
+      description: "Đèn trang trí sân vườn CP202455 với kiểu dáng đèn chùm hiện đại, kích thước Ø200*800mm. Với công suất 18W, ánh sáng LED COB 3000K, đèn mang đến hiệu ứng chiếu sáng trang trí độc đáo cho không gian ngoại thất cao cấp.",
+      mainImage: "/products/outdoor/garden-light-5.png",
+      variants: [
+        { name: "Mẫu tiêu chuẩn", image: "/products/outdoor/garden-light-5.png" },
+        { name: "Ứng dụng 1", image: "/products/outdoor/garden-light-1.png" },
+        { name: "Ứng dụng 2", image: "/products/outdoor/garden-light-2.png" },
+        { name: "Ứng dụng 3", image: "/products/outdoor/garden-light-3.png" }
+      ],
+      category: "outdoor"
+    },
+    {
+      id: 27,
+      title: "CP202456",
+      slug: "cp202456",
+      image: "/collections/out-door/CP202456/4.jpg",
+      price: 2900000,
+      description: "Đèn cột sân vườn CP202456 với kích thước 120*120*1000mm, công suất 24W và điện áp 220V. Đèn sử dụng chip LED COB với nhiệt độ màu 3000K, thân đèn làm từ hợp kim nhôm sơn tĩnh điện màu xám đen, mang đến vẻ đẹp hiện đại cho không gian ngoại thất.",
+      mainImage: "/collections/out-door/CP202456/4.jpg",
+      variants: [
+        { name: "Góc nhìn ban đêm", image: "/collections/out-door/CP202456/4.jpg" },
+        { name: "Góc nhìn 1", image: "/collections/out-door/CP202456/1.jpg" },
+        { name: "Góc nhìn 2", image: "/collections/out-door/CP202456/2.jpg" },
+        { name: "Góc nhìn 3", image: "/collections/out-door/CP202456/3.jpg" }
+      ],
+      category: "outdoor"
     }
   ];
   
-  return productData;
+  // Add luxury decorative lighting products
+  const decorativeLightProducts = [
+    {
+      id: 100,
+      title: "ĐÈN CHÙM BẠCH QUẢ GINGKO",
+      slug: "luxury-chandelier-fp",
+      image: "/collections/chad/ĐÈN CHÙM BẠCH QUẢ GINGKO/ĐÈN CHÙM BẠCH QUẢ GINGKO/1.jpg",
+      price: 32500000,
+      description: "Đèn chùm Bạch Quả Gingko với thiết kế tinh tế lấy cảm hứng từ lá cây bạch quả, được làm từ chất liệu nhôm mạ vàng và acrylic cao cấp. Ánh sáng dịu nhẹ tỏa ra từ những chiếc lá tạo nên không gian ấm cúng và sang trọng.",
+      mainImage: "/collections/chad/ĐÈN CHÙM BẠCH QUẢ GINGKO/ĐÈN CHÙM BẠCH QUẢ GINGKO/1.jpg",
+      variants: [
+        { name: "Góc nhìn 1", image: "/collections/chad/ĐÈN CHÙM BẠCH QUẢ GINGKO/ĐÈN CHÙM BẠCH QUẢ GINGKO/1.jpg" },
+        { name: "Góc nhìn 2", image: "/collections/chad/ĐÈN CHÙM BẠCH QUẢ GINGKO/ĐÈN CHÙM BẠCH QUẢ GINGKO/2.jpg" },
+        { name: "Góc nhìn 3", image: "/collections/chad/ĐÈN CHÙM BẠCH QUẢ GINGKO/ĐÈN CHÙM BẠCH QUẢ GINGKO/3.jpg" },
+        { name: "Góc nhìn 4", image: "/collections/chad/ĐÈN CHÙM BẠCH QUẢ GINGKO/ĐÈN CHÙM BẠCH QUẢ GINGKO/4.jpg" },
+        { name: "Góc nhìn 5", image: "/collections/chad/ĐÈN CHÙM BẠCH QUẢ GINGKO/ĐÈN CHÙM BẠCH QUẢ GINGKO/5.jpg" },
+        { name: "Góc nhìn 6", image: "/collections/chad/ĐÈN CHÙM BẠCH QUẢ GINGKO/ĐÈN CHÙM BẠCH QUẢ GINGKO/6.jpg" }
+      ],
+      category: "decorative"
+    },
+    {
+      id: 101,
+      title: "ĐÈN CHÙM BẰNG ĐỒNG CỔ ĐIỂN",
+      slug: "luxury-chandelier-gcb",
+      image: "/collections/chad/ĐÈN CHÙM BẰNG ĐỒNG CỔ ĐIỂN/ĐÈN CHÙM BẰNG ĐỒNG CỔ ĐIỂN/1.jpg",
+      price: 42800000,
+      description: "Đèn chùm bằng đồng cổ điển là tác phẩm nghệ thuật đỉnh cao, kết hợp giữa chất liệu đồng mạ vàng và pha lê crystal K9 cao cấp. Thiết kế sang trọng theo phong cách châu Âu cổ điển, mang đến vẻ đẹp vượt thời gian cho không gian sống.",
+      mainImage: "/collections/chad/ĐÈN CHÙM BẰNG ĐỒNG CỔ ĐIỂN/ĐÈN CHÙM BẰNG ĐỒNG CỔ ĐIỂN/1.jpg",
+      variants: [
+        { name: "Góc nhìn 1", image: "/collections/chad/ĐÈN CHÙM BẰNG ĐỒNG CỔ ĐIỂN/ĐÈN CHÙM BẰNG ĐỒNG CỔ ĐIỂN/1.jpg" },
+        { name: "Góc nhìn 2", image: "/collections/chad/ĐÈN CHÙM BẰNG ĐỒNG CỔ ĐIỂN/ĐÈN CHÙM BẰNG ĐỒNG CỔ ĐIỂN/2.jpg" },
+        { name: "Góc nhìn 3", image: "/collections/chad/ĐÈN CHÙM BẰNG ĐỒNG CỔ ĐIỂN/ĐÈN CHÙM BẰNG ĐỒNG CỔ ĐIỂN/3.jpg" },
+        { name: "Góc nhìn 4", image: "/collections/chad/ĐÈN CHÙM BẰNG ĐỒNG CỔ ĐIỂN/ĐÈN CHÙM BẰNG ĐỒNG CỔ ĐIỂN/4.jpg" },
+        { name: "Góc nhìn 5", image: "/collections/chad/ĐÈN CHÙM BẰNG ĐỒNG CỔ ĐIỂN/ĐÈN CHÙM BẰNG ĐỒNG CỔ ĐIỂN/5.jpg" },
+        { name: "Góc nhìn 6", image: "/collections/chad/ĐÈN CHÙM BẰNG ĐỒNG CỔ ĐIỂN/ĐÈN CHÙM BẰNG ĐỒNG CỔ ĐIỂN/6.jpg" }
+      ],
+      category: "decorative"
+    },
+    {
+      id: 102,
+      title: "ĐÈN CHÙM BIJOU",
+      slug: "luxury-chandelier-gr",
+      image: "/collections/chad/ĐÈN CHÙM BIJOU/ĐÈN CHÙM BIJOU/1.jpg",
+      price: 28600000,
+      description: "Đèn chùm Bijou là tác phẩm nghệ thuật ánh sáng hiện đại với thiết kế hình vòng tròn chồng lên nhau tạo hiệu ứng độc đáo. Chất liệu thép không gỉ mạ PVD vàng sang trọng với hai tầng đèn, kết hợp công nghệ LED tích hợp có thể điều chỉnh nhiệt độ màu.",
+      mainImage: "/collections/chad/ĐÈN CHÙM BIJOU/ĐÈN CHÙM BIJOU/1.jpg",
+      variants: [
+        { name: "Góc nhìn 1", image: "/collections/chad/ĐÈN CHÙM BIJOU/ĐÈN CHÙM BIJOU/1.jpg" },
+        { name: "Góc nhìn 2", image: "/collections/chad/ĐÈN CHÙM BIJOU/ĐÈN CHÙM BIJOU/2.jpg" },
+        { name: "Góc nhìn 3", image: "/collections/chad/ĐÈN CHÙM BIJOU/ĐÈN CHÙM BIJOU/3.jpg" },
+        { name: "Góc nhìn 4", image: "/collections/chad/ĐÈN CHÙM BIJOU/ĐÈN CHÙM BIJOU/4.jpg" },
+        { name: "Góc nhìn 5", image: "/collections/chad/ĐÈN CHÙM BIJOU/ĐÈN CHÙM BIJOU/5.jpg" }
+      ],
+      category: "decorative"
+    },
+    {
+      id: 103,
+      title: "ĐÈN CHÙM HOA BAY",
+      slug: "luxury-chandelier-cw",
+      image: "/collections/chad/ĐÈN CHÙM HOA BAY/ĐÈN CHÙM HOA BAY/1.jpg",
+      price: 58900000,
+      description: "Đèn chùm Hoa Bay là tác phẩm nghệ thuật tinh xảo với thiết kế các cánh hoa lơ lửng tạo cảm giác như một thác nước pha lê đang đổ xuống. Chất liệu crystal cao cấp kết hợp với thép không gỉ mạ vàng tạo nên vẻ đẹp lộng lẫy, sang trọng.",
+      mainImage: "/collections/chad/ĐÈN CHÙM HOA BAY/ĐÈN CHÙM HOA BAY/1.jpg",
+      variants: [
+        { name: "Góc nhìn 1", image: "/collections/chad/ĐÈN CHÙM HOA BAY/ĐÈN CHÙM HOA BAY/1.jpg" },
+        { name: "Góc nhìn 2", image: "/collections/chad/ĐÈN CHÙM HOA BAY/ĐÈN CHÙM HOA BAY/2.jpg" },
+        { name: "Góc nhìn 3", image: "/collections/chad/ĐÈN CHÙM HOA BAY/ĐÈN CHÙM HOA BAY/3.jpg" },
+        { name: "Góc nhìn 4", image: "/collections/chad/ĐÈN CHÙM HOA BAY/ĐÈN CHÙM HOA BAY/4.jpg" },
+        { name: "Góc nhìn 5", image: "/collections/chad/ĐÈN CHÙM HOA BAY/ĐÈN CHÙM HOA BAY/5.jpg" },
+        { name: "Góc nhìn 6", image: "/collections/chad/ĐÈN CHÙM HOA BAY/ĐÈN CHÙM HOA BAY/6.jpg" },
+        { name: "Góc nhìn 7", image: "/collections/chad/ĐÈN CHÙM HOA BAY/ĐÈN CHÙM HOA BAY/7.jpg" },
+        { name: "Góc nhìn 8", image: "/collections/chad/ĐÈN CHÙM HOA BAY/ĐÈN CHÙM HOA BAY/8.jpg" },
+        { name: "Góc nhìn 9", image: "/collections/chad/ĐÈN CHÙM HOA BAY/ĐÈN CHÙM HOA BAY/9.jpg" },
+        { name: "Góc nhìn 10", image: "/collections/chad/ĐÈN CHÙM HOA BAY/ĐÈN CHÙM HOA BAY/10.jpg" },
+        { name: "Góc nhìn 11", image: "/collections/chad/ĐÈN CHÙM HOA BAY/ĐÈN CHÙM HOA BAY/11.jpg" },
+        { name: "Góc nhìn 12", image: "/collections/chad/ĐÈN CHÙM HOA BAY/ĐÈN CHÙM HOA BAY/12.jpg" },
+        { name: "Góc nhìn 13", image: "/collections/chad/ĐÈN CHÙM HOA BAY/ĐÈN CHÙM HOA BAY/13.jpg" }
+      ],
+      category: "decorative"
+    },
+    {
+      id: 104,
+      title: "ĐÈN CHÙM LÁ PHONG",
+      slug: "luxury-chandelier-be",
+      image: "/collections/chad/ĐÈN CHÙM LÁ PHONG/ĐÈN CHÙM LÁ PHONG/1.jpg",
+      price: 36700000,
+      description: "Đèn chùm Lá Phong là tác phẩm nghệ thuật lấy cảm hứng từ vẻ đẹp của lá phong mùa thu. Được chế tác từ đồng thau và thủy tinh pha lê cao cấp, đèn mang đến vẻ đẹp tự nhiên và ấm áp cho không gian sống.",
+      mainImage: "/collections/chad/ĐÈN CHÙM LÁ PHONG/ĐÈN CHÙM LÁ PHONG/1.jpg",
+      variants: [
+        { name: "Góc nhìn 1", image: "/collections/chad/ĐÈN CHÙM LÁ PHONG/ĐÈN CHÙM LÁ PHONG/1.jpg" },
+        { name: "Góc nhìn 2", image: "/collections/chad/ĐÈN CHÙM LÁ PHONG/ĐÈN CHÙM LÁ PHONG/2.jpg" },
+        { name: "Góc nhìn 3", image: "/collections/chad/ĐÈN CHÙM LÁ PHONG/ĐÈN CHÙM LÁ PHONG/3.jpg" },
+        { name: "Góc nhìn 4", image: "/collections/chad/ĐÈN CHÙM LÁ PHONG/ĐÈN CHÙM LÁ PHONG/4.jpg" },
+        { name: "Góc nhìn 5", image: "/collections/chad/ĐÈN CHÙM LÁ PHONG/ĐÈN CHÙM LÁ PHONG/5.jpg" }
+      ],
+      category: "decorative"
+    },
+    {
+      id: 105,
+      title: "ĐÈN CHÙM SOFIA",
+      slug: "luxury-chandelier-cr",
+      image: "/collections/chad/ĐÈN CHÙM SOFIA/ĐÈN CHÙM SOFIA/1.jpg",
+      price: 63500000,
+      description: "Đèn chùm Sofia là tác phẩm nghệ thuật đỉnh cao với thiết kế hiện đại, lấy cảm hứng từ những giọt mưa pha lê. Chất liệu crystal cao cấp kết hợp với thép không gỉ mạ vàng, tích hợp công nghệ LED có thể điều chỉnh nhiệt độ màu từ 3000K đến 6000K.",
+      mainImage: "/collections/chad/ĐÈN CHÙM SOFIA/ĐÈN CHÙM SOFIA/1.jpg",
+      variants: [
+        { name: "Góc nhìn 1", image: "/collections/chad/ĐÈN CHÙM SOFIA/ĐÈN CHÙM SOFIA/1.jpg" },
+        { name: "Góc nhìn 2", image: "/collections/chad/ĐÈN CHÙM SOFIA/ĐÈN CHÙM SOFIA/2.jpg" },
+        { name: "Góc nhìn 3", image: "/collections/chad/ĐÈN CHÙM SOFIA/ĐÈN CHÙM SOFIA/3.jpg" },
+        { name: "Góc nhìn 4", image: "/collections/chad/ĐÈN CHÙM SOFIA/ĐÈN CHÙM SOFIA/4.jpg" },
+        { name: "Góc nhìn 5", image: "/collections/chad/ĐÈN CHÙM SOFIA/ĐÈN CHÙM SOFIA/5.jpg" },
+        { name: "Góc nhìn 6", image: "/collections/chad/ĐÈN CHÙM SOFIA/ĐÈN CHÙM SOFIA/6.jpg" },
+        { name: "Góc nhìn 7", image: "/collections/chad/ĐÈN CHÙM SOFIA/ĐÈN CHÙM SOFIA/7.jpg" },
+        { name: "Góc nhìn 8", image: "/collections/chad/ĐÈN CHÙM SOFIA/ĐÈN CHÙM SOFIA/8.jpg" },
+        { name: "Góc nhìn 9", image: "/collections/chad/ĐÈN CHÙM SOFIA/ĐÈN CHÙM SOFIA/9.jpg" },
+        { name: "Góc nhìn 10", image: "/collections/chad/ĐÈN CHÙM SOFIA/ĐÈN CHÙM SOFIA/10.jpg" },
+        { name: "Góc nhìn 11", image: "/collections/chad/ĐÈN CHÙM SOFIA/ĐÈN CHÙM SOFIA/11.jpg" }
+      ],
+      category: "decorative"
+    },
+    {
+      id: 106,
+      title: "ĐÈN CHÙM TRÒN QUẢ CẦU PHA LÊ",
+      slug: "luxury-chandelier-ml",
+      image: "/collections/chad/ĐÈN CHÙM TRÒN QUẢ CẦU PHA LÊ/ĐÈN CHÙM TRÒN QUẢ CẦU PHA LÊ/1.jpg",
+      price: 47800000,
+      description: "Đèn chùm tròn quả cầu pha lê là tác phẩm nghệ thuật ánh sáng hiện đại với thiết kế hình tròn quả cầu pha lê lấp lánh. Được chế tác từ đồng mạ vàng và acrylic cao cấp, đèn mang đến không gian sống sang trọng và đẳng cấp.",
+      mainImage: "/collections/chad/ĐÈN CHÙM TRÒN QUẢ CẦU PHA LÊ/ĐÈN CHÙM TRÒN QUẢ CẦU PHA LÊ/1.jpg",
+      variants: [
+        { name: "Góc nhìn 1", image: "/collections/chad/ĐÈN CHÙM TRÒN QUẢ CẦU PHA LÊ/ĐÈN CHÙM TRÒN QUẢ CẦU PHA LÊ/1.jpg" },
+        { name: "Góc nhìn 2", image: "/collections/chad/ĐÈN CHÙM TRÒN QUẢ CẦU PHA LÊ/ĐÈN CHÙM TRÒN QUẢ CẦU PHA LÊ/2.jpg" },
+        { name: "Góc nhìn 3", image: "/collections/chad/ĐÈN CHÙM TRÒN QUẢ CẦU PHA LÊ/ĐÈN CHÙM TRÒN QUẢ CẦU PHA LÊ/3.jpg" },
+        { name: "Góc nhìn 4", image: "/collections/chad/ĐÈN CHÙM TRÒN QUẢ CẦU PHA LÊ/ĐÈN CHÙM TRÒN QUẢ CẦU PHA LÊ/4.jpg" },
+        { name: "Góc nhìn 5", image: "/collections/chad/ĐÈN CHÙM TRÒN QUẢ CẦU PHA LÊ/ĐÈN CHÙM TRÒN QUẢ CẦU PHA LÊ/5.jpg" },
+        { name: "Góc nhìn 6", image: "/collections/chad/ĐÈN CHÙM TRÒN QUẢ CẦU PHA LÊ/ĐÈN CHÙM TRÒN QUẢ CẦU PHA LÊ/6.jpg" }
+      ],
+      category: "decorative"
+    },
+    {
+      id: 107,
+      title: "ĐÈN CIRCULAR",
+      slug: "luxury-chandelier-mc",
+      image: "/collections/chad/ĐÈN CIRCULAR/ĐÈN CIRCULAR/1.jpg",
+      price: 26900000,
+      description: "Đèn Circular là tác phẩm nghệ thuật ánh sáng hiện đại với thiết kế hình tròn tối giản. Được chế tác từ nhôm sơn tĩnh điện cao cấp với công nghệ LED tích hợp, đèn cho phép điều chỉnh nhiệt độ màu từ 3000K đến 6000K, mang đến không gian sống hiện đại và tinh tế.",
+      mainImage: "/collections/chad/ĐÈN CIRCULAR/ĐÈN CIRCULAR/1.jpg",
+      variants: [
+        { name: "Góc nhìn 1", image: "/collections/chad/ĐÈN CIRCULAR/ĐÈN CIRCULAR/1.jpg" },
+        { name: "Góc nhìn 2", image: "/collections/chad/ĐÈN CIRCULAR/ĐÈN CIRCULAR/2.jpg" },
+        { name: "Góc nhìn 3", image: "/collections/chad/ĐÈN CIRCULAR/ĐÈN CIRCULAR/3.jpg" },
+        { name: "Góc nhìn 4", image: "/collections/chad/ĐÈN CIRCULAR/ĐÈN CIRCULAR/4.jpg" },
+        { name: "Góc nhìn 5", image: "/collections/chad/ĐÈN CIRCULAR/ĐÈN CIRCULAR/5.jpg" },
+        { name: "Góc nhìn 6", image: "/collections/chad/ĐÈN CIRCULAR/ĐÈN CIRCULAR/6.jpg" }
+      ],
+      category: "decorative"
+    },
+    {
+      id: 108,
+      title: "ĐÈN CHÙM MIRA",
+      slug: "luxury-pendant-fb",
+      image: "/collections/chad/ĐÈN CHÙM MIRA/1.jpg",
+      price: 48500000,
+      description: "Đèn chùm Mira là tác phẩm nghệ thuật ánh sáng hiện đại với thiết kế độc đáo. Được chế tác từ thép không gỉ mạ vàng và acrylic cao cấp, đèn tạo ra hiệu ứng ánh sáng tinh tế, mang đến không gian sống sang trọng và đẳng cấp.",
+      mainImage: "/collections/chad/ĐÈN CHÙM MIRA/1.jpg",
+      variants: [
+        { name: "Góc nhìn 1", image: "/collections/chad/ĐÈN CHÙM MIRA/1.jpg" },
+        { name: "Góc nhìn 2", image: "/collections/chad/ĐÈN CHÙM MIRA/2.jpg" },
+        { name: "Góc nhìn 3", image: "/collections/chad/ĐÈN CHÙM MIRA/3.jpg" },
+        { name: "Góc nhìn 4", image: "/collections/chad/ĐÈN CHÙM MIRA/4.jpg" },
+        { name: "Góc nhìn 5", image: "/collections/chad/ĐÈN CHÙM MIRA/5.jpg" },
+        { name: "Góc nhìn 6", image: "/collections/chad/ĐÈN CHÙM MIRA/6.jpg" },
+        { name: "Góc nhìn 7", image: "/collections/chad/ĐÈN CHÙM MIRA/7.jpg" },
+        { name: "Góc nhìn 8", image: "/collections/chad/ĐÈN CHÙM MIRA/8.jpg" },
+        { name: "Góc nhìn 9", image: "/collections/chad/ĐÈN CHÙM MIRA/9.jpg" },
+        { name: "Góc nhìn 10", image: "/collections/chad/ĐÈN CHÙM MIRA/10.jpg" },
+        { name: "Góc nhìn 11", image: "/collections/chad/ĐÈN CHÙM MIRA/11.jpg" },
+        { name: "Góc nhìn 12", image: "/collections/chad/ĐÈN CHÙM MIRA/12.jpg" }
+      ],
+      category: "decorative"
+    },
+    {
+      id: 109,
+      title: "ĐÈN CHÙM PHA LÊ HIRO NODA",
+      slug: "luxury-chandelier-gc",
+      image: "/collections/chad/ĐÈN CHÙM PHA LÊ HIRO NODA/1.jpg",
+      price: 72000000,
+      description: "Đèn chùm pha lê Hiro Noda là kiệt tác nghệ thuật ánh sáng với thiết kế cổ điển sang trọng. Được chế tác từ đồng mạ vàng 24K và crystal K9 cao cấp, đèn mang đến vẻ đẹp lộng lẫy và đẳng cấp cho không gian sống.",
+      mainImage: "/collections/chad/ĐÈN CHÙM PHA LÊ HIRO NODA/1.jpg",
+      variants: [
+        { name: "Góc nhìn 1", image: "/collections/chad/ĐÈN CHÙM PHA LÊ HIRO NODA/1.jpg" },
+        { name: "Góc nhìn 2", image: "/collections/chad/ĐÈN CHÙM PHA LÊ HIRO NODA/2.jpg" },
+        { name: "Góc nhìn 3", image: "/collections/chad/ĐÈN CHÙM PHA LÊ HIRO NODA/3.jpg" },
+        { name: "Góc nhìn 4", image: "/collections/chad/ĐÈN CHÙM PHA LÊ HIRO NODA/4.jpg" },
+        { name: "Góc nhìn 5", image: "/collections/chad/ĐÈN CHÙM PHA LÊ HIRO NODA/5.jpg" }
+      ],
+      category: "decorative"
+    },
+    {
+      id: 110,
+      title: "ĐÈN CHÙM PHA LÊ STELLA",
+      slug: "luxury-pendant-cb",
+      image: "/collections/chad/ĐÈN CHÙM PHA LÊ STELLA/1.jpg",
+      price: 52800000,
+      description: "Đèn chùm pha lê Stella là tác phẩm nghệ thuật ánh sáng với thiết kế bong bóng pha lê tinh tế. Được chế tác từ thủy tinh pha lê và thép không gỉ mạ vàng, đèn mang đến hiệu ứng ánh sáng lấp lánh như những ngôi sao, tạo không gian sống sang trọng và đẳng cấp.",
+      mainImage: "/collections/chad/ĐÈN CHÙM PHA LÊ STELLA/1.jpg",
+      variants: [
+        { name: "Góc nhìn 1", image: "/collections/chad/ĐÈN CHÙM PHA LÊ STELLA/1.jpg" },
+        { name: "Góc nhìn 2", image: "/collections/chad/ĐÈN CHÙM PHA LÊ STELLA/2.jpg" },
+        { name: "Góc nhìn 3", image: "/collections/chad/ĐÈN CHÙM PHA LÊ STELLA/3.jpg" },
+        { name: "Góc nhìn 4", image: "/collections/chad/ĐÈN CHÙM PHA LÊ STELLA/4.jpg" },
+        { name: "Góc nhìn 5", image: "/collections/chad/ĐÈN CHÙM PHA LÊ STELLA/5.jpg" },
+        { name: "Góc nhìn 6", image: "/collections/chad/ĐÈN CHÙM PHA LÊ STELLA/6.jpg" }
+      ],
+      category: "decorative"
+    },
+    {
+      id: 111,
+      title: "ĐÈN CHÙM PHA LÊ TRÒN HALO",
+      slug: "luxury-chandelier-gb",
+      image: "/collections/chad/ĐÈN CHÙM PHA LÊ TRÒN HALO/1.jpg",
+      price: 66900000,
+      description: "Đèn chùm pha lê tròn Halo là tác phẩm nghệ thuật ánh sáng hiện đại với thiết kế vòng tròn hoàn hảo. Được chế tác từ đồng mạ vàng và crystal cao cấp, đèn mang đến hiệu ứng ánh sáng lộng lẫy và sang trọng cho không gian sống.",
+      mainImage: "/collections/chad/ĐÈN CHÙM PHA LÊ TRÒN HALO/1.jpg",
+      variants: [
+        { name: "Góc nhìn 1", image: "/collections/chad/ĐÈN CHÙM PHA LÊ TRÒN HALO/1.jpg" },
+        { name: "Góc nhìn 2", image: "/collections/chad/ĐÈN CHÙM PHA LÊ TRÒN HALO/2.jpg" },
+        { name: "Góc nhìn 3", image: "/collections/chad/ĐÈN CHÙM PHA LÊ TRÒN HALO/3.jpg" },
+        { name: "Góc nhìn 4", image: "/collections/chad/ĐÈN CHÙM PHA LÊ TRÒN HALO/4.jpg" },
+        { name: "Góc nhìn 5", image: "/collections/chad/ĐÈN CHÙM PHA LÊ TRÒN HALO/5.jpg" },
+        { name: "Góc nhìn 6", image: "/collections/chad/ĐÈN CHÙM PHA LÊ TRÒN HALO/6.jpg" },
+        { name: "Góc nhìn 7", image: "/collections/chad/ĐÈN CHÙM PHA LÊ TRÒN HALO/7.jpg" },
+        { name: "Góc nhìn 8", image: "/collections/chad/ĐÈN CHÙM PHA LÊ TRÒN HALO/8.jpg" },
+        { name: "Góc nhìn 9", image: "/collections/chad/ĐÈN CHÙM PHA LÊ TRÒN HALO/9.jpg" },
+        { name: "Góc nhìn 10", image: "/collections/chad/ĐÈN CHÙM PHA LÊ TRÒN HALO/10.jpg" }
+      ],
+      category: "decorative"
+    }
+  ];
+
+  // Add decorative light products to the main product array
+  return [...productData, ...decorativeLightProducts];
 };
 
 // Find product by slug
@@ -315,7 +747,7 @@ export default function ProductPage({ params }: { params: PageParams }) {
         </div>
 
         {/* Product Content */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 relative bg-gradient-to-br from-red-900 to-black rounded-lg overflow-hidden md:h-[600px] aspect-square md:aspect-auto p-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 relative bg-gradient-to-br from-red-900 to-black rounded-lg overflow-hidden md:min-h-[600px] p-6">
           {/* Background Branding Text */}
           <div className="absolute inset-0 flex items-center justify-center opacity-20 pointer-events-none overflow-hidden z-20">
             <h1 className="text-[80px] md:text-[200px] font-bold tracking-tighter whitespace-nowrap">
@@ -324,13 +756,15 @@ export default function ProductPage({ params }: { params: PageParams }) {
           </div>
           
           {/* Right Column - Product Image, appears first on mobile */}
-          <div className="order-1 md:order-1 flex items-center justify-center z-10">
+          <div className="order-1 md:order-1 flex items-center justify-center z-10 min-h-[300px] md:min-h-[500px] w-full overflow-visible">
+            <div className="relative w-full h-full flex items-center justify-center">
             <Image
               src={selectedImage || product.mainImage || "/placeholder.svg"}
               alt={product.title}
               width={600}
               height={600}
-              className="object-contain transition-opacity duration-300"
+                className="object-contain max-w-full max-h-full transition-opacity duration-300"
+                style={{ maxHeight: "100%", width: "auto" }}
             />
 
             {/* Navigation Arrows - only show if multiple images */}
@@ -358,6 +792,7 @@ export default function ProductPage({ params }: { params: PageParams }) {
                 </button>
               </div>
             )}
+            </div>
           </div>
 
           {/* Left Column - Product Info, appears second on mobile */}
@@ -445,52 +880,7 @@ export default function ProductPage({ params }: { params: PageParams }) {
         <div className="md:hidden mt-6 bg-zinc-900/50 p-6 rounded-lg space-y-6">
           <p className="text-gray-400">{product.description}</p>
           
-          {/* Variants section for mobile - only show if there are variants */}
-          {product.variants && product.variants.length > 0 && (
-            <div className="mb-8">
-                <h3 className="text-xl font-semibold mb-3">Phiên bản</h3>
-                <div className="flex flex-wrap gap-4">
-                  {product.variants.map((variant, index) => (
-                    <button
-                      key={index}
-                      onClick={() => setSelectedImage(variant.image)}
-                      className={`px-4 py-2 rounded-md border ${
-                        selectedImage === variant.image 
-                          ? 'border-red-500 bg-red-500/10' 
-                          : 'border-gray-700 hover:border-gray-500'
-                      }`}
-                    >
-                      {variant.name}
-              </button>
-                  ))}
-                </div>
-            </div>
-          )}
-          
-          {/* Thumbnails for mobile - only display if there are variant images */}
-          {uniqueProductImages.length > 1 && (
-            <div className="flex space-x-4 mb-8">
-                {uniqueProductImages.map((image, index) => (
-                  <button
-                    key={index}
-                    onClick={() => setSelectedImage(image)}
-                    className={`w-16 h-16 border rounded-sm overflow-hidden ${
-                      selectedImage === image 
-                        ? 'border-red-500' 
-                        : 'border-white/20 hover:border-white/50'
-                    }`}
-                  >
-                  <Image
-                    src={image || "/placeholder.svg"}
-                    alt={`${product.title} thumbnail ${index + 1}`}
-                    width={80}
-                    height={80}
-                    className="w-full h-full object-cover"
-                  />
-              </button>
-                ))}
-            </div>
-          )}
+          {/* Removing variant section for mobile to avoid duplication */}
 
           {/* Contact Button for mobile */}
           <Link href="https://m.me/855258281507149" target="_blank" rel="noopener noreferrer">

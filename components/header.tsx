@@ -5,7 +5,7 @@ import type React from "react"
 import { useState, useEffect } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { Volume2, VolumeX } from "lucide-react"
+import { Volume2, VolumeX, Box } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { useSound } from "@/hooks/use-sound"
 import { useRouter } from "next/navigation"
@@ -88,7 +88,7 @@ export default function Header({ onButtonClick, onButtonHover }: HeaderProps) {
       )}
     >
       {/* Desktop Navigation */}
-      <div className="container mx-auto hidden md:flex items-center justify-between">
+      <div className="container mx-auto hidden lg:flex items-center justify-between">
         {/* Left Navigation - Split into two groups */}
         <div className="flex items-center space-x-3">
           {/* Group 1: Home button */}
@@ -110,17 +110,17 @@ export default function Header({ onButtonClick, onButtonHover }: HeaderProps) {
           <div className="relative group bg-white/10 backdrop-blur-sm rounded-full">
             <div className="flex items-center px-2">
               <Link
-                href="/projects"
+                href="/about"
                 className={cn(
                   "px-3 py-2 font-medium transition-all duration-300 relative",
-                  pathname === "/projects"
+                  pathname === "/about"
                     ? "text-white [text-shadow:0_0_15px_rgba(255,255,255,0.7)]"
                     : "text-gray-400 hover:text-white hover:[text-shadow:0_0_15px_rgba(255,255,255,0.7)]",
                 )}
                 onClick={(e) => handleNavClick(e)}
                 onMouseEnter={onButtonHover}
               >
-                Projects
+                About
               </Link>
               <Link
                 href="/products"
@@ -136,17 +136,17 @@ export default function Header({ onButtonClick, onButtonHover }: HeaderProps) {
                 Products
               </Link>
               <Link
-                href="/about"
+                href="/projects"
                 className={cn(
                   "px-3 py-2 font-medium transition-all duration-300 relative",
-                  pathname === "/about"
+                  pathname === "/projects"
                     ? "text-white [text-shadow:0_0_15px_rgba(255,255,255,0.7)]"
                     : "text-gray-400 hover:text-white hover:[text-shadow:0_0_15px_rgba(255,255,255,0.7)]",
                 )}
                 onClick={(e) => handleNavClick(e)}
                 onMouseEnter={onButtonHover}
               >
-                About
+                Projects
               </Link>
               <Link
                 href="/contacts"
@@ -178,8 +178,8 @@ export default function Header({ onButtonClick, onButtonHover }: HeaderProps) {
         <HeaderButtons soundOn={soundOn} onSoundToggle={handleSoundToggle} playSound={playSound} />
       </div>
 
-      {/* Mobile Navigation - New 3-button layout */}
-      <div className="flex md:hidden items-center justify-between">
+      {/* Mobile Navigation - Updated layout with 3D model button */}
+      <div className="flex lg:hidden items-center justify-between">
         {/* Menu Button */}
         <button
           onClick={toggleMobileMenu}
@@ -198,16 +198,28 @@ export default function Header({ onButtonClick, onButtonHover }: HeaderProps) {
           />
         </div>
         
-        {/* Catalogue Button */}
-        <a
-          href="/IDA LIGHTING 02 03 2025.pdf"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="px-3 py-2 bg-white/10 backdrop-blur-sm rounded-full hover:bg-white/20 transition-all duration-300 hover:shadow-[0_0_15px_rgba(255,255,255,0.5)] text-white text-sm"
-          onClick={() => playSound()}
-        >
-          Catalogue
-        </a>
+        {/* Mobile buttons container */}
+        <div className="flex space-x-1">
+          {/* Sound Button - Only show icon on mobile */}
+          <button
+            onClick={handleSoundToggle}
+            className="p-2 rounded-full bg-white/10 backdrop-blur-sm hover:bg-white/20 transition-all duration-300 text-white"
+            aria-label={soundOn ? "Mute sound" : "Enable sound"}
+          >
+            {soundOn ? <Volume2 size={18} /> : <VolumeX size={18} />}
+          </button>
+          
+          {/* 3D model button - Icon only on mobile */}
+          <a
+            href="https://1miba.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="p-2 rounded-full bg-white/10 backdrop-blur-sm hover:bg-white/20 transition-all duration-300 text-white"
+            onClick={() => playSound()}
+          >
+            <Box size={18} />
+          </a>
+        </div>
       </div>
 
       {/* Mobile Menu - Updated with rounded corners and two-column layout */}
@@ -327,15 +339,27 @@ export default function Header({ onButtonClick, onButtonHover }: HeaderProps) {
               {soundOn ? <Volume2 size={20} className="text-white" /> : <VolumeX size={20} className="text-white" />}
             </button>
 
-            <a
-              href="/IDA LIGHTING 02 03 2025.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-white hover:text-gray-200 transition-colors duration-300"
-              onClick={() => playSound()}
-            >
-              Download catalogue
-            </a>
+            <div className="flex space-x-2">
+              <a
+                href="/IDA LIGHTING 02 03 2025.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white hover:text-gray-200 transition-colors duration-300"
+                onClick={() => playSound()}
+              >
+                Download catalogue
+              </a>
+              
+              <a
+                href="https://1miba.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white hover:text-gray-200 transition-colors duration-300"
+                onClick={() => playSound()}
+              >
+                3D model
+              </a>
+            </div>
           </div>
         </div>
       )}
