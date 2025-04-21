@@ -45,7 +45,7 @@ export default function MobileLayout2({ hasLoaded, page, direction, paginate, im
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 1 }}
-      className="relative w-full min-h-screen overflow-hidden bg-[#8B2323]"
+      className="relative w-full min-h-screen overflow-hidden bg-gradient-to-r from-black via-black to-[#8B2323]"
     >
       {/* Loading animation */}
       <AnimatePresence>
@@ -77,13 +77,7 @@ export default function MobileLayout2({ hasLoaded, page, direction, paginate, im
         )}
       </AnimatePresence>
 
-      {/* Background gradient - 70% red, 30% peach - colors inverted from mobile-layout */}
-      <div className="absolute inset-0 z-0">
-        <div className="absolute right-0 top-0 h-full w-[70%] bg-gradient-to-l from-[#FFDAB9] via-[#FFE4C4] to-[#FFEFD5] z-0">
-          {/* Animated gradient overlay */}
-          <div className="absolute inset-0 bg-gradient-to-bl from-transparent to-black/20 opacity-70" />
-        </div>
-      </div>
+      {/* Background gradient overlay - removed previous gradient */}
 
       {/* Content container - mobile optimized with no padding */}
       <div className="relative z-10 flex flex-col h-screen">

@@ -182,11 +182,11 @@ export default function Home() {
   // Prepare section components for better performance
   const sections = [
     <VideoPlayerSection key="video" />,
+    <div className="bg-[#B8BBC1] w-full h-full" key="project"><ProjectSlider /></div>,
     <HomeProjectSlider key="home-projects" />,
+    <ThirdElementHpage key="third" productSet={homeProductSet} />,
     <FirstElementHpage key="first" />,
     <SecondElementHpage key="second" />,
-    <ThirdElementHpage key="third" productSet={homeProductSet} />,
-    <div className="bg-[#B8BBC1] w-full h-full" key="project"><ProjectSlider /></div>,
     <div className="rounded-t-[10px] overflow-hidden shadow-2xl h-full" key="footer"><Footer /></div>
   ]
 

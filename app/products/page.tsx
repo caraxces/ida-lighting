@@ -130,13 +130,13 @@ const downlightProducts: Product[] = [
 const products: Product[] = [
   {
     id: "product-1",
-    name: "Garden Light",
-    slug: "ida-6899-crystal",
+    name: "CP202112",
+    slug: "cp202112",
     variants: [
       {
-        id: "gp201-88",
-        name: "GP201 88",
-        image: "/slides/6899-10+5.png",
+        id: "cp202112",
+        name: "CP202112 Trụ Sân Vườn",
+        image: "/collections/out-door/CP202112/4.jpg",
         price: 2400000,
         specs: [
           { label: "Đèn trụ sân vườn", value: "" },
@@ -150,32 +150,17 @@ const products: Product[] = [
           { label: "Màu sắc", value: "Sand black" },
         ],
       },
-      {
-        id: "gp201-96",
-        name: "GP201 96",
-        image: "/slides/6551-6.png",
-        price: 2750000,
-        specs: [
-          { label: "Đèn trụ sân vườn", value: "" },
-          { label: "Kích thước", value: "Ø80*600mm" },
-          { label: "Công suất", value: "9W" },
-          { label: "Điện áp", value: "24V" },
-          { label: "Chip led", value: "COB" },
-          { label: "CCT", value: "3000K" },
-          { label: "Màu sắc", value: "Sand black" },
-        ],
-      },
     ],
   },
   {
     id: "product-2",
-    name: "Garden Light",
-    slug: "ida-6551-gold",
+    name: "CP202113",
+    slug: "cp202113",
     variants: [
       {
-        id: "gp201-812",
-        name: "GP201 812",
-        image: "/slides/6897-1.png",
+        id: "cp202113",
+        name: "CP202113 Hình Khối",
+        image: "/collections/out-door/CP202113/2.jpg",
         price: 1800000,
         specs: [
           { label: "Đèn trụ sân vườn", value: "" },
@@ -188,9 +173,9 @@ const products: Product[] = [
         ],
       },
       {
-        id: "gp201-99",
-        name: "GP201 99",
-        image: "/slides/6898-8.png",
+        id: "cp202113-v2",
+        name: "CP202113 Hình Vuông",
+        image: "/products/outdoor/garden-light-4.png",
         price: 3200000,
         specs: [
           { label: "Đèn trụ sân vườn", value: "" },
@@ -200,6 +185,144 @@ const products: Product[] = [
           { label: "Chip led", value: "COB" },
           { label: "CCT", value: "3000K" },
           { label: "Màu sắc", value: "Sand black" },
+        ],
+      },
+    ],
+  },
+  {
+    id: "product-3",
+    name: "CP202455",
+    slug: "cp202455",
+    variants: [
+      {
+        id: "cp202455",
+        name: "CP202455 Đèn Chùm",
+        image: "/collections/outdoor/CP202455/1.jpg",
+        price: 4200000,
+        specs: [
+          { label: "Đèn trang trí sân vườn", value: "" },
+          { label: "Kích thước", value: "Ø200*800mm" },
+          { label: "Công suất", value: "18W" },
+          { label: "Điện áp", value: "24V" },
+          { label: "Chip led", value: "COB" },
+          { label: "CCT", value: "3000K" },
+          { label: "Màu sắc", value: "Dark grey" },
+        ],
+      },
+      
+    ],
+  },
+  {
+    id: "product-4",
+    name: "CP202456",
+    slug: "cp202456",
+    variants: [
+      {
+        id: "cp202456",
+        name: "CP202456 Đèn Cột",
+        image: "/collections/outdoor/CP202456.jpg",
+        price: 2900000,
+        specs: [
+          { label: "Đèn cột sân vườn", value: "" },
+          { label: "Kích thước", value: "120*120*1000mm" },
+          { label: "Công suất", value: "24W" },
+          { label: "Điện áp", value: "220V" },
+          { label: "Chip led", value: "COB" },
+          { label: "CCT", value: "3000K" },
+          { label: "Màu sắc", value: "Dark grey" },
+        ],
+      },
+      {
+        id: "cp202456-v2",
+        name: "CP202456 Đèn Ray",
+        image: "/products/outdoor/garden-light-8.png",
+        price: 3150000,
+        specs: [
+          { label: "Đèn ray sân vườn", value: "" },
+          { label: "Kích thước", value: "100*120*800mm" },
+          { label: "Công suất", value: "20W" },
+          { label: "Điện áp", value: "220V" },
+          { label: "Chip led", value: "COB" },
+          { label: "CCT", value: "3000K/4000K" },
+          { label: "Màu sắc", value: "Black" },
+        ],
+      },
+    ],
+  },
+  {
+    id: "product-5",
+    name: "Garden Light - Chiếu Điểm",
+    slug: "garden-light-spotlight",
+    variants: [
+      {
+        id: "gl-s1",
+        name: "GL-S1 Spotlight",
+        image: "/products/outdoor/garden-light-9.png",
+        price: 1600000,
+        specs: [
+          { label: "Đèn chiếu điểm sân vườn", value: "" },
+          { label: "Kích thước", value: "Ø80*180mm" },
+          { label: "Công suất", value: "10W" },
+          { label: "Điện áp", value: "24V" },
+          { label: "Góc chiếu", value: "15°/30°/45°" },
+          { label: "CCT", value: "3000K" },
+          { label: "Màu sắc", value: "Black" },
+          { label: "IP", value: "IP65" },
+        ],
+      },
+      {
+        id: "gl-s2",
+        name: "GL-S2 Spotlight",
+        image: "/products/outdoor/garden-light-10.png",
+        price: 1900000,
+        specs: [
+          { label: "Đèn chiếu điểm sân vườn", value: "" },
+          { label: "Kích thước", value: "Ø90*200mm" },
+          { label: "Công suất", value: "12W" },
+          { label: "Điện áp", value: "24V" },
+          { label: "Góc chiếu", value: "30°/60°" },
+          { label: "CCT", value: "3000K/4000K" },
+          { label: "Màu sắc", value: "Dark grey" },
+          { label: "IP", value: "IP65" },
+        ],
+      },
+    ],
+  },
+  {
+    id: "product-6",
+    name: "Garden Light - Âm Đất",
+    slug: "garden-light-underground",
+    variants: [
+      {
+        id: "gl-u1",
+        name: "GL-U1 Âm Đất",
+        image: "/products/outdoor/garden-light-11.png",
+        price: 1200000,
+        specs: [
+          { label: "Đèn âm đất", value: "" },
+          { label: "Kích thước", value: "Ø120*80mm" },
+          { label: "Công suất", value: "9W" },
+          { label: "Điện áp", value: "24V" },
+          { label: "Góc chiếu", value: "30°" },
+          { label: "CCT", value: "3000K" },
+          { label: "Màu sắc", value: "Stainless steel" },
+          { label: "IP", value: "IP67" },
+        ],
+      },
+      {
+        id: "gl-u2",
+        name: "GL-U2 Âm Đất",
+        image: "/products/outdoor/garden-light-12.png",
+        price: 1400000,
+        specs: [
+          { label: "Đèn âm đất", value: "" },
+          { label: "Kích thước", value: "Ø150*100mm" },
+          { label: "Công suất", value: "12W" },
+          { label: "Điện áp", value: "24V" },
+          { label: "Góc chiếu", value: "45°" },
+          { label: "CCT", value: "3000K/4000K" },
+          { label: "Màu sắc", value: "Stainless steel" },
+          { label: "IP", value: "IP67" },
         ],
       },
     ],
@@ -313,13 +436,13 @@ const verticalProducts: Product[] = [
 const outdoorProducts: Product[] = [
   {
     id: "outdoor-1",
-    name: "Garden Light",
-    slug: "cp201-85",
+    name: "CP20183",
+    slug: "cp20183",
     variants: [
       {
-        id: "cp201-85",
-        name: "CP201 85",
-        image: "/collections/outdoor/CP20185.jpg",
+        id: "cp20183",
+        name: "CP20183",
+        image: "/collections/out-door/CP20183/4.jpg",
         specs: [
           { label: "Đèn trụ sân vườn", value: "" },
           { label: "Kích thước", value: "Ø150mm" },
@@ -335,13 +458,13 @@ const outdoorProducts: Product[] = [
   },
   {
     id: "outdoor-2",
-    name: "Garden Light",
-    slug: "cp201-96",
+    name: "CP20184",
+    slug: "cp20184",
     variants: [
       {
-        id: "cp201-96",
-        name: "CP201 96",
-        image: "/collections/outdoor/CP20196.jpg",
+        id: "cp20184",
+        name: "CP20184",
+        image: "/collections/out-door/CP20184/6.jpg",
         specs: [
           { label: "Đèn trụ sân vườn", value: "" },
           { label: "Kích thước", value: "Ø200*400mm" },
@@ -356,13 +479,13 @@ const outdoorProducts: Product[] = [
   },
   {
     id: "outdoor-3",
-    name: "Garden Light",
-    slug: "cp201-812",
+    name: "CP20188",
+    slug: "cp20188",
     variants: [
       {
-        id: "cp201-812",
-        name: "CP201 812",
-        image: "/collections/outdoor/CP201812.jpg",
+        id: "cp20188",
+        name: "CP20188",
+        image: "/collections/out-door/CP20188/4.jpg",
         specs: [
           { label: "Đèn trụ sân vườn", value: "" },
           { label: "Kích thước", value: "160*55*600mm" },
@@ -377,13 +500,13 @@ const outdoorProducts: Product[] = [
   },
   {
     id: "outdoor-4",
-    name: "Garden Light",
-    slug: "cp201-99",
+    name: "CP20196",
+    slug: "cp20196",
     variants: [
       {
-        id: "cp201-99",
-        name: "CP201 99",
-        image: "/collections/outdoor/CP20199.jpg",
+        id: "cp20196",
+        name: "CP20196",
+        image: "/collections/out-door/CP20196/6.jpg",
         specs: [
           { label: "Đèn trụ sân vườn", value: "" },
           { label: "Kích thước", value: "150*150*600mm" },
@@ -402,13 +525,13 @@ const outdoorProducts: Product[] = [
 const outdoorVerticalProducts: Product[] = [
   {
     id: "outdoor-v1",
-    name: "Garden Light",
-    slug: "cp202-05",
+    name: "CP20199",
+    slug: "cp20199",
     variants: [
       {
-        id: "cp202-05",
-        name: "CP202 05",
-        image: "/collections/outdoor/CP20205.jpg",
+        id: "cp20199",
+        name: "CP20199",
+        image: "/collections/out-door/CP20199/6.jpg",
         specs: [
           { label: "Đèn trụ sân vườn", value: "" },
           { label: "Kích thước", value: "150*150*600mm" },
@@ -424,13 +547,13 @@ const outdoorVerticalProducts: Product[] = [
   },
   {
     id: "outdoor-v2",
-    name: "Garden Light",
-    slug: "cp202-112",
+    name: "CP20205",
+    slug: "cp20205",
     variants: [
       {
-        id: "cp202-112",
-        name: "CP202 112",
-        image: "/collections/outdoor/CP202112.jpg",
+        id: "cp20205",
+        name: "CP20205",
+        image: "/collections/out-door/CP20205/3.jpg",
         specs: [
           { label: "Đèn trụ sân vườn", value: "" },
           { label: "Kích thước", value: "100*78mm" },
@@ -446,13 +569,13 @@ const outdoorVerticalProducts: Product[] = [
   },
   {
     id: "outdoor-v3",
-    name: "Garden Light",
-    slug: "cp202-19",
+    name: "CP20219",
+    slug: "cp20219",
     variants: [
       {
-        id: "cp202-19",
-        name: "CP202 19",
-        image: "/collections/outdoor/CP20219.jpg",
+        id: "cp20219",
+        name: "CP20219",
+        image: "/collections/out-door/CP20219/3.jpg",
         specs: [
           { label: "Đèn trụ sân vườn", value: "" },
           { label: "Kích thước", value: "120*40mm" },
@@ -468,13 +591,13 @@ const outdoorVerticalProducts: Product[] = [
   },
   {
     id: "outdoor-v4",
-    name: "Garden Light",
-    slug: "cp202-113",
+    name: "CP201812",
+    slug: "cp201812",
     variants: [
       {
-        id: "cp202-113",
-        name: "CP202 113",
-        image: "/collections/outdoor/CP202113.jpg",
+        id: "cp201812",
+        name: "CP201812",
+        image: "/collections/out-door/CP201812/4.jpg",
         specs: [
           { label: "Đèn trụ sân vườn", value: "" },
           { label: "Kích thước", value: "Ø140mm" },
@@ -494,72 +617,168 @@ const outdoorVerticalProducts: Product[] = [
 const decorativeLightProducts: Product[] = [
   {
     id: "decorative-1",
-    name: "Crystal Chandelier",
-    slug: "d8050",
+    name: "ĐÈN CHÙM BẠCH QUẢ GINGKO",
+    slug: "luxury-chandelier-fp",
     variants: [
       {
-        id: "d8050",
-        name: "D8050",
-        image: "/collections/decorative/D8050.jpg",
+        id: "floating-petals",
+        name: "ĐÈN CHÙM BẠCH QUẢ GINGKO",
+        image: "/collections/chad/ĐÈN CHÙM BẠCH QUẢ GINGKO/ĐÈN CHÙM BẠCH QUẢ GINGKO/1.jpg",
+        price: 32500000,
         specs: [
-          { label: "Chất liệu", value: "Pha lê K9" },
-          { label: "Kích thước", value: "W 280 x H 300mm" },
-          { label: "Số tay nến", value: "2 tay" },
+          { label: "Chất liệu", value: "Nhôm mạ vàng & Acrylic" },
+          { label: "Kích thước", value: "Ø900 x H300mm" },
+          { label: "Số bóng đèn", value: "LED tích hợp 48W" },
+          { label: "Nhiệt độ màu", value: "3000K" },
           { label: "Bảo hành", value: "5 năm" },
+          { label: "Xuất xứ", value: "Nhập khẩu" },
         ],
       },
     ],
   },
   {
     id: "decorative-2",
-    name: "Crystal Chandelier",
-    slug: "d8064",
+    name: "ĐÈN CHÙM BẰNG ĐỒNG CỔ ĐIỂN",
+    slug: "luxury-chandelier-gcb",
     variants: [
       {
-        id: "d8064",
-        name: "D8064",
-        image: "/collections/decorative/D8064.jpg",
+        id: "golden-crystal-branch",
+        name: "ĐÈN CHÙM BẰNG ĐỒNG CỔ ĐIỂN",
+        image: "/collections/chad/ĐÈN CHÙM BẰNG ĐỒNG CỔ ĐIỂN/ĐÈN CHÙM BẰNG ĐỒNG CỔ ĐIỂN/6.jpg",
+        price: 42800000,
         specs: [
-          { label: "Chất liệu", value: "Pha lê K9" },
-          { label: "Kích thước", value: "W 280 x H 300mm" },
-          { label: "Số tay nến", value: "2 tay" },
+          { label: "Chất liệu", value: "Đồng mạ vàng & Crystal K9" },
+          { label: "Kích thước", value: "L1200 x W400 x H350mm" },
+          { label: "Số bóng đèn", value: "LED tích hợp 65W" },
+          { label: "Nhiệt độ màu", value: "3000K" },
           { label: "Bảo hành", value: "5 năm" },
+          { label: "Xuất xứ", value: "Nhập khẩu Châu Âu" },
         ],
       },
     ],
   },
   {
     id: "decorative-3",
-    name: "Crystal Chandelier",
-    slug: "d8052",
+    name: "ĐÈN CHÙM BIJOU",
+    slug: "luxury-chandelier-gr",
     variants: [
       {
-        id: "d8052",
-        name: "D8052",
-        image: "/collections/decorative/D8052.jpg",
+        id: "golden-rings",
+        name: "ĐÈN CHÙM BIJOU",
+        image: "/collections/chad/ĐÈN CHÙM BIJOU/ĐÈN CHÙM BIJOU/1.jpg",
+        price: 28600000,
         specs: [
-          { label: "Chất liệu", value: "Pha lê K9" },
-          { label: "Kích thước", value: "W 280 x H 300mm" },
-          { label: "Số tay nến", value: "2 tay" },
+          { label: "Chất liệu", value: "Thép không gỉ mạ PVD vàng" },
+          { label: "Kích thước", value: "Ø800 x H1200mm (2 tầng)" },
+          { label: "Số bóng đèn", value: "LED tích hợp 56W" },
+          { label: "Nhiệt độ màu", value: "3000K - 4000K (Điều chỉnh)" },
           { label: "Bảo hành", value: "5 năm" },
+          { label: "Xuất xứ", value: "Nhập khẩu" },
         ],
       },
     ],
   },
   {
     id: "decorative-4",
-    name: "Crystal Chandelier",
-    slug: "d8061",
+    name: "ĐÈN CHÙM HOA BAY",
+    slug: "luxury-chandelier-cw",
     variants: [
       {
-        id: "d8061",
-        name: "D8061",
-        image: "/collections/decorative/D8061.jpg",
+        id: "crystal-waterfall",
+        name: "ĐÈN CHÙM HOA BAY",
+        image: "/collections/chad/ĐÈN CHÙM HOA BAY/ĐÈN CHÙM HOA BAY/13.jpg",
+        price: 58900000,
         specs: [
-          { label: "Chất liệu", value: "Pha lê K9" },
-          { label: "Kích thước", value: "W 800 x H 620mm" },
-          { label: "Số tay nến", value: "10 tay" },
+          { label: "Chất liệu", value: "Crystal cao cấp & Thép không gỉ mạ vàng" },
+          { label: "Kích thước", value: "Ø600 x H800mm" },
+          { label: "Số bóng đèn", value: "LED tích hợp 78W" },
+          { label: "Nhiệt độ màu", value: "3000K" },
           { label: "Bảo hành", value: "5 năm" },
+          { label: "Xuất xứ", value: "Nhập khẩu" },
+        ],
+      },
+    ],
+  },
+  {
+    id: "decorative-5",
+    name: "ĐÈN CHÙM LÁ PHONG",
+    slug: "luxury-chandelier-be",
+    variants: [
+      {
+        id: "brass-elegance",
+        name: "ĐÈN CHÙM LÁ PHONG",
+        image: "/collections/chad/ĐÈN CHÙM LÁ PHONG/ĐÈN CHÙM LÁ PHONG/1.jpg",
+        price: 36700000,
+        specs: [
+          { label: "Chất liệu", value: "Đồng thau & Thủy tinh pha lê" },
+          { label: "Kích thước", value: "Ø750 x H400mm" },
+          { label: "Số bóng đèn", value: "12 bóng G9 (5W mỗi bóng)" },
+          { label: "Nhiệt độ màu", value: "3000K" },
+          { label: "Bảo hành", value: "5 năm" },
+          { label: "Xuất xứ", value: "Nhập khẩu" },
+        ],
+      },
+    ],
+  },
+  {
+    id: "decorative-6",
+    name: "ĐÈN CHÙM SOFIA",
+    slug: "luxury-chandelier-cr",
+    variants: [
+      {
+        id: "crystal-rain",
+        name: "ĐÈN CHÙM SOFIA",
+        image: "/collections/chad/ĐÈN CHÙM SOFIA/ĐÈN CHÙM SOFIA/11.jpg",
+        price: 63500000,
+        specs: [
+          { label: "Chất liệu", value: "Crystal cao cấp & Thép không gỉ mạ vàng" },
+          { label: "Kích thước", value: "Ø800 x H1500mm" },
+          { label: "Số bóng đèn", value: "LED tích hợp 96W" },
+          { label: "Nhiệt độ màu", value: "3000K - 6000K (Điều chỉnh)" },
+          { label: "Bảo hành", value: "5 năm" },
+          { label: "Xuất xứ", value: "Nhập khẩu Châu Âu" },
+        ],
+      },
+    ],
+  },
+  {
+    id: "decorative-7",
+    name: "ĐÈN CHÙM TRÒN QUẢ CẦU PHA LÊ",
+    slug: "luxury-chandelier-ml",
+    variants: [
+      {
+        id: "modern-leaf",
+        name: "ĐÈN CHÙM TRÒN QUẢ CẦU PHA LÊ",
+        image: "/collections/chad/ĐÈN CHÙM TRÒN QUẢ CẦU PHA LÊ/ĐÈN CHÙM TRÒN QUẢ CẦU PHA LÊ/1.jpg",
+        price: 47800000,
+        specs: [
+          { label: "Chất liệu", value: "Đồng mạ vàng & Acrylic cao cấp" },
+          { label: "Kích thước", value: "Ø1000 x H700mm" },
+          { label: "Số bóng đèn", value: "LED tích hợp 85W" },
+          { label: "Nhiệt độ màu", value: "3000K" },
+          { label: "Bảo hành", value: "5 năm" },
+          { label: "Xuất xứ", value: "Nhập khẩu" },
+        ],
+      },
+    ],
+  },
+  {
+    id: "decorative-8",
+    name: "ĐÈN CIRCULAR",
+    slug: "luxury-chandelier-mc",
+    variants: [
+      {
+        id: "modern-circle",
+        name: "ĐÈN CIRCULAR",
+        image: "/collections/chad/ĐÈN CIRCULAR/ĐÈN CIRCULAR/1.jpg",
+        price: 26900000,
+        specs: [
+          { label: "Chất liệu", value: "Nhôm sơn tĩnh điện" },
+          { label: "Kích thước", value: "Ø600 x H80mm" },
+          { label: "Số bóng đèn", value: "LED tích hợp 45W" },
+          { label: "Nhiệt độ màu", value: "3000K - 6000K (Điều chỉnh)" },
+          { label: "Bảo hành", value: "5 năm" },
+          { label: "Xuất xứ", value: "Nhập khẩu" },
         ],
       },
     ],
@@ -570,72 +789,84 @@ const decorativeLightProducts: Product[] = [
 const decorativeVerticalProducts: Product[] = [
   {
     id: "decorative-v1",
-    name: "Crystal Chandelier",
-    slug: "d8008",
+    name: "ĐÈN CHÙM MIRA",
+    slug: "luxury-pendant-fb",
     variants: [
       {
-        id: "d8008",
-        name: "D8008",
-        image: "/collections/decorative/D8008.jpg",
+        id: "mira",
+        name: "ĐÈN CHÙM MIRA",
+        image: "/collections/chad/ĐÈN CHÙM MIRA/12.jpg",
+        price: 48500000,
         specs: [
-          { label: "Chất liệu", value: "Pha lê K9" },
-          { label: "Kích thước", value: "W 800 x H 750mm" },
-          { label: "Số tay nến", value: "10+5 tay" },
+          { label: "Chất liệu", value: "Thép không gỉ mạ vàng & Acrylic" },
+          { label: "Kích thước", value: "Ø800 x H500mm" },
+          { label: "Số bóng đèn", value: "LED tích hợp 65W" },
+          { label: "Nhiệt độ màu", value: "3000K" },
           { label: "Bảo hành", value: "5 năm" },
+          { label: "Xuất xứ", value: "Nhập khẩu Châu Âu" },
         ],
       },
     ],
   },
   {
     id: "decorative-v2",
-    name: "Crystal Chandelier",
-    slug: "d8016",
+    name: "ĐÈN CHÙM PHA LÊ HIRO NODA",
+    slug: "luxury-chandelier-gc",
     variants: [
       {
-        id: "d8016",
-        name: "D8016",
-        image: "/collections/decorative/D8016.jpg",
+        id: "golden-chandelier",
+        name: "ĐÈN CHÙM PHA LÊ HIRO NODA",
+        image: "/collections/chad/ĐÈN CHÙM PHA LÊ HIRO NODA/3.jpg",
+        price: 72000000,
         specs: [
-          { label: "Chất liệu", value: "Pha lê K9" },
-          { label: "Kích thước", value: "W 800 x H 600mm" },
-          { label: "Số tay nến", value: "10+5 tay" },
+          { label: "Chất liệu", value: "Đồng mạ vàng & Crystal K9" },
+          { label: "Kích thước", value: "Ø900 x H1200mm" },
+          { label: "Số bóng đèn", value: "18 bóng E14 (5W mỗi bóng)" },
+          { label: "Nhiệt độ màu", value: "3000K" },
           { label: "Bảo hành", value: "5 năm" },
+          { label: "Xuất xứ", value: "Nhập khẩu" },
         ],
       },
     ],
   },
   {
     id: "decorative-v3",
-    name: "Crystal Chandelier",
-    slug: "d8029",
+    name: "ĐÈN CHÙM PHA LÊ STELLA",
+    slug: "luxury-pendant-cb",
     variants: [
       {
-        id: "d8029",
-        name: "D8029",
-        image: "/collections/decorative/D8029.jpg",
+        id: "crystal-bubble",
+        name: "ĐÈN CHÙM PHA LÊ STELLA",
+        image: "/collections/chad/ĐÈN CHÙM PHA LÊ STELLA/1.jpg",
+        price: 52800000,
         specs: [
-          { label: "Chất liệu", value: "Pha lê K9" },
-          { label: "Kích thước", value: "W 800 x H 750mm" },
-          { label: "Số tay nến", value: "10+5 tay" },
+          { label: "Chất liệu", value: "Thủy tinh pha lê & Thép không gỉ mạ vàng" },
+          { label: "Kích thước", value: "Ø800 x H600mm" },
+          { label: "Số bóng đèn", value: "12 bóng G9 (5W mỗi bóng)" },
+          { label: "Nhiệt độ màu", value: "3000K" },
           { label: "Bảo hành", value: "5 năm" },
+          { label: "Xuất xứ", value: "Nhập khẩu Châu Âu" },
         ],
       },
     ],
   },
   {
     id: "decorative-v4",
-    name: "Crystal Chandelier",
-    slug: "d8003",
+    name: "ĐÈN CHÙM PHA LÊ TRÒN HALO",
+    slug: "luxury-chandelier-gb",
     variants: [
       {
-        id: "d8003",
-        name: "D8003",
-        image: "/collections/decorative/D8003.jpg",
+        id: "gold-branch",
+        name: "ĐÈN CHÙM PHA LÊ TRÒN HALO",
+        image: "/collections/chad/ĐÈN CHÙM PHA LÊ TRÒN HALO/10.jpg",
+        price: 66900000,
         specs: [
-          { label: "Chất liệu", value: "Pha lê K9" },
-          { label: "Kích thước", value: "W 600 x H 650mm" },
-          { label: "Số tay nến", value: "6 tay" },
+          { label: "Chất liệu", value: "Đồng mạ vàng & Crystal" },
+          { label: "Kích thước", value: "Ø1000 x H800mm" },
+          { label: "Số bóng đèn", value: "LED tích hợp 120W" },
+          { label: "Nhiệt độ màu", value: "3000K" },
           { label: "Bảo hành", value: "5 năm" },
+          { label: "Xuất xứ", value: "Nhập khẩu" },
         ],
       },
     ],
@@ -658,29 +889,29 @@ export default function ProductsPage() {
         <div className="container mx-auto px-4 space-y-20">
           <VerticalProductListing products={verticalProducts} showcaseImage="/collections/TRC_9988.jpg" />
           <CollectionsListing products={downlightProducts} title="Đèn Âm Trần Cao Cấp" />
-                </div>
+        </div>
 
         {/* Outdoor Section */}
         <CollectionBanner 
           title="SERIES OUTDOOR" 
           subtitle="GARDEN LIGHT"
-          image="/collections/outdoor/banner.jpg" 
+          image="/collections/outdoor1.JPG" 
         />
 
         <div className="container mx-auto px-4 space-y-20">
-          <VerticalProductListing products={outdoorVerticalProducts} showcaseImage="/collections/outdoor/showcase.jpg" />
+          <VerticalProductListing products={outdoorVerticalProducts} showcaseImage="/collections/outdoor1.JPG" />
           <CollectionsListing products={outdoorProducts} title="Đèn Sân Vườn" />
-              </div>
+        </div>
 
         {/* Decorative Section */}
         <CollectionBanner 
           title="SERIES CRYSTAL" 
           subtitle="DECORATIVE LIGHT"
-          image="/collections/decorative/banner.jpg" 
+          image="/collections/1.png" 
         />
 
         <div className="container mx-auto px-4 space-y-20">
-          <VerticalProductListing products={decorativeVerticalProducts} showcaseImage="/collections/decorative/showcase.jpg" />
+          <VerticalProductListing products={decorativeVerticalProducts} showcaseImage="/collections/5.jpg" />
           <CollectionsListing products={decorativeLightProducts} title="Đèn Trang Trí Pha Lê" />
         </div>
       </main>

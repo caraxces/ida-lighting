@@ -93,7 +93,7 @@ export default function LightingShowcase() {
   }, [])
 
   return (
-    <div className="relative w-full h-screen bg-black flex items-center justify-center overflow-hidden">
+    <div className="relative w-full h-screen bg-gradient-to-r from-black via-black to-[#8B2323] flex items-center justify-center overflow-hidden">
       {/* Animated light flow */}
       <canvas ref={canvasRef} className="absolute inset-0 w-full h-full" />
 
@@ -118,7 +118,7 @@ export default function LightingShowcase() {
               >
                 <div className="aspect-[4/3] overflow-hidden mb-3">
                   <Image
-                    src={category.image || "/placeholder.svg"}
+                    src={category.image || "/about/outdoor1.JPG"}
                     alt={category.title}
                     width={240}
                     height={180}
@@ -148,24 +148,24 @@ const categories = [
     title: "Outdoor Light",
     description:
       "Các công đèn ngoài trời của chúng tôi được thiết kế để chịu được điều kiện thời tiết khắc nghiệt, đồng thời mang lại ánh sáng đẹp và hiệu quả cho không gian ngoài trời của bạn.",
-    image: "/placeholder.svg?height=180&width=240",
+    image: "/about/outdoor1.JPG",
   },
   {
     title: "Indoor Light",
     description:
       "Hệ thống đèn chiếu sáng trong nhà của chúng tôi được thiết kế để tạo nên một môi trường sống ấm áp, tạo cảm giác thoải mái và thư giãn. Đèn trong nhà của chúng tôi mang đến vẻ đẹp và chức năng.",
-    image: "/placeholder.svg?height=180&width=240",
+    image: "/about/showroom-lighting.jpg",
   },
   {
     title: "Đèn Trang Trí",
     description:
       "Những chiếc đèn trang trí của chúng tôi không chỉ mang ánh sáng đến không gian của bạn mà còn là những tác phẩm nghệ thuật độc đáo, tạo điểm nhấn cho không gian của bạn.",
-    image: "/placeholder.svg?height=180&width=240",
+    image: "/about/chadl.jpg",
   },
   {
     title: "Bespoke Lighting",
     description:
       "Chúng tôi cung cấp các thiết kế đèn tùy chỉnh để đáp ứng nhu cầu cụ thể của mọi không gian. Thiết kế độc đáo, phù hợp với từng không gian riêng của bạn.",
-    image: "/placeholder.svg?height=180&width=240",
+    image: "/about/bespoke.png",
   },
 ]

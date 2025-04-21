@@ -26,7 +26,7 @@ export default function IDALightingProfile() {
       {/* Hero Section */}
       <div className="max-w-7xl mx-auto px-4 py-16 relative">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-24">
-          <div className="flex justify-center md:justify-end items-center">
+          <div className="flex justify-center  items-center">
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -110,7 +110,7 @@ cao cho các công trình. Đây chính là động lực để IDA LIGHTING ra 
           >
             <div className="w-48 h-64 relative overflow-hidden">
               <Image
-                src="/placeholder.svg?height=256&width=192"
+                src="/about/NguyenDinhDuong.jpg"
                 alt="Founder Portrait"
                 width={192}
                 height={256}
@@ -338,7 +338,7 @@ cao cho các công trình. Đây chính là động lực để IDA LIGHTING ra 
               className="w-full h-32 relative overflow-hidden"
             >
               <Image
-                src="/placeholder.svg?height=128&width=320"
+                src="/about/team2.png"  
                 alt="Team Photo 1"
                 width={320}
                 height={128}
@@ -353,7 +353,7 @@ cao cho các công trình. Đây chính là động lực để IDA LIGHTING ra 
               className="w-full h-32 relative overflow-hidden"
             >
               <Image
-                src="/placeholder.svg?height=128&width=320"
+                src="/about/team3.png"
                 alt="Team Photo 2"
                 width={320}
                 height={128}
@@ -368,7 +368,7 @@ cao cho các công trình. Đây chính là động lực để IDA LIGHTING ra 
               className="w-full h-32 relative overflow-hidden"
             >
               <Image
-                src="/placeholder.svg?height=128&width=320"
+                src="/about/team4.png"
                 alt="Team Photo 3"
                 width={320}
                 height={128}
@@ -383,7 +383,7 @@ cao cho các công trình. Đây chính là động lực để IDA LIGHTING ra 
               className="w-full h-32 relative overflow-hidden"
             >
               <Image
-                src="/placeholder.svg?height=128&width=320"
+                src="/about/team1.png"
                 alt="Team Photo 4"
                 width={320}
                 height={128}
@@ -573,7 +573,7 @@ cao cho các công trình. Đây chính là động lực để IDA LIGHTING ra 
               className="w-full h-40 relative overflow-hidden"
             >
               <Image
-                src="/placeholder.svg?height=160&width=400"
+                src="/about/price1 (1).png"
                 alt="Award Ceremony 1"
                 width={400}
                 height={160}
@@ -593,7 +593,7 @@ cao cho các công trình. Đây chính là động lực để IDA LIGHTING ra 
               className="w-full h-40 relative overflow-hidden"
             >
               <Image
-                src="/placeholder.svg?height=160&width=400"
+                src="/about/price1 (3).png"
                 alt="Award Ceremony 2"
                 width={400}
                 height={160}
@@ -608,7 +608,7 @@ cao cho các công trình. Đây chính là động lực để IDA LIGHTING ra 
               className="w-full h-40 relative overflow-hidden"
             >
               <Image
-                src="/placeholder.svg?height=160&width=400"
+                src="/about/price1 (2).png"
                 alt="ASHUI AWARDS VIBE EXPO 2024"
                 width={400}
                 height={160}
@@ -700,7 +700,7 @@ cao cho các công trình. Đây chính là động lực để IDA LIGHTING ra 
                 className="w-full relative"
               >
                 <Image
-                  src="/placeholder.svg?height=200&width=500"
+                  src="/about/WPS.png"
                   alt="LED Module Downlight"
                   width={500}
                   height={200}
@@ -716,7 +716,7 @@ cao cho các công trình. Đây chính là động lực để IDA LIGHTING ra 
                 className="w-full relative mt-8"
               >
                 <Image
-                  src="/placeholder.svg?height=200&width=500"
+                  src="/about/WPS1.png"
                   alt="Lighting Components"
                   width={500}
                   height={200}

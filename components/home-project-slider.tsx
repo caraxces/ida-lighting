@@ -19,30 +19,30 @@ type HomeProject = {
 const homeProjects: HomeProject[] = [
   {
     id: 1,
-    title: "Starlake",
+    title: "Ánh sáng không chỉ là ánh sáng – mà là để cảm nhận!",
     image: "/home-page/TRC_7715.jpg",
-    description: ".",
+    description: "Tại IDA Lighting, mỗi giải pháp chiếu sáng đều được thiết kế để truyền cảm hứng, định hình không gian và nâng tầm trải nghiệm sống.",
     link: "/projects/starlake"
   },
   {
     id: 2,
-    title: "Koi Cafe",
+    title: "Không gian của bạn – Ánh sáng của bạn!",
     image: "/home-page/272997168_476963463943196_4364219283871969024_n.jpg", 
-    description: ".",
+    description: "IDA Lighting cung cấp thiết bị chiếu sáng cao cấp kết hợp thiết kế độc quyền, tối ưu cả công năng lẫn thẩm mỹ.",
     link: "/projects/koicafe"
   },
   {
     id: 3,
-    title: "Chiếu sáng công nghiệp",
+    title: "Công nghệ chiếu sáng thông minh – Giải pháp cho công trình đẳng cấp!",
     image: "/home-page/_TRC7712.jpg",
-    description: "Giải pháp chiếu sáng hiệu suất cao cho nhà máy, kho và cơ sở công nghiệp, tập trung vào hiệu quả và an toàn.",
+    description: "IDA Lighting ứng dụng công nghệ hiện đại để kiến tạo giải pháp chiếu sáng thông minh, tiết kiệm năng lượng và bền vững.",
     link: "/projects/industrial"
   },
   {
     id: 4,
-    title: "Hệ thống chiếu sáng thông minh",
+    title: "Từ bản vẽ đến thực tế – chúng tôi làm ánh sáng trở nên sống động!",
     image: "/home-page/_TRC7748-Pano.jpg",
-    description: "Hệ thống chiếu sáng thông minh với khả năng điều khiển và tự động hóa tiên tiến, hoàn hảo cho môi trường sống và làm việc hiện đại.",
+    description: "Với đội ngũ kiến trúc sư và kỹ sư chuyên sâu, IDA Lighting biến ý tưởng chiếu sáng thành hiện thực hoàn hảo cho mọi công trình.",
     link: "/projects/smart"
   }
 ]
@@ -96,7 +96,7 @@ const HomeProjectSlider = ({ onSlideChange }: HomeProjectSliderProps) => {
     };
 
     // Start auto-slide timer
-    autoSlideTimerRef.current = setInterval(moveToNextSlide, 6000);
+    autoSlideTimerRef.current = setInterval(moveToNextSlide, 4000);
 
     // Pause on mouse enter, resume on mouse leave
     const sliderElement = sliderRef.current;
@@ -110,7 +110,7 @@ const HomeProjectSlider = ({ onSlideChange }: HomeProjectSliderProps) => {
 
       const resumeAutoSlide = () => {
         if (!autoSlideTimerRef.current) {
-          autoSlideTimerRef.current = setInterval(moveToNextSlide, 6000);
+          autoSlideTimerRef.current = setInterval(moveToNextSlide, 4000);
         }
       };
 

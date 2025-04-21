@@ -92,7 +92,17 @@ export default function Footer() {
             Privacy Policy
           </Link>
           
-          <p className="text-sm text-gray-400">Website by trucmt</p>
+          <p className="text-sm text-gray-400">
+            Website by{" "}
+            <a 
+              href="https://www.linkedin.com/in/trucmt0110/" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="hover:text-white transition-colors duration-200 underline underline-offset-2"
+            >
+              trucmt
+            </a>
+          </p>
         </div>
       </div>
 
