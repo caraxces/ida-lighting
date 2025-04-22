@@ -10,19 +10,267 @@ import { ChevronRight } from "lucide-react"
 import AnimatedTitle from "./animated-title"
 import FloatingElements from "./floating-elements"
 import { cn } from "@/lib/utils"
-import MobileLayout from "./mobile-layout"
 import Link from "next/link"
 
-// Image array
+// Image array - có thể được thay đổi sau
 const images = [
-  "/slides/6899-10+5.png",
-  "/slides/6551-6.png",
-  "/slides/6897-1.png",
-  "/slides/6899-2+1.png",
-  "/slides/6898-8.png",
+  "/home-page/3.1.png",
+  "/home-page/6.png",
+  "/home-page/3.png",
 ]
 
-export default function FirstElementHpage() {
+// Add Mobile Product Showcase component inside this file
+function MobileProductShowcase({ hasLoaded, page, direction, paginate, images }: { 
+  hasLoaded: boolean;
+  page: number;
+  direction: number;
+  paginate: (direction: number) => void;
+  images: string[];
+}) {
+  // Get previous and next slide indices
+  const getPrevSlide = (current: number) => (current - 1 + images.length) % images.length
+  const getNextSlide = (current: number) => (current + 1) % images.length
+  
+  // State for animation
+  const [isAnimating, setIsAnimating] = useState(false)
+
+  // Auto-slide functionality
+  useEffect(() => {
+    const autoSlideTimer = setInterval(() => {
+      if (!isAnimating) {
+        setIsAnimating(true)
+        paginate(1)
+        setTimeout(() => {
+          setIsAnimating(false)
+        }, 600)
+      }
+    }, 2000)
+
+    return () => clearInterval(autoSlideTimer)
+  }, [page, isAnimating, paginate])
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 1 }}
+      className="relative w-full min-h-screen overflow-hidden bg-gradient-to-r from-black via-black to-[#8B2323]"
+    >
+      {/* Loading animation */}
+      <AnimatePresence>
+        {!hasLoaded && (
+          <motion.div
+            className="absolute inset-0 z-50 bg-gradient-to-r from-black via-black to-[#8B2323] flex items-center justify-center"
+            exit={{
+              opacity: 0,
+              transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] },
+            }}
+          >
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{
+                opacity: 1,
+                scale: 1,
+                transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] },
+              }}
+              exit={{
+                opacity: 0,
+                scale: 1.2,
+                transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] },
+              }}
+              className="text-white text-4xl font-bold"
+            >
+              IDA Collection
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Content container - mobile optimized with no padding */}
+      <div className="relative z-10 flex flex-col h-screen">
+        {/* Top section with text - compact */}
+        <div className="flex flex-col px-3 pt-24">
+          {/* Small header text */}
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="flex items-center text-white/70 text-xs tracking-wider"
+          >
+            <span>2023</span>
+            <span className="mx-2">—</span>
+            <span>Outdoor Collection</span>
+          </motion.div>
+
+          {/* Main title - smaller for mobile */}
+          <div className="mt-1">
+            <AnimatedTitle>
+              {/* <span className="text-3xl block text-white">Our</span> */}
+              <span className="text-3xl font-extrabold text-white">Outdoor</span>
+              <span className="text-3xl text-white"> Lighting.</span>
+            </AnimatedTitle>
+          </div>
+
+          {/* Description text - shortened for mobile */}
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="mt-1"
+          >
+            <h3 className="text-white font-medium">Illuminate your outdoor spaces</h3>
+            <p className="text-white/80 text-xs leading-relaxed">
+              Hệ thống chiếu sáng ngoài trời của IDA LIGHTING kết hợp giữa thiết kế tinh tế và công nghệ bền bỉ, 
+              tạo nên điểm nhấn hoàn hảo cho cảnh quan của bạn.
+            </p>
+            
+            {/* CTA Button - moved directly under description text */}
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.6 }}
+              className="mt-4"
+            >
+              <Link href="/collections">
+                <Button
+                  variant="ghost"
+                  className="w-fit text-white hover:bg-white/10 hover:text-white group transition-all duration-300 shadow-[0_4px_8px_rgba(0,0,0,0.1)] px-0 relative overflow-hidden"
+                > 
+                  <span className="border-b border-white/40 pb-1 flex items-center relative z-10">
+                    Khám phá bộ sưu tập ngoài trời
+                    <ChevronRight className="ml-2 h-4 w-4" />
+                  </span>
+                </Button>
+              </Link>
+            </motion.div>
+          </motion.div>
+        </div>
+
+        {/* Middle section with carousel */}
+        <div className="flex-1 flex items-center justify-center mt-[-5%]">
+          <div className="relative z-50 w-full max-w-[95vw] flex justify-center overflow-visible">
+            <div className="relative w-full h-[280px] overflow-visible">
+              {/* Carousel Track */}
+              <div className="absolute w-full h-full flex items-center justify-center">
+                {/* Previous Slide (Left) */}
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={`prev-${page}`}
+                    initial={{ x: "-100%", opacity: 0, scale: 0.8 }}
+                    animate={{
+                      x: "-60%",
+                      opacity: 0.8,
+                      scale: 0.8,
+                      rotateY: 15,
+                    }}
+                    exit={{ x: "-120%", opacity: 0, scale: 0.7 }}
+                    transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                    className="absolute transform-gpu"
+                    style={{ transformStyle: "preserve-3d" }}
+                  >
+                    <Image
+                      src={images[getPrevSlide(page)] || "/placeholder.svg"}
+                      alt={`IDA Lighting - Previous Product`}
+                      width={250}
+                      height={250}
+                      className="object-contain drop-shadow-[0_10px_10px_rgba(0,0,0,0.2)]"
+                      draggable={false}
+                    />
+                  </motion.div>
+                </AnimatePresence>
+
+                {/* Current Slide (Center) */}
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={`current-${page}`}
+                    initial={{ x: "100%", opacity: 0, scale: 0.8 }}
+                    animate={{
+                      x: "0%",
+                      opacity: 1,
+                      scale: 1,
+                      rotateY: 0,
+                    }}
+                    exit={{ x: "-100%", opacity: 0, scale: 0.8 }}
+                    transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                    className="absolute transform-gpu"
+                    style={{ transformStyle: "preserve-3d", zIndex: 10 }}
+                  >
+                    <Image
+                      src={images[page] || "/placeholder.svg"}
+                      alt={`IDA Lighting - Current Product`}
+                      width={350}
+                      height={350}
+                      priority
+                      className="object-contain drop-shadow-[0_20px_20px_rgba(0,0,0,0.3)]"
+                      draggable={false}
+                    />
+                  </motion.div>
+                </AnimatePresence>
+
+                {/* Next Slide (Right) */}
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={`next-${page}`}
+                    initial={{ x: "100%", opacity: 0, scale: 0.8 }}
+                    animate={{
+                      x: "60%",
+                      opacity: 0.8,
+                      scale: 0.8,
+                      rotateY: -15,
+                    }}
+                    exit={{ x: "120%", opacity: 0, scale: 0.7 }}
+                    transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                    className="absolute transform-gpu"
+                    style={{ transformStyle: "preserve-3d" }}
+                  >
+                    <Image
+                      src={images[getNextSlide(page)] || "/placeholder.svg"}
+                      alt={`IDA Lighting - Next Product`}
+                      width={250}
+                      height={250}
+                      className="object-contain drop-shadow-[0_10px_10px_rgba(0,0,0,0.2)]"
+                      draggable={false}
+                    />
+                  </motion.div>
+                </AnimatePresence>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Bottom section without navigation buttons */}
+        <div className="flex flex-col items-center pb-6">
+          {/* Slide indicators */}
+          <div className="flex gap-2 z-20 mb-6">
+            {images.map((_, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 * index, duration: 0.5 }}
+                className={`h-1.5 rounded-full transition-all ${page === index ? "w-5 bg-white" : "w-1.5 bg-white/50"}`}
+                aria-label={`Slide ${index + 1}`}
+                aria-current={page === index ? "true" : "false"}
+              />
+            ))}
+          </div>
+        </div>
+
+        {/* Page indicator */}
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.3 }}
+          className="absolute top-4 right-4 text-[#8B2323]/70 text-xs"
+        >
+          {String(page + 1).padStart(2, "0")} of {String(images.length).padStart(2, "0")}
+        </motion.div>
+      </div>
+    </motion.div>
+  )
+}
+
+export default function ProductShowcase() {
   const [currentSlide, setCurrentSlide] = useState(0)
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 })
   const [isHovering, setIsHovering] = useState(false)
@@ -181,7 +429,7 @@ export default function FirstElementHpage() {
   return (
     <>
       {isMobile ? (
-        <MobileLayout
+        <MobileProductShowcase
           hasLoaded={hasLoaded}
           page={currentSlide}
           direction={1}
@@ -196,7 +444,7 @@ export default function FirstElementHpage() {
           animate={{ opacity: 1 }}
           transition={{ duration: 1 }}
           className={cn(
-            "relative w-full min-h-screen overflow-hidden bg-gradient-to-r from-black via-black to-[#8B2323]", // Removed touch-none class
+            "relative w-full min-h-screen overflow-hidden bg-gradient-to-r from-black via-black to-[#8B2323]",
             hasLoaded ? "transition-all duration-1000" : "",
           )}
           onMouseEnter={() => {
@@ -231,7 +479,7 @@ export default function FirstElementHpage() {
                   }}
                   className="text-white text-4xl font-bold"
                 >
-                  IDA Lighting
+                  IDA Collection
                 </motion.div>
               </motion.div>
             )}
@@ -284,17 +532,17 @@ export default function FirstElementHpage() {
                 transition={{ duration: 0.8, delay: 0.2 }}
                 className="flex items-center text-white/70 md:text-[#8B2323]/70 text-xs mb-4 md:mb-8 tracking-wider"
               >
-                <span>2019</span>
+                <span>2023</span>
                 <span className="mx-2">—</span>
-                <span>Duong Nguyen</span>
+                <span>Outdoor Collection</span>
               </motion.div>
 
               {/* Main title with 3D effect */}
               <div className="mb-4">
                 <AnimatedTitle>
-                  {/* <span className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl block text-white">This is</span> */}
+                  <span className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl block text-white">Our</span>
                   <span className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-white">
-                    IDA
+                    Outdoor
                   </span>
                   <span className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-white"> Lighting.</span>
                 </AnimatedTitle>
@@ -307,9 +555,12 @@ export default function FirstElementHpage() {
                 transition={{ duration: 0.8, delay: 0.6 }}
                 className="mt-4 md:mt-8 mb-6 md:mb-10 max-w-md"
               >
-                <h3 className="text-white font-medium mb-2">Your light - Your style.</h3>
+                <h3 className="text-white font-medium mb-2">Illuminate your outdoor spaces</h3>
                 <p className="text-white/80 text-sm leading-relaxed">
-                Bộ sưu tập đèn thờ cao cấp của IDA LIGHTING là sự kết hợp hài hòa giữa gỗ Walnut của Mỹ, đồng nguyên chất và đá tự nhiên được tuyển chọn kỹ lưỡng. Từng chi tiết được chế tác thủ công với độ tinh xảo cao, tôn vinh nét đẹp tâm linh và thiêng liêng của không gian thờ tự. Chất liệu cao cấp không chỉ đảm bảo độ bền vượt thời gian mà còn mang đến sự sang trọng, trầm mặc và trang nghiêm—góp phần tạo nên một không gian thờ cúng đầy uy nghi, linh khí và chuẩn mực về phong thủy. Đây không chỉ là đèn chiếu sáng, mà còn là biểu tượng của sự kính trọng và lòng thành.
+                  Hệ thống chiếu sáng ngoài trời của IDA LIGHTING kết hợp giữa thiết kế tinh tế và công nghệ bền bỉ, 
+                  tạo nên điểm nhấn hoàn hảo cho cảnh quan sân vườn. Với khả năng chống chịu thời tiết khắc nghiệt 
+                  và hiệu suất năng lượng tối ưu, các sản phẩm đèn sân vườn của chúng tôi không chỉ làm đẹp không gian 
+                  mà còn nâng cao an ninh và tạo ra bầu không khí ấm cúng cho những buổi tối ngoài trời.
                 </p>
               </motion.div>
 
@@ -319,13 +570,13 @@ export default function FirstElementHpage() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.8 }}
               >
-                <Link href="/products">
+                <Link href="/collections">
                   <Button
                     variant="ghost"
                     className="w-fit text-white hover:bg-white/10 hover:text-white group transition-all duration-300 shadow-[0_4px_8px_rgba(0,0,0,0.1)] hover:shadow-[0_6px_12px_rgba(0,0,0,0.2)] transform hover:-translate-y-1 px-0 relative overflow-hidden"
                   >
                     <span className="border-b border-white/40 pb-1 flex items-center relative z-10">
-                      Xem bộ sưu tập
+                      Khám phá bộ sưu tập ngoài trời
                       <ChevronRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                     </span>
                     <motion.div
@@ -367,7 +618,7 @@ export default function FirstElementHpage() {
                       >
                         <Image
                           src={images[getPrevSlide(currentSlide)] || "/placeholder.svg"}
-                          alt={`IDA Lighting - Previous Slide`}
+                          alt={`IDA Lighting - Previous Product`}
                           width={350}
                           height={350}
                           className="object-contain drop-shadow-[0_10px_10px_rgba(0,0,0,0.2)]"
@@ -394,7 +645,7 @@ export default function FirstElementHpage() {
                       >
                         <Image
                           src={images[currentSlide] || "/placeholder.svg"}
-                          alt={`IDA Lighting - Current Slide`}
+                          alt={`IDA Lighting - Current Product`}
                           width={500}
                           height={500}
                           priority
@@ -422,7 +673,7 @@ export default function FirstElementHpage() {
                       >
                         <Image
                           src={images[getNextSlide(currentSlide)] || "/placeholder.svg"}
-                          alt={`IDA Lighting - Next Slide`}
+                          alt={`IDA Lighting - Next Product`}
                           width={350}
                           height={350}
                           className="object-contain drop-shadow-[0_10px_10px_rgba(0,0,0,0.2)]"
@@ -464,4 +715,4 @@ export default function FirstElementHpage() {
       )}
     </>
   )
-}
+} 

@@ -280,7 +280,7 @@ const ProjectSlider = ({ onSlideChange }: ProjectSliderProps) => {
               <div className="relative w-full h-full flex items-center justify-center">
                 {/* Link button */}
                 <Link
-                  href={`/work/${services[currentIndex].category}`}
+                  href="/about"
                   className="absolute bottom-8 right-8 flex items-center text-white text-sm uppercase tracking-widest group"
                 >
                   <span>TÌM HIỂU THÊM</span>
@@ -349,7 +349,7 @@ const ProjectSlider = ({ onSlideChange }: ProjectSliderProps) => {
           <motion.div
             className="absolute z-40 left-0 right-0"
             style={{
-              top: isMobile ? "25%" : "40%",
+              top: isMobile ? "calc(10% - 10px)" : "40%",
             }}
             initial={{ opacity: 0, x: "100%" }}
             animate={{ opacity: 1, x: 0 }}

@@ -260,21 +260,115 @@ export default function ContactPage() {
                 <p className="text-gray-300 text-sm mb-4">
                   Hãy đến showroom của chúng tôi để xem trực tiếp các giải pháp chiếu sáng.
                 </p>
-                <div className="flex items-center mb-6">
-                  <MapPin className="w-5 h-5 text-orange-500 mr-2" />
-                  <span className="text-white">153 Hà Huy Tập, Nam Hà, TP. Hà Tĩnh</span>
+                
+                {/* Main Office */}
+                <div className="mb-6">
+                  <div className="flex items-start mb-3">
+                    <MapPin className="w-5 h-5 text-orange-500 mr-2 mt-1 flex-shrink-0" />
+                    <div>
+                      <p className="text-white font-medium">Trụ sở chính:</p>
+                      <p className="text-gray-300">153 Hà Huy Tập, Nam Hà, TP. Hà Tĩnh</p>
+                    </div>
+                  </div>
+                  <div className="w-full h-48 bg-black/30 rounded-lg overflow-hidden mb-6">
+                    <iframe
+                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d946.8305562986295!2d105.90002481681827!3d18.33257839614494!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31384f8aac003d29%3A0x145d3a0591e89d69!2sIDA%20Lighting!5e0!3m2!1svi!2s!4v1742799579490!5m2!1svi!2s"
+                      width="100%"
+                      height="100%"
+                      style={{ border: 0 }}
+                      allowFullScreen
+                      loading="lazy"
+                      referrerPolicy="no-referrer-when-downgrade"
+                    ></iframe>
+                  </div>
                 </div>
 
-                <div className="w-full h-64 bg-black/30 rounded-lg overflow-hidden">
-                  <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d946.8305562986295!2d105.90002481681827!3d18.33257839614494!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31384f8aac003d29%3A0x145d3a0591e89d69!2sIDA%20Lighting!5e0!3m2!1svi!2s!4v1742799579490!5m2!1svi!2s"
-                    width="100%"
-                    height="100%"
-                    style={{ border: 0 }}
-                    allowFullScreen
-                    loading="lazy"
-                    referrerPolicy="no-referrer-when-downgrade"
-                  ></iframe>
+                {/* Hanoi Office 1 */}
+                <div className="mb-6">
+                  <div className="flex items-start mb-3">
+                    <MapPin className="w-5 h-5 text-orange-500 mr-2 mt-1 flex-shrink-0" />
+                    <div>
+                      <p className="text-white font-medium">Văn phòng Hà Nội:</p>
+                      <p className="text-gray-300">Tòa nhà số 373 Vũ Tông Phan, P. Khương Đình, Q.Thanh Xuân, Tp. Hà Nội</p>
+                    </div>
+                  </div>
+                  <div className="w-full h-48 bg-black/30 rounded-lg overflow-hidden mb-6">
+                    <iframe
+                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3725.0550989084566!2d105.8139905!3d20.9881099!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135acfdf495d8d9%3A0xa2f9b16036648187!2zMzczIFbFqSBUw7RuZyBQaGFuLCBQaMawxqFuZyBMacOqbiwgVGhhbmggWHXDom4sIEjDoCBO4buZaSwgVmlldG5hbQ!5e0!3m2!1sen!2s!4v1707828837659!5m2!1sen!2s"
+                      width="100%"
+                      height="100%"
+                      style={{ border: 0 }}
+                      allowFullScreen
+                      loading="lazy"
+                      referrerPolicy="no-referrer-when-downgrade"
+                    ></iframe>
+                  </div>
+                </div>
+
+                {/* Hanoi Office 2 */}
+                <div className="mb-6">
+                  <div className="flex items-start mb-3">
+                    <MapPin className="w-5 h-5 text-orange-500 mr-2 mt-1 flex-shrink-0" />
+                    <div>
+                      <p className="text-white font-medium">Văn phòng Hà Nội:</p>
+                      <p className="text-gray-300">Trung tâm Hội nghị Quốc Gia - số 1 Đại lộ Thăng Long, quận Nam Từ Liêm, Tp. Hà Nội</p>
+                    </div>
+                  </div>
+                  <div className="w-full h-48 bg-black/30 rounded-lg overflow-hidden mb-6">
+                    <iframe
+                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3723.8768282331844!2d105.7833138!3d21.0048366!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x313454b3260b1a8b%3A0x1d03b1441acb079f!2sNational%20Convention%20Center!5e0!3m2!1sen!2s!4v1707828930518!5m2!1sen!2s"
+                      width="100%"
+                      height="100%"
+                      style={{ border: 0 }}
+                      allowFullScreen
+                      loading="lazy"
+                      referrerPolicy="no-referrer-when-downgrade"
+                    ></iframe>
+                  </div>
+                </div>
+
+                {/* Nghe An Office */}
+                <div className="mb-6">
+                  <div className="flex items-start mb-3">
+                    <MapPin className="w-5 h-5 text-orange-500 mr-2 mt-1 flex-shrink-0" />
+                    <div>
+                      <p className="text-white font-medium">Văn phòng Nghệ An:</p>
+                      <p className="text-gray-300">Tòa nhà HV59, khu đô thị Eco Central Park, TP Vinh, Nghệ An</p>
+                    </div>
+                  </div>
+                  <div className="w-full h-48 bg-black/30 rounded-lg overflow-hidden mb-6">
+                    <iframe
+                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3778.5600898280385!2d105.68885300000001!3d18.7221011!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3139ce66435e025d%3A0x5d01683cb4955ca6!2sEcopark%20Vinh!5e0!3m2!1sen!2s!4v1707829005553!5m2!1sen!2s"
+                      width="100%"
+                      height="100%"
+                      style={{ border: 0 }}
+                      allowFullScreen
+                      loading="lazy"
+                      referrerPolicy="no-referrer-when-downgrade"
+                    ></iframe>
+                  </div>
+                </div>
+
+                {/* Quang Binh Office */}
+                <div className="mb-6">
+                  <div className="flex items-start mb-3">
+                    <MapPin className="w-5 h-5 text-orange-500 mr-2 mt-1 flex-shrink-0" />
+                    <div>
+                      <p className="text-white font-medium">Văn phòng Quảng Bình:</p>
+                      <p className="text-gray-300">26 Bùi Sĩ Tiêm, Hải Đình, TP. Đồng Hới</p>
+                    </div>
+                  </div>
+                  <div className="w-full h-48 bg-black/30 rounded-lg overflow-hidden mb-6">
+                    <iframe
+                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3788.644534593324!2d106.6088499!3d17.4685075!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31473a0e7e8dcb4d%3A0x81cfd0a0b0c6e304!2zQsO5aSBTxKkgVGnDqm0sIMSQhu1uZyBI4bubaSwgUXXhuqNuZyBCw6xuaCwgVmlldG5hbQ!5e0!3m2!1sen!2s!4v1707829093150!5m2!1sen!2s"
+                      width="100%"
+                      height="100%"
+                      style={{ border: 0 }}
+                      allowFullScreen
+                      loading="lazy"
+                      referrerPolicy="no-referrer-when-downgrade"
+                    ></iframe>
+                  </div>
                 </div>
               </MotionDiv>
             </div>

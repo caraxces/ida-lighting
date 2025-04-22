@@ -7,20 +7,6 @@ import { motion } from "framer-motion"
 export default function IDALightingProfile() {
   const textRef = useRef<HTMLDivElement>(null)
 
-  useEffect(() => {
-    const handleScroll = () => {
-      if (!textRef.current) return
-      const scrollPosition = window.scrollY
-      const opacity = Math.min(1, scrollPosition / 300)
-      if (textRef.current) {
-        textRef.current.style.opacity = (0.4 + opacity * 0.6).toString()
-      }
-    }
-
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
-
   return (
     <div className="bg-gradient-to-r from-black via-black to-[#8B2323] text-white min-h-screen w-full">
       {/* Hero Section */}
@@ -34,7 +20,7 @@ export default function IDALightingProfile() {
               className="w-64 h-64 bg-red-700"
             />
           </div>
-          <div className="space-y-6" ref={textRef}>
+          <div className="space-y-6 mt-[20px]" ref={textRef}>
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}

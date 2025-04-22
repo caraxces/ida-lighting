@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react"
 import { motion } from "framer-motion"
 import Image from "next/image"
+import Link from "next/link"
 
 export default function LightingShowcase() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
@@ -116,15 +117,17 @@ export default function LightingShowcase() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 * index }}
               >
-                <div className="aspect-[4/3] overflow-hidden mb-3">
-                  <Image
-                    src={category.image || "/about/outdoor1.JPG"}
-                    alt={category.title}
-                    width={240}
-                    height={180}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
+                <Link href={category.link} className="block overflow-hidden transition-transform duration-300 hover:scale-105">
+                  <div className="aspect-[4/3] overflow-hidden mb-3">
+                    <Image
+                      src={category.image || "/about/outdoor1.JPG"}
+                      alt={category.title}
+                      width={240}
+                      height={180}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                </Link>
                 <h3 className="text-white uppercase text-center font-medium tracking-wider text-sm mb-1">
                   {category.title}
                 </h3>
@@ -149,23 +152,27 @@ const categories = [
     description:
       "Các công đèn ngoài trời của chúng tôi được thiết kế để chịu được điều kiện thời tiết khắc nghiệt, đồng thời mang lại ánh sáng đẹp và hiệu quả cho không gian ngoài trời của bạn.",
     image: "/about/outdoor1.JPG",
+    link: "/about",
   },
   {
     title: "Indoor Light",
     description:
       "Hệ thống đèn chiếu sáng trong nhà của chúng tôi được thiết kế để tạo nên một môi trường sống ấm áp, tạo cảm giác thoải mái và thư giãn. Đèn trong nhà của chúng tôi mang đến vẻ đẹp và chức năng.",
     image: "/about/showroom-lighting.jpg",
+    link: "/about",
   },
   {
     title: "Đèn Trang Trí",
     description:
       "Những chiếc đèn trang trí của chúng tôi không chỉ mang ánh sáng đến không gian của bạn mà còn là những tác phẩm nghệ thuật độc đáo, tạo điểm nhấn cho không gian của bạn.",
     image: "/about/chadl.jpg",
+    link: "/about",
   },
   {
     title: "Bespoke Lighting",
     description:
       "Chúng tôi cung cấp các thiết kế đèn tùy chỉnh để đáp ứng nhu cầu cụ thể của mọi không gian. Thiết kế độc đáo, phù hợp với từng không gian riêng của bạn.",
     image: "/about/bespoke.png",
+    link: "/about",
   },
 ]

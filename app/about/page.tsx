@@ -1,7 +1,7 @@
 "use client"
 
 import Header from "@/components/header"
-import AboutHero from "@/components/about-hero"
+// import AboutHero from "@/components/about-hero"
 import AboutBody from "@/components/about-body"
 import Footer from "@/components/footer"
 import LightingShowcase from "@/components/lighting-showcase"
@@ -14,10 +14,10 @@ export default function AboutPage() {
       </div>
       
       <main className="w-full">
-        {/* Hero Section */}
+        {/* Hero Section
         <section className="min-h-screen w-full">
           <AboutHero />
-        </section>
+        </section> */}
         
         {/* Body Section */}
         <section className="w-full">

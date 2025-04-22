@@ -398,8 +398,8 @@ export default function SecondElementHpage() {
               {/* Main title with 3D effect */}
               <div className="mb-4">
                 <AnimatedTitle>
-                  <span className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl block text-white">This is</span>
-                  <span className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold italic text-white">IDA</span>
+                  {/* <span className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl block text-white">This is</span> */}
+                  <span className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-white">IDA</span>
                   <span className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-white"> Lighting.</span>
                 </AnimatedTitle>
               </div>
@@ -413,7 +413,7 @@ export default function SecondElementHpage() {
               >
                 <h3 className="text-white font-medium mb-2">Your light - Your style.</h3>
                 <p className="text-white/80 text-sm leading-relaxed">
-                Bộ sưu tập IDA là một phần trong cam kết của IDA trong việc hợp tác cùng các doanh nghiệp nhằm giảm thiểu tác động đến môi trường thông qua những sản phẩm mới độc đáo mang giá trị bền vững cho không gian sống.
+                Hệ thống đèn trang trí cao cấp của IDA LIGHTING là sự giao thoa tinh tế giữa nghệ thuật ánh sáng và công nghệ cá nhân hoá hiện đại, tạo nên những trải nghiệm độc bản dành riêng cho từng gia chủ. Mỗi thiết kế được chăm chút tỉ mỉ từ kiểu dáng, chất liệu đến nhịp điệu ánh sáng, đảm bảo sự hòa quyện tuyệt đối với không gian sống và phong cách thẩm mỹ riêng biệt của từng gia đình. Không chỉ là thiết bị chiếu sáng, sản phẩm của IDA LIGHTING còn là tác phẩm nghệ thuật treo trần, khơi dậy cảm xúc, thể hiện cá tính và nâng tầm đẳng cấp cho mọi không gian nội thất.
                 </p>
               </motion.div>
 
