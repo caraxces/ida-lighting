@@ -19,31 +19,31 @@ type Service = {
 const services: Service[] = [
   {
     id: 1,
-    title: "Tư vấn thiết kế chiếu sáng",
+    title: "Ánh sáng không chỉ là ánh sáng – mà là để cảm nhận!",
     image: "/home-page/_TRC7620.jpg",
     category: "residential",
-    description: "IDA LIGHTING mang đến các giải pháp thiết kế chiếu sáng chuyên nghiệp, phù hợp cho từng không gian kiến trúc như: Nhà ở, Văn phòng, Khách sạn, Resort nghỉ dưỡng, Nhà hàng... và các công trình Công cộng. Chúng tôi đảm bảo sự hài hòa giữa thẩm mỹ và công năng, tối ưu hóa ánh sáng để nâng cao trải nghiệm và tiết kiệm năng lượng."
+    description: "Tại IDA Lighting, mỗi giải pháp chiếu sáng đều được thiết kế để truyền cảm hứng, định hình không gian và nâng tầm trải nghiệm sống."
   },
   {
     id: 2,
-    title: "Cung cấp giải pháp chiếu sáng toàn diện",
+    title: "Không gian của bạn – Ánh sáng của bạn!",
     image: "/home-page/_TRC7706.jpg",
     category: "commercial",
-    description: "Chiếu sáng không đơn thuần là ánh sáng mà còn là cách chúng ta kiểm soát và sử dụng ánh sáng như thế nào để phục vụ - nuông chiều cảm xúc của mình nhất. IDA cung cấp một giải pháp tổng thể cho công trình và tương thích với các ngôn ngữ điều khiển tân tiến nhất hiện nay."
+    description: "IDA Lighting cung cấp thiết bị chiếu sáng cao cấp kết hợp thiết kế độc quyền, tối ưu cả công năng lẫn thẩm mỹ."
   },
   {
     id: 3,
-    title: "Bespoke Lighting",
+    title: "Công nghệ chiếu sáng thông minh – Giải pháp cho công trình đẳng cấp!",
     image: "/home-page/_TRC7712.jpg",
     category: "industrial",
-    description: "IDA làm chủ được công nghệ sản xuất, lắp ráp tại Trung Quốc, các nước Châu Âu như Đức, Czech... với lựa chọn các nhà thầu cung cáp linh kiện - phụ kiện hàng đầu thế giới. Không chỉ mang lại những sản phẩm chất lượng cao mà chi phí phù hợp với thị trường Việt Nam, đáp ứng nhu cầu cá nhân hóa ngày càng được giới tinh hoa lựa chọn."
+    description: "IDA Lighting ứng dụng công nghệ hiện đại để kiến tạo giải pháp chiếu sáng thông minh, tiết kiệm năng lượng và bền vững."
   },
   {
     id: 4,
-    title: "Cung cấp thiết bị chiếu sáng",
+    title: "Từ bản vẽ đến thực tế – chúng tôi làm ánh sáng trở nên sống động!",
     image: "/home-page/_TRC7748-Pano.jpg",
     category: "smart",
-    description: "IDA LIGHTING mang đến những dòng sản phẩm đa dạng, đáp ứng đầu đủ nhu cầu chiếu sáng cho nhiều không gian khác nhau. Luôn lựa chọn và mang đến cho khách hàng những sản phẩm với tiêu chí: - Cùng một chất lượng thì chi phí thấp nhất. - Cùng một chi phí thì chất lượng cao nhất."
+    description: "Với đội ngũ kiến trúc sư và kỹ sư chuyên sâu, IDA Lighting biến ý tưởng chiếu sáng thành hiện thực hoàn hảo cho mọi công trình."
   }
 ]
 
@@ -349,7 +349,7 @@ const ProjectSlider = ({ onSlideChange }: ProjectSliderProps) => {
           <motion.div
             className="absolute z-40 left-0 right-0"
             style={{
-              top: isMobile ? "calc(10% - 10px)" : "40%",
+              top: isMobile ? "calc(10% + 20px)" : "calc(40% + 20px)",
             }}
             initial={{ opacity: 0, x: "100%" }}
             animate={{ opacity: 1, x: 0 }}
@@ -357,7 +357,7 @@ const ProjectSlider = ({ onSlideChange }: ProjectSliderProps) => {
             transition={{ duration: 0.5, delay: 0.2 }}
           >
             <h1
-              className="text-4xl md:text-6xl lg:text-[40px] font-black text-white leading-none mx-8 md:ml-[calc(15%)] md:mr-16"
+              className="text-2xl md:text-6xl lg:text-[40px] font-black text-white leading-none mx-8 md:ml-[calc(15%)] md:mr-16"
               style={{
                 fontFamily: "'Inter', sans-serif",
                 letterSpacing: "-0.02em",

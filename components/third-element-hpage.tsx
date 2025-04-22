@@ -218,23 +218,46 @@ export default function ThirdElementHpage({ productSet }: ThirdElementHpageProps
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
-                className="flex items-center text-white/70 text-xs tracking-wider mb-4"
+                className="flex items-center text-white/70 text-xs tracking-wider mb-2"
               >
                 <span>2023</span>
                 <span className="mx-2">—</span>
                 <span>IDA Collection</span>
               </motion.div>
 
-              {/* Main title with 3D effect */}
-              <div className="mb-2">
+              {/* Main title with 3D effect - reduced size */}
+              <div className="mb-1 pt-0">
                 <AnimatedTitle>
-                  <span className="text-2xl sm:text-3xl block text-white">Downlight</span>
-                  <span className="text-2xl sm:text-3xl font-extrabold italic text-white">
-                    {productSet?.title || "IDA"}
-                  </span>
-                  <span className="text-2xl sm:text-3xl text-white"> Collection.</span>
+                  {/* <span className="text-2xl sm:text-3xl block text-white">Downlight</span> */}
+                  <span className="text-xl sm:text-2xl text-white">Downlight Collection.</span>
                 </AnimatedTitle>
               </div>
+              
+              {/* Move CTA Button here */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.8 }}
+                className="flex pt-2 mb-2"
+              >
+                <Link href="/products">
+                  <Button
+                    variant="ghost"
+                    className="w-fit text-white hover:bg-white/10 hover:text-white group transition-all duration-300 shadow-[0_4px_8px_rgba(0,0,0,0.1)] hover:shadow-[0_6px_12px_rgba(0,0,0,0.2)] transform hover:-translate-y-1 px-0 relative overflow-hidden"
+                  >
+                    <span className="border-b border-white/40 pb-1 flex items-center relative z-10">
+                      Explore collection
+                      <ChevronRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                    </span>
+                    <motion.div
+                      className="absolute inset-0 bg-white/10 -z-0"
+                      initial={{ x: "-100%" }}
+                      whileHover={{ x: 0 }}
+                      transition={{ duration: 0.3 }}
+                    />
+                  </Button>
+                </Link>
+              </motion.div>
             </div>
 
             {/* Mobile image carousel - Ở giữa */}
@@ -243,7 +266,7 @@ export default function ThirdElementHpage({ productSet }: ThirdElementHpageProps
                 <div className="flex space-x-5 px-2 min-w-max">
                   {[0, 1, 2, 3].map((colIndex) => {
                     const currentPos = currentPositions[colIndex];
-                    const isLedModule = colIndex % 2 === 1; // Column 2 and 4 (index 1 and 3) are LED modules
+                    const isLedModule = colIndex % 2 === 0; // Column 1 and 3 (index 0 and 2) are LED modules
                     const { prev, current, next } = getImageIndices(currentPos % (isLedModule ? selectedLedImages.length : selectedFrameImages.length), isLedModule);
                     const isReversed = colIndex % 2 === 1; // Columns 2 and 4 (index 1 and 3) will be reversed
                     
@@ -358,32 +381,6 @@ export default function ThirdElementHpage({ productSet }: ThirdElementHpageProps
                   Đèn downlight của IDA LIGHTING được thiết kế theo dạng modul lắp ráp, cho phép thay thế linh hoạt giữa chip LED và choá đèn chỉ với thao tác đơn giản. Nhờ đó, người dùng có thể dễ dàng tùy biến công suất, góc chiếu và màu ánh sáng phù hợp với từng không gian cụ thể mà không cần thay toàn bộ đèn, giúp tiết kiệm chi phí và tối ưu hoá hiệu suất chiếu sáng. Thiết kế modul này cũng thuận tiện cho việc bảo trì, nâng cấp trong tương lai.
                 </p>
               </motion.div>
-              
-              {/* CTA Button */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.8 }}
-                className="flex justify-center pt-4"
-              >
-                <Link href="/products">
-                  <Button
-                    variant="ghost"
-                    className="w-fit text-white hover:bg-white/10 hover:text-white group transition-all duration-300 shadow-[0_4px_8px_rgba(0,0,0,0.1)] hover:shadow-[0_6px_12px_rgba(0,0,0,0.2)] transform hover:-translate-y-1 px-0 relative overflow-hidden"
-                  >
-                    <span className="border-b border-white/40 pb-1 flex items-center relative z-10">
-                      Explore collection
-                      <ChevronRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                    </span>
-                    <motion.div
-                      className="absolute inset-0 bg-white/10 -z-0"
-                      initial={{ x: "-100%" }}
-                      whileHover={{ x: 0 }}
-                      transition={{ duration: 0.3 }}
-                    />
-                  </Button>
-                </Link>
-              </motion.div>
             </div>
           </div>
         </motion.div>
@@ -474,39 +471,26 @@ export default function ThirdElementHpage({ productSet }: ThirdElementHpageProps
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
-                className="flex items-center text-white/70 md:text-[#FFDAB9]/70 text-xs mb-4 tracking-wider"
+                className="flex items-center text-white/70 md:text-[#FFDAB9]/70 text-xs mb-2 tracking-wider"
               >
                 <span>2023</span>
                 <span className="mx-2">—</span>
                 <span>IDA Collection</span>
               </motion.div>
 
-              {/* Main title with 3D effect */}
-              <div className="mb-4">
+              {/* Main title with 3D effect - reduced size */}
+              <div className="mb-2 pt-0">
                 <AnimatedTitle>
-                  <span className="text-3xl sm:text-4xl md:text-5xl block text-white">Downlight</span>
-                  <span className="text-3xl sm:text-4xl md:text-5xl text-white"> Collection.</span>
+                  <span className="text-2xl sm:text-3xl md:text-4xl block text-white">Downlight Collection.</span>
                 </AnimatedTitle>
               </div>
 
-              {/* Description text with reveal animation */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.6 }}
-                className="mt-4 mb-6 max-w-md"
-              >
-                <h3 className="text-white font-medium mb-2">Premium Lighting Solutions</h3>
-                <p className="text-white/80 text-sm leading-relaxed">
-                  Đèn downlight của IDA LIGHTING được thiết kế theo dạng modul lắp ráp, cho phép thay thế linh hoạt giữa chip LED và choá đèn chỉ với thao tác đơn giản. Nhờ đó, người dùng có thể dễ dàng tùy biến công suất, góc chiếu và màu ánh sáng phù hợp với từng không gian cụ thể mà không cần thay toàn bộ đèn, giúp tiết kiệm chi phí và tối ưu hoá hiệu suất chiếu sáng. Thiết kế modul này cũng thuận tiện cho việc bảo trì, nâng cấp trong tương lai.
-                </p>
-              </motion.div>
-
-              {/* CTA Button with 3D effect and hover animation */}
+              {/* Move CTA Button here */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.8 }}
+                className="mt-2 mb-4"
               >
                 <Link href="/products">
                   <Button
@@ -526,6 +510,19 @@ export default function ThirdElementHpage({ productSet }: ThirdElementHpageProps
                   </Button>
                 </Link>
               </motion.div>
+
+              {/* Description text with reveal animation */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.6 }}
+                className="max-w-md"
+              >
+                <h3 className="text-white font-medium mb-2">Premium Lighting Solutions</h3>
+                <p className="text-white/80 text-sm leading-relaxed">
+                  Đèn downlight của IDA LIGHTING được thiết kế theo dạng modul lắp ráp, cho phép thay thế linh hoạt giữa chip LED và choá đèn chỉ với thao tác đơn giản. Nhờ đó, người dùng có thể dễ dàng tùy biến công suất, góc chiếu và màu ánh sáng phù hợp với từng không gian cụ thể mà không cần thay toàn bộ đèn, giúp tiết kiệm chi phí và tối ưu hoá hiệu suất chiếu sáng. Thiết kế modul này cũng thuận tiện cho việc bảo trì, nâng cấp trong tương lai.
+                </p>
+              </motion.div>
             </div>
 
             {/* Right section with image carousel - Now takes 7/10 columns (70%) */}
@@ -533,7 +530,7 @@ export default function ThirdElementHpage({ productSet }: ThirdElementHpageProps
               <div className="grid grid-cols-4 gap-8 w-full max-w-[650px] mx-auto">
                 {[0, 1, 2, 3].map((colIndex) => {
                   const currentPos = currentPositions[colIndex];
-                  const isLedModule = colIndex % 2 === 1; // Column 2 and 4 (index 1 and 3) are LED modules
+                  const isLedModule = colIndex % 2 === 0; // Column 1 and 3 (index 0 and 2) are LED modules
                   const { prev, current, next } = getImageIndices(currentPos % (isLedModule ? selectedLedImages.length : selectedFrameImages.length), isLedModule);
                   const isReversed = colIndex % 2 === 1; // Columns 2 and 4 (index 1 and 3) will be reversed
                   
