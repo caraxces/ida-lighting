@@ -357,7 +357,7 @@ const ProjectSlider = ({ onSlideChange }: ProjectSliderProps) => {
             transition={{ duration: 0.5, delay: 0.2 }}
           >
             <h1
-              className="text-2xl md:text-6xl lg:text-[40px] font-black text-white leading-none mx-8 md:ml-[calc(15%)] md:mr-16"
+              className="text-[1.125rem] md:text-4xl lg:text-5xl font-black text-white leading-none mx-8 md:ml-[calc(15%)] md:mr-16"
               style={{
                 fontFamily: "'Inter', sans-serif",
                 letterSpacing: "-0.02em",
@@ -366,7 +366,7 @@ const ProjectSlider = ({ onSlideChange }: ProjectSliderProps) => {
             >
               {services[currentIndex].title}
               {services[currentIndex].description && (
-                <p className="text-base md:text-lg mt-4 font-normal max-w-2xl">
+                <p className="text-sm md:text-base mt-4 font-normal max-w-2xl">
                   {services[currentIndex].description}
                 </p>
               )}
