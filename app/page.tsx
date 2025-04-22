@@ -32,13 +32,21 @@ const ProjectSlider = dynamic(() => import("@/components/project-slider"), {
   loading: () => <div className="w-full h-screen bg-[#B8BBC1]"></div>
 })
 
+const ProductShowcase = dynamic(() => import("@/components/product-showcase"), {
+  loading: () => <div className="w-full h-screen bg-black"></div>
+})
+
+const LightingShowcase = dynamic(() => import("@/components/lighting-showcase"), {
+  loading: () => <div className="w-full h-screen bg-black"></div>
+})
+
 export default function Home() {
   const containerRef = useRef<HTMLDivElement | null>(null)
   const [currentSection, setCurrentSection] = useState(0)
   const [isScrolling, setIsScrolling] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
   const scrollCooldownRef = useRef(false)
-  const totalSections = 7
+  const totalSections = 9
 
   // Define product set for ThirdElementHpage
   const homeProductSet = {
@@ -182,12 +190,14 @@ export default function Home() {
   // Prepare section components for better performance
   const sections = [
     <VideoPlayerSection key="video" />,
-    <div className="bg-[#B8BBC1] w-full h-full" key="project"><ProjectSlider /></div>,
     <HomeProjectSlider key="home-projects" />,
+    <div className="bg-[#B8BBC1] w-full h-full" key="project"><ProjectSlider /></div>,
     <ThirdElementHpage key="third" productSet={homeProductSet} />,
     <FirstElementHpage key="first" />,
     <SecondElementHpage key="second" />,
-    <div className="rounded-t-[10px] overflow-hidden shadow-2xl h-full" key="footer"><Footer /></div>
+    <ProductShowcase key="product-showcase" />,
+    <LightingShowcase key="lighting-showcase" />,
+    <div className="rounded-t-[10px] overflow-hidden shadow-2xl h-auto min-h-screen" key="footer"><Footer /></div>
   ]
 
   return (

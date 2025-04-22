@@ -36,14 +36,14 @@ const homeProjects: HomeProject[] = [
     title: "Công nghệ chiếu sáng thông minh – Giải pháp cho công trình đẳng cấp!",
     image: "/home-page/_TRC7712.jpg",
     description: "IDA Lighting ứng dụng công nghệ hiện đại để kiến tạo giải pháp chiếu sáng thông minh, tiết kiệm năng lượng và bền vững.",
-    link: "/projects/industrial"
+    link: "/projects/luxury-apartments"
   },
   {
     id: 4,
     title: "Từ bản vẽ đến thực tế – chúng tôi làm ánh sáng trở nên sống động!",
     image: "/home-page/_TRC7748-Pano.jpg",
     description: "Với đội ngũ kiến trúc sư và kỹ sư chuyên sâu, IDA Lighting biến ý tưởng chiếu sáng thành hiện thực hoàn hảo cho mọi công trình.",
-    link: "/projects/smart"
+    link: "/projects/luxury-villas"
   }
 ]
 

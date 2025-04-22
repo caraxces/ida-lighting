@@ -327,7 +327,7 @@ const projects: Record<string, Project> = {
       { id: 8, image: "/work/smart-home/6063c516-1ac2-4870-9eaf-1b592de8fcfe.png" },
     ],
   },
-  "hoiana-resort-casino": {
+  "koi-gardens": {
     title: "Nhà riêng",
     description: "Premium residential lighting design showcasing luxury and comfort",
     banner: "/work/vn1/2022_10_21_14_54_IMG_9377.JPG",
@@ -352,22 +352,19 @@ const projects: Record<string, Project> = {
       }
     ],
     items: [
-      { id: 1, image: "/work/vn1/2022_10_21_14_54_IMG_9377.JPG" },
-      { id: 2, image: "/work/vn1/2022_10_21_14_54_IMG_9378.JPG" },
-      { id: 3, image: "/work/vn1/2022_10_21_14_54_IMG_9379.JPG" },
-      { id: 4, image: "/work/vn1/2022_07_25_16_39_IMG_6556.JPG" },
-      { id: 5, image: "/work/vn1/2022_07_25_16_39_IMG_6557.JPG" },
-      { id: 6, image: "/work/vn1/2022_07_25_16_40_IMG_6558.JPG" },
-      { id: 7, image: "/work/vn1/2022_07_25_16_42_IMG_6559.JPG" },
-      { id: 8, image: "/work/vn1/2022_07_25_16_42_IMG_6560.JPG" },
-      { id: 9, image: "/work/vn1/2022_05_04_06_51_IMG_3809.JPG" },
-      { id: 10, image: "/work/vn1/2022_05_04_06_51_IMG_3810.JPG" },
-      { id: 11, image: "/work/vn1/2022_05_04_06_51_IMG_3811.JPG" },
-      { id: 12, image: "/work/vn1/2022_08_03_07_29_IMG_6852.JPG" },
-      { id: 13, image: "/work/vn1/2022_08_03_14_36_IMG_6853.JPG" },
-      { id: 14, image: "/work/vn1/2022_08_03_14_36_IMG_6854.JPG" },
-      { id: 15, image: "/work/vn1/2022_08_03_14_39_IMG_6855.JPG" },
-      { id: 16, image: "/work/vn1/2022_08_03_14_40_IMG_6856.JPG" }
+      { id: 1, image: "/work/vn1/2022_07_25_16_39_IMG_6556.JPG" },
+      { id: 2, image: "/work/vn1/2022_07_25_16_39_IMG_6557.JPG" },
+      { id: 3, image: "/work/vn1/2022_07_25_16_40_IMG_6558.JPG" },
+      { id: 4, image: "/work/vn1/2022_07_25_16_42_IMG_6559.JPG" },
+      { id: 5, image: "/work/vn1/2022_07_25_16_42_IMG_6560.JPG" },
+      { id: 6, image: "/work/vn1/2022_07_25_16_43_IMG_6561.JPG" },
+      { id: 7, image: "/work/vn1/2022_07_25_16_43_IMG_6562.JPG" },
+      { id: 8, image: "/work/vn1/2022_07_25_16_46_IMG_6563.JPG" },
+      { id: 9, image: "/work/vn1/2022_07_25_16_47_IMG_6564.JPG" },
+      { id: 10, image: "/work/vn1/2022_10_21_14_54_IMG_9376.JPG" },
+      { id: 11, image: "/work/vn1/2022_10_21_14_54_IMG_9377.JPG" },
+      { id: 12, image: "/work/vn1/2022_10_21_14_54_IMG_9378.JPG" },
+      { id: 13, image: "/work/vn1/2022_10_21_14_54_IMG_9379.JPG" }
     ],
   },
   "luxury-apartments": {
@@ -467,7 +464,7 @@ const projects: Record<string, Project> = {
       { id: 29, image: "/work/vn3/2022_09_26_19_31_IMG_8521.JPG" }
     ],
   },
-  "retails": {
+  "retail": {
     title: "Bamboo cafe",
     description: "Contemporary cafe lighting design creating a vibrant and welcoming atmosphere",
     banner: "/work/vn4/2020_12_26_19_53_IMG_0314.JPG",
@@ -533,7 +530,7 @@ const projects: Record<string, Project> = {
       { id: 56, image: "/work/vn4/2021_04_14_20_44_IMG_0429.JPG" }
     ],
   },
-  "out door": {
+  "outdoor": {
     title: "Out door field",
     description: "Entertainment lighting solutions for outdoor recreational areas and public spaces",
     banner: "/work/vn5/2022_04_28_19_36_IMG_3661.JPG",

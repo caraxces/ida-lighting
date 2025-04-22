@@ -110,7 +110,7 @@ export default function MobileLayout({ hasLoaded, page, direction, paginate, ima
           >
             <h3 className="text-white font-medium">Your light - Your style.</h3>
             <p className="text-white/80 text-xs leading-relaxed">
-              IDA's commitment to creating unique, responsible lighting solutions.
+              Bộ sưu tập đèn thờ cao cấp của IDA LIGHTING là sự kết hợp hài hòa giữa gỗ Walnut của Mỹ, đồng nguyên chất và đá tự nhiên được tuyển chọn kỹ lưỡng. Từng chi tiết được chế tác thủ công với độ tinh xảo cao, tôn vinh nét đẹp tâm linh và thiêng liêng của không gian thờ tự.
             </p>
             
             {/* CTA Button - moved directly under description text */}

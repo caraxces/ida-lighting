@@ -113,7 +113,7 @@ export default function MobileLayout2({ hasLoaded, page, direction, paginate, im
           >
             <h3 className="text-white font-medium">Your light - Your style.</h3>
             <p className="text-white/80 text-xs leading-relaxed">
-              Bộ sưu tập IDA là một phần trong cam kết của IDA trong việc hợp tác cùng các doanh nghiệp nhằm giảm thiểu tác động đến môi trường.
+              Hệ thống đèn trang trí cao cấp của IDA LIGHTING là sự giao thoa tinh tế giữa nghệ thuật ánh sáng và công nghệ cá nhân hoá hiện đại, tạo nên những trải nghiệm độc bản dành riêng cho từng gia chủ. Mỗi thiết kế được chăm chút tỉ mỉ từ kiểu dáng đến chất liệu.
             </p>
             
             {/* CTA Button - moved directly under description text */}

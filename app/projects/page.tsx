@@ -35,7 +35,7 @@ const projects = [
     category: "Hospitality",
     application: ["Facades", "Interior", "Landscape", "Fountains and swimming pools"],
     image: "/work/vn1/2022_10_21_14_54_IMG_9377.JPG",
-    slug: "hoiana-resort-casino",
+    slug: "koi-gardens",
   },
   {
     id: 12,
@@ -44,7 +44,7 @@ const projects = [
     category: "Residential",
     application: ["Interior", "Wellness", "Landscape"],
     image: "/work/vn2/z4279796446188_4aaf42a5ea2830e48d8572d24725dcac.jpg",
-    slug: "the-marq-apartments",
+    slug: "luxury-apartments",
   },
   {
     id: 13,
@@ -53,7 +53,7 @@ const projects = [
     category: "Historical buildings & cultural destinations",
     application: ["Facades", "Landscape", "Museums and exhibitions"],
     image: "/work/vn3/2022_09_26_19_38_IMG_8530.JPG",
-    slug: "saigon-opera-house",
+    slug: "luxury-villas",
   },
   {
     id: 14,
@@ -62,7 +62,7 @@ const projects = [
     category: "Corporate",
     application: ["Facades", "Interior", "Public spaces"],
     image: "/work/vn4/2020_12_26_19_53_IMG_0314.JPG",
-    slug: "landmark-81-tower",
+    slug: "retail",
   },
   {
     id: 15,
@@ -71,7 +71,7 @@ const projects = [
     category: "Entertainment",
     application: ["Facades", "Landscape", "Paths and steps"],
     image: "/work/vn5/2022_04_28_19_36_IMG_3661.JPG",
-    slug: "sun-world-bana-hills",
+    slug: "outdoor",
   },
   {
     id: 16,

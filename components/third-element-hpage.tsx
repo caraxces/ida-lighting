@@ -355,7 +355,7 @@ export default function ThirdElementHpage({ productSet }: ThirdElementHpageProps
               >
                 <h3 className="text-white font-medium mb-2 text-sm">Premium Lighting Solutions</h3>
                 <p className="text-white/80 text-xs leading-relaxed">
-                  Our latest collection features innovative lighting designs that combine aesthetics with functionality. Each piece is crafted with precision and care to bring the perfect ambiance to your space.
+                  Đèn downlight của IDA LIGHTING được thiết kế theo dạng modul lắp ráp, cho phép thay thế linh hoạt giữa chip LED và choá đèn chỉ với thao tác đơn giản. Nhờ đó, người dùng có thể dễ dàng tùy biến công suất, góc chiếu và màu ánh sáng phù hợp với từng không gian cụ thể mà không cần thay toàn bộ đèn, giúp tiết kiệm chi phí và tối ưu hoá hiệu suất chiếu sáng. Thiết kế modul này cũng thuận tiện cho việc bảo trì, nâng cấp trong tương lai.
                 </p>
               </motion.div>
               
@@ -498,7 +498,7 @@ export default function ThirdElementHpage({ productSet }: ThirdElementHpageProps
               >
                 <h3 className="text-white font-medium mb-2">Premium Lighting Solutions</h3>
                 <p className="text-white/80 text-sm leading-relaxed">
-                  Our latest collection features innovative lighting designs that combine aesthetics with functionality. Each piece is crafted with precision and care to bring the perfect ambiance to your space.
+                  Đèn downlight của IDA LIGHTING được thiết kế theo dạng modul lắp ráp, cho phép thay thế linh hoạt giữa chip LED và choá đèn chỉ với thao tác đơn giản. Nhờ đó, người dùng có thể dễ dàng tùy biến công suất, góc chiếu và màu ánh sáng phù hợp với từng không gian cụ thể mà không cần thay toàn bộ đèn, giúp tiết kiệm chi phí và tối ưu hoá hiệu suất chiếu sáng. Thiết kế modul này cũng thuận tiện cho việc bảo trì, nâng cấp trong tương lai.
                 </p>
               </motion.div>
 
@@ -530,7 +530,7 @@ export default function ThirdElementHpage({ productSet }: ThirdElementHpageProps
 
             {/* Right section with image carousel - Now takes 7/10 columns (70%) */}
             <div className="md:col-span-7 flex items-center justify-center py-8 px-4 md:px-8">
-              <div className="grid grid-cols-4 gap-4 w-full max-w-[550px] mx-auto">
+              <div className="grid grid-cols-4 gap-8 w-full max-w-[650px] mx-auto">
                 {[0, 1, 2, 3].map((colIndex) => {
                   const currentPos = currentPositions[colIndex];
                   const isLedModule = colIndex % 2 === 1; // Column 2 and 4 (index 1 and 3) are LED modules
@@ -541,7 +541,7 @@ export default function ThirdElementHpage({ productSet }: ThirdElementHpageProps
                   const imageArray = isLedModule ? selectedLedImages : selectedFrameImages;
                   
                   return (
-                    <div key={colIndex} className="flex flex-col items-center h-[240px] justify-center">
+                    <div key={colIndex} className="flex flex-col items-center h-[240px] justify-center px-[15px]">
                       <div className="relative h-full flex flex-col items-center justify-center">
                         {/* Previous image (smaller) */}
                         <AnimatePresence mode="popLayout">
