@@ -97,7 +97,7 @@ export default function MobileLayout({ hasLoaded, page, direction, paginate, ima
           {/* Main title - smaller for mobile */}
           <div className="mt-1">
             <AnimatedTitle>
-              <span className="text-3xl block text-white">This is IDA Lighting</span>
+              <span className="text-3xl block text-white">IDA Lighting</span>
             </AnimatedTitle>
           </div>
 

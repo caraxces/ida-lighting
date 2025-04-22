@@ -37,7 +37,7 @@ export default function AnimatedTitle({ children, className, delay = 0.2 }: Anim
     <motion.h2
       ref={headlineRef}
       className={cn(
-        "text-5xl md:text-7xl lg:text-8xl font-bold mb-8 leading-tight tracking-tight mix-blend-difference",
+        "text-5xl md:text-7xl lg:text-8xl font-bold leading-tight tracking-tight mix-blend-difference",
         className,
       )}
       style={{

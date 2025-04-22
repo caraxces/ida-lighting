@@ -279,7 +279,7 @@ const HomeProjectSlider = ({ onSlideChange }: HomeProjectSliderProps) => {
               {/* Color block content with project info */}
               <div className="relative w-full h-full flex flex-col justify-center px-8 md:px-12">
                 <motion.h2 
-                  className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4"
+                  className="text-[1.125rem] md:text-4xl lg:text-5xl font-bold text-white mb-4"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: 0.2 }}
