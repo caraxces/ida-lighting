@@ -126,7 +126,7 @@ export default function MobileLayout({ hasLoaded, page, direction, paginate, ima
               <GlowButton 
                 text="XEM THÊM" 
                 onClick={() => router.push("/products")}
-                className="w-[250px]"
+                className="w-auto inline-block"
               />
             </motion.div>
           </motion.div>

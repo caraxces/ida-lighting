@@ -7,6 +7,7 @@ import { useSound } from "@/hooks/use-sound"
 import { ChevronRight } from "lucide-react"
 import { useRouter } from "next/navigation"
 import GlowButton from "./glow-button"
+import AnimatedTitle from "./animated-title"
 
 // Types
 type HomeProject = {
@@ -281,14 +282,12 @@ const HomeProjectSlider = ({ onSlideChange }: HomeProjectSliderProps) => {
             >
               {/* Color block content with project info */}
               <div className="relative w-full h-full flex flex-col justify-center px-8 md:px-12 mt-[20px]">
-                <motion.h2 
-                  className="text-[36px] font-bold text-white mb-4"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.2 }}
+                <AnimatedTitle 
+                  className="text-[1.125rem] md:text-4xl lg:text-5xl mb-4"
+                  delay={0.2}
                 >
                   {homeProjects[currentIndex].title}
-                </motion.h2>
+                </AnimatedTitle>
                 
                 <motion.p
                   className="text-sm md:text-base text-white/80 max-w-md mb-8 whitespace-pre-line"
@@ -308,6 +307,7 @@ const HomeProjectSlider = ({ onSlideChange }: HomeProjectSliderProps) => {
                   <GlowButton 
                     text="XEM THÊM" 
                     onClick={() => router.push(homeProjects[currentIndex].link)}
+                    className="inline-block"
                   />
                 </motion.div>
               </div>

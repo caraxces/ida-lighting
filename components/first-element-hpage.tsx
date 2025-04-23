@@ -324,7 +324,7 @@ export default function FirstElementHpage() {
                 <GlowButton 
                   text="XEM THÊM" 
                   onClick={() => router.push("/products")}
-                  className="w-[320px]"
+                  className="inline-block"
                 />
               </motion.div>
             </div>

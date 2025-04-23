@@ -135,9 +135,9 @@ function MobileProductShowcase({ hasLoaded, page, direction, paginate, images }:
               className="mt-4"
             >
               <GlowButton 
-                text="Xem thêm" 
+                text="XEM THÊM" 
                 onClick={() => router.push("/collections")}
-                className="w-[250px]"
+                className="inline-block"
               />
             </motion.div>
           </motion.div>
@@ -569,9 +569,9 @@ export default function ProductShowcase() {
                 transition={{ duration: 0.8, delay: 0.8 }}
               >
                 <GlowButton 
-                  text="Xem thêm" 
+                  text="XEM THÊM" 
                   onClick={() => router.push("/collections")}
-                  className="w-[320px]"
+                  className="inline-block"
                 />
               </motion.div>
             </div>

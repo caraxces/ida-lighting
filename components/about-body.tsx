@@ -39,7 +39,7 @@ export default function IDALightingProfile() {
               Với tầm nhìn sáng tạo và đột phá, IDA LIGHTING được thành lập vào năm 2019 bởi Ths.Kts Nguyễn Đình Dương. Sau nhiều năm làm việc 
 trong lĩnh vực thiết kế và thi công kiến trúc, nhận thấy nhu cầu cấp thiết về những giải pháp chiếu sáng hiện đại, tinh tế và cá nhân hóa 
 cao cho các công trình. Đây chính là động lực để IDA LIGHTING ra đời vào năm 2019 với sứ mệnh:
-              <span className="block italic mt-2">"“Biến ánh sáng thành linh hồn của không gian”.".</span>
+              <span className="block italic mt-2">“Biến ánh sáng thành linh hồn của không gian”.</span>
             </motion.p>
 
             <motion.p
