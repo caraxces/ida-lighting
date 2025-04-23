@@ -6,9 +6,10 @@ interface GlowButtonProps {
   text: string
   onClick: () => void
   className?: string
+  width?: string
 }
 
-export default function GlowButton({ text, onClick, className = "" }: GlowButtonProps) {
+export default function GlowButton({ text, onClick, className = "", width = "70%" }: GlowButtonProps) {
   const [isHovered, setIsHovered] = useState(false)
   const [rotation, setRotation] = useState(0)
 
@@ -37,6 +38,7 @@ export default function GlowButton({ text, onClick, className = "" }: GlowButton
   return (
     <div
       className={`relative ${className}`}
+      style={{ maxWidth: width, width: width }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -73,8 +75,8 @@ export default function GlowButton({ text, onClick, className = "" }: GlowButton
         className="relative z-10 px-8 py-3 bg-black bg-opacity-90 text-white font-medium rounded-full w-full transition-all duration-300"
         style={{
           boxShadow: isHovered 
-            ? "0 0 30px rgba(0, 255, 255, 0.7), 0 0 60px rgba(0, 255, 255, 0.4)" 
-            : "0 0 20px rgba(0, 255, 255, 0.5), 0 0 40px rgba(0, 255, 255, 0.3)",
+            ? "0 0 30px rgba(168, 2, 2, 0.7), 0 0 60px rgba(247, 6, 6, 0.4)" 
+            : "0 0 20px rgba(250, 17, 17, 0.5), 0 0 40px rgba(240, 22, 22, 0.3)",
           transform: isHovered ? "scale(1.05)" : "scale(1.02)",
           textShadow: isHovered 
             ? "0 0 10px rgba(255, 255, 255, 0.5)" 

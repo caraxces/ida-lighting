@@ -296,10 +296,9 @@ export default function FirstElementHpage() {
               <div className="mb-4">
                 <AnimatedTitle>
                   {/* <span className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl block text-white">This is</span> */}
-                  <span className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-white">
-                    IDA
+                  <span className="text-[36px] font-extrabold text-white">
+                    Đèn gỗ
                   </span>
-                  <span className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-white"> Lighting.</span>
                 </AnimatedTitle>
               </div>
 
@@ -323,7 +322,7 @@ export default function FirstElementHpage() {
                 transition={{ duration: 0.8, delay: 0.8 }}
               >
                 <GlowButton 
-                  text="Xem bộ sưu tập" 
+                  text="Xem thêm" 
                   onClick={() => router.push("/products")}
                   className="w-[320px]"
                 />

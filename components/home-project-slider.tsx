@@ -29,7 +29,7 @@ const homeProjects: HomeProject[] = [
   {
     id: 2,
     title: "DỰ ÁN | LONG HOUSE",
-    image: "/home-page/272997168_476963463943196_4364219283871969024_n.jpg", 
+    image: "/work/long-house/_TRC7194.jpg", 
     description: "TKKT: LE HUU SANG ARCHITEXT\nĐịa Chỉ: TP Hà Tĩnh\nNăm hoàn thành: 2024\nHạng mục chiếu sáng: Garden lighting, Indoor, Outdoor, Decor Lighting",
     link: "/projects/long-house"
   },
@@ -282,7 +282,7 @@ const HomeProjectSlider = ({ onSlideChange }: HomeProjectSliderProps) => {
               {/* Color block content with project info */}
               <div className="relative w-full h-full flex flex-col justify-center px-8 md:px-12 mt-[20px]">
                 <motion.h2 
-                  className="text-[1.125rem] md:text-4xl lg:text-5xl font-bold text-white mb-4"
+                  className="text-[36px] font-bold text-white mb-4"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: 0.2 }}
@@ -308,7 +308,6 @@ const HomeProjectSlider = ({ onSlideChange }: HomeProjectSliderProps) => {
                   <GlowButton 
                     text="XEM CHI TIẾT" 
                     onClick={() => router.push(homeProjects[currentIndex].link)}
-                    className="w-[320px]"
                   />
                 </motion.div>
               </div>

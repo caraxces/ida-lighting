@@ -844,7 +844,7 @@ export default function ProjectPage({ params }: ProjectPageProps) {
       window.removeEventListener('mousemove', handleMouseMove);
     };
   }, []);
-  
+
   return (
     <main className="min-h-screen bg-gradient-to-r from-black via-black to-[#8B2323] text-white">
       <Header />
@@ -887,9 +887,9 @@ export default function ProjectPage({ params }: ProjectPageProps) {
                     style={{ y: bannerY }}
                   >
                     <Image 
-                      src={project.banner} 
-                      alt={project.title}
-                      className="w-full h-full object-cover"
+                    src={project.banner} 
+                    alt={project.title}
+                    className="w-full h-full object-cover"
                       fill
                       sizes="(max-width: 1024px) 100vw, 66vw"
                       style={{
@@ -950,8 +950,8 @@ export default function ProjectPage({ params }: ProjectPageProps) {
                   >
                     {allImages[currentImageIndex].endsWith('.mp4') ? (
                       <video 
-                        src={allImages[currentImageIndex]} 
-                        className="w-full h-full object-cover"
+                    src={allImages[currentImageIndex]} 
+                    className="w-full h-full object-cover"
                         autoPlay
                         loop
                         muted
@@ -973,7 +973,7 @@ export default function ProjectPage({ params }: ProjectPageProps) {
                     )}
                   </motion.div>
                 </AnimatePresence>
-              
+                
                 {/* Navigation arrows with improved hover effects */}
                 <motion.button 
                   onClick={goToPrevImage}
@@ -1172,9 +1172,9 @@ export default function ProjectPage({ params }: ProjectPageProps) {
               );
               
               return (
-                <motion.div 
-                  key={item.id} 
-                  className="group relative"
+              <motion.div 
+                key={item.id} 
+                className="group relative"
                   ref={ref}
                   style={{ 
                     y: isInView ? itemY : 0,
@@ -1200,17 +1200,17 @@ export default function ProjectPage({ params }: ProjectPageProps) {
                     filter: { duration: 0.5 },
                     y: { duration: 0.5, ease: "easeOut" }
                   }}
-                >
-                  <div className="relative aspect-[4/3] overflow-hidden rounded-md">
+              >
+                <div className="relative aspect-[4/3] overflow-hidden rounded-md">
                     <motion.div 
                       className="w-full h-full"
                       whileHover={{ scale: 1.08 }}
                       transition={{ duration: 0.7, ease: "easeOut" }}
                     >
                       <Image 
-                        src={item.image} 
+                    src={item.image} 
                         alt={item.title || `Gallery image ${idx + 1}`}
-                        className="w-full h-full object-cover"
+                    className="w-full h-full object-cover"
                         fill
                         sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                         style={{
@@ -1220,13 +1220,13 @@ export default function ProjectPage({ params }: ProjectPageProps) {
                         loading="lazy"
                       />
                     </motion.div>
-                    <motion.div 
+                  <motion.div 
                       className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                      initial={{ opacity: 0 }}
-                      whileHover={{ opacity: 1 }}
+                    initial={{ opacity: 0 }}
+                    whileHover={{ opacity: 1 }}
                       transition={{ duration: 0.5 }}
-                    />
-                  </div>
+                  />
+                </div>
                   <motion.h3 
                     className="mt-2 font-medium"
                     initial={{ opacity: 0, y: 5 }}
@@ -1239,7 +1239,7 @@ export default function ProjectPage({ params }: ProjectPageProps) {
                   >
                     {item.title}
                   </motion.h3>
-                </motion.div>
+              </motion.div>
               );
             })}
           </div>

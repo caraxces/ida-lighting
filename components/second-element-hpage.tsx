@@ -19,9 +19,9 @@ import GlowButton from "./glow-button"
 // Image array
 const images = [
   // "/slides/1.png", // Renamed from 1.png
-  "/slides/2.png",
-  "/slides/3.png",
-  "/slides/4.png",
+  "/home-page/4ae1bc8666-1.png",
+  "/home-page/4ff8136e05-1.png",
+  "/home-page/155a8c6b92-1.png",
 ]
 
 export default function SecondElementHpage() {
@@ -402,9 +402,7 @@ export default function SecondElementHpage() {
               <div className="mb-4">
                 <AnimatedTitle>
                   {/* <span className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl block text-white">This is</span> */}
-                  <span className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-white">IDA</span>
-                  <span className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-white"> Lighting.</span>
-                </AnimatedTitle>
+                  <span className="text-[36px] font-extrabold text-white">Đèn trang trí</span>                </AnimatedTitle>
               </div>
 
               {/* Description text with reveal animation */}
@@ -427,7 +425,7 @@ export default function SecondElementHpage() {
                 transition={{ duration: 0.8, delay: 0.8 }}
               >
                 <GlowButton 
-                  text="See collection" 
+                  text="Xem thêm" 
                   onClick={() => router.push("/products")}
                   className="w-[320px]"
                 />
