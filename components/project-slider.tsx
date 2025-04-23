@@ -306,7 +306,7 @@ const ProjectSlider = ({ onSlideChange }: ProjectSliderProps) => {
                   transition={{ duration: 0.5, delay: 0.4 }}
                 >
                   <GlowButton 
-                    text="TÌM HIỂU THÊM" 
+                    text="XEM THÊM" 
                     onClick={() => router.push("/about")}
                     width="70%"
                   />
