@@ -135,7 +135,7 @@ function MobileProductShowcase({ hasLoaded, page, direction, paginate, images }:
               className="mt-4"
             >
               <GlowButton 
-                text="Khám phá bộ sưu tập ngoài trời" 
+                text="Xem thêm" 
                 onClick={() => router.push("/collections")}
                 className="w-[250px]"
               />
@@ -539,10 +539,10 @@ export default function ProductShowcase() {
               <div className="mb-4">
                 <AnimatedTitle>
                   {/* <span className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl block text-white">Our</span> */}
-                  <span className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-white">
+                  <span className="text-[36px] font-extrabold text-white">
                     Outdoor 
                   </span>
-                  <span className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-white"> Lighting.</span>
+                  <span className="text-[36px] text-white"> Lighting.</span>
                 </AnimatedTitle>
               </div>
 
@@ -569,7 +569,7 @@ export default function ProductShowcase() {
                 transition={{ duration: 0.8, delay: 0.8 }}
               >
                 <GlowButton 
-                  text="Khám phá bộ sưu tập ngoài trời" 
+                  text="Xem thêm" 
                   onClick={() => router.push("/collections")}
                   className="w-[320px]"
                 />

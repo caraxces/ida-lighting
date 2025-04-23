@@ -2,7 +2,7 @@
 
 import type React from "react"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Header from "@/components/header"
 import Footer from "@/components/footer"
 import { motion, HTMLMotionProps, AnimatePresence } from "framer-motion"
@@ -41,6 +41,31 @@ export default function ContactPage() {
 
   // State để theo dõi QR code đang được xem toàn màn hình
   const [activeQR, setActiveQR] = useState<QRCodeData | null>(null);
+  
+  // State để theo dõi bố cục (dọc hoặc ngang)
+  const [isVerticalLayout, setIsVerticalLayout] = useState(true);
+  
+  // State để theo dõi kích thước màn hình
+  const [isMobile, setIsMobile] = useState(true);
+
+  // Kiểm tra kích thước màn hình khi component mount
+  useEffect(() => {
+    const checkMobile = () => {
+      const isMobileScreen = window.innerWidth < 768;
+      setIsMobile(isMobileScreen);
+      // Nếu là màn hình mobile thì luôn là bố cục dọc
+      if (isMobileScreen) {
+        setIsVerticalLayout(true);
+      }
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
+    return () => {
+      window.removeEventListener('resize', checkMobile);
+    };
+  }, []);
 
   // Dữ liệu QR code
   const qrCodes: QRCodeData[] = [
@@ -82,6 +107,9 @@ export default function ContactPage() {
       ...prev,
       [name]: value,
     }))
+    
+    // Khi người dùng tương tác với form, chuyển về bố cục dọc
+    setIsVerticalLayout(true);
   }
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -95,9 +123,21 @@ export default function ContactPage() {
       message: "",
     })
   }
+  
+  // Xử lý khi người dùng chạm vào trang
+  const handleInteraction = () => {
+    // Nếu không phải màn hình mobile, chuyển về bố cục dọc khi có tương tác
+    if (!isMobile) {
+      setIsVerticalLayout(true);
+    }
+  };
 
   return (
-    <main className="min-h-screen bg-gradient-to-r from-black via-black to-[#8B2323] text-white">
+    <main 
+      className="min-h-screen bg-gradient-to-r from-black via-black to-[#8B2323] text-white"
+      onClick={handleInteraction}
+      onTouchStart={handleInteraction}
+    >
       <Header />
 
       <section className="pt-32 pb-16 px-4 md:px-8">
@@ -121,8 +161,8 @@ export default function ContactPage() {
                   Quét mã QR bên dưới để kết nối với đội ngũ của chúng tôi trên các nền tảng nhắn tin để nhận phản hồi nhanh chóng.
                 </p>
 
-                {/* Responsive QR Code Layout - Vertical on mobile, Horizontal on md+ */}
-                <div className="flex flex-col md:flex-row justify-between items-center md:items-stretch gap-6 w-full mb-8">
+                {/* Responsive QR Code Layout - Luôn dọc khi có tương tác */}
+                <div className={`flex ${isVerticalLayout ? 'flex-col' : 'md:flex-row'} justify-between items-center ${isVerticalLayout ? '' : 'md:items-stretch'} gap-6 w-full mb-8`}>
                   {qrCodes.map((qr, index) => (
                     <motion.div 
                       key={qr.id}
@@ -132,7 +172,10 @@ export default function ContactPage() {
                         boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1)"
                       }}
                       transition={{ type: "spring", stiffness: 300 }}
-                      onClick={() => setActiveQR(qr)}
+                      onClick={(e) => {
+                        e.stopPropagation(); // Ngăn bubble lên để không trigger handleInteraction
+                        setActiveQR(qr);
+                      }}
                     >
                       <div className={`relative w-full h-full p-4 border-2 ${
                         qr.id === "zalo-customer" ? "border-blue-500/40 bg-gradient-to-br from-slate-900/80 to-red-900/30 group-hover:border-blue-500/70" :
@@ -214,7 +257,7 @@ export default function ContactPage() {
               </motion.div>
             </div>
 
-            <div className="w-full md:w-1/2">
+            <div className="w-full md:w-1/2" onClick={handleInteraction}>
               <MotionDiv
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}

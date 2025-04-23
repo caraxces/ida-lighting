@@ -5,15 +5,24 @@ import type React from "react"
 import { useRef, useEffect } from "react"
 import { motion } from "framer-motion"
 import { cn } from "@/lib/utils"
+import { HEADING_SIZES } from "@/lib/constants/typography"
+import { useDeviceSize } from "./hooks/use-device-size"
 
 type AnimatedTitleProps = {
   children: React.ReactNode
   className?: string
   delay?: number
+  variant?: keyof typeof HEADING_SIZES
 }
 
-export default function AnimatedTitle({ children, className, delay = 0.2 }: AnimatedTitleProps) {
+export default function AnimatedTitle({ 
+  children, 
+  className, 
+  delay = 0.2,
+  variant = "h2" 
+}: AnimatedTitleProps) {
   const headlineRef = useRef<HTMLHeadingElement>(null)
+  const { isDesktop } = useDeviceSize()
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -33,11 +42,18 @@ export default function AnimatedTitle({ children, className, delay = 0.2 }: Anim
     }
   }, [])
 
+  // Lấy class dựa trên kích thước màn hình
+  const responsiveClass = isDesktop 
+    ? "text-7xl lg:text-8xl" // Desktop size
+    : "text-5xl" // Mobile/tablet size
+
   return (
     <motion.h2
       ref={headlineRef}
       className={cn(
-        "text-5xl md:text-7xl lg:text-8xl font-bold leading-tight tracking-tight mix-blend-difference",
+        "font-bold leading-tight tracking-tight", 
+        responsiveClass,
+        "mix-blend-difference",
         className,
       )}
       style={{
@@ -45,8 +61,6 @@ export default function AnimatedTitle({ children, className, delay = 0.2 }: Anim
         backgroundSize: "300% 300%",
         WebkitBackgroundClip: "text",
         WebkitTextFillColor: "transparent",
-        MozBackgroundClip: "text",
-        MozTextFillColor: "transparent",
       }}
       initial={{ opacity: 0, y: 50 }}
       animate={{ opacity: 1, y: 0 }}

@@ -233,7 +233,7 @@ export default function ThirdElementHpage({ productSet }: ThirdElementHpageProps
               <div className="mb-1 pt-0">
                 <AnimatedTitle>
                   {/* <span className="text-2xl sm:text-3xl block text-white">Downlight</span> */}
-                  <span className="text-xl sm:text-2xl text-white">Downlight Collection.</span>
+                  <span className="text-[36px] text-white">Downlight Collection.</span>
                 </AnimatedTitle>
               </div>
               
@@ -245,7 +245,7 @@ export default function ThirdElementHpage({ productSet }: ThirdElementHpageProps
                 className="mt-2 mb-4"
               >
                 <GlowButton 
-                  text="Explore collection" 
+                  text="Xem thêm" 
                   onClick={() => router.push("/products")}
                   className="w-[320px]"
                 />
@@ -473,7 +473,7 @@ export default function ThirdElementHpage({ productSet }: ThirdElementHpageProps
               {/* Main title with 3D effect - reduced size */}
               <div className="mb-2 pt-0">
                 <AnimatedTitle>
-                  <span className="text-2xl sm:text-3xl md:text-4xl block text-white">Downlight Collection.</span>
+                  <span className="text-[36px] block text-white">Downlight Collection.</span>
                 </AnimatedTitle>
               </div>
 
@@ -485,7 +485,7 @@ export default function ThirdElementHpage({ productSet }: ThirdElementHpageProps
                 className="mt-2 mb-4"
               >
                 <GlowButton 
-                  text="Explore collection" 
+                  text="Xem thêm" 
                   onClick={() => router.push("/products")}
                   className="w-[320px]"
                 />

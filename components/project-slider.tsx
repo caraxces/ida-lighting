@@ -266,29 +266,51 @@ const ProjectSlider = ({ onSlideChange }: ProjectSliderProps) => {
             <motion.div
               className="relative h-full bg-black z-30 overflow-hidden"
               initial={{
-                width: isMobile ? "100%" : "30%",
+                width: isMobile ? "100%" : "37.5%",
                 height: isMobile ? "50%" : "100%",
               }}
               animate={{
-                width: isMobile ? "100%" : "30%",
+                width: isMobile ? "100%" : "37.5%",
                 height: isMobile ? "50%" : "100%",
               }}
               exit={{
-                width: isMobile ? "100%" : "30%",
+                width: isMobile ? "100%" : "37.5%",
                 height: isMobile ? "0%" : "100%",
               }}
               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             >
-              {/* Color block content - simplified, removed small labels */}
-              <div className="relative w-full h-full flex items-center justify-center">
+              {/* Color block content with project info */}
+              <div className="relative w-full h-full flex flex-col justify-center px-8 md:px-12 mt-[20px]">
+                <motion.h2 
+                  className="text-[1.125rem] md:text-4xl lg:text-5xl font-bold text-white mb-4"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.2 }}
+                >
+                  {services[currentIndex].title}
+                </motion.h2>
+                
+                <motion.p
+                  className="text-sm md:text-base text-white/80 max-w-md mb-8 whitespace-pre-line"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.3 }}
+                >
+                  {services[currentIndex].description}
+                </motion.p>
+                
                 {/* Link button */}
-                <div className="absolute bottom-8 right-8">
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.4 }}
+                >
                   <GlowButton 
                     text="TÌM HIỂU THÊM" 
                     onClick={() => router.push("/about")}
-                    className="w-[320px]"
+                    width="70%"
                   />
-                </div>
+                </motion.div>
               </div>
             </motion.div>
 
@@ -310,11 +332,18 @@ const ProjectSlider = ({ onSlideChange }: ProjectSliderProps) => {
               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             >
               {services[currentIndex] && (
-                <img
-                  src={services[currentIndex].image || "/placeholder.svg"}
-                  alt={services[currentIndex].title}
-                  className="w-full h-full object-cover"
-                />
+                <motion.div 
+                  className="w-full h-full"
+                  initial={{ scale: 1.05 }}
+                  animate={{ scale: 1 }}
+                  transition={{ duration: 5, ease: "easeInOut" }}
+                >
+                  <img
+                    src={services[currentIndex].image || "/placeholder.svg"}
+                    alt={services[currentIndex].title}
+                    className="w-full h-full object-cover"
+                  />
+                </motion.div>
               )}
             </motion.div>
 
@@ -322,15 +351,15 @@ const ProjectSlider = ({ onSlideChange }: ProjectSliderProps) => {
             <motion.div
               className="relative bg-black/80 z-10 overflow-hidden"
               initial={{
-                width: isMobile ? "100%" : "20%",
+                width: isMobile ? "100%" : "12.5%",
                 height: isMobile ? "0%" : "100%",
               }}
               animate={{
-                width: isMobile ? "100%" : "20%",
+                width: isMobile ? "100%" : "12.5%",
                 height: isMobile ? "0%" : "100%",
               }}
               exit={{
-                width: isMobile ? "100%" : "20%",
+                width: isMobile ? "100%" : "12.5%",
                 height: isMobile ? "0%" : "100%",
               }}
               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
@@ -347,36 +376,26 @@ const ProjectSlider = ({ onSlideChange }: ProjectSliderProps) => {
               )}
             </motion.div>
           </div>
-
-          {/* Service Title - Positioned on top of everything with higher z-index */}
-          <motion.div
-            className="absolute z-40 left-0 right-0"
-            style={{
-              top: isMobile ? "calc(10% + 20px)" : "calc(40% + 20px)",
-            }}
-            initial={{ opacity: 0, x: "100%" }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: "-100%" }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-          >
-            <h1
-              className="text-[1.125rem] md:text-4xl lg:text-5xl font-black text-white leading-none mx-8 md:ml-[calc(15%)] md:mr-16"
-              style={{
-                fontFamily: "'Inter', sans-serif",
-                letterSpacing: "-0.02em",
-                textShadow: "0 2px 10px rgba(0,0,0,0.2)",
-              }}
-            >
-              {services[currentIndex].title}
-              {services[currentIndex].description && (
-                <p className="text-sm md:text-base mt-4 font-normal max-w-2xl">
-                  {services[currentIndex].description}
-                </p>
-              )}
-            </h1>
-          </motion.div>
         </motion.div>
       </AnimatePresence>
+
+      {/* Navigation buttons */}
+      <div className="absolute bottom-8 left-8 flex space-x-4 z-50">
+        <button
+          onClick={() => handleButtonClick("prev")}
+          className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center backdrop-blur-sm hover:bg-white/20 transition-colors"
+          aria-label="Previous slide"
+        >
+          <ChevronRight size={20} className="text-white rotate-180" />
+        </button>
+        <button
+          onClick={() => handleButtonClick("next")}
+          className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center backdrop-blur-sm hover:bg-white/20 transition-colors"
+          aria-label="Next slide"
+        >
+          <ChevronRight size={20} className="text-white" />
+        </button>
+      </div>
 
       {/* Navigation indicators */}
       <div className="absolute bottom-8 right-8 flex space-x-2 z-50">
