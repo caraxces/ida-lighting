@@ -101,12 +101,33 @@ export default function Home() {
     
     // Use passive wheel listener for better performance
     const handleWheel = (e: WheelEvent) => {
-      e.preventDefault()
+      // Allow normal scrolling behavior when in the footer section
+      if (currentSection === totalSections - 1) {
+        const footerElement = document.querySelector('.footer-section');
+        const isFooterScrollable = footerElement && footerElement.scrollHeight > footerElement.clientHeight;
+        
+        // If at the top of footer and scrolling up, move to previous section
+        if (e.deltaY < 0 && (!footerElement || footerElement.scrollTop === 0)) {
+          e.preventDefault();
+          navigateToSection(currentSection - 1);
+        }
+        // Otherwise allow normal scrolling in the footer
+        else if (isFooterScrollable) {
+          return;
+        }
+        // If footer is not scrollable and scrolling down, prevent default behavior
+        else if (e.deltaY > 0) {
+          e.preventDefault();
+        }
+        return;
+      }
       
-      if (scrollCooldownRef.current) return
+      e.preventDefault();
       
-      const direction = e.deltaY > 0 ? 1 : -1
-      navigateToSection(currentSection + direction)
+      if (scrollCooldownRef.current) return;
+      
+      const direction = e.deltaY > 0 ? 1 : -1;
+      navigateToSection(currentSection + direction);
     }
 
     const container = containerRef.current
@@ -115,7 +136,7 @@ export default function Home() {
     return () => {
       container.removeEventListener("wheel", handleWheel)
     }
-  }, [currentSection, navigateToSection])
+  }, [currentSection, navigateToSection, totalSections])
 
   // Optimized touch events handler
   useEffect(() => {
@@ -128,6 +149,20 @@ export default function Home() {
     }
     
     const handleTouchMove = (e: TouchEvent) => {
+      // Allow normal touch behavior in the footer section
+      if (currentSection === totalSections - 1) {
+        const footerElement = document.querySelector('.footer-section');
+        
+        // Only prevent default if at the top of footer and trying to scroll up
+        if (footerElement && footerElement.scrollTop === 0) {
+          const touchCurrentY = e.touches[0].clientY;
+          if (touchCurrentY > touchStartY) {
+            e.preventDefault();
+          }
+        }
+        return;
+      }
+      
       // Only prevent default for vertical swipes to allow horizontal scrolling
       const touchCurrentY = e.touches[0].clientY
       const touchCurrentX = e.touches[0].clientX
@@ -147,6 +182,15 @@ export default function Home() {
       const touchEndY = e.changedTouches[0].clientY
       const diffY = touchStartY - touchEndY
       
+      // In footer, only navigate to previous section if at the top and swiping up
+      if (currentSection === totalSections - 1) {
+        const footerElement = document.querySelector('.footer-section');
+        if (footerElement && footerElement.scrollTop === 0 && diffY < -minSwipeDistance) {
+          navigateToSection(currentSection - 1);
+        }
+        return;
+      }
+      
       if (Math.abs(diffY) > minSwipeDistance) {
         const direction = diffY > 0 ? 1 : -1
         navigateToSection(currentSection + direction)
@@ -162,7 +206,7 @@ export default function Home() {
       window.removeEventListener("touchmove", handleTouchMove)
       window.removeEventListener("touchend", handleTouchEnd)
     }
-  }, [currentSection, navigateToSection])
+  }, [currentSection, navigateToSection, totalSections])
 
   // Keyboard navigation
   useEffect(() => {
@@ -197,7 +241,7 @@ export default function Home() {
     <SecondElementHpage key="second" />,
     <ProductShowcase key="product-showcase" />,
     <LightingShowcase key="lighting-showcase" />,
-    <div className="rounded-t-[10px] overflow-hidden shadow-2xl h-auto min-h-screen" key="footer"><Footer /></div>
+    <div className="rounded-t-[10px] overflow-y-auto w-full h-auto" key="footer"><Footer /></div>
   ]
 
   return (
@@ -211,7 +255,12 @@ export default function Home() {
           scrollbar-width: none;
           max-width: 100vw;
           overscroll-behavior: none;
-          overflow: hidden;
+          overflow: ${currentSection === totalSections - 1 ? 'auto' : 'hidden'};
+        }
+
+        .footer-section {
+          overflow-y: ${currentSection === totalSections - 1 ? 'auto' : 'hidden'};
+          height: ${currentSection === totalSections - 1 ? 'auto' : '100vh'};
         }
       `}</style>
 
@@ -223,7 +272,7 @@ export default function Home() {
           {sections.map((section, index) => (
             <motion.div
               key={index}
-              className="absolute top-0 left-0 w-full h-screen"
+              className={`absolute top-0 left-0 w-full ${index === totalSections - 1 ? 'footer-section' : 'h-screen'}`}
               initial={false}
               animate={{
                 y: `${(index - currentSection) * 100}vh`,
@@ -287,7 +336,7 @@ export default function Home() {
         </div>
 
         {/* Section progress indicator */}
-        <div className="fixed left-8 bottom-8 z-50 flex items-center gap-2">
+        {/* <div className="fixed left-8 bottom-8 z-50 flex items-center gap-2">
           <span className="text-white text-lg font-medium">{currentSection + 1}</span>
           <div className="w-12 h-[1px] bg-white/30">
             <motion.div 
@@ -300,7 +349,7 @@ export default function Home() {
             />
           </div>
           <span className="text-white/70 text-sm">{totalSections}</span>
-        </div>
+        </div> */}
       </main>
     </div>
   )

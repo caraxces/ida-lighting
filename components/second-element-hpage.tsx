@@ -402,7 +402,7 @@ export default function SecondElementHpage() {
               <div className="mb-4">
                 <AnimatedTitle>
                   {/* <span className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl block text-white">This is</span> */}
-                  <span className="text-[36px] font-extrabold text-white">Đèn trang trí</span>                </AnimatedTitle>
+                  <span className="text-[36px] font-extrabold text-white">Bespoke Lighting</span>                </AnimatedTitle>
               </div>
 
               {/* Description text with reveal animation */}
@@ -427,7 +427,7 @@ export default function SecondElementHpage() {
                 <GlowButton 
                   text="XEM THÊM" 
                   onClick={() => router.push("/products")}
-                  className="w-[320px]"
+                  className="inline-block"
                 />
               </motion.div>
             </div>

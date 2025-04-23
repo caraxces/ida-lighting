@@ -105,23 +105,9 @@ export default function MobileLayout2({ hasLoaded, page, direction, paginate, im
           {/* Main title - smaller for mobile */}
           <div className="mt-1">
             <AnimatedTitle>
-              <span className="text-3xl font-extrabold text-white">Đèn trang trí</span>
+              <span className="text-3xl font-extrabold text-white">Bespoke Lighting</span>
             </AnimatedTitle>
           </div>
-
-          {/* CTA Button - moved right below title */}
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.5 }}
-            className="mt-3 mb-3"
-          >
-            <GlowButton 
-              text="XEM THÊM" 
-              onClick={() => router.push("/products")}
-              className="w-[360px]"
-            />
-          </motion.div>
 
           {/* Description text - shortened for mobile */}
           <motion.div
@@ -134,6 +120,20 @@ export default function MobileLayout2({ hasLoaded, page, direction, paginate, im
             <p className="text-white/80 text-xs leading-relaxed">
               Hệ thống đèn trang trí cao cấp của IDA LIGHTING là sự giao thoa tinh tế giữa nghệ thuật ánh sáng và công nghệ cá nhân hoá hiện đại, tạo nên những trải nghiệm độc bản dành riêng cho từng gia chủ.
             </p>
+          </motion.div>
+
+          {/* CTA Button - moved below description */}
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.5 }}
+            className="mt-3 mb-3"
+          >
+            <GlowButton 
+              text="XEM THÊM" 
+              onClick={() => router.push("/products")}
+              className="w-auto inline-block"
+            />
           </motion.div>
         </div>
 
