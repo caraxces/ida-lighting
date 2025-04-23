@@ -322,7 +322,7 @@ export default function FirstElementHpage() {
                 transition={{ duration: 0.8, delay: 0.8 }}
               >
                 <GlowButton 
-                  text="Xem thêm" 
+                  text="XEM THÊM" 
                   onClick={() => router.push("/products")}
                   className="w-[320px]"
                 />

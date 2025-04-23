@@ -124,7 +124,7 @@ export default function MobileLayout({ hasLoaded, page, direction, paginate, ima
               className="mt-4"
             >
               <GlowButton 
-                text="Xem thêm" 
+                text="XEM THÊM" 
                 onClick={() => router.push("/products")}
                 className="w-[250px]"
               />

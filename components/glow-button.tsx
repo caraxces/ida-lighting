@@ -43,10 +43,10 @@ export default function GlowButton({ text, onClick, className = "", width = "70%
       onMouseLeave={() => setIsHovered(false)}
     >
       {/* Glow effect container */}
-      <div className="absolute inset-0 rounded-full overflow-hidden">
+      <div className="absolute inset-0 overflow-hidden">
         {/* Animated gradient border */}
         <div
-          className="absolute inset-[-2px] rounded-full"
+          className="absolute inset-[-1px]"
           style={{
             background: `conic-gradient(
               from ${rotation * 360}deg,
@@ -62,9 +62,9 @@ export default function GlowButton({ text, onClick, className = "", width = "70%
               #00ffcc, 
               #00ffff
             )`,
-            filter: `blur(${isHovered ? 8 : 6}px) brightness(${isHovered ? 1.2 : 1.1})`,
+            filter: `blur(${isHovered ? 3 : 2}px) brightness(${isHovered ? 1.2 : 1.1})`,
             opacity: isHovered ? 1 : 0.95,
-            transform: "scale(1.05)",
+            transform: "scale(1.02)",
           }}
         />
       </div>
@@ -72,12 +72,12 @@ export default function GlowButton({ text, onClick, className = "", width = "70%
       {/* Button content */}
       <button
         onClick={onClick}
-        className="relative z-10 px-8 py-3 bg-black bg-opacity-90 text-white font-medium rounded-full w-full transition-all duration-300"
+        className="relative z-10 px-8 py-3 bg-black bg-opacity-90 text-white font-medium w-full transition-all duration-300"
         style={{
           boxShadow: isHovered 
-            ? "0 0 30px rgba(168, 2, 2, 0.7), 0 0 60px rgba(247, 6, 6, 0.4)" 
-            : "0 0 20px rgba(250, 17, 17, 0.5), 0 0 40px rgba(240, 22, 22, 0.3)",
-          transform: isHovered ? "scale(1.05)" : "scale(1.02)",
+            ? "0 0 15px rgba(168, 2, 2, 0.7), 0 0 30px rgba(247, 6, 6, 0.4)" 
+            : "0 0 10px rgba(250, 17, 17, 0.5), 0 0 20px rgba(240, 22, 22, 0.3)",
+          transform: isHovered ? "scale(1.02)" : "scale(1)",
           textShadow: isHovered 
             ? "0 0 10px rgba(255, 255, 255, 0.5)" 
             : "0 0 5px rgba(255, 255, 255, 0.3)",

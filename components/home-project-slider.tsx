@@ -306,7 +306,7 @@ const HomeProjectSlider = ({ onSlideChange }: HomeProjectSliderProps) => {
                   transition={{ duration: 0.5, delay: 0.4 }}
                 >
                   <GlowButton 
-                    text="XEM CHI TIẾT" 
+                    text="XEM THÊM" 
                     onClick={() => router.push(homeProjects[currentIndex].link)}
                   />
                 </motion.div>

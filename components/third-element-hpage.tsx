@@ -226,14 +226,14 @@ export default function ThirdElementHpage({ productSet }: ThirdElementHpageProps
               >
                 <span>2023</span>
                 <span className="mx-2">—</span>
-                <span>IDA Collection</span>
+                <span></span>
               </motion.div>
 
               {/* Main title with 3D effect - reduced size */}
-              <div className="mb-1 pt-0">
+              <div className="mb-1 pt-0.7">
                 <AnimatedTitle>
                   {/* <span className="text-2xl sm:text-3xl block text-white">Downlight</span> */}
-                  <span className="text-[36px] text-white">Downlight Collection.</span>
+                  <span className="text-[36px] text-white mt-[15px] inline-block">Downlight Collection.</span>
                 </AnimatedTitle>
               </div>
               
@@ -245,7 +245,7 @@ export default function ThirdElementHpage({ productSet }: ThirdElementHpageProps
                 className="mt-2 mb-4"
               >
                 <GlowButton 
-                  text="Xem thêm" 
+                  text="XEM THÊM" 
                   onClick={() => router.push("/products")}
                   className="w-[320px]"
                 />
@@ -473,7 +473,7 @@ export default function ThirdElementHpage({ productSet }: ThirdElementHpageProps
               {/* Main title with 3D effect - reduced size */}
               <div className="mb-2 pt-0">
                 <AnimatedTitle>
-                  <span className="text-[36px] block text-white">Downlight Collection.</span>
+                  <span className="text-[36px] block text-white mt-[15px]">Downlight Collection.</span>
                 </AnimatedTitle>
               </div>
 
@@ -485,7 +485,7 @@ export default function ThirdElementHpage({ productSet }: ThirdElementHpageProps
                 className="mt-2 mb-4"
               >
                 <GlowButton 
-                  text="Xem thêm" 
+                  text="XEM THÊM" 
                   onClick={() => router.push("/products")}
                   className="w-[320px]"
                 />
