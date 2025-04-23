@@ -6,6 +6,8 @@ import { ChevronRight, ChevronLeft } from "lucide-react"
 import AnimatedTitle from "./animated-title"
 import { useState, useEffect } from "react"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
+import GlowButton from "./glow-button"
 
 // Props for the mobile layout
 interface MobileLayoutProps {
@@ -23,6 +25,7 @@ export default function MobileLayout({ hasLoaded, page, direction, paginate, ima
   
   // State for animation
   const [isAnimating, setIsAnimating] = useState(false)
+  const router = useRouter()
 
   // Auto-slide functionality
   useEffect(() => {
@@ -120,17 +123,11 @@ export default function MobileLayout({ hasLoaded, page, direction, paginate, ima
               transition={{ duration: 0.8, delay: 0.6 }}
               className="mt-4"
             >
-              <Link href="/products">
-                <Button
-                  variant="ghost"
-                  className="w-fit text-white hover:bg-white/10 hover:text-white group transition-all duration-300 shadow-[0_4px_8px_rgba(0,0,0,0.1)] px-0 relative overflow-hidden"
-                > 
-                  <span className="border-b border-white/40 pb-1 flex items-center relative z-10">
-                    Xem bộ sưu tập
-                    <ChevronRight className="ml-2 h-4 w-4" />
-                  </span>
-                </Button>
-              </Link>
+              <GlowButton 
+                text="Xem bộ sưu tập" 
+                onClick={() => router.push("/products")}
+                className="w-[250px]"
+              />
             </motion.div>
           </motion.div>
         </div>

@@ -82,6 +82,24 @@ const projects = [
     image: "/work/vn6/DSC09659_HDR 1.jpg",
     slug: "vincom-center-retail",
   },
+  {
+    id: 17,
+    title: "Long House",
+    location: "Vietnam",
+    category: "Residential",
+    application: ["Facades", "Interior", "Landscape"],
+    image: "/work/long-house/_TRC7471.jpg",
+    slug: "long-house",
+  },
+  {
+    id: 18,
+    title: "Villa 44 Hà Nội",
+    location: "Hanoi, Vietnam",
+    category: "Residential",
+    application: ["Facades", "Interior", "Landscape", "Smart Home"],
+    image: "/work/villa-44/TRC_9185.jpg",
+    slug: "villa-44",
+  },
 ]
 
 // Categories for filtering

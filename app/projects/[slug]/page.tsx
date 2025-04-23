@@ -4,8 +4,8 @@ import Header from "@/components/header"
 import Footer from "@/components/footer"
 import Image from "next/image"
 import { notFound } from "next/navigation"
-import { useState, useEffect } from "react"
-import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion"
+import { useState, useEffect, useRef } from "react"
+import { motion, useScroll, useTransform, AnimatePresence, useInView } from "framer-motion"
 
 // Define project item type
 type ProjectItem = {
@@ -397,15 +397,7 @@ const projects: Record<string, Project> = {
       { id: 3, image: "/work/vn2/z4279796466044_c5730d70c7b17454e2f9592618ade7ad.jpg" },
       { id: 4, image: "/work/vn2/z4279796467822_94c1444c1f9662cde1f462e12b420fd7.jpg" },
       { id: 5, image: "/work/vn2/z4279796477537_2d44c70444780b51f0aaeb8ef53cd9cd.jpg" },
-      { id: 6, image: "/work/vn2/z4279796478648_6f87d8600736f8a18bc1d2e21ab88b6a.jpg" },
-      { id: 7, image: "/work/vn2/2022_08_03_14_40_IMG_6858.JPG" },
-      { id: 8, image: "/work/vn2/2022_08_03_15_15_IMG_6859.JPG" },
-      { id: 9, image: "/work/vn2/2022_08_03_15_15_IMG_6860.JPG" },
-      { id: 10, image: "/work/vn2/2022_08_03_17_01_IMG_6862.JPG" },
-      { id: 11, image: "/work/vn2/2022_08_03_17_01_IMG_6863.JPG" },
-      { id: 12, image: "/work/vn2/2022_08_03_17_01_IMG_6864.JPG" },
-      { id: 13, image: "/work/vn2/2022_08_03_17_02_IMG_6865.JPG" },
-      { id: 14, image: "/work/vn2/2022_08_03_17_02_IMG_6866.JPG" }
+      { id: 6, image: "/work/vn2/z4279796478648_6f87d8600736f8a18bc1d2e21ab88b6a.jpg" }
     ],
   },
   "luxury-villas": {
@@ -530,7 +522,7 @@ const projects: Record<string, Project> = {
       { id: 56, image: "/work/vn4/2021_04_14_20_44_IMG_0429.JPG" }
     ],
   },
-  "outdoor": {
+  "outdoor-field": {
     title: "Out door field",
     description: "Entertainment lighting solutions for outdoor recreational areas and public spaces",
     banner: "/work/vn5/2022_04_28_19_36_IMG_3661.JPG",
@@ -672,6 +664,89 @@ const projects: Record<string, Project> = {
       { id: 63, image: "/work/vn6/DSC09861 1.jpg" }
     ],
   },
+  "long-house": {
+    title: "Long House",
+    description: "Modern residential lighting with clean lines and seamless integration",
+    banner: "/work/long-house/_TRC7471.jpg",
+    location: "Vietnam",
+    application: "Facades, Interior, Landscape",
+    project: "IDA Lighting",
+    photo: "IDA Team",
+    products: [
+      {
+        id: "downlight-lh",
+        name: "PRO.S60 (W)",
+        description: "Đèn âm trần chống chói",
+        specs: "∅50*H75mm, 15W, 60°, 97Ra",
+        image: "/collections/Downlight/IDA0075.JPG"
+      },
+      {
+        id: "outdoor-lh",
+        name: "CP20188",
+        description: "Đèn trụ sân vườn",
+        specs: "160*55*600mm, 10W, 3000K",
+        image: "/collections/out-door/CP20188/4.jpg"
+      }
+    ],
+    items: [
+      { id: 1, image: "/work/long-house/_TRC7471.jpg" },
+      { id: 2, image: "/work/long-house/_TRC7469.jpg" },
+      { id: 3, image: "/work/long-house/_TRC7474.jpg" },
+      { id: 4, image: "/work/long-house/_TRC7472.jpg" },
+      { id: 5, image: "/work/long-house/_TRC7482.jpg" },
+      { id: 6, image: "/work/long-house/_TRC7488.jpg" },
+      { id: 7, image: "/work/long-house/_TRC7470.jpg" },
+      { id: 8, image: "/work/long-house/_TRC7464.jpg" }
+    ],
+  },
+  "villa-44": {
+    title: "Villa 44 Hà Nội",
+    description: "Premium residential lighting design showcasing luxury and modern smart home integration",
+    banner: "/work/villa-44/TRC_9185.jpg",
+    location: "Hanoi, Vietnam",
+    application: "Facades, Interior, Landscape, Smart Home",
+    project: "IDA Lighting",
+    photo: "IDA Team",
+    products: [
+      {
+        id: "downlight-v44",
+        name: "PRO.S60 (W)",
+        description: "Recessed downlight with adjustable beam angle",
+        specs: "3000K, 15W, 60°, IP44, 97Ra",
+        image: "/collections/Downlight/IDA0075.JPG"
+      },
+      {
+        id: "outdoor-v44",
+        name: "CP20188",
+        description: "Đèn trụ sân vườn",
+        specs: "160*55*600mm, 10W, 3000K",
+        image: "/collections/out-door/CP20188/4.jpg"
+      }
+    ],
+    items: [
+      { id: 1, image: "/work/villa-44/TRC_9185.jpg" },
+      { id: 2, image: "/work/villa-44/TRC_9186.jpg" },
+      { id: 3, image: "/work/villa-44/TRC_9195.jpg" },
+      { id: 4, image: "/work/villa-44/TRC_9197.jpg" },
+      { id: 5, image: "/work/villa-44/TRC_9198.jpg" },
+      { id: 6, image: "/work/villa-44/TRC_9199.jpg" },
+      { id: 7, image: "/work/villa-44/TRC_9276.jpg" },
+      { id: 8, image: "/work/villa-44/TRC_9282.jpg" },
+      { id: 9, image: "/work/villa-44/TRC_9298.jpg" },
+      { id: 10, image: "/work/villa-44/TRC_9299.jpg" },
+      { id: 11, image: "/work/villa-44/TRC_9309.jpg" },
+      { id: 12, image: "/work/villa-44/TRC_9329.jpg" },
+      { id: 13, image: "/work/villa-44/TRC_9352.jpg" },
+      { id: 14, image: "/work/villa-44/TRC_9373.jpg" },
+      { id: 15, image: "/work/villa-44/TRC_9397.jpg" },
+      { id: 16, image: "/work/villa-44/TRC_9417.jpg" },
+      { id: 17, image: "/work/villa-44/TRC_9461.jpg" },
+      { id: 18, image: "/work/villa-44/TRC_9467.jpg" },
+      { id: 19, image: "/work/villa-44/TRC_9473.jpg" },
+      { id: 20, image: "/work/villa-44/TRC_9476.jpg" },
+      { id: 21, image: "/work/villa-44/TRC_9483.jpg" }
+    ],
+  },
 }
 
 type ProjectPageProps = {
@@ -691,10 +766,43 @@ export default function ProjectPage({ params }: ProjectPageProps) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isZooming, setIsZooming] = useState(false);
   
-  // Parallax scroll effect references
+  // Enhanced parallax scroll effect references
   const { scrollYProgress } = useScroll();
-  const bannerY = useTransform(scrollYProgress, [0, 1], [0, 100]);
-  const sliderScale = useTransform(scrollYProgress, [0, 0.5], [1, 1.1]);
+  
+  // More refined parallax transformations with improved easing
+  const bannerY = useTransform(
+    scrollYProgress, 
+    [0, 1], 
+    [0, 50]
+  );
+  
+  // More subtle slider scale with smoother easing
+  const sliderScale = useTransform(
+    scrollYProgress, 
+    [0, 0.5], 
+    [1, 1.05]
+  );
+  
+  // Add parallax for the heading
+  const titleY = useTransform(
+    scrollYProgress, 
+    [0, 0.2], 
+    [0, -15]
+  );
+  
+  // Add a subtle rotation effect for gallery items
+  const galleryRotate = useTransform(
+    scrollYProgress,
+    [0, 1],
+    [0, 1]
+  );
+  
+  // Add parallax effect for description section
+  const descriptionY = useTransform(
+    scrollYProgress,
+    [0.1, 0.5],
+    [0, -20]
+  );
   
   // Zoom animation timing
   useEffect(() => {
@@ -722,14 +830,30 @@ export default function ProjectPage({ params }: ProjectPageProps) {
     setSelectedProduct(project.products[0])
   }
 
+  // Track cursor position for hover effects
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      setMousePosition({ x: e.clientX, y: e.clientY });
+    };
+    
+    window.addEventListener('mousemove', handleMouseMove);
+    
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+    };
+  }, []);
+  
   return (
     <main className="min-h-screen bg-gradient-to-r from-black via-black to-[#8B2323] text-white">
       <Header />
       
       {/* New layout based on Lucelight.it */}
       <div className="container mx-auto pt-32 pb-16 px-4 md:px-8">
-        {/* Project title */}
+        {/* Project title with parallax */}
         <motion.h1 
+          style={{ y: titleY }}
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
@@ -758,17 +882,30 @@ export default function ProjectPage({ params }: ProjectPageProps) {
                 />
               ) : (
                 <div className="relative h-full overflow-hidden">
-                  <motion.img 
+                  <motion.div 
+                    className="relative w-full h-full"
                     style={{ y: bannerY }}
-                    src={project.banner} 
-                    alt={project.title}
-                    className="w-full h-full object-cover"
-                  />
+                  >
+                    <Image 
+                      src={project.banner} 
+                      alt={project.title}
+                      className="w-full h-full object-cover"
+                      fill
+                      sizes="(max-width: 1024px) 100vw, 66vw"
+                      style={{
+                        objectFit: 'cover',
+                      }}
+                      quality={90}
+                      priority // Load this image with priority
+                    />
+                  </motion.div>
                   
-                  {/* Product indicators */}
+                  {/* Product indicators with subtle hover effect */}
                   {project.products.map((product, index) => (
-                    <button
+                    <motion.button
                       key={product.id}
+                      whileHover={{ scale: 1.1 }}
+                      transition={{ type: "spring", stiffness: 400, damping: 20 }}
                       className={`absolute w-8 h-8 rounded-full flex items-center justify-center 
                                  transition-all duration-300 ${selectedProduct?.id === product.id 
                                    ? 'bg-red-600 text-white' 
@@ -780,67 +917,103 @@ export default function ProjectPage({ params }: ProjectPageProps) {
                       onClick={() => setSelectedProduct(product)}
                     >
                       {index + 1}
-                    </button>
+                    </motion.button>
                   ))}
                 </div>
               )}
             </motion.div>
             
-            {/* Image slider with navigation arrows */}
+            {/* Image slider with refined parallax and smoother animations */}
             <motion.div 
               style={{ scale: sliderScale }}
               className="relative aspect-[16/9] mb-8 overflow-hidden rounded-md"
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: false, amount: 0.3 }}
             >
               <div className="relative h-full">
                 <AnimatePresence mode="wait">
-                  <motion.img 
+                  <motion.div
                     key={currentImageIndex}
-                    initial={{ opacity: 0, scale: 1.05 }}
+                    className="relative w-full h-full"
+                    initial={{ opacity: 0, scale: 1.05, filter: "blur(4px)" }}
                     animate={{ 
                       opacity: 1, 
-                      scale: isZooming ? 1.05 : 1 
+                      scale: isZooming ? 1.03 : 1,
+                      filter: "blur(0px)"
                     }}
-                    exit={{ opacity: 0 }}
+                    exit={{ opacity: 0, scale: 0.98, filter: "blur(4px)" }}
                     transition={{ 
-                      opacity: { duration: 0.5 },
-                      scale: { duration: 5, ease: "easeInOut" }
+                      opacity: { duration: 0.7 },
+                      scale: { duration: 5, ease: "easeInOut" },
+                      filter: { duration: 0.5 }
                     }}
-                    src={allImages[currentImageIndex]} 
-                    alt={`Gallery image ${currentImageIndex + 1}`}
-                    className="w-full h-full object-cover"
-                  />
+                  >
+                    {allImages[currentImageIndex].endsWith('.mp4') ? (
+                      <video 
+                        src={allImages[currentImageIndex]} 
+                        className="w-full h-full object-cover"
+                        autoPlay
+                        loop
+                        muted
+                        playsInline
+                      />
+                    ) : (
+                      <Image 
+                        src={allImages[currentImageIndex]} 
+                        alt={`Gallery image ${currentImageIndex + 1}`}
+                        className="w-full h-full"
+                        fill
+                        sizes="(max-width: 1024px) 100vw, 66vw"
+                        style={{
+                          objectFit: 'cover',
+                        }}
+                        quality={85}
+                        priority={currentImageIndex === 0} // Load the first image with priority
+                      />
+                    )}
+                  </motion.div>
                 </AnimatePresence>
-                
-                {/* Navigation arrows */}
-                <button 
+              
+                {/* Navigation arrows with improved hover effects */}
+                <motion.button 
                   onClick={goToPrevImage}
+                  whileHover={{ scale: 1.1, backgroundColor: "rgba(0, 0, 0, 0.7)" }}
+                  transition={{ type: "spring", stiffness: 400, damping: 25 }}
                   className="absolute left-2 top-1/2 -translate-y-1/2 w-10 h-10 bg-black/50 hover:bg-black/70 rounded-full flex items-center justify-center text-white transition-all"
                   aria-label="Previous image"
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                   </svg>
-                </button>
+                </motion.button>
                 
-                <button 
+                <motion.button 
                   onClick={goToNextImage}
+                  whileHover={{ scale: 1.1, backgroundColor: "rgba(0, 0, 0, 0.7)" }}
+                  transition={{ type: "spring", stiffness: 400, damping: 25 }}
                   className="absolute right-2 top-1/2 -translate-y-1/2 w-10 h-10 bg-black/50 hover:bg-black/70 rounded-full flex items-center justify-center text-white transition-all"
                   aria-label="Next image"
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                   </svg>
-                </button>
+                </motion.button>
                 
-                {/* Image counter */}
-                <div className="absolute bottom-4 right-4 bg-black/60 text-white text-sm px-3 py-1 rounded-full">
+                {/* Image counter with animation */}
+                <motion.div 
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.3, duration: 0.5, ease: "easeOut" }}
+                  className="absolute bottom-4 right-4 bg-black/60 text-white text-sm px-3 py-1 rounded-full"
+                >
                   {currentImageIndex + 1} / {allImages.length}
-                </div>
+                </motion.div>
               </div>
             </motion.div>
             
-            {/* Project description */}
+            {/* Project description with parallax effect */}
             <motion.div 
+              style={{ y: descriptionY }}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.3 }}
@@ -876,8 +1049,10 @@ export default function ProjectPage({ params }: ProjectPageProps) {
                 {/* Product selection buttons */}
                 <div className="flex gap-3 mt-4">
                   {project.products.map((product) => (
-                    <button
+                    <motion.button
                       key={product.id}
+                      whileHover={{ scale: 1.05 }}
+                      transition={{ type: "spring", stiffness: 400, damping: 20 }}
                       className={`px-4 py-2 rounded-md transition-colors ${
                         selectedProduct?.id === product.id
                           ? 'bg-red-600 text-white'
@@ -886,7 +1061,7 @@ export default function ProjectPage({ params }: ProjectPageProps) {
                       onClick={() => setSelectedProduct(product)}
                     >
                       {product.name}
-                    </button>
+                    </motion.button>
                   ))}
                 </div>
               </div>
@@ -965,43 +1140,108 @@ export default function ProjectPage({ params }: ProjectPageProps) {
           </div>
         </div>
         
-        {/* Project gallery */}
+        {/* Project gallery with enhanced parallax and zoom effects */}
         <motion.div 
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.5 }}
           className="mt-12"
+          style={{ rotateX: galleryRotate }}
         >
           <h2 className="text-2xl font-bold mb-6">Project Gallery</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {project.items.map((item, idx) => (
-              <motion.div 
-                key={item.id} 
-                className="group relative"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.1 * idx }}
-              >
-                <div className="relative aspect-[4/3] overflow-hidden rounded-md">
-                  <motion.img 
-                    src={item.image} 
-                    alt={item.title}
-                    className="w-full h-full object-cover"
-                    whileHover={{ 
-                      scale: 1.1,
-                      transition: { duration: 0.5 }
+            {project.items.map((item, idx) => {
+              // For each item, create a ref and useInView hook inside the map function
+              const ref = useRef(null);
+              const isInView = useInView(ref, { 
+                once: false,
+                amount: 0.2,
+                margin: "0px 0px -10% 0px"
+              });
+              
+              // Calculate animation delay based on position
+              const columnPosition = idx % 3; // Assuming 3 columns in desktop layout
+              const rowPosition = Math.floor(idx / 3); 
+              const delayFactor = columnPosition * 0.1 + rowPosition * 0.05;
+              
+              // Create a parallax effect for each gallery item
+              const itemY = useTransform(
+                scrollYProgress,
+                [Math.max(0, rowPosition * 0.05), Math.min(1, 0.2 + rowPosition * 0.05)],
+                [20, -20]
+              );
+              
+              return (
+                <motion.div 
+                  key={item.id} 
+                  className="group relative"
+                  ref={ref}
+                  style={{ 
+                    y: isInView ? itemY : 0,
+                  }}
+                  initial={{ 
+                    opacity: 0, 
+                    scale: 1.05, 
+                    filter: "blur(4px)",
+                    y: 20
+                  }}
+                  animate={isInView ? { 
+                    opacity: 1, 
+                    scale: 1,
+                    filter: "blur(0px)",
+                    y: 0
+                  } : {}}
+                  transition={{ 
+                    duration: 0.8, 
+                    ease: "easeOut",
+                    delay: delayFactor, 
+                    opacity: { duration: 0.6 },
+                    scale: { duration: 0.7 },
+                    filter: { duration: 0.5 },
+                    y: { duration: 0.5, ease: "easeOut" }
+                  }}
+                >
+                  <div className="relative aspect-[4/3] overflow-hidden rounded-md">
+                    <motion.div 
+                      className="w-full h-full"
+                      whileHover={{ scale: 1.08 }}
+                      transition={{ duration: 0.7, ease: "easeOut" }}
+                    >
+                      <Image 
+                        src={item.image} 
+                        alt={item.title || `Gallery image ${idx + 1}`}
+                        className="w-full h-full object-cover"
+                        fill
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                        style={{
+                          objectFit: 'cover',
+                        }}
+                        quality={80}
+                        loading="lazy"
+                      />
+                    </motion.div>
+                    <motion.div 
+                      className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                      initial={{ opacity: 0 }}
+                      whileHover={{ opacity: 1 }}
+                      transition={{ duration: 0.5 }}
+                    />
+                  </div>
+                  <motion.h3 
+                    className="mt-2 font-medium"
+                    initial={{ opacity: 0, y: 5 }}
+                    animate={isInView ? { opacity: 1, y: 0 } : {}}
+                    transition={{ 
+                      duration: 0.5, 
+                      delay: delayFactor + 0.2,
+                      ease: "easeOut"
                     }}
-                  />
-                  <motion.div 
-                    className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                    initial={{ opacity: 0 }}
-                    whileHover={{ opacity: 1 }}
-                    transition={{ duration: 0.3 }}
-                  />
-                </div>
-                <h3 className="mt-2 font-medium">{item.title}</h3>
-              </motion.div>
-            ))}
+                  >
+                    {item.title}
+                  </motion.h3>
+                </motion.div>
+              );
+            })}
           </div>
         </motion.div>
       </div>

@@ -5,6 +5,8 @@ import { motion, AnimatePresence } from "framer-motion"
 import Link from "next/link"
 import { useSound } from "@/hooks/use-sound"
 import { ChevronRight } from "lucide-react"
+import { useRouter } from "next/navigation"
+import GlowButton from "./glow-button"
 
 // Types
 type HomeProject = {
@@ -19,31 +21,31 @@ type HomeProject = {
 const homeProjects: HomeProject[] = [
   {
     id: 1,
-    title: "Ánh sáng không chỉ là ánh sáng – mà là để cảm nhận!",
+    title: "DỰ ÁN | 44 VILLAR",
     image: "/home-page/TRC_7715.jpg",
-    description: "Tại IDA Lighting, mỗi giải pháp chiếu sáng đều được thiết kế để truyền cảm hứng, định hình không gian và nâng tầm trải nghiệm sống.",
-    link: "/projects/starlake"
+    description: "TKKT: LE HUU SANG ARCHITEXT\nĐịa Chỉ: TP Hà Tĩnh\nNăm hoàn thành: 2024\nHạng mục chiếu sáng: Garden lighting, Indoor, Outdoor, Decor Lighting",
+    link: "/projects/villa-44"
   },
   {
     id: 2,
-    title: "Không gian của bạn – Ánh sáng của bạn!",
+    title: "DỰ ÁN | LONG HOUSE",
     image: "/home-page/272997168_476963463943196_4364219283871969024_n.jpg", 
-    description: "IDA Lighting cung cấp thiết bị chiếu sáng cao cấp kết hợp thiết kế độc quyền, tối ưu cả công năng lẫn thẩm mỹ.",
-    link: "/projects/koicafe"
+    description: "TKKT: LE HUU SANG ARCHITEXT\nĐịa Chỉ: TP Hà Tĩnh\nNăm hoàn thành: 2024\nHạng mục chiếu sáng: Garden lighting, Indoor, Outdoor, Decor Lighting",
+    link: "/projects/long-house"
   },
   {
     id: 3,
-    title: "Công nghệ chiếu sáng thông minh – Giải pháp cho công trình đẳng cấp!",
+    title: "DỰ ÁN | AN HOUSE",
     image: "/home-page/_TRC7712.jpg",
-    description: "IDA Lighting ứng dụng công nghệ hiện đại để kiến tạo giải pháp chiếu sáng thông minh, tiết kiệm năng lượng và bền vững.",
+    description: "TKKT: MAAR DESIGNS\nĐịa Chỉ: TP Hà Tĩnh\nNăm hoàn thành: 2023\nHạng mục chiếu sáng: Garden lighting, Indoor, Outdoor, Decor Lighting",
     link: "/projects/luxury-apartments"
   },
   {
     id: 4,
-    title: "Từ bản vẽ đến thực tế – chúng tôi làm ánh sáng trở nên sống động!",
+    title: "DỰ ÁN | STARLAKE VILLAR",
     image: "/home-page/_TRC7748-Pano.jpg",
-    description: "Với đội ngũ kiến trúc sư và kỹ sư chuyên sâu, IDA Lighting biến ý tưởng chiếu sáng thành hiện thực hoàn hảo cho mọi công trình.",
-    link: "/projects/luxury-villas"
+    description: "TKKT: RHINELUX\nĐịa Chỉ: Hồ Tây – Hà Nội\nNăm hoàn thành: 2024\nHạng mục chiếu sáng: Garden lighting, Indoor, Outdoor, Decor Lighting",
+    link: "/projects/starlake"
   }
 ]
 
@@ -57,6 +59,7 @@ const HomeProjectSlider = ({ onSlideChange }: HomeProjectSliderProps) => {
   const sliderRef = useRef<HTMLDivElement>(null)
   const { playSound, isSoundEnabled } = useSound()
   const autoSlideTimerRef = useRef<NodeJS.Timeout | null>(null)
+  const router = useRouter()
 
   // Add responsive state
   const [isMobile, setIsMobile] = useState(false)
@@ -277,7 +280,7 @@ const HomeProjectSlider = ({ onSlideChange }: HomeProjectSliderProps) => {
               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             >
               {/* Color block content with project info */}
-              <div className="relative w-full h-full flex flex-col justify-center px-8 md:px-12">
+              <div className="relative w-full h-full flex flex-col justify-center px-8 md:px-12 mt-[20px]">
                 <motion.h2 
                   className="text-[1.125rem] md:text-4xl lg:text-5xl font-bold text-white mb-4"
                   initial={{ opacity: 0, y: 20 }}
@@ -288,7 +291,7 @@ const HomeProjectSlider = ({ onSlideChange }: HomeProjectSliderProps) => {
                 </motion.h2>
                 
                 <motion.p
-                  className="text-sm md:text-base text-white/80 max-w-md mb-8"
+                  className="text-sm md:text-base text-white/80 max-w-md mb-8 whitespace-pre-line"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: 0.3 }}
@@ -302,13 +305,11 @@ const HomeProjectSlider = ({ onSlideChange }: HomeProjectSliderProps) => {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: 0.4 }}
                 >
-                  <Link
-                    href={homeProjects[currentIndex].link}
-                    className="inline-flex items-center text-white text-sm uppercase tracking-widest group border border-white/30 px-4 py-2 hover:bg-white/10 transition-colors"
-                  >
-                    <span>XEM DỰ ÁN</span>
-                    <ChevronRight size={14} className="ml-1 group-hover:translate-x-1 transition-transform" />
-                  </Link>
+                  <GlowButton 
+                    text="XEM CHI TIẾT" 
+                    onClick={() => router.push(homeProjects[currentIndex].link)}
+                    className="w-[320px]"
+                  />
                 </motion.div>
               </div>
             </motion.div>

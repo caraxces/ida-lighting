@@ -12,6 +12,8 @@ import FloatingElements from "./floating-elements"
 import { cn } from "@/lib/utils"
 import MobileLayout from "./mobile-layout"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
+import GlowButton from "./glow-button"
 
 // Image array
 const images = [
@@ -33,6 +35,7 @@ export default function FirstElementHpage() {
   const touchStartY = useRef<number | null>(null)
   const [isMobile, setIsMobile] = useState(false)
   const carouselRef = useRef<HTMLDivElement>(null)
+  const router = useRouter()
 
   // Scroll animation
   const { scrollYProgress } = useScroll({
@@ -319,23 +322,11 @@ export default function FirstElementHpage() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.8 }}
               >
-                <Link href="/products">
-                  <Button
-                    variant="ghost"
-                    className="w-fit text-white hover:bg-white/10 hover:text-white group transition-all duration-300 shadow-[0_4px_8px_rgba(0,0,0,0.1)] hover:shadow-[0_6px_12px_rgba(0,0,0,0.2)] transform hover:-translate-y-1 px-0 relative overflow-hidden"
-                  >
-                    <span className="border-b border-white/40 pb-1 flex items-center relative z-10">
-                      Xem bộ sưu tập
-                      <ChevronRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                    </span>
-                    <motion.div
-                      className="absolute inset-0 bg-white/10 -z-0"
-                      initial={{ x: "-100%" }}
-                      whileHover={{ x: 0 }}
-                      transition={{ duration: 0.3 }}
-                    />
-                  </Button>
-                </Link>
+                <GlowButton 
+                  text="Xem bộ sưu tập" 
+                  onClick={() => router.push("/products")}
+                  className="w-[320px]"
+                />
               </motion.div>
             </div>
 

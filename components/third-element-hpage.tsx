@@ -11,6 +11,8 @@ import AnimatedTitle from "./animated-title"
 import FloatingElements from "./floating-elements"
 import { cn } from "@/lib/utils"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
+import GlowButton from "./glow-button"
 
 // Define ProductSet type
 type ProductSet = {
@@ -163,6 +165,8 @@ export default function ThirdElementHpage({ productSet }: ThirdElementHpageProps
     return () => window.removeEventListener('resize', checkMobile)
   }, [])
 
+  const router = useRouter()
+
   return (
     <>
       <style jsx global>{scrollbarHideCss}</style>
@@ -238,25 +242,13 @@ export default function ThirdElementHpage({ productSet }: ThirdElementHpageProps
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.8 }}
-                className="flex pt-2 mb-2"
+                className="mt-2 mb-4"
               >
-                <Link href="/products">
-                  <Button
-                    variant="ghost"
-                    className="w-fit text-white hover:bg-white/10 hover:text-white group transition-all duration-300 shadow-[0_4px_8px_rgba(0,0,0,0.1)] hover:shadow-[0_6px_12px_rgba(0,0,0,0.2)] transform hover:-translate-y-1 px-0 relative overflow-hidden"
-                  >
-                    <span className="border-b border-white/40 pb-1 flex items-center relative z-10">
-                      Explore collection
-                      <ChevronRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                    </span>
-                    <motion.div
-                      className="absolute inset-0 bg-white/10 -z-0"
-                      initial={{ x: "-100%" }}
-                      whileHover={{ x: 0 }}
-                      transition={{ duration: 0.3 }}
-                    />
-                  </Button>
-                </Link>
+                <GlowButton 
+                  text="Explore collection" 
+                  onClick={() => router.push("/products")}
+                  className="w-[320px]"
+                />
               </motion.div>
             </div>
 
@@ -492,23 +484,11 @@ export default function ThirdElementHpage({ productSet }: ThirdElementHpageProps
                 transition={{ duration: 0.8, delay: 0.8 }}
                 className="mt-2 mb-4"
               >
-                <Link href="/products">
-                  <Button
-                    variant="ghost"
-                    className="w-fit text-white hover:bg-white/10 hover:text-white group transition-all duration-300 shadow-[0_4px_8px_rgba(0,0,0,0.1)] hover:shadow-[0_6px_12px_rgba(0,0,0,0.2)] transform hover:-translate-y-1 px-0 relative overflow-hidden"
-                  >
-                    <span className="border-b border-white/40 pb-1 flex items-center relative z-10">
-                      Explore collection
-                      <ChevronRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                    </span>
-                    <motion.div
-                      className="absolute inset-0 bg-white/10 -z-0"
-                      initial={{ x: "-100%" }}
-                      whileHover={{ x: 0 }}
-                      transition={{ duration: 0.3 }}
-                    />
-                  </Button>
-                </Link>
+                <GlowButton 
+                  text="Explore collection" 
+                  onClick={() => router.push("/products")}
+                  className="w-[320px]"
+                />
               </motion.div>
 
               {/* Description text with reveal animation */}

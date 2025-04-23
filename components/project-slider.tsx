@@ -5,6 +5,8 @@ import { motion, AnimatePresence } from "framer-motion"
 import Link from "next/link"
 import { useSound } from "@/hooks/use-sound"
 import { ChevronRight } from "lucide-react"
+import { useRouter } from "next/navigation"
+import GlowButton from "./glow-button"
 
 // Types
 type Service = {
@@ -57,6 +59,7 @@ const ProjectSlider = ({ onSlideChange }: ProjectSliderProps) => {
   const sliderRef = useRef<HTMLDivElement>(null)
   const { playSound, isSoundEnabled } = useSound()
   const autoSlideTimerRef = useRef<NodeJS.Timeout | null>(null)
+  const router = useRouter()
 
   // Add responsive state
   const [isMobile, setIsMobile] = useState(false)
@@ -279,13 +282,13 @@ const ProjectSlider = ({ onSlideChange }: ProjectSliderProps) => {
               {/* Color block content - simplified, removed small labels */}
               <div className="relative w-full h-full flex items-center justify-center">
                 {/* Link button */}
-                <Link
-                  href="/about"
-                  className="absolute bottom-8 right-8 flex items-center text-white text-sm uppercase tracking-widest group"
-                >
-                  <span>TÌM HIỂU THÊM</span>
-                  <ChevronRight size={14} className="ml-1 group-hover:translate-x-1 transition-transform" />
-                </Link>
+                <div className="absolute bottom-8 right-8">
+                  <GlowButton 
+                    text="TÌM HIỂU THÊM" 
+                    onClick={() => router.push("/about")}
+                    className="w-[320px]"
+                  />
+                </div>
               </div>
             </motion.div>
 
