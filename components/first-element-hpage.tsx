@@ -287,9 +287,7 @@ export default function FirstElementHpage() {
                 transition={{ duration: 0.8, delay: 0.2 }}
                 className="flex items-center text-white/70 md:text-[#8B2323]/70 text-xs mb-4 md:mb-8 tracking-wider"
               >
-                <span>2019</span>
-                <span className="mx-2">—</span>
-                <span>Duong Nguyen</span>
+                {/* Date and attribution removed */}
               </motion.div>
 
               {/* Main title with 3D effect */}
@@ -309,7 +307,7 @@ export default function FirstElementHpage() {
                 transition={{ duration: 0.8, delay: 0.6 }}
                 className="mt-4 md:mt-8 mb-6 md:mb-10 max-w-md"
               >
-                <h3 className="text-white font-medium mb-2">Your light - Your style.</h3>
+                {/* <h3 className="text-white font-medium mb-2">Your light - Your style.</h3> */}
                 <p className="text-white/80 text-sm leading-relaxed">
                 Bộ sưu tập đèn thờ cao cấp của IDA LIGHTING là sự kết hợp hài hòa giữa gỗ Walnut của Mỹ, đồng nguyên chất và đá tự nhiên được tuyển chọn kỹ lưỡng. Từng chi tiết được chế tác thủ công với độ tinh xảo cao, tôn vinh nét đẹp tâm linh và thiêng liêng của không gian thờ tự. Chất liệu cao cấp không chỉ đảm bảo độ bền vượt thời gian mà còn mang đến sự sang trọng, trầm mặc và trang nghiêm—góp phần tạo nên một không gian thờ cúng đầy uy nghi, linh khí và chuẩn mực về phong thủy. Đây không chỉ là đèn chiếu sáng, mà còn là biểu tượng của sự kính trọng và lòng thành.
                 </p>

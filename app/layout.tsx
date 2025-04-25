@@ -2,9 +2,8 @@ import type React from "react"
 import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import "./globals.css"
-import { SoundProvider } from "@/hooks/use-sound"
+// import { SoundProvider } from "@/hooks/use-sound"
 import Script from "next/script"
-import PulsePreloader from "@/components/preload"
 import FloatingContactButton from "@/components/floating-contact-button"
 // import SoundTest from "@/components/sound-test"
 
@@ -110,18 +109,7 @@ export default function RootLayout({
         <link rel="manifest" href="/site.webmanifest" />
       </head>
       <body className={inter.className} suppressHydrationWarning>
-        <PulsePreloader 
-          color="#ffffff"
-          duration={3.5}
-          size={100}
-          text="IDA Lighting your light-your style"
-          variant="pulse"
-          flashDuration={1}
-        />
-        <SoundProvider>
-          {children}
-          {/* <SoundTest /> */}
-        </SoundProvider>
+        {children}
 
         {/* GSAP Scripts */}
         <Script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" strategy="beforeInteractive" />
@@ -130,6 +118,7 @@ export default function RootLayout({
           strategy="beforeInteractive"
         />
 
+        {/* Contact button with z-index lower than mobile menu */}
         <FloatingContactButton />
       </body>
     </html>

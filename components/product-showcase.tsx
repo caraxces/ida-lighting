@@ -100,9 +100,7 @@ function MobileProductShowcase({ hasLoaded, page, direction, paginate, images }:
             transition={{ duration: 0.8, delay: 0.2 }}
             className="flex items-center text-white/70 text-xs tracking-wider"
           >
-            <span>2023</span>
-            <span className="mx-2">—</span>
-            <span>Outdoor Collection</span>
+            {/* Date and collection info removed */}
           </motion.div>
 
           {/* Main title - smaller for mobile */}
@@ -121,7 +119,6 @@ function MobileProductShowcase({ hasLoaded, page, direction, paginate, images }:
             transition={{ duration: 0.8, delay: 0.4 }}
             className="mt-1"
           >
-            <h3 className="text-white font-medium">Illuminate your outdoor spaces</h3>
             <p className="text-white/80 text-xs leading-relaxed">
               Hệ thống chiếu sáng ngoài trời của IDA LIGHTING kết hợp giữa thiết kế tinh tế và công nghệ bền bỉ, 
               tạo nên điểm nhấn hoàn hảo cho cảnh quan của bạn.
@@ -530,9 +527,7 @@ export default function ProductShowcase() {
                 transition={{ duration: 0.8, delay: 0.2 }}
                 className="flex items-center text-white/70 md:text-[#8B2323]/70 text-xs mb-4 md:mb-8 tracking-wider"
               >
-                <span>2023</span>
-                <span className="mx-2">—</span>
-                <span>Outdoor Collection</span>
+                {/* Date and collection info removed */}
               </motion.div>
 
               {/* Main title with 3D effect */}

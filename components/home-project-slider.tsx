@@ -4,7 +4,7 @@ import { useState, useRef, useEffect, useCallback } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import Link from "next/link"
 import { useSound } from "@/hooks/use-sound"
-import { ChevronRight } from "lucide-react"
+import { ChevronRight, ChevronLeft } from "lucide-react"
 import { useRouter } from "next/navigation"
 import GlowButton from "./glow-button"
 import AnimatedTitle from "./animated-title"
@@ -177,6 +177,9 @@ const HomeProjectSlider = ({ onSlideChange }: HomeProjectSliderProps) => {
   // Handle touch events for mobile swipe
   useEffect(() => {
     const handleTouchStart = (e: TouchEvent) => {
+      // Don't capture touch events for swipe navigation on mobile - allow normal scrolling
+      if (isMobile) return
+      
       if (!sliderRef.current) return
       const rect = sliderRef.current.getBoundingClientRect()
       if (rect.bottom <= 0 || rect.top >= window.innerHeight) return
@@ -188,6 +191,9 @@ const HomeProjectSlider = ({ onSlideChange }: HomeProjectSliderProps) => {
     }
 
     const handleTouchMove = (e: TouchEvent) => {
+      // Don't prevent default scrolling behavior on mobile
+      if (isMobile) return
+      
       if (!sliderRef.current || touchStartY.current === null) return
 
       // If we've viewed all slides and are on the last slide, allow normal scrolling
@@ -198,6 +204,9 @@ const HomeProjectSlider = ({ onSlideChange }: HomeProjectSliderProps) => {
     }
 
     const handleTouchEnd = (e: TouchEvent) => {
+      // Don't handle swipe gestures on mobile
+      if (isMobile) return
+      
       if (!sliderRef.current || touchStartY.current === null || isScrolling) return
 
       const rect = sliderRef.current.getBoundingClientRect()
@@ -235,9 +244,9 @@ const HomeProjectSlider = ({ onSlideChange }: HomeProjectSliderProps) => {
 
     // Add touch event listeners
     if (sliderRef.current) {
-      sliderRef.current.addEventListener("touchstart", handleTouchStart, { passive: false })
-      sliderRef.current.addEventListener("touchmove", handleTouchMove, { passive: false })
-      sliderRef.current.addEventListener("touchend", handleTouchEnd, { passive: false })
+      sliderRef.current.addEventListener("touchstart", handleTouchStart, { passive: true })
+      sliderRef.current.addEventListener("touchmove", handleTouchMove, { passive: true })
+      sliderRef.current.addEventListener("touchend", handleTouchEnd, { passive: true })
     }
 
     return () => {
@@ -247,7 +256,7 @@ const HomeProjectSlider = ({ onSlideChange }: HomeProjectSliderProps) => {
         sliderRef.current.removeEventListener("touchend", handleTouchEnd)
       }
     }
-  }, [currentIndex, isScrolling, hasViewedAllSlides, homeProjects.length])
+  }, [currentIndex, isScrolling, hasViewedAllSlides, homeProjects.length, isMobile])
 
   return (
     <div ref={sliderRef} className="relative w-full h-screen overflow-hidden bg-gray-900">
@@ -255,36 +264,45 @@ const HomeProjectSlider = ({ onSlideChange }: HomeProjectSliderProps) => {
       <AnimatePresence initial={false} mode="wait">
         <motion.div
           key={`slide-${currentIndex}`}
-          className="absolute inset-0 z-10 flex"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.5 }}
+          className="absolute inset-0 z-[10] flex"
+          initial={{ opacity: 0, y: isMobile ? 20 : 0 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: isMobile ? -20 : 0 }}
+          transition={{ 
+            duration: 0.8, 
+            ease: "easeInOut"
+          }}
         >
           {/* Main container for precise layout control */}
           <div className={`absolute inset-0 ${isMobile ? "flex flex-col" : "flex flex-row"}`}>
             {/* COLOR BLOCK with animated width */}
             <motion.div
-              className="relative h-full bg-gradient-to-r from-gray-900 to-[#8B2323] z-30 overflow-hidden"
+              className="relative h-full bg-gradient-to-r from-gray-900 to-[#8B2323] z-[30] overflow-hidden"
               initial={{
                 width: isMobile ? "100%" : "40%",
                 height: isMobile ? "50%" : "100%",
+                opacity: 0.8
               }}
               animate={{
                 width: isMobile ? "100%" : "40%",
                 height: isMobile ? "50%" : "100%",
+                opacity: 1
               }}
               exit={{
                 width: isMobile ? "100%" : "40%",
                 height: isMobile ? "0%" : "100%",
+                opacity: 0.8
               }}
-              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ 
+                duration: 1.2, 
+                ease: "easeOut"
+              }}
             >
               {/* Color block content with project info */}
               <div className="relative w-full h-full flex flex-col justify-center px-8 md:px-12 mt-[20px]">
                 <AnimatedTitle 
-                  className="text-[1.125rem] md:text-4xl lg:text-5xl mb-4"
-                  delay={0.2}
+                  className="text-[24px] md:text-4xl lg:text-5xl mb-4"
+                  delay={0.3}
                 >
                   {homeProjects[currentIndex].title}
                 </AnimatedTitle>
@@ -293,7 +311,7 @@ const HomeProjectSlider = ({ onSlideChange }: HomeProjectSliderProps) => {
                   className="text-sm md:text-base text-white/80 max-w-md mb-8 whitespace-pre-line"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.3 }}
+                  transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
                 >
                   {homeProjects[currentIndex].description}
                 </motion.p>
@@ -302,12 +320,15 @@ const HomeProjectSlider = ({ onSlideChange }: HomeProjectSliderProps) => {
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.4 }}
+                  transition={{ duration: 0.8, delay: 0.5, ease: "easeOut" }}
+                  className="origin-left"
+                  style={{ transform: 'scale(0.65)' }}
                 >
                   <GlowButton 
                     text="XEM THÊM" 
                     onClick={() => router.push(homeProjects[currentIndex].link)}
                     className="inline-block"
+                    // smallGlow={true}
                   />
                 </motion.div>
               </div>
@@ -315,27 +336,33 @@ const HomeProjectSlider = ({ onSlideChange }: HomeProjectSliderProps) => {
 
             {/* CURRENT SLIDE IMAGE with animated width */}
             <motion.div
-              className="relative bg-gray-100 z-20 overflow-hidden"
+              className="relative bg-gray-100 z-[20] overflow-hidden"
               initial={{
                 width: isMobile ? "100%" : "60%",
                 height: isMobile ? "50%" : "100%",
+                opacity: 0.8
               }}
               animate={{
                 width: isMobile ? "100%" : "60%",
                 height: isMobile ? "50%" : "100%",
+                opacity: 1
               }}
               exit={{
                 width: isMobile ? "100%" : "60%",
                 height: isMobile ? "0%" : "100%",
+                opacity: 0.8
               }}
-              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ 
+                duration: 1.2, 
+                ease: "easeOut"
+              }}
             >
               {homeProjects[currentIndex] && (
                 <motion.div 
                   className="w-full h-full"
-                  initial={{ scale: 1.05 }}
-                  animate={{ scale: 1 }}
-                  transition={{ duration: 5, ease: "easeInOut" }}
+                  initial={{ scale: 1.05, filter: "blur(2px)" }}
+                  animate={{ scale: 1, filter: "blur(0px)" }}
+                  transition={{ duration: 2.5, ease: "easeOut" }}
                 >
                   <img
                     src={homeProjects[currentIndex].image || "/placeholder.svg"}
@@ -349,26 +376,50 @@ const HomeProjectSlider = ({ onSlideChange }: HomeProjectSliderProps) => {
         </motion.div>
       </AnimatePresence>
 
-      {/* Navigation buttons */}
-      <div className="absolute bottom-8 left-8 flex space-x-4 z-50">
-        <button
-          onClick={() => handleButtonClick("prev")}
-          className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center backdrop-blur-sm hover:bg-white/20 transition-colors"
-          aria-label="Previous slide"
-        >
-          <ChevronRight size={20} className="text-white rotate-180" />
-        </button>
-        <button
-          onClick={() => handleButtonClick("next")}
-          className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center backdrop-blur-sm hover:bg-white/20 transition-colors"
-          aria-label="Next slide"
-        >
-          <ChevronRight size={20} className="text-white" />
-        </button>
+      {/* Mobile Navigation Arrows */}
+      {isMobile && (
+        <div className="absolute inset-x-0 top-1/2 -mt-4 px-2 flex justify-between z-[9999] pointer-events-none isolation-auto">
+          <button
+            onClick={() => handleButtonClick("prev")}
+            className="w-8 h-8 rounded-full bg-white/90 flex items-center justify-center shadow-lg pointer-events-auto"
+            aria-label="Previous project"
+          >
+            <ChevronLeft size={18} className="text-[#8B2323]" />
+          </button>
+          <button
+            onClick={() => handleButtonClick("next")}
+            className="w-8 h-8 rounded-full bg-white/90 flex items-center justify-center shadow-lg pointer-events-auto"
+            aria-label="Next project"
+          >
+            <ChevronRight size={18} className="text-[#8B2323]" />
+          </button>
+        </div>
+      )}
+
+      {/* Bottom Navigation Buttons */}
+      <div className="absolute bottom-8 right-8 flex space-x-2 z-[500]">
+        {!isMobile && (
+          <>
+            <button
+              onClick={() => handleButtonClick("prev")}
+              className="bg-white/10 backdrop-blur-xl p-4 rounded-full"
+              aria-label="Previous project"
+            >
+              <ChevronLeft size={20} className="text-white" />
+            </button>
+            <button
+              onClick={() => handleButtonClick("next")}
+              className="bg-white/10 backdrop-blur-xl p-4 rounded-full"
+              aria-label="Next project"
+            >
+              <ChevronRight size={20} className="text-white" />
+            </button>
+          </>
+        )}
       </div>
 
-      {/* Navigation indicators */}
-      <div className="absolute bottom-8 right-8 flex space-x-2 z-50">
+      {/* Navigation Indicators */}
+      <div className="absolute bottom-8 left-8 flex space-x-2 z-[500]">
         {homeProjects.map((_, index) => (
           <button
             key={index}
@@ -377,10 +428,10 @@ const HomeProjectSlider = ({ onSlideChange }: HomeProjectSliderProps) => {
                 setCurrentIndex(index)
               }
             }}
-            className={`w-2 h-2 rounded-full transition-all duration-300 ${
-              index === currentIndex ? "bg-white scale-125" : "bg-white/40"
+            className={`w-3 h-3 rounded-full transition-all ${
+              index === currentIndex ? "bg-white scale-125" : "bg-white/50"
             }`}
-            aria-label={`Go to slide ${index + 1}`}
+            aria-label={`Go to project ${index + 1}`}
           />
         ))}
       </div>

@@ -393,9 +393,7 @@ export default function SecondElementHpage() {
                 transition={{ duration: 0.8, delay: 0.2 }}
                 className="flex items-center text-white/70 md:text-[#FFDAB9]/70 text-xs mb-4 md:mb-8 tracking-wider"
               >
-                <span>2019</span>
-                <span className="mx-2">—</span>
-                <span>Duong Nguyen</span>
+                {/* Date and attribution removed */}
               </motion.div>
 
               {/* Main title with 3D effect */}
@@ -412,7 +410,7 @@ export default function SecondElementHpage() {
                 transition={{ duration: 0.8, delay: 0.6 }}
                 className="mt-4 md:mt-8 mb-6 md:mb-10 max-w-md"
               >
-                <h3 className="text-white font-medium mb-2">Your light - Your style.</h3>
+                {/* <h3 className="text-white font-medium mb-2">Your light - Your style.</h3> */}
                 <p className="text-white/80 text-sm leading-relaxed">
                 Hệ thống đèn trang trí cao cấp của IDA LIGHTING là sự giao thoa tinh tế giữa nghệ thuật ánh sáng và công nghệ cá nhân hoá hiện đại, tạo nên những trải nghiệm độc bản dành riêng cho từng gia chủ. Mỗi thiết kế được chăm chút tỉ mỉ từ kiểu dáng, chất liệu đến nhịp điệu ánh sáng, đảm bảo sự hòa quyện tuyệt đối với không gian sống và phong cách thẩm mỹ riêng biệt của từng gia đình. Không chỉ là thiết bị chiếu sáng, sản phẩm của IDA LIGHTING còn là tác phẩm nghệ thuật treo trần, khơi dậy cảm xúc, thể hiện cá tính và nâng tầm đẳng cấp cho mọi không gian nội thất.
                 </p>

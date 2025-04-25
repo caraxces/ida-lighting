@@ -65,10 +65,29 @@ export default function Header({ onButtonClick, onButtonHover }: HeaderProps) {
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen)
+    // When opening menu, prevent body scrolling
+    if (!mobileMenuOpen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = ''
+    }
     if (isSoundEnabled) {
       playSound()
     }
   }
+
+  // Cleanup body overflow when component unmounts
+  useEffect(() => {
+    return () => {
+      document.body.style.overflow = ''
+    }
+  }, [])
+
+  // Close menu on route change
+  useEffect(() => {
+    setMobileMenuOpen(false)
+    document.body.style.overflow = ''
+  }, [pathname])
 
   // Thêm menu item mới cho blog
   const menuItems = [
@@ -83,7 +102,7 @@ export default function Header({ onButtonClick, onButtonHover }: HeaderProps) {
   return (
     <header
       className={cn(
-        "w-full py-4 md:py-6 px-4 md:px-8 fixed top-0 z-50 transition-all duration-500",
+        "w-full py-4 md:py-6 px-4 md:px-8 fixed top-0 z-[99999] transition-all duration-500",
         scrolled ? "bg-black/60 backdrop-blur-xl" : "bg-transparent",
       )}
     >
@@ -222,144 +241,102 @@ export default function Header({ onButtonClick, onButtonHover }: HeaderProps) {
         </div>
       </div>
 
-      {/* Mobile Menu - Updated with rounded corners and two-column layout */}
+      {/* Mobile Menu - Consistent overlay for all pages */}
       {mobileMenuOpen && (
-        <div className="fixed inset-0 bg-black/90 z-50 overflow-y-auto">
-          <div className="flex items-center justify-between p-4 animate-slide-down">
-            <button
-              onClick={toggleMobileMenu}
-              className="px-5 py-2 bg-white/10 backdrop-blur-sm text-white rounded-full font-medium hover:bg-white/20 hover:shadow-[0_0_15px_rgba(255,255,255,0.5)] transition-all duration-300 hover:translate-y-[-2px]"
-            >
-              Close
-            </button>
+        <div 
+          className="fixed inset-0 bg-black/95 z-[99999] lg:hidden"
+          style={{ height: '100vh', overflowY: 'auto' }}
+        >
+          <div className="flex flex-col">
+            <div className="flex items-center justify-between p-4 animate-slide-down sticky top-0 bg-black/80 backdrop-blur-xl z-10">
+              <button
+                onClick={toggleMobileMenu}
+                className="px-5 py-2 bg-white/10 backdrop-blur-sm text-white rounded-full font-medium hover:bg-white/20 hover:shadow-[0_0_15px_rgba(255,255,255,0.5)] transition-all duration-300 hover:translate-y-[-2px]"
+              >
+                Close
+              </button>
 
-            <div className="flex-1 flex justify-center">
-              <img
-                src="/Ida B-W2.png"
-                alt="IDA Lighting Logo"
-                className="h-12 w-auto transition-all duration-300 hover:shadow-[0_0_20px_rgba(255,255,255,0.7)] cursor-pointer"
-              />
-            </div>
-            
-            {/* Catalogue Button */}
-            <a
-              href="/IDA LIGHTING 02 03 2025.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-3 py-2 bg-white/10 backdrop-blur-sm rounded-full hover:bg-white/20 transition-all duration-300 hover:shadow-[0_0_15px_rgba(255,255,255,0.5)] text-white text-sm"
-              onClick={() => playSound()}
-            >
-              Catalogue
-            </a>
-          </div>
-
-          <div className="flex flex-col mt-4 px-4 space-y-4">
-            <Link
-              href="/"
-              className="py-6 px-8 text-left text-xl font-medium bg-white/10 backdrop-blur-xl text-white rounded-full transform transition-all duration-300 hover:scale-[1.02] hover:translate-y-[-4px] hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] hover:bg-white/20 animate-slide-down group relative overflow-hidden"
-              style={{ animationDelay: "100ms" }}
-              onClick={(e) => handleNavClick(e)}
-            >
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent group-hover:translate-x-full transition-transform duration-700 ease-in-out"></div>
-              Home
-            </Link>
-
-            <Link
-              href="/projects"
-              className="py-6 px-8 text-left text-xl font-medium bg-white/10 backdrop-blur-xl text-white rounded-full transform transition-all duration-300 hover:scale-[1.02] hover:translate-y-[-4px] hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] hover:bg-white/20 animate-slide-down group relative overflow-hidden"
-              style={{ animationDelay: "200ms" }}
-              onClick={(e) => handleNavClick(e)}
-            >
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent group-hover:translate-x-full transition-transform duration-700 ease-in-out"></div>
-              Projects
-            </Link>
-
-            <Link
-              href="/products"
-              className="py-6 px-8 text-left text-xl font-medium bg-white/10 backdrop-blur-xl text-white rounded-full transform transition-all duration-300 hover:scale-[1.02] hover:translate-y-[-4px] hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] hover:bg-white/20 animate-slide-down group relative overflow-hidden"
-              style={{ animationDelay: "250ms" }}
-              onClick={(e) => handleNavClick(e)}
-            >
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent group-hover:translate-x-full transition-transform duration-700 ease-in-out"></div>
-              Products
-            </Link>
-
-            <Link
-              href="/about"
-              className="py-6 px-8 text-left text-xl font-medium bg-white/10 backdrop-blur-xl text-white rounded-full transform transition-all duration-300 hover:scale-[1.02] hover:translate-y-[-4px] hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] hover:bg-white/20 animate-slide-down group relative overflow-hidden"
-              style={{ animationDelay: "300ms" }}
-              onClick={(e) => handleNavClick(e)}
-            >
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent group-hover:translate-x-full transition-transform duration-700 ease-in-out"></div>
-              About
-            </Link>
-
-            <Link
-              href="/contacts"
-              className="py-6 px-8 text-left text-xl font-medium bg-white/10 backdrop-blur-xl text-white rounded-full transform transition-all duration-300 hover:scale-[1.02] hover:translate-y-[-4px] hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] hover:bg-white/20 animate-slide-down group relative overflow-hidden"
-              style={{ animationDelay: "400ms" }}
-              onClick={(e) => handleNavClick(e)}
-            >
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent group-hover:translate-x-full transition-transform duration-700 ease-in-out"></div>
-              Contact
-            </Link>
-          </div>
-
-          <div className="p-8 mt-8 flex justify-center">
-            <div
-              className="bg-white/10 backdrop-blur-xl rounded-[30px] p-8 max-w-md w-full transform transition-all duration-300 hover:scale-[1.02] hover:translate-y-[-4px] hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] hover:bg-white/20 animate-slide-down group relative overflow-hidden"
-              style={{ animationDelay: "600ms" }}
-            >
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent group-hover:translate-x-full transition-transform duration-700 ease-in-out"></div>
-              <div className="relative z-10">
-                <h3 className="font-medium mb-4 text-white text-center">Hà Tĩnh</h3>
-                <p className="text-gray-400 mb-1 text-center">153 Hà Huy Tập</p>
-                <p className="text-gray-400 mb-1 text-center">Thành phố Hà Tĩnh, Việt Nam</p>
-                <p className="text-gray-400 mb-8 text-center">+84 0924.222.888</p>
+              <div className="flex-1 flex justify-center">
+                <img
+                  src="/Ida B-W2.png"
+                  alt="IDA Lighting Logo"
+                  className="h-12 w-auto transition-all duration-300 hover:shadow-[0_0_20px_rgba(255,255,255,0.7)] cursor-pointer"
+                />
               </div>
-
-              <div className="mt-8 relative z-10">
-                <h3 className="font-medium mb-4 text-white text-center">Hà Nội</h3>
-                <p className="text-gray-400 mb-1 text-center">Trung tâm Hội nghị Quốc Gia</p>
-                <p className="text-gray-400 mb-1 text-center">Số 1 Đại lộ Thăng Long, Nam Từ Liêm</p>
-                <p className="text-gray-400 text-center">+84 0924.222.888</p>
-              </div>
-            </div>
-          </div>
-
-          {/* Extra padding space at the bottom to allow overscroll and account for the fixed bottom bar */}
-          <div className="h-[80px] md:hidden"></div>
-
-          <div className="fixed bottom-0 left-0 right-0 bg-white/10 backdrop-blur-xl p-4 flex justify-between items-center animate-slide-up">
-            <button
-              onClick={handleSoundToggle}
-              className="p-2 rounded-full bg-white/20 hover:bg-white/30 transition-all duration-300 hover:translate-y-[-2px] hover:shadow-[0_0_15px_rgba(255,255,255,0.5)]"
-              aria-label={soundOn ? "Mute sound" : "Enable sound"}
-            >
-              {soundOn ? <Volume2 size={20} className="text-white" /> : <VolumeX size={20} className="text-white" />}
-            </button>
-
-            <div className="flex space-x-2">
+              
+              {/* Catalogue Button */}
               <a
                 href="/IDA LIGHTING 02 03 2025.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-white hover:text-gray-200 transition-colors duration-300"
+                className="px-3 py-2 bg-white/10 backdrop-blur-sm rounded-full hover:bg-white/20 transition-all duration-300 hover:shadow-[0_0_15px_rgba(255,255,255,0.5)] text-white text-sm"
                 onClick={() => playSound()}
               >
-                Download catalogue
-              </a>
-              
-              <a
-                href="https://1miba.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-white hover:text-gray-200 transition-colors duration-300"
-                onClick={() => playSound()}
-              >
-                3D model
+                Catalogue
               </a>
             </div>
+
+            <div className="flex-1 flex flex-col mt-4 px-4 space-y-4">
+              {menuItems.map((item, index) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className="py-6 px-8 text-left text-xl font-medium bg-white/10 backdrop-blur-xl text-white rounded-full transform transition-all duration-300 hover:scale-[1.02] hover:translate-y-[-4px] hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] hover:bg-white/20 animate-slide-down group relative overflow-hidden"
+                  style={{ animationDelay: `${100 + index * 50}ms` }}
+                  onClick={(e) => handleNavClick(e)}
+                >
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent group-hover:translate-x-full transition-transform duration-700 ease-in-out"></div>
+                  {item.title}
+                </Link>
+              ))}
+            
+              {/* Integrated bottom bar - moved from fixed position */}
+              <div className="bg-white/10 backdrop-blur-xl p-4 flex justify-between items-center rounded-full animate-slide-down" style={{ animationDelay: "500ms" }}>
+                <button
+                  onClick={handleSoundToggle}
+                  className="p-2 rounded-full bg-white/20 hover:bg-white/30 transition-all duration-300 hover:translate-y-[-2px] hover:shadow-[0_0_15px_rgba(255,255,255,0.5)]"
+                  aria-label={soundOn ? "Mute sound" : "Enable sound"}
+                >
+                  {soundOn ? <Volume2 size={20} className="text-white" /> : <VolumeX size={20} className="text-white" />}
+                </button>
+
+                <a
+                  href="https://1miba.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-2 rounded-full bg-white/20 hover:bg-white/30 transition-all duration-300 hover:translate-y-[-2px] hover:shadow-[0_0_15px_rgba(255,255,255,0.5)] flex items-center space-x-2"
+                  onClick={() => playSound()}
+                >
+                  <Box size={20} className="text-white" />
+                  <span className="text-white">3D model</span>
+                </a>
+              </div>
+            </div>
+
+            <div className="p-8 mt-4 flex justify-center">
+              <div
+                className="bg-white/10 backdrop-blur-xl rounded-[30px] p-8 max-w-md w-full transform transition-all duration-300 hover:scale-[1.02] hover:translate-y-[-4px] hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] hover:bg-white/20 animate-slide-down group relative overflow-hidden"
+                style={{ animationDelay: "600ms" }}
+              >
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent group-hover:translate-x-full transition-transform duration-700 ease-in-out"></div>
+                <div className="relative z-10">
+                  <h3 className="font-medium mb-4 text-white text-center">Hà Tĩnh</h3>
+                  <p className="text-gray-400 mb-1 text-center">153 Hà Huy Tập</p>
+                  <p className="text-gray-400 mb-1 text-center">Thành phố Hà Tĩnh, Việt Nam</p>
+                  <p className="text-gray-400 mb-8 text-center">+84 0924.222.888</p>
+                </div>
+
+                <div className="mt-8 relative z-10">
+                  <h3 className="font-medium mb-4 text-white text-center">Hà Nội</h3>
+                  <p className="text-gray-400 mb-1 text-center">Trung tâm Hội nghị Quốc Gia</p>
+                  <p className="text-gray-400 mb-1 text-center">Số 1 Đại lộ Thăng Long, Nam Từ Liêm</p>
+                  <p className="text-gray-400 text-center">+84 0924.222.888</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Extra padding space at the bottom for better scrolling */}
+            <div className="h-[40px] md:hidden"></div>
           </div>
         </div>
       )}

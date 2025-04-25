@@ -92,15 +92,13 @@ export default function MobileLayout({ hasLoaded, page, direction, paginate, ima
             transition={{ duration: 0.8, delay: 0.2 }}
             className="flex items-center text-white/70 text-xs tracking-wider"
           >
-            <span>2019</span>
-            <span className="mx-2">—</span>
-            <span>Duong Nguyen</span>
+            {/* Date and attribution removed */}
           </motion.div>
 
           {/* Main title - smaller for mobile */}
           <div className="mt-1">
             <AnimatedTitle>
-              <span className="text-3xl block text-white">IDA Lighting</span>
+              <span className="text-3xl block text-white">Đèn gỗ</span>
             </AnimatedTitle>
           </div>
 
@@ -111,7 +109,7 @@ export default function MobileLayout({ hasLoaded, page, direction, paginate, ima
             transition={{ duration: 0.8, delay: 0.4 }}
             className="mt-1"
           >
-            <h3 className="text-white font-medium">Your light - Your style.</h3>
+            {/* <h3 className="text-white font-medium">Your light - Your style.</h3> */}
             <p className="text-white/80 text-xs leading-relaxed">
               Bộ sưu tập đèn thờ cao cấp của IDA LIGHTING là sự kết hợp hài hòa giữa gỗ Walnut của Mỹ, đồng nguyên chất và đá tự nhiên được tuyển chọn kỹ lưỡng. Từng chi tiết được chế tác thủ công với độ tinh xảo cao, tôn vinh nét đẹp tâm linh và thiêng liêng của không gian thờ tự.
             </p>
