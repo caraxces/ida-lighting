@@ -224,16 +224,14 @@ export default function ThirdElementHpage({ productSet }: ThirdElementHpageProps
                 transition={{ duration: 0.8, delay: 0.2 }}
                 className="flex items-center text-white/70 text-xs tracking-wider mb-2"
               >
-                <span>2023</span>
-                <span className="mx-2">—</span>
-                <span></span>
+                {/* Date removed */}
               </motion.div>
 
               {/* Main title with 3D effect - reduced size */}
               <div className="pt-0.7">
                 <AnimatedTitle>
                   {/* <span className="text-2xl sm:text-3xl block text-white">Downlight</span> */}
-                  <span className="text-[36px] text-white mt-[15px] inline-block">Downlight Collection.</span>
+                  <span className="text-[30px] text-white mt-[15px] inline-block">Downlight Collection.</span>
                 </AnimatedTitle>
               </div>
               
@@ -242,7 +240,7 @@ export default function ThirdElementHpage({ productSet }: ThirdElementHpageProps
             </div>
 
             {/* Mobile image carousel - Ở giữa */}
-            <div className="px-4 flex-1 flex items-center justify-center">
+            <div className="px-4 flex-1 flex items-center justify-center relative">
               <div className="w-full overflow-x-auto pb-4 hide-scrollbar -mt-[40px]">
                 <div className="flex space-x-5 px-2 min-w-max">
                   {[0, 1, 2, 3].map((colIndex) => {
@@ -347,6 +345,29 @@ export default function ThirdElementHpage({ productSet }: ThirdElementHpageProps
                   })}
                 </div>
               </div>
+              
+              {/* Bouncing arrow button for horizontal scroll */}
+              <motion.div 
+                className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white/10 backdrop-blur-sm rounded-l-full p-2 z-20"
+                animate={{
+                  x: [-5, 0, -5],
+                  opacity: [0.8, 1, 0.8]
+                }}
+                transition={{
+                  duration: 1.5,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+                onClick={() => {
+                  // Scroll the carousel to the right when clicked
+                  const carousel = document.querySelector('.hide-scrollbar');
+                  if (carousel) {
+                    carousel.scrollBy({ left: 150, behavior: 'smooth' });
+                  }
+                }}
+              >
+                <ChevronRight size={24} className="text-white" />
+              </motion.div>
             </div>
 
             {/* Description text section - Ở dưới cùng */}
@@ -468,9 +489,7 @@ export default function ThirdElementHpage({ productSet }: ThirdElementHpageProps
                 transition={{ duration: 0.8, delay: 0.2 }}
                 className="flex items-center text-white/70 md:text-[#FFDAB9]/70 text-xs mb-2 tracking-wider"
               >
-                <span>2023</span>
-                <span className="mx-2">—</span>
-                <span>IDA Collection</span>
+                {/* Date and collection info removed */}
               </motion.div>
 
               {/* Main title with 3D effect - reduced size */}
@@ -489,7 +508,6 @@ export default function ThirdElementHpage({ productSet }: ThirdElementHpageProps
                 transition={{ duration: 0.8, delay: 0.6 }}
                 className="max-w-md"
               >
-                <h3 className="text-white font-medium mb-2">Premium Lighting Solutions</h3>
                 <p className="text-white/80 text-sm leading-relaxed">
                   Đèn downlight của IDA LIGHTING được thiết kế theo dạng modul lắp ráp, cho phép thay thế linh hoạt giữa chip LED và choá đèn chỉ với thao tác đơn giản. Nhờ đó, người dùng có thể dễ dàng tùy biến công suất, góc chiếu và màu ánh sáng phù hợp với từng không gian cụ thể mà không cần thay toàn bộ đèn, giúp tiết kiệm chi phí và tối ưu hoá hiệu suất chiếu sáng. Thiết kế modul này cũng thuận tiện cho việc bảo trì, nâng cấp trong tương lai.
                 </p>

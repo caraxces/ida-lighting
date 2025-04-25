@@ -97,9 +97,7 @@ export default function MobileLayout2({ hasLoaded, page, direction, paginate, im
             transition={{ duration: 0.8, delay: 0.2 }}
             className="flex items-center text-white/70 text-xs tracking-wider"
           >
-            <span>2019</span>
-            <span className="mx-2">—</span>
-            <span>Duong Nguyen</span>
+            {/* Date and attribution removed */}
           </motion.div>
 
           {/* Main title - smaller for mobile */}
@@ -116,7 +114,7 @@ export default function MobileLayout2({ hasLoaded, page, direction, paginate, im
             transition={{ duration: 0.8, delay: 0.4 }}
             className="mt-1 mb-2"
           >
-            <h3 className="text-white font-medium">Your light - Your style.</h3>
+            {/* <h3 className="text-white font-medium">Your light - Your style.</h3> */}
             <p className="text-white/80 text-xs leading-relaxed">
               Hệ thống đèn trang trí cao cấp của IDA LIGHTING là sự giao thoa tinh tế giữa nghệ thuật ánh sáng và công nghệ cá nhân hoá hiện đại, tạo nên những trải nghiệm độc bản dành riêng cho từng gia chủ.
             </p>
@@ -143,7 +141,7 @@ export default function MobileLayout2({ hasLoaded, page, direction, paginate, im
           <div className="relative z-50 w-full h-[60vh] max-h-[450px] flex justify-center">
             <div className="relative w-full h-full">
               {/* Navigation buttons - now appearing on sides of the image */}
-              <div className="absolute inset-x-0 top-1/2 -mt-4 px-2 flex justify-between z-50 pointer-events-none">
+              <div className="absolute inset-x-0 top-1/2 -mt-4 px-2 flex justify-between z-[9999] pointer-events-none isolation-auto">
                 <motion.button
                   whileTap={{ scale: 0.95 }}
                   className="w-8 h-8 rounded-full bg-white/90 flex items-center justify-center shadow-lg pointer-events-auto"

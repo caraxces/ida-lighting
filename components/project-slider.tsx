@@ -177,6 +177,9 @@ const ProjectSlider = ({ onSlideChange }: ProjectSliderProps) => {
   // Handle touch events for mobile swipe
   useEffect(() => {
     const handleTouchStart = (e: TouchEvent) => {
+      // Skip touch handling on mobile devices
+      if (isMobile) return
+      
       if (!sliderRef.current) return
       const rect = sliderRef.current.getBoundingClientRect()
       if (rect.bottom <= 0 || rect.top >= window.innerHeight) return
@@ -188,6 +191,9 @@ const ProjectSlider = ({ onSlideChange }: ProjectSliderProps) => {
     }
 
     const handleTouchMove = (e: TouchEvent) => {
+      // Skip touch handling on mobile devices
+      if (isMobile) return
+      
       if (!sliderRef.current || touchStartY.current === null) return
 
       // If we've viewed all slides and are on the last slide, allow normal scrolling
@@ -198,6 +204,9 @@ const ProjectSlider = ({ onSlideChange }: ProjectSliderProps) => {
     }
 
     const handleTouchEnd = (e: TouchEvent) => {
+      // Skip touch handling on mobile devices
+      if (isMobile) return
+      
       if (!sliderRef.current || touchStartY.current === null || isScrolling) return
 
       const rect = sliderRef.current.getBoundingClientRect()
@@ -235,9 +244,9 @@ const ProjectSlider = ({ onSlideChange }: ProjectSliderProps) => {
 
     // Add touch event listeners
     if (sliderRef.current) {
-      sliderRef.current.addEventListener("touchstart", handleTouchStart, { passive: false })
-      sliderRef.current.addEventListener("touchmove", handleTouchMove, { passive: false })
-      sliderRef.current.addEventListener("touchend", handleTouchEnd, { passive: false })
+      sliderRef.current.addEventListener("touchstart", handleTouchStart, { passive: isMobile })
+      sliderRef.current.addEventListener("touchmove", handleTouchMove, { passive: isMobile })
+      sliderRef.current.addEventListener("touchend", handleTouchEnd, { passive: isMobile })
     }
 
     return () => {
@@ -247,7 +256,7 @@ const ProjectSlider = ({ onSlideChange }: ProjectSliderProps) => {
         sliderRef.current.removeEventListener("touchend", handleTouchEnd)
       }
     }
-  }, [currentIndex, isScrolling, hasViewedAllSlides, services.length])
+  }, [currentIndex, isScrolling, hasViewedAllSlides, services.length, isMobile])
 
   return (
     <div ref={sliderRef} className="relative w-full h-screen overflow-hidden bg-white">
@@ -256,10 +265,13 @@ const ProjectSlider = ({ onSlideChange }: ProjectSliderProps) => {
         <motion.div
           key={`slide-${currentIndex}`}
           className="absolute inset-0 z-10 flex"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.5 }}
+          initial={{ opacity: 0, y: isMobile ? 20 : 0 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: isMobile ? -20 : 0 }}
+          transition={{ 
+            duration: 0.8, 
+            ease: "easeInOut"
+          }}
         >
           {/* Main container for precise layout control */}
           <div className={`absolute inset-0 ${isMobile ? "flex flex-col" : "flex flex-row"}`}>
@@ -269,22 +281,28 @@ const ProjectSlider = ({ onSlideChange }: ProjectSliderProps) => {
               initial={{
                 width: isMobile ? "100%" : "37.5%",
                 height: isMobile ? "50%" : "100%",
+                opacity: 0.8
               }}
               animate={{
                 width: isMobile ? "100%" : "37.5%",
                 height: isMobile ? "50%" : "100%",
+                opacity: 1
               }}
               exit={{
                 width: isMobile ? "100%" : "37.5%",
                 height: isMobile ? "0%" : "100%",
+                opacity: 0.8
               }}
-              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ 
+                duration: 1.2, 
+                ease: "easeOut"
+              }}
             >
               {/* Color block content with project info */}
               <div className="relative w-full h-full flex flex-col justify-center px-8 md:px-12 mt-[20px]">
                 <AnimatedTitle 
-                  className="text-[1.125rem] md:text-4xl lg:text-5xl mb-4"
-                  delay={0.2}
+                  className="text-[24px] md:text-4xl lg:text-5xl mb-4"
+                  delay={0.3}
                 >
                   {services[currentIndex].title}
                 </AnimatedTitle>
@@ -293,7 +311,7 @@ const ProjectSlider = ({ onSlideChange }: ProjectSliderProps) => {
                   className="text-sm md:text-base text-white/80 max-w-md mb-8 whitespace-pre-line"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.3 }}
+                  transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
                 >
                   {services[currentIndex].description}
                 </motion.p>
@@ -302,7 +320,7 @@ const ProjectSlider = ({ onSlideChange }: ProjectSliderProps) => {
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.4 }}
+                  transition={{ duration: 0.8, delay: 0.5, ease: "easeOut" }}
                 >
                   <GlowButton 
                     text="XEM THÊM" 
@@ -319,23 +337,29 @@ const ProjectSlider = ({ onSlideChange }: ProjectSliderProps) => {
               initial={{
                 width: isMobile ? "100%" : "50%",
                 height: isMobile ? "50%" : "100%",
+                opacity: 0.8
               }}
               animate={{
                 width: isMobile ? "100%" : "50%",
                 height: isMobile ? "50%" : "100%",
+                opacity: 1
               }}
               exit={{
                 width: isMobile ? "100%" : "50%",
                 height: isMobile ? "0%" : "100%",
+                opacity: 0.8
               }}
-              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ 
+                duration: 1.2, 
+                ease: "easeOut"
+              }}
             >
               {services[currentIndex] && (
                 <motion.div 
                   className="w-full h-full"
-                  initial={{ scale: 1.05 }}
-                  animate={{ scale: 1 }}
-                  transition={{ duration: 5, ease: "easeInOut" }}
+                  initial={{ scale: 1.05, filter: "blur(2px)" }}
+                  animate={{ scale: 1, filter: "blur(0px)" }}
+                  transition={{ duration: 2.5, ease: "easeOut" }}
                 >
                   <img
                     src={services[currentIndex].image || "/placeholder.svg"}
@@ -352,16 +376,22 @@ const ProjectSlider = ({ onSlideChange }: ProjectSliderProps) => {
               initial={{
                 width: isMobile ? "100%" : "12.5%",
                 height: isMobile ? "0%" : "100%",
+                opacity: 0.7
               }}
               animate={{
                 width: isMobile ? "100%" : "12.5%",
                 height: isMobile ? "0%" : "100%",
+                opacity: 1
               }}
               exit={{
                 width: isMobile ? "100%" : "12.5%",
                 height: isMobile ? "0%" : "100%",
+                opacity: 0.7
               }}
-              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ 
+                duration: 1.2, 
+                ease: "easeOut"
+              }}
             >
               {services[(currentIndex + 1) % services.length] && (
                 <div className="w-full h-full relative opacity-70">
@@ -379,25 +409,25 @@ const ProjectSlider = ({ onSlideChange }: ProjectSliderProps) => {
       </AnimatePresence>
 
       {/* Navigation buttons */}
-      <div className="absolute bottom-8 left-8 flex space-x-4 z-50">
+      <div className="absolute inset-x-0 top-1/2 -mt-4 px-2 flex justify-between z-[9999] pointer-events-none isolation-auto">
         <button
           onClick={() => handleButtonClick("prev")}
-          className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center backdrop-blur-sm hover:bg-white/20 transition-colors"
+          className="w-8 h-8 rounded-full bg-white/90 flex items-center justify-center shadow-lg pointer-events-auto"
           aria-label="Previous slide"
         >
-          <ChevronRight size={20} className="text-white rotate-180" />
+          <ChevronRight size={18} className="text-[#8B2323] rotate-180" />
         </button>
         <button
           onClick={() => handleButtonClick("next")}
-          className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center backdrop-blur-sm hover:bg-white/20 transition-colors"
+          className="w-8 h-8 rounded-full bg-white/90 flex items-center justify-center shadow-lg pointer-events-auto"
           aria-label="Next slide"
         >
-          <ChevronRight size={20} className="text-white" />
+          <ChevronRight size={18} className="text-[#8B2323]" />
         </button>
       </div>
 
       {/* Navigation indicators */}
-      <div className="absolute bottom-8 right-8 flex space-x-2 z-50">
+      <div className="absolute bottom-8 right-8 flex space-x-2 z-[5000]">
         {services.map((_, index) => (
           <button
             key={index}
@@ -416,7 +446,7 @@ const ProjectSlider = ({ onSlideChange }: ProjectSliderProps) => {
 
       {/* Scroll indicator for when all slides have been viewed */}
       {hasViewedAllSlides && currentIndex === services.length - 1 && (
-        <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 text-white/80 text-xs md:text-sm animate-bounce">
+        <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 text-white/80 text-xs md:text-sm animate-bounce z-[5000]">
           Cuộn để tiếp tục
         </div>
       )}
