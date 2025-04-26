@@ -23,28 +23,28 @@ const homeProjects: HomeProject[] = [
   {
     id: 1,
     title: "DỰ ÁN | 44 VILLAR",
-    image: "/home-page/TRC_7715.jpg",
+    image: "/work/villa-44/TRC_9185-min.jpg",
     description: "TKKT: LE HUU SANG ARCHITEXT\nĐịa Chỉ: TP Hà Tĩnh\nNăm hoàn thành: 2024\nHạng mục chiếu sáng: Garden lighting, Indoor, Outdoor, Decor Lighting",
     link: "/projects/villa-44"
   },
   {
     id: 2,
     title: "DỰ ÁN | LONG HOUSE",
-    image: "/work/long-house/_TRC7194.jpg", 
+    image: "/work/long-house/_TRC7413-min.jpg", 
     description: "TKKT: LE HUU SANG ARCHITEXT\nĐịa Chỉ: TP Hà Tĩnh\nNăm hoàn thành: 2024\nHạng mục chiếu sáng: Garden lighting, Indoor, Outdoor, Decor Lighting",
     link: "/projects/long-house"
   },
   {
     id: 3,
     title: "DỰ ÁN | AN HOUSE",
-    image: "/home-page/_TRC7712.jpg",
+    image: "/work/vn3/2022_09_26_19_34_IMG_8523.JPG",
     description: "TKKT: MAAR DESIGNS\nĐịa Chỉ: TP Hà Tĩnh\nNăm hoàn thành: 2023\nHạng mục chiếu sáng: Garden lighting, Indoor, Outdoor, Decor Lighting",
-    link: "/projects/luxury-apartments"
+    link: "/projects/luxury-villas"
   },
   {
     id: 4,
     title: "DỰ ÁN | STARLAKE VILLAR",
-    image: "/home-page/_TRC7748-Pano.jpg",
+    image: "/work/IDA_Starlake/TRC_7559.jpg",
     description: "TKKT: RHINELUX\nĐịa Chỉ: Hồ Tây – Hà Nội\nNăm hoàn thành: 2024\nHạng mục chiếu sáng: Garden lighting, Indoor, Outdoor, Decor Lighting",
     link: "/projects/starlake"
   }

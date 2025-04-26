@@ -290,8 +290,8 @@ export default function Header({ onButtonClick, onButtonHover }: HeaderProps) {
                 </Link>
               ))}
             
-              {/* Integrated bottom bar - moved from fixed position */}
-              <div className="bg-white/10 backdrop-blur-xl p-4 flex justify-between items-center rounded-full animate-slide-down" style={{ animationDelay: "500ms" }}>
+              {/* Sound and 3D model buttons without container */}
+              <div className="flex justify-between items-center px-8 animate-slide-down" style={{ animationDelay: "500ms" }}>
                 <button
                   onClick={handleSoundToggle}
                   className="p-2 rounded-full bg-white/20 hover:bg-white/30 transition-all duration-300 hover:translate-y-[-2px] hover:shadow-[0_0_15px_rgba(255,255,255,0.5)]"

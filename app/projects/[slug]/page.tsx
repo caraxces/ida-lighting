@@ -1,11 +1,22 @@
 "use client"
 
 import Header from "@/components/header"
-import Footer from "@/components/footer"
-import Image from "next/image"
 import { notFound } from "next/navigation"
-import { useState, useEffect, useRef } from "react"
+import { useState, useEffect, useRef, useMemo, useCallback } from "react"
 import { motion, useScroll, useTransform, AnimatePresence, useInView } from "framer-motion"
+import dynamic from "next/dynamic"
+import { default as NextImage } from "next/image"
+
+// Lazy load Footer component
+const Footer = dynamic(() => import("@/components/footer"), {
+  ssr: false,
+  loading: () => <div className="py-10 bg-black"></div>,
+})
+
+// Lazy load image component
+const OptimizedImage = dynamic(() => import("next/image"), {
+  ssr: true,
+})
 
 // Define project item type
 type ProjectItem = {
@@ -39,9 +50,9 @@ type Project = {
 // Define project data with content from idalighting.vn
 const projects: Record<string, Project> = {
   starlake: {
-    title: "Starlake Project",
+    title: "STARLAKE PROJECT",
     description: "A premium lighting project for the luxurious Starlake residential complex, combining elegance and functionality",
-    banner: "/work/IDA_Starlake/TRC_7700.jpg",
+    banner: "/work/IDA_Starlake/TRC_7559.jpg",
     location: "Hanoi, Vietnam",
     application: "Facades, Interior",
     project: "IDA Lighting",
@@ -63,42 +74,51 @@ const projects: Record<string, Project> = {
       }
     ],
     items: [
-      { id: 1, image: "/work/IDA_Starlake/TRC_7699.jpg" },
-      { id: 2, image: "/work/IDA_Starlake/TRC_7696.jpg" },
-      { id: 3, image: "/work/IDA_Starlake/TRC_7695.jpg" },
-      { id: 4, image: "/work/IDA_Starlake/TRC_7672.jpg" },
-      { id: 5, image: "/work/IDA_Starlake/TRC_7677.jpg" },
-      { id: 6, image: "/work/IDA_Starlake/TRC_7688.jpg" },
-      { id: 7, image: "/work/IDA_Starlake/TRC_7670.jpg" },
-      { id: 8, image: "/work/IDA_Starlake/TRC_7674.jpg" },
-      { id: 9, image: "/work/IDA_Starlake/TRC_7756.jpg" },
-      { id: 10, image: "/work/IDA_Starlake/TRC_7743.jpg" },
-      { id: 11, image: "/work/IDA_Starlake/TRC_7748.jpg" },
-      { id: 12, image: "/work/IDA_Starlake/TRC_7749.jpg" },
-      { id: 13, image: "/work/IDA_Starlake/TRC_7734.jpg" },
-      { id: 14, image: "/work/IDA_Starlake/TRC_7745.jpg" },
-      { id: 15, image: "/work/IDA_Starlake/TRC_7757.jpg" },
-      { id: 16, image: "/work/IDA_Starlake/TRC_7751.jpg" },
-      { id: 17, image: "/work/IDA_Starlake/TRC_7742.jpg" },
-      { id: 18, image: "/work/IDA_Starlake/TRC_7754.jpg" },
-      { id: 19, image: "/work/IDA_Starlake/TRC_7746.jpg" },
-      { id: 20, image: "/work/IDA_Starlake/TRC_7731.jpg" },
-      { id: 21, image: "/work/IDA_Starlake/TRC_7752.jpg" },
+      { id: 1, image: "/work/IDA_Starlake/TRC_7559.jpg" },
+      { id: 2, image: "/work/IDA_Starlake/TRC_7561.jpg" },
+      { id: 3, image: "/work/IDA_Starlake/TRC_7562.jpg" },
+      { id: 4, image: "/work/IDA_Starlake/TRC_7565.jpg" },
+      { id: 5, image: "/work/IDA_Starlake/TRC_7568.jpg" },
+      { id: 6, image: "/work/IDA_Starlake/TRC_7569.jpg" },
+      { id: 7, image: "/work/IDA_Starlake/TRC_7570.jpg" },
+      { id: 8, image: "/work/IDA_Starlake/TRC_7571.jpg" },
+      { id: 9, image: "/work/IDA_Starlake/TRC_7572.jpg" },
+      { id: 10, image: "/work/IDA_Starlake/TRC_7576.jpg" },
+      { id: 11, image: "/work/IDA_Starlake/TRC_7577.jpg" },
+      { id: 12, image: "/work/IDA_Starlake/TRC_7579.jpg" },
+      { id: 13, image: "/work/IDA_Starlake/TRC_7582.jpg" },
+      { id: 14, image: "/work/IDA_Starlake/TRC_7585.jpg" },
+      { id: 15, image: "/work/IDA_Starlake/TRC_7586.jpg" },
+      { id: 16, image: "/work/IDA_Starlake/TRC_7587.jpg" },
+      { id: 17, image: "/work/IDA_Starlake/TRC_7588.jpg" },
+      { id: 18, image: "/work/IDA_Starlake/TRC_7719.jpg" },
+      { id: 19, image: "/work/IDA_Starlake/TRC_7720.jpg" },
+      { id: 20, image: "/work/IDA_Starlake/TRC_7721.jpg" },
+      { id: 21, image: "/work/IDA_Starlake/TRC_7722.jpg" },
       { id: 22, image: "/work/IDA_Starlake/TRC_7723.jpg" },
-      { id: 23, image: "/work/IDA_Starlake/TRC_7744.jpg" },
-      { id: 24, image: "/work/IDA_Starlake/TRC_7716.jpg" },
-      { id: 25, image: "/work/IDA_Starlake/TRC_7755.jpg" },
-      { id: 26, image: "/work/IDA_Starlake/TRC_7740.jpg" },
-      { id: 27, image: "/work/IDA_Starlake/TRC_7677.jpg" },
-      { id: 28, image: "/work/IDA_Starlake/TRC_7719.jpg" },
-      { id: 29, image: "/work/IDA_Starlake/TRC_7739.jpg" },
-      { id: 30, image: "/work/IDA_Starlake/TRC_7724.jpg" },
+      { id: 23, image: "/work/IDA_Starlake/TRC_7724.jpg" },
+      { id: 24, image: "/work/IDA_Starlake/TRC_7725.jpg" },
+      { id: 25, image: "/work/IDA_Starlake/TRC_7726.jpg" },
+      { id: 26, image: "/work/IDA_Starlake/TRC_7728.jpg" },
+      { id: 27, image: "/work/IDA_Starlake/TRC_7729.jpg" },
+      { id: 28, image: "/work/IDA_Starlake/TRC_7731.jpg" },
+      { id: 29, image: "/work/IDA_Starlake/TRC_7744.jpg" },
+      { id: 30, image: "/work/IDA_Starlake/TRC_7745.jpg" },
+      { id: 31, image: "/work/IDA_Starlake/TRC_7746.jpg" },
+      { id: 32, image: "/work/IDA_Starlake/TRC_7748.jpg" },
+      { id: 33, image: "/work/IDA_Starlake/TRC_7749.jpg" },
+      { id: 34, image: "/work/IDA_Starlake/TRC_7751.jpg" },
+      { id: 35, image: "/work/IDA_Starlake/TRC_7752.jpg" },
+      { id: 36, image: "/work/IDA_Starlake/TRC_7754.jpg" },
+      { id: 37, image: "/work/IDA_Starlake/TRC_7755.jpg" },
+      { id: 38, image: "/work/IDA_Starlake/TRC_7756.jpg" },
+      { id: 39, image: "/work/IDA_Starlake/TRC_7757.jpg" },
     ],
   },
   koicafe: {
-    title: "Koi Cafe",
+    title: "KOI CAFE",
     description: "Atmospheric lighting design for the trendy Koi Cafe space, creating a warm and inviting ambiance for customers",
-    banner: "/work/koi cafe/2020_11_21_14_18_IMG_0138.JPG",
+    banner: "/work/koi cafe/2020_11_21_14_18_IMG_0138-min.JPG",
     location: "Ho Chi Minh City, Vietnam",
     application: "Interior, Entertainment",
     project: "IDA Lighting",
@@ -120,40 +140,29 @@ const projects: Record<string, Project> = {
       }
     ],
     items: [
-      { id: 1, image: "/work/koi cafe/2020_11_21_15_39_IMG_0140.JPG" },
-      { id: 2, image: "/work/koi cafe/2020_11_21_14_12_IMG_0136.JPG" },
-      { id: 3, image: "/work/koi cafe/2020_11_21_15_06_IMG_0139.JPG" },
-      { id: 4, image: "/work/koi cafe/2020_11_21_17_54_IMG_0152.JPG" },
-      { id: 5, image: "/work/koi cafe/2020_11_21_16_45_IMG_0142.JPG" },
-      { id: 6, image: "/work/koi cafe/2020_11_21_17_43_IMG_0147.JPG" },
-      { id: 7, image: "/work/koi cafe/2020_11_21_17_46_IMG_0148.JPG" },
-      { id: 8, image: "/work/koi cafe/2020_11_21_17_49_IMG_0150.JPG" },
-      { id: 9, image: "/work/koi cafe/2020_11_21_14_12_IMG_0137.JPG" },
-      { id: 10, image: "/work/koi cafe/2020_11_21_17_55_IMG_0153.JPG" },
-      { id: 11, image: "/work/koi cafe/z4657775267180_273d7041ad31becaf7e453ee94636cb4.jpg" },
-      { id: 12, image: "/work/koi cafe/150030371_266236301548582_2927341516468461359_n.jpg" },
-      { id: 13, image: "/work/koi cafe/z4657775278117_c708d0f200ab9d39c42f939602962319.jpg" },
-      { id: 14, image: "/work/koi cafe/z4657775281798_6bbdfeb86f6c763884fa4463621ff438.jpg" },
-      { id: 15, image: "/work/koi cafe/z4657775269758_f4e3cbef0d9d0fefd655dab457acc009.jpg" },
-      { id: 16, image: "/work/koi cafe/335923656_599881578654042_1268634657177024188_n.jpg" },
-      { id: 17, image: "/work/koi cafe/297064468_596248115214064_7650294870205169416_n.jpg" },
-      { id: 18, image: "/work/koi cafe/z4657775265937_b58cb298fa6ef09f4e88c5590eec4195.jpg" },
-      { id: 19, image: "/work/koi cafe/2020_11_21_16_44_IMG_0141.JPG" },
-      { id: 20, image: "/work/koi cafe/z4657775283761_9ebaf04f0491b2db975e8f63b2b0fab4.jpg" },
-      { id: 21, image: "/work/koi cafe/340091591_938369397315716_1744049555005482317_n.jpg" },
-      { id: 22, image: "/work/koi cafe/2020_11_21_17_35_IMG_0144.JPG" },
-      { id: 23, image: "/work/koi cafe/327427671_1357387545058636_892862445078244852_n.jpg" },
-      { id: 24, image: "/work/koi cafe/340012239_109710155423306_7501542820500424786_n.jpg" },
-      { id: 25, image: "/work/koi cafe/2020_11_21_17_34_IMG_0143.JPG" },
-      { id: 26, image: "/work/koi cafe/2020_11_21_17_42_IMG_0146.JPG" },
-      { id: 27, image: "/work/koi cafe/z4657775257822_e259063c59e520ff45fda77f8d022733.jpg" },
-      { id: 28, image: "/work/koi cafe/2020_11_21_17_54_IMG_0151.JPG" },
-      { id: 29, image: "/work/koi cafe/2020_11_21_17_37_IMG_0145.JPG" },
-      { id: 30, image: "/work/koi cafe/2020_11_21_17_46_IMG_0149.JPG" },
+      { id: 1, image: "/work/koi cafe/2020_11_21_15_39_IMG_0140-min.JPG" },
+      { id: 2, image: "/work/koi cafe/2020_11_21_14_12_IMG_0136-min.JPG" },
+      { id: 3, image: "/work/koi cafe/2020_11_21_15_06_IMG_0139-min.JPG" },
+      { id: 4, image: "/work/koi cafe/2020_11_21_17_54_IMG_0152-min.JPG" },
+      { id: 5, image: "/work/koi cafe/2020_11_21_16_45_IMG_0142-min.JPG" },
+      { id: 6, image: "/work/koi cafe/2020_11_21_17_43_IMG_0147-min.JPG" },
+      { id: 7, image: "/work/koi cafe/2020_11_21_17_46_IMG_0148-min.JPG" },
+      { id: 8, image: "/work/koi cafe/2020_11_21_17_49_IMG_0150-min.JPG" },
+      { id: 9, image: "/work/koi cafe/2020_11_21_14_12_IMG_0137-min.JPG" },
+      { id: 10, image: "/work/koi cafe/2020_11_21_17_55_IMG_0153-min.JPG" },
+      { id: 11, image: "/work/koi cafe/150030371_266236301548582_2927341516468461359_n-min.jpg" },
+      { id: 12, image: "/work/koi cafe/297064468_596248115214064_7650294870205169416_n-min.jpg" },
+      { id: 13, image: "/work/koi cafe/2020_11_21_16_44_IMG_0141-min.JPG" },
+      { id: 14, image: "/work/koi cafe/2020_11_21_17_34_IMG_0143-min.JPG" },
+      { id: 15, image: "/work/koi cafe/2020_11_21_17_35_IMG_0144-min.JPG" },
+      { id: 16, image: "/work/koi cafe/2020_11_21_17_37_IMG_0145-min.JPG" },
+      { id: 17, image: "/work/koi cafe/2020_11_21_17_42_IMG_0146-min.JPG" },
+      { id: 18, image: "/work/koi cafe/2020_11_21_17_46_IMG_0149-min.JPG" },
+      { id: 19, image: "/work/koi cafe/2020_11_21_17_54_IMG_0151-min.JPG" }
     ],
   },
   residential: {
-    title: "Residential Lighting",
+    title: "RESIDENTIAL LIGHTING",
     description: "Elegant lighting solutions that enhance the comfort and aesthetics of homes",
     banner: "/work/residential/13387622937775503.mp4",
     location: "Various locations, Vietnam",
@@ -188,7 +197,7 @@ const projects: Record<string, Project> = {
     ],
   },
   commercial: {
-    title: "Commercial Lighting",
+    title: "COMMERCIAL LIGHTING",
     description: "Professional lighting solutions for offices, retail spaces, and hospitality venues",
     banner: "/work/commercial/commercial.png",
     location: "Various locations, Vietnam",
@@ -328,8 +337,8 @@ const projects: Record<string, Project> = {
     ],
   },
   "koi-gardens": {
-    title: "Nhà riêng",
-    description: "Premium residential lighting design showcasing luxury and comfort",
+    title: "Koi Garden",
+    description: "Premium outdoor space lighting with elegant water features and landscaping",
     banner: "/work/vn1/2022_10_21_14_54_IMG_9377.JPG",
     location: "Vietnam",
     application: "Facades, Interior, Landscape, Fountains and swimming pools",
@@ -368,7 +377,7 @@ const projects: Record<string, Project> = {
     ],
   },
   "luxury-apartments": {
-    title: "Nhà riêng",
+    title: "NHÀ RIÊNG",
     description: "Modern residential lighting solutions with a focus on comfort and style",
     banner: "/work/vn2/z4279796446188_4aaf42a5ea2830e48d8572d24725dcac.jpg",
     location: "Vietnam",
@@ -401,9 +410,9 @@ const projects: Record<string, Project> = {
     ],
   },
   "luxury-villas": {
-    title: "Nhà riêng",
+    title: "NHÀ RIÊNG",
     description: "Cultural lighting design highlighting architectural elements and historical significance",
-    banner: "/work/vn3/2022_09_26_19_38_IMG_8530.JPG",
+    banner: "/work/vn3/2022_09_26_19_34_IMG_8523.JPG",
     location: "Vietnam",
     application: "Facades, Landscape, Museums and exhibitions",
     project: "IDA Lighting",
@@ -425,39 +434,34 @@ const projects: Record<string, Project> = {
       }
     ],
     items: [
-      { id: 1, image: "/work/vn3/2022_09_26_19_38_IMG_8530.JPG" },
-      { id: 2, image: "/work/vn3/2022_09_26_19_39_IMG_8533.JPG" },
-      { id: 3, image: "/work/vn3/2022_09_26_19_39_IMG_8534.JPG" },
-      { id: 4, image: "/work/vn3/2022_09_26_19_40_IMG_8535.JPG" },
-      { id: 5, image: "/work/vn3/2022_09_26_19_40_IMG_8536.JPG" },
-      { id: 6, image: "/work/vn3/2022_09_26_19_41_IMG_8537.JPG" },
-      { id: 7, image: "/work/vn3/2022_09_26_19_41_IMG_8538.JPG" },
-      { id: 8, image: "/work/vn3/2022_09_26_19_41_IMG_8539.JPG" },
-      { id: 9, image: "/work/vn3/2022_09_26_19_41_IMG_8540.JPG" },
-      { id: 10, image: "/work/vn3/2022_09_26_19_42_IMG_8541.JPG" },
-      { id: 11, image: "/work/vn3/2022_09_26_19_42_IMG_8542.JPG" },
-      { id: 12, image: "/work/vn3/2022_09_26_19_34_IMG_8522.JPG" },
-      { id: 13, image: "/work/vn3/2022_09_26_19_34_IMG_8523.JPG" },
-      { id: 14, image: "/work/vn3/2022_09_26_19_34_IMG_8524.JPG" },
-      { id: 15, image: "/work/vn3/2022_09_26_19_35_IMG_8525.JPG" },
-      { id: 16, image: "/work/vn3/2022_09_26_19_38_IMG_8526.JPG" },
-      { id: 17, image: "/work/vn3/2022_09_26_19_38_IMG_8527.JPG" },
-      { id: 18, image: "/work/vn3/2022_09_26_19_38_IMG_8528.JPG" },
-      { id: 19, image: "/work/vn3/2022_09_26_19_38_IMG_8529.JPG" },
-      { id: 20, image: "/work/vn3/2022_09_26_19_38_IMG_8530.JPG" },
-      { id: 21, image: "/work/vn3/2022_09_26_19_39_IMG_8531.JPG" },
-      { id: 22, image: "/work/vn3/2022_09_26_19_39_IMG_8532.JPG" },
-      { id: 23, image: "/work/vn3/2022_09_26_17_50_IMG_8515.JPG" },
-      { id: 24, image: "/work/vn3/2022_09_26_17_50_IMG_8516.JPG" },
-      { id: 25, image: "/work/vn3/2022_09_26_17_50_IMG_8517.JPG" },
-      { id: 26, image: "/work/vn3/2022_09_26_17_50_IMG_8518.JPG" },
-      { id: 27, image: "/work/vn3/2022_09_26_19_31_IMG_8519.JPG" },
-      { id: 28, image: "/work/vn3/2022_09_26_19_31_IMG_8520.JPG" },
-      { id: 29, image: "/work/vn3/2022_09_26_19_31_IMG_8521.JPG" }
+      { id: 1, image: "/work/vn3/2022_05_04_06_51_IMG_3810-min.JPG" },
+      { id: 2, image: "/work/vn3/2022_05_04_06_51_IMG_3811-min.JPG" },
+      { id: 3, image: "/work/vn3/2022_08_03_07_29_IMG_6852-min.JPG" },
+      { id: 4, image: "/work/vn3/2022_08_03_14_36_IMG_6854-min.JPG" },
+      { id: 5, image: "/work/vn3/2022_08_03_17_02_IMG_6865-min.JPG" },
+      { id: 6, image: "/work/vn3/2022_08_03_17_02_IMG_6866-min.JPG" },
+      { id: 7, image: "/work/vn3/2022_08_03_18_01_IMG_6868-min.JPG" },
+      { id: 8, image: "/work/vn3/2022_08_03_18_01_IMG_6869-min.JPG" },
+      { id: 9, image: "/work/vn3/2022_08_04_10_17_IMG_6879-min.JPG" },
+      { id: 10, image: "/work/vn3/2022_08_04_11_43_IMG_6880-min.JPG" },
+      { id: 11, image: "/work/vn3/2022_09_26_17_50_IMG_8515-min.JPG" },
+      { id: 12, image: "/work/vn3/2022_09_26_19_34_IMG_8523.JPG" },
+      { id: 13, image: "/work/vn3/2022_09_26_19_34_IMG_8524.JPG" },
+      { id: 14, image: "/work/vn3/2022_09_26_19_38_IMG_8526.JPG" },
+      { id: 15, image: "/work/vn3/2022_09_26_19_38_IMG_8529.JPG" },
+      { id: 16, image: "/work/vn3/2022_09_26_19_39_IMG_8531.JPG" },
+      { id: 17, image: "/work/vn3/2022_09_26_19_39_IMG_8532.JPG" },
+      { id: 18, image: "/work/vn3/2022_09_26_19_39_IMG_8533.JPG" },
+      { id: 19, image: "/work/vn3/2022_09_26_19_39_IMG_8534.JPG" },
+      { id: 20, image: "/work/vn3/2022_09_26_19_41_IMG_8538.JPG" },
+      { id: 21, image: "/work/vn3/2022_09_26_19_41_IMG_8539.JPG" },
+      { id: 22, image: "/work/vn3/2022_09_26_19_41_IMG_8540.JPG" },
+      { id: 23, image: "/work/vn3/2022_09_26_19_42_IMG_8541.JPG" },
+      { id: 24, image: "/work/vn3/2022_09_26_19_42_IMG_8542.JPG" }
     ],
   },
   "retail": {
-    title: "Bamboo cafe",
+    title: "BAMBOO CAFE",
     description: "Contemporary cafe lighting design creating a vibrant and welcoming atmosphere",
     banner: "/work/vn4/2020_12_26_19_53_IMG_0314.JPG",
     location: "Vietnam",
@@ -481,51 +485,51 @@ const projects: Record<string, Project> = {
       }
     ],
     items: [
-      { id: 18, image: "/work/vn4/2020_12_24_15_07_IMG_0298.JPG" },
-      { id: 19, image: "/work/vn4/2020_12_24_15_08_IMG_0299.JPG" },
-      { id: 20, image: "/work/vn4/2020_12_24_15_08_IMG_0300.JPG" },
-      { id: 21, image: "/work/vn4/2020_12_24_15_11_IMG_0301.JPG" },
-      { id: 22, image: "/work/vn4/2020_12_24_15_11_IMG_0302.JPG" },
-      { id: 23, image: "/work/vn4/2020_12_24_15_12_IMG_0303.JPG" },
-      { id: 24, image: "/work/vn4/2020_12_24_15_13_IMG_0304.JPG" },
-      { id: 25, image: "/work/vn4/2020_12_24_15_14_IMG_0305.JPG" },
-      { id: 26, image: "/work/vn4/2020_12_26_19_47_IMG_0306.JPG" },
-      { id: 27, image: "/work/vn4/2020_12_26_19_48_IMG_0307.JPG" },
-      { id: 28, image: "/work/vn4/2020_12_26_19_49_IMG_0308.JPG" },
-      { id: 29, image: "/work/vn4/2020_12_26_19_49_IMG_0309.JPG" },
-      { id: 30, image: "/work/vn4/2020_12_26_19_50_IMG_0310.JPG" },
-      { id: 31, image: "/work/vn4/2020_12_26_19_52_IMG_0311.JPG" },
-      { id: 32, image: "/work/vn4/2020_12_26_19_52_IMG_0312.JPG" },
-      { id: 33, image: "/work/vn4/2020_12_26_19_53_IMG_0313.JPG" },
-      { id: 34, image: "/work/vn4/2020_12_26_19_53_IMG_0314.JPG" },
-      { id: 35, image: "/work/vn4/2020_12_26_20_07_IMG_0315.JPG" },
-      { id: 36, image: "/work/vn4/2021_01_21_21_09_IMG_0340.JPG" },
-      { id: 37, image: "/work/vn4/2021_01_21_21_09_IMG_0341.JPG" },
-      { id: 38, image: "/work/vn4/2021_01_21_21_09_IMG_0342.JPG" },
-      { id: 39, image: "/work/vn4/2021_01_24_20_15_IMG_0353.JPG" },
-      { id: 40, image: "/work/vn4/2021_01_24_20_16_IMG_0354.JPG" },
-      { id: 41, image: "/work/vn4/2021_01_24_20_18_IMG_0358.JPG" },
-      { id: 42, image: "/work/vn4/2021_02_01_11_03_IMG_0377.JPG" },
-      { id: 43, image: "/work/vn4/2021_02_01_11_04_IMG_0378.JPG" },
-      { id: 44, image: "/work/vn4/2021_02_09_23_18_IMG_0412.JPG" },
-      { id: 45, image: "/work/vn4/2021_02_09_23_19_IMG_0413.JPG" },
-      { id: 46, image: "/work/vn4/2021_02_09_23_20_IMG_0414.JPG" },
-      { id: 47, image: "/work/vn4/2021_02_09_23_20_IMG_0415.JPG" },
-      { id: 48, image: "/work/vn4/2021_02_10_20_53_IMG_0416.JPG" },
-      { id: 49, image: "/work/vn4/2021_02_10_20_53_IMG_0417.JPG" },
-      { id: 50, image: "/work/vn4/2021_02_10_20_53_IMG_0418.JPG" },
-      { id: 51, image: "/work/vn4/2021_02_10_20_53_IMG_0419.JPG" },
-      { id: 52, image: "/work/vn4/2021_03_01_22_20_IMG_0879.JPG" },
-      { id: 53, image: "/work/vn4/2021_03_24_20_55_IMG_0422.JPG" },
-      { id: 54, image: "/work/vn4/2021_03_24_20_56_IMG_0423.JPG" },
-      { id: 55, image: "/work/vn4/2021_04_14_20_43_IMG_0426.JPG" },
-      { id: 56, image: "/work/vn4/2021_04_14_20_44_IMG_0429.JPG" }
+      { id: 18, image: "/work/vn4/2020_12_24_15_07_IMG_0298-min.JPG" },
+      { id: 19, image: "/work/vn4/2020_12_24_15_08_IMG_0299-min.JPG" },
+      { id: 20, image: "/work/vn4/2020_12_24_15_08_IMG_0300-min.JPG" },
+      { id: 21, image: "/work/vn4/2020_12_24_15_11_IMG_0301-min.JPG" },
+      { id: 22, image: "/work/vn4/2020_12_24_15_11_IMG_0302-min.JPG" },
+      { id: 23, image: "/work/vn4/2020_12_24_15_12_IMG_0303-min.JPG" },
+      { id: 24, image: "/work/vn4/2020_12_24_15_13_IMG_0304-min.JPG" },
+      { id: 25, image: "/work/vn4/2020_12_24_15_14_IMG_0305-min.JPG" },
+      { id: 26, image: "/work/vn4/2020_12_26_19_47_IMG_0306-min.JPG" },
+      { id: 27, image: "/work/vn4/2020_12_26_19_48_IMG_0307-min.JPG" },
+      { id: 28, image: "/work/vn4/2020_12_26_19_49_IMG_0308-min.JPG" },
+      { id: 29, image: "/work/vn4/2020_12_26_19_49_IMG_0309-min.JPG" },
+      { id: 30, image: "/work/vn4/2020_12_26_19_50_IMG_0310-min.JPG" },
+      { id: 31, image: "/work/vn4/2020_12_26_19_52_IMG_0311-min.JPG" },
+      { id: 32, image: "/work/vn4/2020_12_26_19_52_IMG_0312-min.JPG" },
+      { id: 33, image: "/work/vn4/2020_12_26_19_53_IMG_0313-min.JPG" },
+      { id: 34, image: "/work/vn4/2020_12_26_19_53_IMG_0314-min.JPG" },
+      { id: 35, image: "/work/vn4/2020_12_26_20_07_IMG_0315-min.JPG" },
+      { id: 36, image: "/work/vn4/2021_01_21_21_09_IMG_0340-min.JPG" },
+      { id: 37, image: "/work/vn4/2021_01_21_21_09_IMG_0341-min.JPG" },
+      { id: 38, image: "/work/vn4/2021_01_21_21_09_IMG_0342-min.JPG" },
+      { id: 39, image: "/work/vn4/2021_01_24_20_15_IMG_0353-min.JPG" },
+      { id: 40, image: "/work/vn4/2021_01_24_20_16_IMG_0354-min.JPG" },
+      { id: 41, image: "/work/vn4/2021_01_24_20_18_IMG_0358-min.JPG" },
+      { id: 42, image: "/work/vn4/2021_02_01_11_03_IMG_0377-min.JPG" },
+      { id: 43, image: "/work/vn4/2021_02_01_11_04_IMG_0378-min.JPG" },
+      { id: 44, image: "/work/vn4/2021_02_09_23_18_IMG_0412-min.JPG" },
+      { id: 45, image: "/work/vn4/2021_02_09_23_19_IMG_0413-min.JPG" },
+      { id: 46, image: "/work/vn4/2021_02_09_23_20_IMG_0414-min.JPG" },
+      { id: 47, image: "/work/vn4/2021_02_09_23_20_IMG_0415-min.JPG" },
+      { id: 48, image: "/work/vn4/2021_02_10_20_53_IMG_0416-min.JPG" },
+      { id: 49, image: "/work/vn4/2021_02_10_20_53_IMG_0417-min.JPG" },
+      { id: 50, image: "/work/vn4/2021_02_10_20_53_IMG_0418-min.JPG" },
+      { id: 51, image: "/work/vn4/2021_02_10_20_53_IMG_0419-min.JPG" },
+      { id: 52, image: "/work/vn4/2021_03_01_22_20_IMG_0879-min.JPG" },
+      { id: 53, image: "/work/vn4/2021_03_24_20_55_IMG_0422-min.JPG" },
+      { id: 54, image: "/work/vn4/2021_03_24_20_56_IMG_0423-min.JPG" },
+      { id: 55, image: "/work/vn4/2021_04_14_20_43_IMG_0426-min.JPG" },
+      { id: 56, image: "/work/vn4/2021_04_14_20_44_IMG_0429-min.JPG" }
     ],
   },
-  "outdoor-field": {
-    title: "Out door field",
+  "mochi-cafe": {
+    title: "MOCHI CAFE",
     description: "Entertainment lighting solutions for outdoor recreational areas and public spaces",
-    banner: "/work/vn5/2022_04_28_19_36_IMG_3661.JPG",
+    banner: "/work/vn5/2022_04_26_21_51_IMG_3568.JPG",
     location: "Vietnam",
     application: "Facades, Landscape, Paths and steps",
     project: "IDA Lighting",
@@ -547,61 +551,51 @@ const projects: Record<string, Project> = {
       }
     ],
     items: [
-      { id: 17, image: "/work/vn5/2022_04_25_20_34_IMG_3551.JPG" },
-      { id: 18, image: "/work/vn5/2022_04_25_20_35_IMG_3552.JPG" },
-      { id: 19, image: "/work/vn5/2022_04_25_20_50_IMG_3553.JPG" },
-      { id: 20, image: "/work/vn5/2022_04_25_20_57_IMG_3554.JPG" },
-      { id: 21, image: "/work/vn5/2022_04_26_08_57_IMG_3557.JPG" },
-      { id: 22, image: "/work/vn5/2022_04_26_21_50_IMG_3567.JPG" },
-      { id: 23, image: "/work/vn5/2022_04_26_21_51_IMG_3568.JPG" },
-      { id: 24, image: "/work/vn5/2022_04_26_21_51_IMG_3569.JPG" },
-      { id: 25, image: "/work/vn5/2022_04_26_21_57_IMG_3570.JPG" },
-      { id: 26, image: "/work/vn5/2022_04_28_15_16_IMG_3652.JPG" },
-      { id: 27, image: "/work/vn5/2022_04_28_16_33_IMG_3654.JPG" },
-      { id: 28, image: "/work/vn5/2022_04_28_16_33_IMG_3655.JPG" },
-      { id: 29, image: "/work/vn5/2022_04_28_18_02_IMG_3657.JPG" },
-      { id: 30, image: "/work/vn5/2022_04_28_18_18_IMG_3658.JPG" },
-      { id: 31, image: "/work/vn5/2022_04_28_18_19_IMG_3659.JPG" },
-      { id: 32, image: "/work/vn5/2022_04_28_19_36_IMG_3660.JPG" },
-      { id: 33, image: "/work/vn5/2022_04_28_19_36_IMG_3661.JPG" },
-      { id: 34, image: "/work/vn5/2022_04_28_19_38_IMG_3662.JPG" },
-      { id: 35, image: "/work/vn5/2022_05_04_17_29_IMG_3831.JPG" },
-      { id: 36, image: "/work/vn5/2022_05_04_17_29_IMG_3832.JPG" },
-      { id: 37, image: "/work/vn5/2022_05_04_17_30_IMG_3833.JPG" },
-      { id: 38, image: "/work/vn5/2022_05_04_17_32_IMG_3834.JPG" },
-      { id: 39, image: "/work/vn5/2022_05_07_14_01_IMG_0957.JPG" },
-      { id: 40, image: "/work/vn5/2022_05_07_14_01_IMG_0958.JPG" },
-      { id: 41, image: "/work/vn5/2022_05_07_14_01_IMG_0959.JPG" },
-      { id: 42, image: "/work/vn5/2022_05_07_14_01_IMG_0960.JPG" },
-      { id: 43, image: "/work/vn5/2022_05_07_14_01_IMG_0961.JPG" },
-      { id: 44, image: "/work/vn5/2022_05_07_14_01_IMG_0962.JPG" },
-      { id: 45, image: "/work/vn5/2022_05_07_14_01_IMG_0963.JPG" },
-      { id: 46, image: "/work/vn5/2022_05_07_14_01_IMG_0964.JPG" },
-      { id: 47, image: "/work/vn5/2022_05_07_14_01_IMG_0965.JPG" },
-      { id: 48, image: "/work/vn5/2022_05_07_14_01_IMG_0966.JPG" },
-      { id: 49, image: "/work/vn5/2022_05_07_14_01_IMG_0967.JPG" },
-      { id: 50, image: "/work/vn5/2022_05_07_14_01_IMG_0968.JPG" },
-      { id: 51, image: "/work/vn5/2022_05_07_14_01_IMG_0969.JPG" },
-      { id: 52, image: "/work/vn5/2022_05_07_14_01_IMG_0970.JPG" },
-      { id: 53, image: "/work/vn5/2022_05_07_14_01_IMG_0971.JPG" },
-      { id: 54, image: "/work/vn5/2022_05_07_14_01_IMG_0972.JPG" },
-      { id: 55, image: "/work/vn5/2022_05_07_14_01_IMG_0973.JPG" },
-      { id: 56, image: "/work/vn5/2022_05_07_14_01_IMG_0974.JPG" },
-      { id: 57, image: "/work/vn5/2022_05_07_14_01_IMG_0975.JPG" },
-      { id: 58, image: "/work/vn5/2022_05_07_14_01_IMG_0976.JPG" },
-      { id: 59, image: "/work/vn5/2022_05_07_14_01_IMG_0977.JPG" },
-      { id: 60, image: "/work/vn5/2022_05_07_14_01_IMG_0978.JPG" },
-      { id: 61, image: "/work/vn5/2022_05_07_14_01_IMG_0979.JPG" },
-      { id: 62, image: "/work/vn5/2022_05_07_14_01_IMG_0980.JPG" },
-      { id: 63, image: "/work/vn5/2022_05_07_14_01_IMG_0981.JPG" },
-      { id: 64, image: "/work/vn5/2022_05_07_14_01_IMG_0982.JPG" },
-      { id: 65, image: "/work/vn5/2022_05_07_14_01_IMG_0983.JPG" },
-      { id: 66, image: "/work/vn5/2022_05_07_14_01_IMG_0984.JPG" },
-      { id: 67, image: "/work/vn5/2022_05_07_14_01_IMG_0985.JPG" }
+      { id: 1, image: "/work/vn5/2022_04_25_20_35_IMG_3552.JPG" },
+      { id: 2, image: "/work/vn5/2022_04_25_20_50_IMG_3553.JPG" },
+      { id: 3, image: "/work/vn5/2022_04_25_20_57_IMG_3554.JPG" },
+      { id: 4, image: "/work/vn5/2022_04_26_08_57_IMG_3557.JPG" },
+      { id: 5, image: "/work/vn5/2022_04_26_21_50_IMG_3567.JPG" },
+      { id: 6, image: "/work/vn5/2022_04_26_21_51_IMG_3568.JPG" },
+      { id: 7, image: "/work/vn5/2022_04_26_21_51_IMG_3569.JPG" },
+      { id: 8, image: "/work/vn5/2022_04_26_21_57_IMG_3570.JPG" },
+      { id: 9, image: "/work/vn5/2022_04_28_18_02_IMG_3657.JPG" },
+      { id: 10, image: "/work/vn5/2022_04_28_18_18_IMG_3658.JPG" },
+      { id: 11, image: "/work/vn5/2022_04_28_18_19_IMG_3659.JPG" },
+      { id: 12, image: "/work/vn5/2022_04_28_19_38_IMG_3662.JPG" },
+      { id: 13, image: "/work/vn5/2022_05_04_17_29_IMG_3831.JPG" },
+      { id: 14, image: "/work/vn5/2022_05_04_17_29_IMG_3832.JPG" },
+      { id: 15, image: "/work/vn5/2022_05_04_17_32_IMG_3834.JPG" },
+      { id: 16, image: "/work/vn5/2022_05_07_14_01_IMG_0957.JPG" },
+      { id: 17, image: "/work/vn5/2022_05_07_14_01_IMG_0958.JPG" },
+      { id: 18, image: "/work/vn5/2022_05_07_14_01_IMG_0959.JPG" },
+      { id: 19, image: "/work/vn5/2022_05_07_14_01_IMG_0960.JPG" },
+      { id: 20, image: "/work/vn5/2022_05_07_14_01_IMG_0961.JPG" },
+      { id: 21, image: "/work/vn5/2022_05_07_14_01_IMG_0962.JPG" },
+      { id: 22, image: "/work/vn5/2022_05_07_14_01_IMG_0963.JPG" },
+      { id: 23, image: "/work/vn5/2022_05_07_14_01_IMG_0964.JPG" },
+      { id: 24, image: "/work/vn5/2022_05_07_14_01_IMG_0965.JPG" },
+      { id: 25, image: "/work/vn5/2022_05_07_14_01_IMG_0966.JPG" },
+      { id: 26, image: "/work/vn5/2022_05_07_14_01_IMG_0967.JPG" },
+      { id: 27, image: "/work/vn5/2022_05_07_14_01_IMG_0968.JPG" },
+      { id: 28, image: "/work/vn5/2022_05_07_14_01_IMG_0969.JPG" },
+      { id: 29, image: "/work/vn5/2022_05_07_14_01_IMG_0970.JPG" },
+      { id: 30, image: "/work/vn5/2022_05_07_14_01_IMG_0971.JPG" },
+      { id: 31, image: "/work/vn5/2022_05_07_14_01_IMG_0972.JPG" },
+      { id: 32, image: "/work/vn5/2022_05_07_14_01_IMG_0973.JPG" },
+      { id: 33, image: "/work/vn5/2022_05_07_14_01_IMG_0975.JPG" },
+      { id: 34, image: "/work/vn5/2022_05_07_14_01_IMG_0977.JPG" },
+      { id: 35, image: "/work/vn5/2022_05_07_14_01_IMG_0979.JPG" },
+      { id: 36, image: "/work/vn5/2022_05_07_14_01_IMG_0981.JPG" },
+      { id: 37, image: "/work/vn5/2022_05_07_14_01_IMG_0982.JPG" },
+      { id: 38, image: "/work/vn5/2022_05_07_14_01_IMG_0984.JPG" },
+      { id: 39, image: "/work/vn5/z4657774934112_d8b2f2aecd365287e273366f2f91c7a9.jpg" },
+      { id: 40, image: "/work/vn5/z4657774950267_06e274dbe712f58d3f7da8f7c749a344.jpg" },
+      { id: 41, image: "/work/vn5/z4657774952734_d2b8a186b3afc4425c0ac34aa0b16a30.jpg" }
     ],
   },
   "villa": {
-    title: "Nhà riêng",
+    title: "NHÀ RIÊNG",
     description: "Retail lighting design enhancing product displays and creating an immersive shopping experience",
     banner: "/work/vn6/DSC09659_HDR 1.jpg",
     location: "Vietnam",
@@ -665,9 +659,9 @@ const projects: Record<string, Project> = {
     ],
   },
   "long-house": {
-    title: "Long House",
+    title: "LONG HOUSE",
     description: "Modern residential lighting with clean lines and seamless integration",
-    banner: "/work/long-house/_TRC7471.jpg",
+    banner: "/work/long-house/_TRC7471-min.jpg",
     location: "Vietnam",
     application: "Facades, Interior, Landscape",
     project: "IDA Lighting",
@@ -689,20 +683,47 @@ const projects: Record<string, Project> = {
       }
     ],
     items: [
-      { id: 1, image: "/work/long-house/_TRC7471.jpg" },
-      { id: 2, image: "/work/long-house/_TRC7469.jpg" },
-      { id: 3, image: "/work/long-house/_TRC7474.jpg" },
-      { id: 4, image: "/work/long-house/_TRC7472.jpg" },
-      { id: 5, image: "/work/long-house/_TRC7482.jpg" },
-      { id: 6, image: "/work/long-house/_TRC7488.jpg" },
-      { id: 7, image: "/work/long-house/_TRC7470.jpg" },
-      { id: 8, image: "/work/long-house/_TRC7464.jpg" }
+      { id: 1, image: "/work/long-house/_TRC7253-min.jpg" },
+      { id: 2, image: "/work/long-house/_TRC7254-min.jpg" },
+      { id: 3, image: "/work/long-house/_TRC7255-min.jpg" },
+      { id: 4, image: "/work/long-house/_TRC7258-min.jpg" },
+      { id: 5, image: "/work/long-house/_TRC7261-min.jpg" },
+      { id: 6, image: "/work/long-house/_TRC7266-min.jpg" },
+      { id: 7, image: "/work/long-house/_TRC7410-min.jpg" },
+      { id: 8, image: "/work/long-house/_TRC7413-min.jpg" },
+      { id: 9, image: "/work/long-house/_TRC7420-min.jpg" },
+      { id: 10, image: "/work/long-house/_TRC7428-min.jpg" },
+      { id: 11, image: "/work/long-house/_TRC7440-min.jpg" },
+      { id: 12, image: "/work/long-house/_TRC7442-min.jpg" },
+      { id: 13, image: "/work/long-house/_TRC7443-min.jpg" },
+      { id: 14, image: "/work/long-house/_TRC7455-min.jpg" },
+      { id: 15, image: "/work/long-house/_TRC7470-min.jpg" },
+      { id: 16, image: "/work/long-house/_TRC7471-min.jpg" },
+      { id: 17, image: "/work/long-house/_TRC7472-min.jpg" },
+      { id: 18, image: "/work/long-house/_TRC7474-min.jpg" },
+      { id: 19, image: "/work/long-house/_TRC7477-min.jpg" },
+      { id: 20, image: "/work/long-house/_TRC7478-min.jpg" },
+      { id: 21, image: "/work/long-house/_TRC6913.jpg" },
+      { id: 22, image: "/work/long-house/_TRC6920.jpg" },
+      { id: 23, image: "/work/long-house/_TRC6934.jpg" },
+      { id: 24, image: "/work/long-house/_TRC6943.jpg" },
+      { id: 25, image: "/work/long-house/_TRC6944.jpg" },
+      { id: 26, image: "/work/long-house/_TRC6946.jpg" },
+      { id: 27, image: "/work/long-house/_TRC6947.jpg" },
+      { id: 28, image: "/work/long-house/_TRC6962.jpg" },
+      { id: 29, image: "/work/long-house/_TRC6964.jpg" },
+      { id: 30, image: "/work/long-house/_TRC6966.jpg" },
+      { id: 31, image: "/work/long-house/_TRC6968.jpg" },
+      { id: 32, image: "/work/long-house/_TRC6985.jpg" },
+      { id: 33, image: "/work/long-house/_TRC6996.jpg" },
+      { id: 34, image: "/work/long-house/_TRC7000.jpg" },
+      { id: 35, image: "/work/long-house/_TRC7153.jpg" }
     ],
   },
   "villa-44": {
-    title: "Villa 44 Hà Nội",
+    title: "VILLA 44 HÀ NỘI",
     description: "Premium residential lighting design showcasing luxury and modern smart home integration",
-    banner: "/work/villa-44/TRC_9185.jpg",
+    banner: "/work/villa-44/TRC_9185-min.jpg",
     location: "Hanoi, Vietnam",
     application: "Facades, Interior, Landscape, Smart Home",
     project: "IDA Lighting",
@@ -724,27 +745,27 @@ const projects: Record<string, Project> = {
       }
     ],
     items: [
-      { id: 1, image: "/work/villa-44/TRC_9185.jpg" },
-      { id: 2, image: "/work/villa-44/TRC_9186.jpg" },
-      { id: 3, image: "/work/villa-44/TRC_9195.jpg" },
-      { id: 4, image: "/work/villa-44/TRC_9197.jpg" },
-      { id: 5, image: "/work/villa-44/TRC_9198.jpg" },
-      { id: 6, image: "/work/villa-44/TRC_9199.jpg" },
-      { id: 7, image: "/work/villa-44/TRC_9276.jpg" },
-      { id: 8, image: "/work/villa-44/TRC_9282.jpg" },
-      { id: 9, image: "/work/villa-44/TRC_9298.jpg" },
-      { id: 10, image: "/work/villa-44/TRC_9299.jpg" },
-      { id: 11, image: "/work/villa-44/TRC_9309.jpg" },
-      { id: 12, image: "/work/villa-44/TRC_9329.jpg" },
-      { id: 13, image: "/work/villa-44/TRC_9352.jpg" },
-      { id: 14, image: "/work/villa-44/TRC_9373.jpg" },
-      { id: 15, image: "/work/villa-44/TRC_9397.jpg" },
-      { id: 16, image: "/work/villa-44/TRC_9417.jpg" },
-      { id: 17, image: "/work/villa-44/TRC_9461.jpg" },
-      { id: 18, image: "/work/villa-44/TRC_9467.jpg" },
-      { id: 19, image: "/work/villa-44/TRC_9473.jpg" },
-      { id: 20, image: "/work/villa-44/TRC_9476.jpg" },
-      { id: 21, image: "/work/villa-44/TRC_9483.jpg" }
+      { id: 1, image: "/work/villa-44/TRC_9185-min.jpg" },
+      { id: 2, image: "/work/villa-44/TRC_9186-min.jpg" },
+      { id: 3, image: "/work/villa-44/TRC_9195-min.jpg" },
+      { id: 4, image: "/work/villa-44/TRC_9197-min.jpg" },
+      { id: 5, image: "/work/villa-44/TRC_9198-min.jpg" },
+      { id: 6, image: "/work/villa-44/TRC_9199-min.jpg" },
+      { id: 7, image: "/work/villa-44/TRC_9276-min.jpg" },
+      { id: 8, image: "/work/villa-44/TRC_9282-min.jpg" },
+      { id: 9, image: "/work/villa-44/TRC_9298-min.jpg" },
+      { id: 10, image: "/work/villa-44/TRC_9299-min.jpg" },
+      { id: 11, image: "/work/villa-44/TRC_9309-min.jpg" },
+      { id: 12, image: "/work/villa-44/TRC_9329-min.jpg" },
+      { id: 13, image: "/work/villa-44/TRC_9352-min.jpg" },
+      { id: 14, image: "/work/villa-44/TRC_9373-min.jpg" },
+      { id: 15, image: "/work/villa-44/TRC_9397-min.jpg" },
+      { id: 16, image: "/work/villa-44/TRC_9417-min.jpg" },
+      { id: 17, image: "/work/villa-44/TRC_9461-min.jpg" },
+      { id: 18, image: "/work/villa-44/TRC_9467-min.jpg" },
+      { id: 19, image: "/work/villa-44/TRC_9473-min.jpg" },
+      { id: 20, image: "/work/villa-44/TRC_9476-min.jpg" },
+      { id: 21, image: "/work/villa-44/TRC_9483-min.jpg" }
     ],
   },
 }
@@ -755,109 +776,195 @@ type ProjectPageProps = {
 
 export default function ProjectPage({ params }: ProjectPageProps) {
   const slug = params?.slug || '';
-
-  // Check if the project exists
+  
+  // Kiểm tra dự án có tồn tại không và trả về notFound nếu không
   if (!projects[slug as keyof typeof projects]) {
     notFound()
   }
 
   const project = projects[slug as keyof typeof projects]
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null)
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [isZooming, setIsZooming] = useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0)
+  const [isZooming, setIsZooming] = useState(false)
   
-  // Enhanced parallax scroll effect references
-  const { scrollYProgress } = useScroll();
+  // Cache lại mảng hình ảnh để tránh tạo mới mỗi lần render
+  const allImages = useMemo(() => 
+    project ? [project.banner, ...project.items.map(item => item.image)] : [],
+    [project]
+  )
   
-  // More refined parallax transformations with improved easing
-  const bannerY = useTransform(
-    scrollYProgress, 
-    [0, 1], 
-    [0, 50]
-  );
+  // Khởi tạo selected product nếu có
+  useEffect(() => {
+    if (project.products.length > 0 && !selectedProduct) {
+      setSelectedProduct(project.products[0])
+    }
+  }, [project, selectedProduct])
   
-  // More subtle slider scale with smoother easing
-  const sliderScale = useTransform(
-    scrollYProgress, 
-    [0, 0.5], 
-    [1, 1.05]
-  );
+  // Enhanced parallax scroll effect với tối ưu
+  const { scrollYProgress } = useScroll()
   
-  // Add parallax for the heading
-  const titleY = useTransform(
-    scrollYProgress, 
-    [0, 0.2], 
-    [0, -15]
-  );
+  // Memoize các transformation để tránh tính toán lại
+  const bannerY = useTransform(scrollYProgress, [0, 1], [0, 50])
+  const titleY = useTransform(scrollYProgress, [0, 0.2], [0, -15])
+  const descriptionY = useTransform(scrollYProgress, [0.1, 0.5], [0, -20])
+  // Thêm sliderScale transformation
+  const sliderScale = useTransform(scrollYProgress, [0, 0.5], [1, 1.05])
   
-  // Add a subtle rotation effect for gallery items
-  const galleryRotate = useTransform(
-    scrollYProgress,
-    [0, 1],
-    [0, 1]
-  );
-  
-  // Add parallax effect for description section
-  const descriptionY = useTransform(
-    scrollYProgress,
-    [0.1, 0.5],
-    [0, -20]
-  );
-  
-  // Zoom animation timing
+  // Zoom animation
   useEffect(() => {
     const interval = setInterval(() => {
-      setIsZooming(prev => !prev);
-    }, 5000);
+      setIsZooming(prev => !prev)
+    }, 8000)
     
-    return () => clearInterval(interval);
-  }, []);
+    return () => clearInterval(interval)
+  }, [])
   
-  // Tạo mảng tất cả hình ảnh từ gallery để sử dụng cho slider
-  const allImages = project ? [project.banner, ...project.items.map(item => item.image)] : [];
+  // Tối ưu chức năng navigation hình ảnh
+  const goToNextImage = useCallback(() => {
+    const nextIndex = (currentImageIndex + 1) % allImages.length
+    setCurrentImageIndex(nextIndex)
+  }, [currentImageIndex, allImages.length])
   
-  // Hàm điều hướng hình ảnh
-  const goToNextImage = () => {
-    setCurrentImageIndex((prev) => (prev + 1) % allImages.length);
-  };
+  const goToPrevImage = useCallback(() => {
+    const prevIndex = (currentImageIndex === 0) ? allImages.length - 1 : currentImageIndex - 1
+    setCurrentImageIndex(prevIndex)
+  }, [currentImageIndex, allImages.length])
   
-  const goToPrevImage = () => {
-    setCurrentImageIndex((prev) => (prev === 0 ? allImages.length - 1 : prev - 1));
-  };
+  // Cải thiện performance cho gallery với memo
+  const GalleryItem = useCallback(({ item, index }: { item: ProjectItem, index: number }) => {
+    const ref = useRef(null)
+    const isInView = useInView(ref, { 
+      once: true,
+      amount: 0.1,
+      margin: "0px 0px 100px 0px" 
+    })
+    
+    return (
+      <motion.div 
+        ref={ref}
+        className="relative overflow-hidden rounded-md"
+        initial={{ opacity: 0, scale: 0.92 }}
+        animate={isInView ? 
+          { opacity: 1, scale: 1, transition: { duration: 0.8, ease: "easeOut" } } : 
+          { opacity: 0, scale: 0.92 }
+        }
+      >
+        <motion.div 
+          className="aspect-[4/3] w-full h-full"
+          initial={{ scale: 1.1 }}
+          animate={{ scale: isInView ? [1.1, 1.03, 1] : 1.1 }}
+          transition={{ duration: 1.5, ease: "easeOut" }}
+        >
+          <div className="w-full h-full relative">
+            <NextImage
+              key={`gallery-${item.id}`}
+              src={item.image}
+              alt={item.title || `Project image ${index + 1}`}
+              fill
+              className="object-cover"
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+              quality={85}
+            />
+          </div>
+        </motion.div>
+      </motion.div>
+    )
+  }, [])
 
-  // Set default selected product
-  if (project.products.length > 0 && !selectedProduct) {
-    setSelectedProduct(project.products[0])
-  }
+  // Let's split the JSX to simplify the render tree
+  const renderGallery = useMemo(() => {
+    return (
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {project.items.map((item, idx) => (
+          <GalleryItem key={item.id} item={item} index={idx} />
+        ))}
+      </div>
+    )
+  }, [GalleryItem, project.items])
 
-  // Track cursor position for hover effects
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePosition({ x: e.clientX, y: e.clientY });
-    };
-    
-    window.addEventListener('mousemove', handleMouseMove);
-    
-    return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-    };
-  }, []);
+  // Optimize slider component to prevent reflow and repaints
+  const renderImageSlider = useCallback(() => {
+    return (
+      <div className="relative aspect-[16/9] mb-8 overflow-hidden rounded-md">
+        <motion.div 
+          className="relative h-full"
+          initial={{ scale: 1 }}
+          animate={{ scale: isZooming ? 1.02 : 1 }}
+          transition={{ duration: 3, ease: "easeInOut" }}
+        >
+          <AnimatePresence mode="wait">
+            <motion.div 
+              key={currentImageIndex}
+              className="relative w-full h-full"
+              initial={{ opacity: 0, scale: 1.08 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+            >
+              {allImages[currentImageIndex]?.endsWith('.mp4') ? (
+                <video 
+                  src={allImages[currentImageIndex]} 
+                  className="w-full h-full object-cover"
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                />
+              ) : (
+                <NextImage 
+                  src={allImages[currentImageIndex]} 
+                  alt={`Gallery image ${currentImageIndex + 1}`}
+                  className="object-cover"
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 66vw"
+                  quality={90}
+                  priority={currentImageIndex === 0}
+                />
+              )}
+            </motion.div>
+          </AnimatePresence>
+          
+          {/* Navigation arrows with improved hover effects */}
+          <button 
+            onClick={goToPrevImage}
+            className="absolute left-2 top-1/2 -translate-y-1/2 w-10 h-10 bg-black/50 hover:bg-black/70 rounded-full flex items-center justify-center text-white transition-colors"
+            aria-label="Previous image"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            </svg>
+          </button>
+          
+          <button 
+            onClick={goToNextImage}
+            className="absolute right-2 top-1/2 -translate-y-1/2 w-10 h-10 bg-black/50 hover:bg-black/70 rounded-full flex items-center justify-center text-white transition-colors"
+            aria-label="Next image"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
+          
+          <div className="absolute bottom-4 right-4 bg-black/60 text-white text-sm px-3 py-1 rounded-full">
+            {currentImageIndex + 1} / {allImages.length}
+          </div>
+        </motion.div>
+      </div>
+    )
+  }, [allImages, currentImageIndex, goToPrevImage, goToNextImage, isZooming])
 
   return (
     <main className="min-h-screen bg-gradient-to-r from-black via-black to-[#8B2323] text-white">
       <Header />
       
-      {/* New layout based on Lucelight.it */}
+      {/* New layout with simplified DOM structure */}
       <div className="container mx-auto pt-32 pb-16 px-4 md:px-8">
-        {/* Project title with parallax */}
+        {/* Project title with simplified styling */}
         <motion.h1 
-          style={{ y: titleY }}
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
           className="text-4xl md:text-5xl font-bold mb-8"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
         >
           {project.title}
         </motion.h1>
@@ -866,10 +973,10 @@ export default function ProjectPage({ params }: ProjectPageProps) {
           {/* Main image */}
           <div className="lg:w-2/3">
             <motion.div 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 1 }}
               className="relative aspect-[16/9] mb-4 overflow-hidden rounded-md"
+              initial={{ opacity: 0, y: 20, scale: 0.98 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
             >
               {project.banner.endsWith('.mp4') ? (
                 <video 
@@ -881,143 +988,56 @@ export default function ProjectPage({ params }: ProjectPageProps) {
                   playsInline
                 />
               ) : (
-                <div className="relative h-full overflow-hidden">
-                  <motion.div 
-                    className="relative w-full h-full"
-                    style={{ y: bannerY }}
-                  >
-                    <Image 
-                    src={project.banner} 
-                    alt={project.title}
-                    className="w-full h-full object-cover"
+                <motion.div 
+                  className="relative h-full overflow-hidden"
+                  animate={{ scale: isZooming ? 1.03 : 1 }}
+                  transition={{ duration: 5, ease: "easeInOut" }}
+                >
+                  <div className="relative w-full h-full">
+                    <NextImage 
+                      src={project.banner} 
+                      alt={project.title}
+                      className="object-cover"
                       fill
                       sizes="(max-width: 1024px) 100vw, 66vw"
-                      style={{
-                        objectFit: 'cover',
-                      }}
-                      quality={90}
-                      priority // Load this image with priority
+                      quality={95}
+                      priority
                     />
-                  </motion.div>
+                  </div>
                   
-                  {/* Product indicators with subtle hover effect */}
-                  {project.products.map((product, index) => (
+                  {/* Product indicators with simplified DOM */}
+                  {project.products.slice(0, 2).map((product, index) => (
                     <motion.button
                       key={product.id}
-                      whileHover={{ scale: 1.1 }}
-                      transition={{ type: "spring", stiffness: 400, damping: 20 }}
                       className={`absolute w-8 h-8 rounded-full flex items-center justify-center 
-                                 transition-all duration-300 ${selectedProduct?.id === product.id 
+                                 transition-colors ${selectedProduct?.id === product.id 
                                    ? 'bg-red-600 text-white' 
                                    : 'bg-white text-black border border-gray-300'}`}
                       style={{
                         left: `${20 + (index * 15)}%`,
                         top: '70%',
                       }}
+                      initial={{ opacity: 0, scale: 0 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ delay: 0.8 + index * 0.2, duration: 0.5 }}
                       onClick={() => setSelectedProduct(product)}
                     >
                       {index + 1}
                     </motion.button>
                   ))}
-                </div>
+                </motion.div>
               )}
             </motion.div>
             
-            {/* Image slider with refined parallax and smoother animations */}
-            <motion.div 
-              style={{ scale: sliderScale }}
-              className="relative aspect-[16/9] mb-8 overflow-hidden rounded-md"
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: false, amount: 0.3 }}
-            >
-              <div className="relative h-full">
-                <AnimatePresence mode="wait">
-                  <motion.div
-                    key={currentImageIndex}
-                    className="relative w-full h-full"
-                    initial={{ opacity: 0, scale: 1.05, filter: "blur(4px)" }}
-                    animate={{ 
-                      opacity: 1, 
-                      scale: isZooming ? 1.03 : 1,
-                      filter: "blur(0px)"
-                    }}
-                    exit={{ opacity: 0, scale: 0.98, filter: "blur(4px)" }}
-                    transition={{ 
-                      opacity: { duration: 0.7 },
-                      scale: { duration: 5, ease: "easeInOut" },
-                      filter: { duration: 0.5 }
-                    }}
-                  >
-                    {allImages[currentImageIndex].endsWith('.mp4') ? (
-                      <video 
-                    src={allImages[currentImageIndex]} 
-                    className="w-full h-full object-cover"
-                        autoPlay
-                        loop
-                        muted
-                        playsInline
-                      />
-                    ) : (
-                      <Image 
-                        src={allImages[currentImageIndex]} 
-                        alt={`Gallery image ${currentImageIndex + 1}`}
-                        className="w-full h-full"
-                        fill
-                        sizes="(max-width: 1024px) 100vw, 66vw"
-                        style={{
-                          objectFit: 'cover',
-                        }}
-                        quality={85}
-                        priority={currentImageIndex === 0} // Load the first image with priority
-                      />
-                    )}
-                  </motion.div>
-                </AnimatePresence>
-                
-                {/* Navigation arrows with improved hover effects */}
-                <motion.button 
-                  onClick={goToPrevImage}
-                  whileHover={{ scale: 1.1, backgroundColor: "rgba(0, 0, 0, 0.7)" }}
-                  transition={{ type: "spring", stiffness: 400, damping: 25 }}
-                  className="absolute left-2 top-1/2 -translate-y-1/2 w-10 h-10 bg-black/50 hover:bg-black/70 rounded-full flex items-center justify-center text-white transition-all"
-                  aria-label="Previous image"
-                >
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                  </svg>
-                </motion.button>
-                
-                <motion.button 
-                  onClick={goToNextImage}
-                  whileHover={{ scale: 1.1, backgroundColor: "rgba(0, 0, 0, 0.7)" }}
-                  transition={{ type: "spring", stiffness: 400, damping: 25 }}
-                  className="absolute right-2 top-1/2 -translate-y-1/2 w-10 h-10 bg-black/50 hover:bg-black/70 rounded-full flex items-center justify-center text-white transition-all"
-                  aria-label="Next image"
-                >
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
-                </motion.button>
-                
-                {/* Image counter with animation */}
-                <motion.div 
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.3, duration: 0.5, ease: "easeOut" }}
-                  className="absolute bottom-4 right-4 bg-black/60 text-white text-sm px-3 py-1 rounded-full"
-                >
-                  {currentImageIndex + 1} / {allImages.length}
-                </motion.div>
-              </div>
-            </motion.div>
+            {/* Image slider with optimized DOM */}
+            {renderImageSlider()}
             
-            {/* Project description with parallax effect */}
+            {/* Project description with simplified styling */}
             <motion.div 
-              style={{ y: descriptionY }}
+              className="mb-12"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.3 }}
-              className="mb-12"
+              transition={{ duration: 0.8, delay: 0.4 }}
             >
               <p className="text-lg leading-relaxed mb-8 text-gray-200">{project.description}</p>
               
@@ -1026,15 +1046,28 @@ export default function ProjectPage({ params }: ProjectPageProps) {
                 <h2 className="text-2xl font-bold mb-4">Products</h2>
                 
                 {selectedProduct && (
-                  <div className="flex flex-col md:flex-row gap-8 p-6 bg-black/30 backdrop-blur-sm rounded-md">
+                  <motion.div 
+                    className="flex flex-col md:flex-row gap-8 p-6 bg-black/30 backdrop-blur-sm rounded-md"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6 }}
+                  >
                     <div className="md:w-1/3">
-                      <div className="aspect-square bg-black/50 rounded-md overflow-hidden border border-gray-800">
-                        <img 
+                      <motion.div 
+                        className="aspect-square bg-black/50 rounded-md overflow-hidden border border-gray-800"
+                        initial={{ scale: 0.95 }}
+                        animate={{ scale: 1 }}
+                        transition={{ duration: 0.8 }}
+                      >
+                        <motion.img 
                           src={selectedProduct.image || "/placeholder.svg"} 
                           alt={selectedProduct.name}
                           className="w-full h-full object-contain p-4"
+                          initial={{ scale: 1.1 }}
+                          animate={{ scale: 1 }}
+                          transition={{ duration: 1.2 }}
                         />
-                      </div>
+                      </motion.div>
                     </div>
                     <div className="md:w-2/3">
                       <h3 className="text-xl font-bold mb-2">{selectedProduct.name}</h3>
@@ -1043,21 +1076,22 @@ export default function ProjectPage({ params }: ProjectPageProps) {
                         <p className="font-mono text-sm text-gray-200">{selectedProduct.specs}</p>
                       </div>
                     </div>
-                  </div>
+                  </motion.div>
                 )}
                 
-                {/* Product selection buttons */}
+                {/* Product selection buttons - limit to 2 on mobile */}
                 <div className="flex gap-3 mt-4">
-                  {project.products.map((product) => (
+                  {project.products.slice(0, 2).map((product, index) => (
                     <motion.button
                       key={product.id}
-                      whileHover={{ scale: 1.05 }}
-                      transition={{ type: "spring", stiffness: 400, damping: 20 }}
                       className={`px-4 py-2 rounded-md transition-colors ${
                         selectedProduct?.id === product.id
                           ? 'bg-red-600 text-white'
                           : 'bg-black/30 hover:bg-black/50 text-white'
                       }`}
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.2 * index, duration: 0.5 }}
                       onClick={() => setSelectedProduct(product)}
                     >
                       {product.name}
@@ -1069,7 +1103,12 @@ export default function ProjectPage({ params }: ProjectPageProps) {
           </div>
           
           {/* Project details sidebar */}
-          <div className="lg:w-1/3">
+          <motion.div 
+            className="lg:w-1/3"
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+          >
             <div className="bg-black/30 backdrop-blur-sm p-6 rounded-md">
               <table className="w-full text-left">
                 <tbody>
@@ -1099,15 +1138,28 @@ export default function ProjectPage({ params }: ProjectPageProps) {
                 <h2 className="text-2xl font-bold mb-4">Products</h2>
                 
                 {selectedProduct && (
-                  <div className="flex flex-col gap-6">
+                  <motion.div 
+                    className="flex flex-col gap-6"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.8 }}
+                  >
                     <div>
-                      <div className="aspect-square bg-black/50 rounded-md overflow-hidden border border-gray-800">
-                        <img 
+                      <motion.div 
+                        className="aspect-square bg-black/50 rounded-md overflow-hidden border border-gray-800"
+                        initial={{ scale: 0.95 }}
+                        animate={{ scale: 1 }}
+                        transition={{ duration: 0.8 }}
+                      >
+                        <motion.img 
                           src={selectedProduct.image || "/placeholder.svg"} 
                           alt={selectedProduct.name}
                           className="w-full h-full object-contain p-4"
+                          initial={{ scale: 1.1 }}
+                          animate={{ scale: 1 }}
+                          transition={{ duration: 1.2 }}
                         />
-                      </div>
+                      </motion.div>
                     </div>
                     <div>
                       <h3 className="text-xl font-bold mb-2">{selectedProduct.name}</h3>
@@ -1116,136 +1168,47 @@ export default function ProjectPage({ params }: ProjectPageProps) {
                         <p className="font-mono text-sm text-gray-200">{selectedProduct.specs}</p>
                       </div>
                     </div>
-                  </div>
+                  </motion.div>
                 )}
                 
                 {/* Product selection buttons */}
                 <div className="flex flex-wrap gap-3 mt-4">
-                  {project.products.map((product) => (
-                    <button
+                  {project.products.map((product, index) => (
+                    <motion.button
                       key={product.id}
                       className={`px-4 py-2 rounded-md transition-colors ${
                         selectedProduct?.id === product.id
                           ? 'bg-red-600 text-white'
                           : 'bg-black/30 hover:bg-black/50 text-white'
                       }`}
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.2 * index, duration: 0.5 }}
                       onClick={() => setSelectedProduct(product)}
                     >
                       {product.name}
-                    </button>
+                    </motion.button>
                   ))}
                 </div>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
         
-        {/* Project gallery with enhanced parallax and zoom effects */}
+        {/* Project gallery with optimized rendering */}
         <motion.div 
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.5 }}
           className="mt-12"
-          style={{ rotateX: galleryRotate }}
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.6 }}
         >
           <h2 className="text-2xl font-bold mb-6">Project Gallery</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {project.items.map((item, idx) => {
-              // For each item, create a ref and useInView hook inside the map function
-              const ref = useRef(null);
-              const isInView = useInView(ref, { 
-                once: false,
-                amount: 0.2,
-                margin: "0px 0px -10% 0px"
-              });
-              
-              // Calculate animation delay based on position
-              const columnPosition = idx % 3; // Assuming 3 columns in desktop layout
-              const rowPosition = Math.floor(idx / 3); 
-              const delayFactor = columnPosition * 0.1 + rowPosition * 0.05;
-              
-              // Create a parallax effect for each gallery item
-              const itemY = useTransform(
-                scrollYProgress,
-                [Math.max(0, rowPosition * 0.05), Math.min(1, 0.2 + rowPosition * 0.05)],
-                [20, -20]
-              );
-              
-              return (
-              <motion.div 
-                key={item.id} 
-                className="group relative"
-                  ref={ref}
-                  style={{ 
-                    y: isInView ? itemY : 0,
-                  }}
-                  initial={{ 
-                    opacity: 0, 
-                    scale: 1.05, 
-                    filter: "blur(4px)",
-                    y: 20
-                  }}
-                  animate={isInView ? { 
-                    opacity: 1, 
-                    scale: 1,
-                    filter: "blur(0px)",
-                    y: 0
-                  } : {}}
-                  transition={{ 
-                    duration: 0.8, 
-                    ease: "easeOut",
-                    delay: delayFactor, 
-                    opacity: { duration: 0.6 },
-                    scale: { duration: 0.7 },
-                    filter: { duration: 0.5 },
-                    y: { duration: 0.5, ease: "easeOut" }
-                  }}
-              >
-                <div className="relative aspect-[4/3] overflow-hidden rounded-md">
-                    <motion.div 
-                      className="w-full h-full"
-                      whileHover={{ scale: 1.08 }}
-                      transition={{ duration: 0.7, ease: "easeOut" }}
-                    >
-                      <Image 
-                    src={item.image} 
-                        alt={item.title || `Gallery image ${idx + 1}`}
-                    className="w-full h-full object-cover"
-                        fill
-                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                        style={{
-                          objectFit: 'cover',
-                        }}
-                        quality={80}
-                        loading="lazy"
-                      />
-                    </motion.div>
-                  <motion.div 
-                      className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                    initial={{ opacity: 0 }}
-                    whileHover={{ opacity: 1 }}
-                      transition={{ duration: 0.5 }}
-                  />
-                </div>
-                  <motion.h3 
-                    className="mt-2 font-medium"
-                    initial={{ opacity: 0, y: 5 }}
-                    animate={isInView ? { opacity: 1, y: 0 } : {}}
-                    transition={{ 
-                      duration: 0.5, 
-                      delay: delayFactor + 0.2,
-                      ease: "easeOut"
-                    }}
-                  >
-                    {item.title}
-                  </motion.h3>
-              </motion.div>
-              );
-            })}
-          </div>
+          
+          {/* Use memoized gallery render */}
+          {renderGallery}
         </motion.div>
       </div>
-      
+
       <Footer />
     </main>
   )

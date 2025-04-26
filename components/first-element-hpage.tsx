@@ -295,7 +295,7 @@ export default function FirstElementHpage() {
                 <AnimatedTitle>
                   {/* <span className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl block text-white">This is</span> */}
                   <span className="text-[36px] font-extrabold text-white">
-                    Đèn gỗ
+                   BỘ SƯU TẬP ĐÈN THỜ CAO CẤP
                   </span>
                 </AnimatedTitle>
               </div>
