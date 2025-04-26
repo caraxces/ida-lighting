@@ -260,7 +260,7 @@ const ProjectSlider = ({ onSlideChange }: ProjectSliderProps) => {
   }, [currentIndex, isScrolling, hasViewedAllSlides, services.length, isMobile])
 
   return (
-    <div ref={sliderRef} className="relative w-full h-screen overflow-hidden bg-white">
+    <div ref={sliderRef} className="relative w-full h-screen overflow-hidden bg-gray-900">
       {/* Slides container with hardware acceleration */}
       <AnimatePresence initial={false} mode="wait">
         <motion.div
@@ -282,7 +282,7 @@ const ProjectSlider = ({ onSlideChange }: ProjectSliderProps) => {
           <div className={`absolute inset-0 ${isMobile ? "flex flex-col" : "flex flex-row"}`}>
             {/* COLOR BLOCK with animated width */}
             <motion.div
-              className="relative h-full bg-black z-[30] overflow-hidden will-change-transform"
+              className="relative h-full bg-gradient-to-r from-gray-900 to-[#8B2323] z-[30] overflow-hidden will-change-transform"
               initial={{
                 width: isMobile ? "100%" : "37.5%",
                 height: isMobile ? "50%" : "100%",
@@ -312,14 +312,12 @@ const ProjectSlider = ({ onSlideChange }: ProjectSliderProps) => {
             >
               {/* Color block content with project info */}
               <div className="relative w-full h-full flex flex-col justify-center px-8 md:px-12 mt-[20px]">
-                <motion.h2 
-                  className="text-[24px] md:text-4xl lg:text-5xl mb-4 text-white leading-tight"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+                <AnimatedTitle 
+                  className="text-[24px] md:text-4xl lg:text-5xl mb-4"
+                  delay={0.3}
                 >
                   {services[currentIndex].title}
-                </motion.h2>
+                </AnimatedTitle>
                 
                 <motion.p 
                   className="text-sm md:text-base text-white/80 max-w-md mb-8 whitespace-pre-line"
