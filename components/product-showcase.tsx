@@ -114,7 +114,7 @@ function MobileProductShowcase({ hasLoaded, page, direction, paginate, images }:
             transition={{ duration: 0.8, delay: 0.4 }}
             className="mt-1"
           >
-            <p className="text-white/80 text-xs leading-relaxed">
+            <p className="text-white/80 text-xs leading-relaxed text-justify">
               Hệ thống chiếu sáng ngoài trời của IDA LIGHTING kết hợp giữa thiết kế tinh tế và công nghệ bền bỉ, 
               tạo nên điểm nhấn hoàn hảo cho cảnh quan của bạn.
             </p>
@@ -548,7 +548,7 @@ export default function ProductShowcase() {
                 className="mt-4 md:mt-8 mb-6 md:mb-10 max-w-md"
               >
                 <h3 className="text-white font-medium mb-2">Illuminate your outdoor spaces</h3>
-                <p className="text-white/80 text-sm leading-relaxed">
+                <p className="text-white/80 text-sm leading-relaxed text-justify">
                   Hệ thống chiếu sáng ngoài trời của IDA LIGHTING kết hợp giữa thiết kế tinh tế và công nghệ bền bỉ, 
                   tạo nên điểm nhấn hoàn hảo cho cảnh quan sân vườn. Với khả năng chống chịu thời tiết khắc nghiệt 
                   và hiệu suất năng lượng tối ưu, các sản phẩm đèn sân vườn của chúng tôi không chỉ làm đẹp không gian 

@@ -540,7 +540,7 @@ export default function ThirdElementHpage({ productSet }: ThirdElementHpageProps
                 transition={{ duration: 0.8, delay: 0.6 }}
               >
                 <h3 className="text-white font-medium mb-2 text-[1.25rem]">Premium Lighting Solutions</h3>
-                <p className="text-white/80 text-xs leading-relaxed">
+                <p className="text-white/80 text-xs leading-relaxed text-justify">
                   Đèn downlight của IDA LIGHTING được thiết kế theo dạng modul lắp ráp, cho phép thay thế linh hoạt giữa chip LED và choá đèn chỉ với thao tác đơn giản. Nhờ đó, người dùng có thể dễ dàng tùy biến công suất, góc chiếu và màu ánh sáng phù hợp với từng không gian cụ thể mà không cần thay toàn bộ đèn, giúp tiết kiệm chi phí và tối ưu hoá hiệu suất chiếu sáng. Thiết kế modul này cũng thuận tiện cho việc bảo trì, nâng cấp trong tương lai.
                 </p>
               </motion.div>
@@ -677,7 +677,7 @@ export default function ThirdElementHpage({ productSet }: ThirdElementHpageProps
                 transition={{ duration: 0.8, delay: 0.6 }}
                 className="max-w-md"
               >
-                <p className="text-white/80 text-sm leading-relaxed">
+                <p className="text-white/80 text-sm leading-relaxed text-justify">
                   Đèn downlight của IDA LIGHTING được thiết kế theo dạng modul lắp ráp, cho phép thay thế linh hoạt giữa chip LED và choá đèn chỉ với thao tác đơn giản. Nhờ đó, người dùng có thể dễ dàng tùy biến công suất, góc chiếu và màu ánh sáng phù hợp với từng không gian cụ thể mà không cần thay toàn bộ đèn, giúp tiết kiệm chi phí và tối ưu hoá hiệu suất chiếu sáng. Thiết kế modul này cũng thuận tiện cho việc bảo trì, nâng cấp trong tương lai.
                 </p>
               </motion.div>

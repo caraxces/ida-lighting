@@ -113,7 +113,7 @@ export default function MobileLayout2({ hasLoaded, page, direction, paginate, im
             className="mt-1 mb-2"
           >
             {/* <h3 className="text-white font-medium">Your light - Your style.</h3> */}
-            <p className="text-white/80 text-xs leading-relaxed">
+            <p className="text-white/80 text-xs leading-relaxed text-justify">
               Hệ thống đèn trang trí cao cấp của IDA LIGHTING là sự giao thoa tinh tế giữa nghệ thuật ánh sáng và công nghệ cá nhân hoá hiện đại, tạo nên những trải nghiệm độc bản dành riêng cho từng gia chủ.
             </p>
           </motion.div>

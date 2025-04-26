@@ -2,10 +2,8 @@ import type React from "react"
 import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import "./globals.css"
-// import { SoundProvider } from "@/hooks/use-sound"
 import Script from "next/script"
 import FloatingContactButton from "@/components/floating-contact-button"
-// import SoundTest from "@/components/sound-test"
 
 const inter = Inter({ subsets: ["latin"] })
 
