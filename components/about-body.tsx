@@ -34,7 +34,7 @@ export default function IDALightingProfile() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
-              className="text-sm md:text-base text-gray-300 leading-relaxed"
+              className="text-sm md:text-base text-gray-300 leading-relaxed text-justify"
             >
               Với tầm nhìn sáng tạo và đột phá, IDA LIGHTING được thành lập vào năm 2019 bởi Ths.Kts Nguyễn Đình Dương. Sau nhiều năm làm việc 
 trong lĩnh vực thiết kế và thi công kiến trúc, nhận thấy nhu cầu cấp thiết về những giải pháp chiếu sáng hiện đại, tinh tế và cá nhân hóa 
@@ -46,7 +46,7 @@ cao cho các công trình. Đây chính là động lực để IDA LIGHTING ra 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.6 }}
-              className="text-sm md:text-base text-gray-300 leading-relaxed"
+              className="text-sm md:text-base text-gray-300 leading-relaxed text-justify"
             >
               IDA LIGHTING không chỉ cung cấp ánh sáng mà còn mang đến giải pháp chiếu sáng tối ưu, giúp các không gian kiến trúc trở nên hoàn 
               hảo, ấn tượng và tiện nghi. Chúng tôi luôn hướng đến việc kết hợp tính thẩm mỹ và sự hiệu quả, tạo ra những sản phẩm đẳng cấp quốc 
@@ -58,7 +58,7 @@ cao cho các công trình. Đây chính là động lực để IDA LIGHTING ra 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.8 }}
-              className="text-sm md:text-base text-gray-300 leading-relaxed"
+              className="text-sm md:text-base text-gray-300 leading-relaxed text-justify"
             >
               Với đội ngũ chuyên gia và các đối tác quốc tế uy tín,{" "}
               IDA LIGHTING cam kết mang đến những sản phẩm chiếu sách chất
@@ -78,7 +78,7 @@ cao cho các công trình. Đây chính là động lực để IDA LIGHTING ra 
             className="space-y-6"
           >
             <h2 className="text-2xl font-bold text-white mb-6">CÂU CHUYỆN CỦA ÁNH SÁNG</h2>
-            <p className="text-sm md:text-base text-gray-300 leading-relaxed">
+            <p className="text-sm md:text-base text-gray-300 leading-relaxed text-justify">
               Xuất thân từ một kiến trúc sư, tôi đã từng tiếp xúc và làm việc với rất nhiều dự án trong lĩnh vực thiết
               kế - thi công. Và nhận thấy một vấn đề lớn trong ngành: Thị trường chiếu sáng thiếu vắng những giải pháp
               không chỉ đẹp mắt mà còn cần hiệu quả và tiết kiệm năng lượng. Bên cạnh đó, trong quá trình làm việc, bản
@@ -305,7 +305,7 @@ cao cho các công trình. Đây chính là động lực để IDA LIGHTING ra 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 1 }}
-              className="text-xs md:text-sm text-gray-400 mt-12 leading-relaxed"
+              className="text-xs md:text-sm text-gray-400 mt-12 leading-relaxed text-justify"
             >
               IDA LIGHTING có đội ngũ nhân sự trên 30 người gồm nhiều kỹ sư, kiến trúc sư, kỹ sư, thạc sĩ kinh tế,
               chuyên gia, nhân viên có kinh độ chuyên môn đầy đam mê nghiệm và làm việc. Toàn thể nhân viên hoạt động
@@ -398,7 +398,7 @@ cao cho các công trình. Đây chính là động lực để IDA LIGHTING ra 
             <div className="space-y-6">
               <div className="space-y-2">
                 <h4 className="text-white font-bold">PHÙ HỢP NHẤT</h4>
-                <p className="text-sm text-gray-300 leading-relaxed">
+                <p className="text-sm text-gray-300 leading-relaxed text-justify">
                   Đến với IDA LIGHTING chúng tôi sẽ cung cấp cho quý khách hàng các sản phẩm chiếu sáng phù hợp nhất dựa
                   theo:
                 </p>
@@ -411,7 +411,7 @@ cao cho các công trình. Đây chính là động lực để IDA LIGHTING ra 
 
               <div className="space-y-2">
                 <h4 className="text-white font-bold">TIÊN TIẾN NHẤT</h4>
-                <p className="text-sm text-gray-300 leading-relaxed">
+                <p className="text-sm text-gray-300 leading-relaxed text-justify">
                   IDA LIGHTING tự hào là một trong những đơn vị đi đầu tại Việt Nam và khu vực về công nghệ và sản phẩm
                   mới, chúng tôi luôn luôn nỗ lực cập nhật những công nghệ mới nhất và hiện đại nhất để đáp ứng nhu cầu
                   và tính đặc thù của các dự án.
@@ -435,7 +435,7 @@ cao cho các công trình. Đây chính là động lực để IDA LIGHTING ra 
             <div className="space-y-6">
               <div className="space-y-2">
                 <h4 className="text-white font-bold">CHUYÊN TÂM</h4>
-                <p className="text-sm text-gray-300 leading-relaxed">
+                <p className="text-sm text-gray-300 leading-relaxed text-justify">
                   IDA LIGHTING luôn đặt làm huyết, tận tâm đồng hành trong từng sản phẩm. Vì chúng tôi hiểu Câu chuyện
                   ánh sáng của mình có khả năng đồng điệu và song hành cùng khách hàng trong mọi khoảnh khắc của cuộc
                   sống.
@@ -444,7 +444,7 @@ cao cho các công trình. Đây chính là động lực để IDA LIGHTING ra 
 
               <div className="space-y-2">
                 <h4 className="text-white font-bold">CHUYÊN NGHIỆP</h4>
-                <p className="text-sm text-gray-300 leading-relaxed">
+                <p className="text-sm text-gray-300 leading-relaxed text-justify">
                   IDA LIGHTING xây dựng đội ngũ nhân sự chuyên nghiệp. Với mọi đối tượng và sản phẩm của IDA đều đạt
                   tiêu chí tận tâm đầu, đảm bảo đáp ứng sự tin tưởng của khách hàng và đối tác.
                 </p>
@@ -452,7 +452,7 @@ cao cho các công trình. Đây chính là động lực để IDA LIGHTING ra 
 
               <div className="space-y-2">
                 <h4 className="text-white font-bold">CHUYÊN BIỆT</h4>
-                <p className="text-sm text-gray-300 leading-relaxed">
+                <p className="text-sm text-gray-300 leading-relaxed text-justify">
                   IDA LIGHTING đề cao tính sáng tạo, những ý tưởng mới, cập nhật những xu hướng, công nghệ và những sản
                   phẩm tốt nhất nhằm đồng bộ và tương thích cao nhất với hệ sinh thái chung, giúp mang cao kết quả và
                   chất lượng của dự án.
@@ -476,7 +476,7 @@ cao cho các công trình. Đây chính là động lực để IDA LIGHTING ra 
             <div className="space-y-6">
               <div className="space-y-2">
                 <h4 className="text-white font-bold">ĐẲNG CẤP</h4>
-                <p className="text-sm text-gray-300 leading-relaxed">
+                <p className="text-sm text-gray-300 leading-relaxed text-justify">
                   IDA LIGHTING đem đến những sản phẩm và giải pháp đặc thù là minh chứng cho những giá trị vượt trội.
                   Trong quá trình sáng tạo, tôn vinh và nổi bật cho kiến trúc, kiến tạo không gian sống hoàn hảo.
                 </p>
@@ -484,7 +484,7 @@ cao cho các công trình. Đây chính là động lực để IDA LIGHTING ra 
 
               <div className="space-y-2">
                 <h4 className="text-white font-bold">TÂM HUYẾT</h4>
-                <p className="text-sm text-gray-300 leading-relaxed">
+                <p className="text-sm text-gray-300 leading-relaxed text-justify">
                   IDA LIGHTING luôn nỗ lực và đề cao tinh chuyên nghiệp, tận tâm và chân thành trong mọi hợp tác, đánh
                   giá cao tâm huyết cho từng sản phẩm để nâng cao chất lượng cũng như cảm xúc trong các dự án và khách
                   hàng.
@@ -493,7 +493,7 @@ cao cho các công trình. Đây chính là động lực để IDA LIGHTING ra 
 
               <div className="space-y-2">
                 <h4 className="text-white font-bold">KHÁC BIỆT</h4>
-                <p className="text-sm text-gray-300 leading-relaxed">
+                <p className="text-sm text-gray-300 leading-relaxed text-justify">
                   IDA LIGHTING luôn tìm kiếm các hướng đi riêng, những giải pháp đặc biệt cho từng dự án. Mỗi công trình
                   là một tiền đặc bản đặc may do mỗi cách cảm nhận và phù hợp với từng khách hàng.
                 </p>
@@ -501,7 +501,7 @@ cao cho các công trình. Đây chính là động lực để IDA LIGHTING ra 
 
               <div className="space-y-2">
                 <h4 className="text-white font-bold">HIỆU QUẢ</h4>
-                <p className="text-sm text-gray-300 leading-relaxed">
+                <p className="text-sm text-gray-300 leading-relaxed text-justify">
                   IDA LIGHTING trải qua nhiều năm đúc kết những giá trị, kinh nghiệm... nhằm mang đến những giải pháp
                   tối ưu, với những sản phẩm tốt nhất, công nghệ mới nhất, chi phí hợp nhất, đem lại giá trị và hiệu quả
                   cho công trình nói chung và khách hàng lớn đối tác.
@@ -530,7 +530,7 @@ cao cho các công trình. Đây chính là động lực để IDA LIGHTING ra 
             transition={{ duration: 0.6, delay: 0.2 }}
             className="space-y-6"
           >
-            <p className="text-sm text-gray-300 leading-relaxed">
+            <p className="text-sm text-gray-300 leading-relaxed text-justify">
               Trong suốt quá trình hoạt động, IDA LIGHTING đã tham gia và hoàn thành nhiều dự án lớn trên toàn quốc.
               Chúng tôi tự hào đã có tác lần cày của nhiều kiến trúc sư, nhà thầu, và chủ đầu tư, cung cấp các giải pháp
               chiếu sáng đạt chuẩn quốc tế. Không chỉ cung cấp sản phẩm, chúng tôi còn tư vấn và thiết kế chiếu sáng
@@ -542,7 +542,7 @@ cao cho các công trình. Đây chính là động lực để IDA LIGHTING ra 
               <div className="flex justify-end">
                 <div className="max-w-sm">
                   <p className="text-white text-right font-bold">Top 10 Sao Vàng thương hiệu Việt năm 2024</p>
-                  <p className="text-sm text-gray-300 text-right">
+                  <p className="text-sm text-gray-300 text-right text-justify">
                     Sự minh hỏa thành đạt chỉ tin cậy hàng đầu Việt Nam. Giải quyết những thức mắc, làm trỏ của các kiến
                     trúc sư trong việc tìm kiếm giải pháp chiếu sáng đặc biệt và gây ấn tượng.
                   </p>
@@ -626,7 +626,7 @@ cao cho các công trình. Đây chính là động lực để IDA LIGHTING ra 
             <div className="space-y-8">
               <div className="space-y-2">
                 <h4 className="text-white font-bold">Tư vấn thiết kế chiếu sáng</h4>
-                <p className="text-sm text-gray-300 leading-relaxed">
+                <p className="text-sm text-gray-300 leading-relaxed text-justify">
                   IDA LIGHTING mang đến các giải pháp thiết kế chiếu sáng chuyên nghiệp, phù hợp cho từng không gian
                   kiến trúc như: Nhà ở, Văn phòng, Khách sạn, Resort nghỉ dưỡng, Nhà hàng... và các công trình Công
                   cộng. Chúng tôi đảm bảo sự hài hòa giữa thẩm mỹ và công năng, tối ưu hóa ánh sáng để nâng cao trải
@@ -636,7 +636,7 @@ cao cho các công trình. Đây chính là động lực để IDA LIGHTING ra 
 
               <div className="space-y-2">
                 <h4 className="text-white font-bold">Cung cấp giải pháp chiếu sáng toàn diện</h4>
-                <p className="text-sm text-gray-300 leading-relaxed">
+                <p className="text-sm text-gray-300 leading-relaxed text-justify">
                   Chiếu sáng không đơn thuần là ánh sáng mà còn là cách chúng ta kiểm soát và sử dụng ánh sáng như thế
                   nào để phục vụ - hướng chiếu sáng mục đích mình nhất. IDA cung cấp mọi giải pháp tổng thể cho công
                   trình và hướng thích với các ngành nghề đều thiết kế tiên mới nhất hiện nay.
@@ -645,7 +645,7 @@ cao cho các công trình. Đây chính là động lực để IDA LIGHTING ra 
 
               <div className="space-y-2">
                 <h4 className="text-white font-bold">Bespoke lighting</h4>
-                <p className="text-sm text-gray-300 leading-relaxed">
+                <p className="text-sm text-gray-300 leading-relaxed text-justify">
                   IDA làm chủ được công nghệ sản xuất, lắp ráp tại Trung Quốc, các nước Châu Âu như Đức, Czech... và lựa
                   chọn các nhà hiệu cung cấp linh kiện - phụ kiện hàng đầu thế giới, không chỉ mang lại những sản phẩm
                   chất lượng cao mà chỉ phí phù hợp với thị trường Việt Nam, đáp ứng nhu cầu cá nhân hóa ngày càng được
@@ -655,7 +655,7 @@ cao cho các công trình. Đây chính là động lực để IDA LIGHTING ra 
 
               <div className="space-y-2">
                 <h4 className="text-white font-bold">Cung cấp thiết bị chiếu sáng</h4>
-                <p className="text-sm text-gray-300 leading-relaxed">
+                <p className="text-sm text-gray-300 leading-relaxed text-justify">
                   IDA LIGHTING mang đến những dòng sản phẩm đa dạng, đáp ứng đầu vào nhu cầu chiếu sáng cho nhiều không
                   gian khác nhau. Luôn lựa chọn và mang đến cho khách hàng những sản phẩm và liệu chất:
                 </p>
