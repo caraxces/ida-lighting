@@ -2,17 +2,19 @@
 
 import type React from "react"
 
-import { useState, useEffect, useRef } from "react"
+import { useState, useEffect, useRef, useCallback, useMemo } from "react"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion"
 import { ChevronRight } from "lucide-react"
-import AnimatedTitle from "./animated-title"
-import FloatingElements from "./floating-elements"
+import AnimatedTitleComponent from "./animated-title"
+import FloatingElementsComponent from "./floating-elements"
 import { cn } from "@/lib/utils"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import GlowButton from "./glow-button"
+import dynamic from "next/dynamic"
+import { throttle } from "lodash"
 
 // Define ProductSet type
 type ProductSet = {
@@ -50,6 +52,9 @@ const defaultImages = [
   "/work/IDA_Starlake/TRC_7562.jpg",
 ]
 
+// Tối ưu xử lý rotation để giảm thiểu re-render
+const MAX_VISIBLE_IMAGES = 4 // Limit to only what's visible
+
 // CSS để ẩn thanh cuộn trên các thiết bị khác nhau
 const scrollbarHideCss = `
   /* Ẩn thanh cuộn trên Chrome, Safari và Opera */
@@ -68,6 +73,17 @@ interface ThirdElementHpageProps {
   productSet?: ProductSet
 }
 
+// Lazy load các component
+const AnimatedTitle = dynamic(() => import('./animated-title'), {
+  ssr: false,
+  loading: () => <div className="h-[36px] w-full"></div>
+})
+
+const FloatingElements = dynamic(() => import('./floating-elements'), {
+  ssr: false,
+  loading: () => null
+})
+
 export default function ThirdElementHpage({ productSet }: ThirdElementHpageProps) {
   // Use provided images from productSet or fall back to default
   const images = productSet?.images || defaultImages
@@ -78,38 +94,62 @@ export default function ThirdElementHpage({ productSet }: ThirdElementHpageProps
   const [isMobile, setIsMobile] = useState(false)
   const containerRef = useRef<HTMLDivElement>(null)
 
-  // New carousel state for current positions
+  // Optimize and memoize image selection to prevent unnecessary re-renders
   const [currentPositions, setCurrentPositions] = useState([0, 1, 2, 3])
   const carouselTimerRef = useRef<NodeJS.Timeout | null>(null)
 
-  // Scroll animation
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end start"],
-  })
+  // Memoize image arrays to prevent reinstantiation
+  const [selectedFrameImages, setSelectedFrameImages] = useState<string[]>([])
+  const [selectedLedImages, setSelectedLedImages] = useState<string[]>([])
+  
+  // Memoize image indices computation
+  const getImageIndices = useCallback((currentPosition: number, isLedModule: boolean) => {
+    const imagesArray = isLedModule ? selectedLedImages : selectedFrameImages
+    if (!imagesArray || imagesArray.length === 0) return { prev: 0, current: 0, next: 0 }
+    
+    const prev = (currentPosition - 1 + imagesArray.length) % imagesArray.length
+    const next = (currentPosition + 1) % imagesArray.length
+    return { prev, current: currentPosition, next }
+  }, [selectedLedImages, selectedFrameImages])
 
-  const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "20%"])
-  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0.6])
-
-  // Track cursor for spotlight effect
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (!containerRef.current) return
-    const rect = containerRef.current.getBoundingClientRect()
-    setCursorPosition({
-      x: ((e.clientX - rect.left) / rect.width) * 100,
-      y: ((e.clientY - rect.top) / rect.height) * 100,
+  // Memoize the image arrays based on actual visibility
+  const visibleImageArrays = useMemo(() => {
+    // Đảm bảo các arrays đã được khởi tạo
+    if (selectedLedImages.length === 0 || selectedFrameImages.length === 0) {
+      return [[], [], [], []];
+    }
+    
+    return [0, 1, 2, 3].map(colIndex => {
+      const isLedModule = colIndex % 2 === 0
+      return isLedModule ? selectedLedImages : selectedFrameImages
     })
-  }
+  }, [selectedLedImages, selectedFrameImages])
 
-  // Set loaded state after initial render
+  // Only scroll if in viewport
+  const isInViewport = useRef(false)
+  
+  // Use intersection observer to detect if the component is in viewport
   useEffect(() => {
-    const timer = setTimeout(() => setHasLoaded(true), 500)
-    return () => clearTimeout(timer)
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        isInViewport.current = entry.isIntersecting
+      },
+      { threshold: 0.1 }
+    )
+    
+    if (containerRef.current) {
+      observer.observe(containerRef.current)
+    }
+    
+    return () => observer.disconnect()
   }, [])
-
-  // Carousel effect with 3-second interval
+  
+  // Carousel effect with 3-second interval - optimize to only run when in viewport
   useEffect(() => {
     const rotateImages = () => {
+      if (!isInViewport.current) return
+      if (!images || images.length === 0) return
+      
       setCurrentPositions(prev => 
         prev.map(pos => (pos + 1) % images.length)
       )
@@ -124,35 +164,48 @@ export default function ThirdElementHpage({ productSet }: ThirdElementHpageProps
         clearInterval(carouselTimerRef.current)
       }
     }
-  }, [images.length])
+  }, [images])
+  
+  // Pass an empty dependency array to the useScroll hook to avoid recreating it
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end start"],
+  });
 
-  // Randomly select unique frame images
-  const [selectedFrameImages, setSelectedFrameImages] = useState<string[]>([])
-  // Randomly select unique LED module images
-  const [selectedLedImages, setSelectedLedImages] = useState<string[]>([])
+  // Tạo transform values ở cấp component, không phải trong hooks khác
+  const backgroundY = useTransform(scrollYProgress || 0, [0, 1], ["0%", "20%"]);
+  const opacity = useTransform(scrollYProgress || 0, [0, 0.5], [1, 0.6]);
 
-  // Initialize selected images on component mount
+  // Image selection optimization
   useEffect(() => {
-    // Function to shuffle array and take first n elements
     const getRandomUniqueImages = (imgArray: string[], count: number) => {
-      const shuffled = [...imgArray].sort(() => 0.5 - Math.random())
-      return shuffled.slice(0, count)
+      // Liệu có cần lấy ngẫu nhiên không? Có thể lấy đầu tiên để tránh sort
+      const shuffled = [...imgArray].slice(0, count)
+      return shuffled
     }
 
-    // Select unique images from each folder
-    setSelectedFrameImages(getRandomUniqueImages(frameImages, 4))
-    setSelectedLedImages(getRandomUniqueImages(ledModuleImages, 4))
+    setSelectedFrameImages(getRandomUniqueImages(frameImages, MAX_VISIBLE_IMAGES))
+    setSelectedLedImages(getRandomUniqueImages(ledModuleImages, MAX_VISIBLE_IMAGES))
   }, [])
 
-  // Helper function to get previous, current, and next image indices
-  const getImageIndices = (currentPosition: number, isLedModule: boolean) => {
-    const imagesArray = isLedModule ? selectedLedImages : selectedFrameImages
-    if (imagesArray.length === 0) return { prev: 0, current: 0, next: 0 }
-    
-    const prev = (currentPosition - 1 + imagesArray.length) % imagesArray.length
-    const next = (currentPosition + 1) % imagesArray.length
-    return { prev, current: currentPosition, next }
-  }
+  // Sử dụng throttle cho mouse move để tránh quá nhiều re-render
+  const handleMouseMove = useCallback(
+    throttle((e: React.MouseEvent) => {
+      if (!containerRef.current || !isInViewport.current) return
+      const rect = containerRef.current.getBoundingClientRect()
+      setCursorPosition({
+        x: ((e.clientX - rect.left) / rect.width) * 100,
+        y: ((e.clientY - rect.top) / rect.height) * 100,
+      })
+    }, 50),
+    []
+  )
+
+  // Set loaded state after initial render
+  useEffect(() => {
+    const timer = setTimeout(() => setHasLoaded(true), 500)
+    return () => clearTimeout(timer)
+  }, [])
 
   // Thêm useEffect để kiểm tra kích thước màn hình
   useEffect(() => {
@@ -166,6 +219,114 @@ export default function ThirdElementHpage({ productSet }: ThirdElementHpageProps
   }, [])
 
   const router = useRouter()
+
+  // Render optimization for desktop image grid
+  const renderDesktopImageGrid = useCallback(() => {
+    // Bảo vệ khỏi lỗi undefined
+    if (
+      !selectedLedImages || selectedLedImages.length === 0 ||
+      !selectedFrameImages || selectedFrameImages.length === 0 ||
+      !visibleImageArrays || visibleImageArrays.some(arr => !arr)
+    ) {
+      return <div className="grid grid-cols-4 gap-8 w-full max-w-[650px] mx-auto h-[240px]"></div>;
+    }
+    
+    return (
+      <div className="grid grid-cols-4 gap-8 w-full max-w-[650px] mx-auto">
+        {[0, 1, 2, 3].map((colIndex) => {
+          const currentPos = currentPositions[colIndex];
+          const isLedModule = colIndex % 2 === 0;
+          const isReversed = colIndex % 2 === 1;
+          const { prev, current, next } = getImageIndices(
+            currentPos % (isLedModule ? 
+              Math.max(1, selectedLedImages.length) : 
+              Math.max(1, selectedFrameImages.length)), 
+            isLedModule
+          );
+          
+          // Bảo vệ khỏi lỗi undefined array
+          const imageArray = visibleImageArrays[colIndex] || [];
+          
+          return (
+            <div key={colIndex} className="flex flex-col items-center h-[240px] justify-center px-[15px]">
+              <div className="relative h-full flex flex-col items-center justify-center">
+                {/* Previous image */}
+                <AnimatePresence mode="popLayout">
+                  <motion.div
+                    key={`prev-${prev}-${colIndex}`}
+                    initial={{ opacity: 0, y: isReversed ? 20 : -20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: isReversed ? 20 : -20 }}
+                    transition={{ duration: 0.5 }}
+                    className="w-[60px] h-[60px] mb-2 opacity-60"
+                  >
+                    {imageArray.length > 0 && imageArray[prev] && (
+                      <Image
+                        src={imageArray[prev]}
+                        alt={`Product Image ${prev}`}
+                        width={60}
+                        height={60}
+                        className="object-contain rounded-lg"
+                        loading="lazy"
+                      />
+                    )}
+                  </motion.div>
+                </AnimatePresence>
+
+                {/* Current image (larger) */}
+                <AnimatePresence mode="popLayout">
+                  <motion.div
+                    key={`current-${current}-${colIndex}`}
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.8 }}
+                    transition={{ duration: 0.5 }}
+                    className="w-[170px] h-[170px] my-2 z-10 relative"
+                  >
+                    {imageArray.length > 0 && imageArray[current] && (
+                      <Image
+                        src={imageArray[current]}
+                        alt={`Product Image ${current}`}
+                        width={170}
+                        height={170}
+                        className="object-contain rounded-lg"
+                        style={{ filter: "drop-shadow(0 0 8px rgba(255,255,255,0.2))" }}
+                        priority={colIndex === 0}
+                        loading={colIndex === 0 ? "eager" : "lazy"}
+                      />
+                    )}
+                  </motion.div>
+                </AnimatePresence>
+
+                {/* Next image */}
+                <AnimatePresence mode="popLayout">
+                  <motion.div
+                    key={`next-${next}-${colIndex}`}
+                    initial={{ opacity: 0, y: isReversed ? -20 : 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: isReversed ? -20 : 20 }}
+                    transition={{ duration: 0.5 }}
+                    className="w-[60px] h-[60px] mt-2 opacity-60"
+                  >
+                    {imageArray.length > 0 && imageArray[next] && (
+                      <Image
+                        src={imageArray[next]}
+                        alt={`Product Image ${next}`}
+                        width={60}
+                        height={60}
+                        className="object-contain rounded-lg"
+                        loading="lazy"
+                      />
+                    )}
+                  </motion.div>
+                </AnimatePresence>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    );
+  }, [currentPositions, getImageIndices, selectedLedImages, selectedFrameImages, visibleImageArrays]);
 
   return (
     <>
@@ -211,7 +372,7 @@ export default function ThirdElementHpage({ productSet }: ThirdElementHpageProps
           </AnimatePresence>
           
           {/* Floating elements */}
-          <FloatingElements />
+          <FloatingElementsComponent />
           
           {/* Content container - Mobile layout */}
           <div className="relative z-10 flex flex-col min-h-screen">
@@ -229,10 +390,10 @@ export default function ThirdElementHpage({ productSet }: ThirdElementHpageProps
 
               {/* Main title with 3D effect - reduced size */}
               <div className="pt-0.7">
-                <AnimatedTitle>
+                <AnimatedTitleComponent>
                   {/* <span className="text-2xl sm:text-3xl block text-white">Downlight</span> */}
-                  <span className="text-[30px] text-white mt-[15px] inline-block">Downlight Collection.</span>
-                </AnimatedTitle>
+                  <span className="text-[30px] text-white mt-[15px] inline-block">DOWNLIGHT COLLECTION.</span>
+                </AnimatedTitleComponent>
               </div>
               
               {/* CTA Button moved below */}
@@ -281,6 +442,7 @@ export default function ThirdElementHpage({ productSet }: ThirdElementHpageProps
                                   width={50}
                                   height={50}
                                   className="object-contain rounded-lg"
+                                  loading="lazy"
                                 />
                               )}
                             </motion.div>
@@ -304,6 +466,7 @@ export default function ThirdElementHpage({ productSet }: ThirdElementHpageProps
                                   height={100}
                                   className="object-contain rounded-lg"
                                   style={{ filter: "drop-shadow(0 0 8px rgba(255,255,255,0.2))" }}
+                                  loading="lazy"
                                 />
                               )}
                             </motion.div>
@@ -335,6 +498,7 @@ export default function ThirdElementHpage({ productSet }: ThirdElementHpageProps
                                   width={50}
                                   height={50}
                                   className="object-contain rounded-lg"
+                                  loading="lazy"
                                 />
                               )}
                             </motion.div>
@@ -403,7 +567,7 @@ export default function ThirdElementHpage({ productSet }: ThirdElementHpageProps
       ) : (
         <motion.div
           ref={containerRef}
-          style={{ opacity }}
+          style={{ opacity: opacity }}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1 }}
@@ -456,7 +620,7 @@ export default function ThirdElementHpage({ productSet }: ThirdElementHpageProps
           )}
 
           {/* Floating elements */}
-          <FloatingElements />
+          <FloatingElementsComponent />
 
           {/* Grid lines overlay with parallax */}
           <motion.div style={{ y: backgroundY }} className="absolute inset-0 grid grid-cols-12 z-10 pointer-events-none">
@@ -494,9 +658,9 @@ export default function ThirdElementHpage({ productSet }: ThirdElementHpageProps
 
               {/* Main title with 3D effect - reduced size */}
               <div className="mb-2 pt-0">
-                <AnimatedTitle>
-                  <span className="text-[36px] block text-white mt-[15px]">Downlight Collection.</span>
-                </AnimatedTitle>
+                <AnimatedTitleComponent>
+                  <span className="text-[36px] block text-white mt-[15px]">DOWNLIGHT COLLECTION.</span>
+                </AnimatedTitleComponent>
               </div>
 
               {/* Move CTA Button here */}
@@ -531,108 +695,7 @@ export default function ThirdElementHpage({ productSet }: ThirdElementHpageProps
 
             {/* Right section with image carousel - Now takes 7/10 columns (70%) */}
             <div className="md:col-span-7 flex items-center justify-center py-8 px-4 md:px-8">
-              <div className="grid grid-cols-4 gap-8 w-full max-w-[650px] mx-auto">
-                {[0, 1, 2, 3].map((colIndex) => {
-                  const currentPos = currentPositions[colIndex];
-                  const isLedModule = colIndex % 2 === 0; // Column 1 and 3 (index 0 and 2) are LED modules
-                  const { prev, current, next } = getImageIndices(currentPos % (isLedModule ? selectedLedImages.length : selectedFrameImages.length), isLedModule);
-                  const isReversed = colIndex % 2 === 1; // Columns 2 and 4 (index 1 and 3) will be reversed
-                  
-                  // Select the appropriate image array based on column
-                  const imageArray = isLedModule ? selectedLedImages : selectedFrameImages;
-                  
-                  return (
-                    <div key={colIndex} className="flex flex-col items-center h-[240px] justify-center px-[15px]">
-                      <div className="relative h-full flex flex-col items-center justify-center">
-                        {/* Previous image (smaller) */}
-                        <AnimatePresence mode="popLayout">
-                          <motion.div
-                            key={`prev-${prev}-${colIndex}`}
-                            initial={{ 
-                              opacity: 0, 
-                              y: isReversed ? 20 : -20 
-                            }}
-                            animate={{ 
-                              opacity: 1, 
-                              y: 0 
-                            }}
-                            exit={{ 
-                              opacity: 0, 
-                              y: isReversed ? 20 : -20 
-                            }}
-                            transition={{ duration: 0.5 }}
-                            className="w-[60px] h-[60px] mb-2 opacity-60"
-                          >
-                            {imageArray.length > 0 && (
-                              <Image
-                                src={imageArray[prev]}
-                                alt={`Product Image ${prev}`}
-                                width={60}
-                                height={60}
-                                className="object-contain rounded-lg"
-                              />
-                            )}
-                          </motion.div>
-                        </AnimatePresence>
-
-                        {/* Current image (larger by 50%) */}
-                        <AnimatePresence mode="popLayout">
-                          <motion.div
-                            key={`current-${current}-${colIndex}`}
-                            initial={{ opacity: 0, scale: 0.8 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            exit={{ opacity: 0, scale: 0.8 }}
-                            transition={{ duration: 0.5 }}
-                            className="w-[170px] h-[170px] my-2 z-10 relative"
-                          >
-                            {imageArray.length > 0 && (
-                              <Image
-                                src={imageArray[current]}
-                                alt={`Product Image ${current}`}
-                                width={170}
-                                height={170}
-                                className="object-contain rounded-lg"
-                                style={{ filter: "drop-shadow(0 0 8px rgba(255,255,255,0.2))" }}
-                              />
-                            )}
-                          </motion.div>
-                        </AnimatePresence>
-
-                        {/* Next image (smaller) */}
-                        <AnimatePresence mode="popLayout">
-                          <motion.div
-                            key={`next-${next}-${colIndex}`}
-                            initial={{ 
-                              opacity: 0, 
-                              y: isReversed ? -20 : 20 
-                            }}
-                            animate={{ 
-                              opacity: 1, 
-                              y: 0 
-                            }}
-                            exit={{ 
-                              opacity: 0, 
-                              y: isReversed ? -20 : 20 
-                            }}
-                            transition={{ duration: 0.5 }}
-                            className="w-[60px] h-[60px] mt-2 opacity-60"
-                          >
-                            {imageArray.length > 0 && (
-                              <Image
-                                src={imageArray[next]}
-                                alt={`Product Image ${next}`}
-                                width={60}
-                                height={60}
-                                className="object-contain rounded-lg"
-                              />
-                            )}
-                          </motion.div>
-                        </AnimatePresence>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
+              {renderDesktopImageGrid()}
             </div>
           </div>
         </motion.div>

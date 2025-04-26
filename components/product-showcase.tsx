@@ -107,8 +107,8 @@ function MobileProductShowcase({ hasLoaded, page, direction, paginate, images }:
           <div className="mt-1">
             <AnimatedTitle>
               {/* <span className="text-3xl block text-white">Our</span> */}
-              <span className="text-3xl font-extrabold text-white">Outdoor</span>
-              <span className="text-3xl text-white"> Lighting.</span>
+              <span className="text-3xl font-extrabold text-white">OUTDOOR</span>
+              <span className="text-3xl text-white">LIGHTING.</span>
             </AnimatedTitle>
           </div>
 
@@ -534,10 +534,7 @@ export default function ProductShowcase() {
               <div className="mb-4">
                 <AnimatedTitle>
                   {/* <span className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl block text-white">Our</span> */}
-                  <span className="text-[36px] font-extrabold text-white">
-                    Outdoor 
-                  </span>
-                  <span className="text-[36px] text-white"> Lighting.</span>
+                  <span className="text-[36px] text-white inline-block">OUTDOOR LIGHTING.</span>
                 </AnimatedTitle>
               </div>
 

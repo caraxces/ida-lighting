@@ -98,7 +98,7 @@ export default function MobileLayout({ hasLoaded, page, direction, paginate, ima
           {/* Main title - smaller for mobile */}
           <div className="mt-1">
             <AnimatedTitle>
-              <span className="text-3xl block text-white">Đèn gỗ</span>
+              <span className="text-3xl block text-white">BỘ SƯU TẬP ĐÈN THỜ CAO CẤP</span>
             </AnimatedTitle>
           </div>
 
