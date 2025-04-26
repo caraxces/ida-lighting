@@ -1,12 +1,25 @@
 "use client"
 
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import { motion } from "framer-motion"
 import Image from "next/image"
 import Link from "next/link"
 
 export default function LightingShowcase() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    // Detect mobile devices
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768)
+    }
+    
+    checkMobile()
+    window.addEventListener("resize", checkMobile)
+    
+    return () => window.removeEventListener("resize", checkMobile)
+  }, [])
 
   useEffect(() => {
     const canvas = canvasRef.current
@@ -28,9 +41,10 @@ export default function LightingShowcase() {
     let particleX = -200
 
     // Create particles for more dynamic light effect
+    const particleCount = isMobile ? 8 : 15
     const particles: { x: number; y: number; size: number; speed: number; opacity: number }[] = []
 
-    for (let i = 0; i < 15; i++) {
+    for (let i = 0; i < particleCount; i++) {
       particles.push({
         x: Math.random() * canvas.width,
         y: canvas.height / 2 + (Math.random() * 2 - 1) * 3,
@@ -91,34 +105,34 @@ export default function LightingShowcase() {
       cancelAnimationFrame(animationFrameId)
       window.removeEventListener("resize", resizeCanvas)
     }
-  }, [])
+  }, [isMobile])
 
   return (
-    <div className="relative w-full h-screen bg-gradient-to-r from-black via-black to-[#8B2323] flex items-center justify-center overflow-hidden">
+    <div className="relative w-full min-h-screen bg-gradient-to-r from-black via-black to-[#8B2323] flex items-center justify-center overflow-hidden py-12 md:py-0">
       {/* Animated light flow */}
       <canvas ref={canvasRef} className="absolute inset-0 w-full h-full" />
 
       <div className="container mx-auto px-4 z-10">
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 items-center">
-          {/* Left side - Title */}
-          <div className="lg:col-span-1">
+          {/* Title - centered on mobile, right-aligned on desktop */}
+          <div className="lg:col-span-1 mb-8 lg:mb-0">
             <div className="text-center lg:text-right">
-              <h2 className="text-white uppercase font-bold tracking-wider mb-2 text-lg">Dòng chảy của ánh sáng</h2>
+              <h2 className="text-white uppercase font-bold tracking-wider mb-2 text-lg md:text-xl">Dòng chảy của ánh sáng</h2>
             </div>
           </div>
 
-          {/* Right side - Categories */}
-          <div className="lg:col-span-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {/* Categories - 1 column mobile, 2 columns tablet, 4 columns desktop */}
+          <div className="lg:col-span-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 gap-y-10">
             {categories.map((category, index) => (
               <motion.div
                 key={index}
                 className="flex flex-col"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.1 * index }}
+                transition={{ delay: 0.1 * index, duration: 0.5 }}
               >
                 <Link href={category.link} className="block overflow-hidden transition-transform duration-300 hover:scale-105">
-                  <div className="aspect-[4/3] overflow-hidden mb-3">
+                  <div className="aspect-[4/3] overflow-hidden mb-3 rounded-sm">
                     <Image
                       src={category.image || "/about/outdoor1.JPG"}
                       alt={category.title}

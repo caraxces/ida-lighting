@@ -268,7 +268,7 @@ const ProjectSlider = ({ onSlideChange }: ProjectSliderProps) => {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: isMobile ? -20 : 0 }}
           transition={{ 
-            duration: 0.8, 
+            duration: 2.0, 
             ease: "easeInOut"
           }}
           style={{
@@ -300,7 +300,7 @@ const ProjectSlider = ({ onSlideChange }: ProjectSliderProps) => {
                 x: -20
               }}
               transition={{ 
-                duration: 0.6, 
+                duration: 2.0, 
                 ease: [0.25, 0.1, 0.25, 1.0]
               }}
               style={{
@@ -309,12 +309,12 @@ const ProjectSlider = ({ onSlideChange }: ProjectSliderProps) => {
               }}
             >
               {/* Color block content with project info */}
-              <div className="relative w-full h-full flex flex-col justify-center px-8 md:px-12 mt-[20px]">
+              <div className="relative w-full h-full flex flex-col justify-center px-5 md:px-12 mt-[20px]">
                 <motion.h2 
-                  className="text-white text-[1.6rem] font-bold uppercase"
+                  className="text-white uppercase text-[1.5rem] whitespace-nowrap overflow-hidden text-ellipsis pb-3"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+                  transition={{ duration: 1.0, delay: 0.2, ease: "easeOut" }}
                 >
                   {services[currentIndex].title}
                 </motion.h2>
@@ -323,7 +323,7 @@ const ProjectSlider = ({ onSlideChange }: ProjectSliderProps) => {
                   className="text-white/80 text-sm uppercase tracking-wide mb-1 md:mt-6 md:mb-8"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
+                  transition={{ duration: 1.0, delay: 0.3, ease: "easeOut" }}
                 >
                   {services[currentIndex].description}
                 </motion.p>

@@ -389,10 +389,8 @@ export default function ThirdElementHpage({ productSet }: ThirdElementHpageProps
 
               {/* Main title with 3D effect - reduced size */}
               <div className="pt-0.7">
-                <AnimatedTitleComponent>
                   {/* <span className="text-2xl sm:text-3xl block text-white">Downlight</span> */}
-                  <span className="text-[30px] text-white mt-[15px] inline-block">DOWNLIGHT COLLECTION.</span>
-                </AnimatedTitleComponent>
+                  <span className="text-white uppercase text-[1.5rem] whitespace-nowrap overflow-hidden text-ellipsis pb-3">SERIES LED MODULE</span>
               </div>
               
               {/* CTA Button moved below */}
@@ -541,7 +539,7 @@ export default function ThirdElementHpage({ productSet }: ThirdElementHpageProps
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.6 }}
               >
-                <h3 className="text-white font-medium mb-2 text-sm">Premium Lighting Solutions</h3>
+                <h3 className="text-white font-medium mb-2 text-[1.25rem]">Premium Lighting Solutions</h3>
                 <p className="text-white/80 text-xs leading-relaxed">
                   Đèn downlight của IDA LIGHTING được thiết kế theo dạng modul lắp ráp, cho phép thay thế linh hoạt giữa chip LED và choá đèn chỉ với thao tác đơn giản. Nhờ đó, người dùng có thể dễ dàng tùy biến công suất, góc chiếu và màu ánh sáng phù hợp với từng không gian cụ thể mà không cần thay toàn bộ đèn, giúp tiết kiệm chi phí và tối ưu hoá hiệu suất chiếu sáng. Thiết kế modul này cũng thuận tiện cho việc bảo trì, nâng cấp trong tương lai.
                 </p>
@@ -667,9 +665,7 @@ export default function ThirdElementHpage({ productSet }: ThirdElementHpageProps
 
               {/* Main title with 3D effect - reduced size */}
               <div className="mb-2 pt-0">
-                <AnimatedTitleComponent>
-                  <span className="text-[36px] block text-white mt-[15px]">DOWNLIGHT COLLECTION.</span>
-                </AnimatedTitleComponent>
+                <span className="text-white uppercase text-[1.5rem] whitespace-nowrap overflow-hidden text-ellipsis pb-3">SERIES LED MODULE</span>
               </div>
 
               {/* Move CTA Button here */}

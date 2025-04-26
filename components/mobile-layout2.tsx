@@ -102,9 +102,7 @@ export default function MobileLayout2({ hasLoaded, page, direction, paginate, im
 
           {/* Main title - smaller for mobile */}
           <div className="mt-1">
-            <AnimatedTitle>
-              <span className="text-3xl font-extrabold text-white">BESPOKE LIGHTING</span>
-            </AnimatedTitle>
+              <span className="text-white uppercase text-[1.5rem] whitespace-nowrap overflow-hidden text-ellipsis pb-3">BESPOKE LIGHTING</span>
           </div>
 
           {/* Description text - shortened for mobile */}

@@ -22,28 +22,28 @@ const homeProjects: HomeProject[] = [
     id: 1,
     title: "DỰ ÁN | 44 VILLAR",
     image: "/work/villa-44/TRC_9185-min.jpg",
-    description: "TKKT: LE HUU SANG ARCHITEXT\nĐịa Chỉ: TP Hà Tĩnh\nNăm hoàn thành: 2024\nHạng mục chiếu sáng: Garden lighting, Indoor, Outdoor, Decor Lighting",
+    description: "TKKT: LE HUU SANG ARCHITEXT\nĐịa Chỉ: TP Hà Tĩnh\nNăm hoàn thành: 2024",
     link: "/projects/villa-44"
   },
   {
     id: 2,
     title: "DỰ ÁN | LONG HOUSE",
     image: "/work/long-house/_TRC7413-min.jpg", 
-    description: "TKKT: LE HUU SANG ARCHITEXT\nĐịa Chỉ: TP Hà Tĩnh\nNăm hoàn thành: 2024\nHạng mục chiếu sáng: Garden lighting, Indoor, Outdoor, Decor Lighting",
+    description: "TKKT: LE HUU SANG ARCHITEXT\nĐịa Chỉ: TP Hà Tĩnh\nNăm hoàn thành: 2024",
     link: "/projects/long-house"
   },
   {
     id: 3,
     title: "DỰ ÁN | AN HOUSE",
     image: "/work/vn3/2022_09_26_19_34_IMG_8523.JPG",
-    description: "TKKT: MAAR DESIGNS\nĐịa Chỉ: TP Hà Tĩnh\nNăm hoàn thành: 2023\nHạng mục chiếu sáng: Garden lighting, Indoor, Outdoor, Decor Lighting",
+    description: "TKKT: MAAR DESIGNS\nĐịa Chỉ: TP Hà Tĩnh\nNăm hoàn thành: 2023",
     link: "/projects/luxury-villas"
   },
   {
     id: 4,
     title: "DỰ ÁN | STARLAKE VILLAR",
     image: "/work/IDA_Starlake/TRC_7559.jpg",
-    description: "TKKT: RHINELUX\nĐịa Chỉ: Hồ Tây – Hà Nội\nNăm hoàn thành: 2024\nHạng mục chiếu sáng: Garden lighting, Indoor, Outdoor, Decor Lighting",
+    description: "TKKT: RHINELUX\nĐịa Chỉ: Hồ Tây – Hà Nội\nNăm hoàn thành: 2024",
     link: "/projects/starlake"
   }
 ]
@@ -98,7 +98,7 @@ const HomeProjectSlider = ({ onSlideChange }: HomeProjectSliderProps) => {
     };
 
     // Start auto-slide timer
-    autoSlideTimerRef.current = setInterval(moveToNextSlide, 4000);
+    autoSlideTimerRef.current = setInterval(moveToNextSlide, 5000);
 
     // Pause on mouse enter, resume on mouse leave
     const sliderElement = sliderRef.current;
@@ -150,7 +150,7 @@ const HomeProjectSlider = ({ onSlideChange }: HomeProjectSliderProps) => {
 
       setTimeout(() => {
         setIsScrolling(false)
-      }, 500)
+      }, 2000)
     },
     [isScrolling, homeProjects.length]
   )
@@ -226,12 +226,12 @@ const HomeProjectSlider = ({ onSlideChange }: HomeProjectSliderProps) => {
           // Swipe up - go to next slide
           setIsScrolling(true)
           setCurrentIndex((prev) => prev + 1)
-          setTimeout(() => setIsScrolling(false), 800)
+          setTimeout(() => setIsScrolling(false), 2000)
         } else if (touchDiff < 0 && currentIndex > 0) {
           // Swipe down - go to previous slide
           setIsScrolling(true)
           setCurrentIndex((prev) => prev - 1)
-          setTimeout(() => setIsScrolling(false), 800)
+          setTimeout(() => setIsScrolling(false), 2000)
         }
       }
 
@@ -267,7 +267,7 @@ const HomeProjectSlider = ({ onSlideChange }: HomeProjectSliderProps) => {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: isMobile ? -20 : 0 }}
           transition={{ 
-            duration: 0.8, 
+            duration: 2.0, 
             ease: "easeInOut"
           }}
         >
@@ -292,26 +292,26 @@ const HomeProjectSlider = ({ onSlideChange }: HomeProjectSliderProps) => {
                 opacity: 0.8
               }}
               transition={{ 
-                duration: 1.2, 
+                duration: 2.0, 
                 ease: "easeOut"
               }}
             >
               {/* Color block content with project info */}
-              <div className="relative w-full h-full flex flex-col justify-center px-8 md:px-12 mt-[20px]">
+              <div className="relative w-full h-full flex flex-col justify-center px-6 py-6 md:px-12 md:py-0 mt-[10px] md:mt-[20px]">
                 <motion.h2 
-                  className="text-white text-[1.6rem] font-bold uppercase"
+                  className="text-white uppercase text-[1.5rem] whitespace-nowrap overflow-hidden text-ellipsis pb-3"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+                  transition={{ duration: 1.0, delay: 0.5, ease: "easeOut" }}
                 >
                   {homeProjects[currentIndex].title}
                 </motion.h2>
                 
                 <motion.p
-                  className="text-white/80 text-sm uppercase tracking-wide mb-1 md:mt-6 md:mb-8"
+                  className="text-white/80 text-sm uppercase tracking-wide mb-3 md:mt-6 md:mb-8 whitespace-pre-line leading-relaxed"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
+                  transition={{ duration: 1.0, delay: 0.8, ease: "easeOut" }}
                 >
                   {homeProjects[currentIndex].description}
                 </motion.p>
@@ -320,7 +320,7 @@ const HomeProjectSlider = ({ onSlideChange }: HomeProjectSliderProps) => {
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
+                  transition={{ duration: 1.0, delay: 1.1, ease: "easeOut" }}
                   className="md:mt-4"
                 >
                   <button 
@@ -361,7 +361,7 @@ const HomeProjectSlider = ({ onSlideChange }: HomeProjectSliderProps) => {
                 opacity: 0.8
               }}
               transition={{ 
-                duration: 1.2, 
+                duration: 2.0, 
                 ease: "easeOut"
               }}
             >
