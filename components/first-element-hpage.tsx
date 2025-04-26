@@ -290,14 +290,10 @@ export default function FirstElementHpage() {
               </motion.div>
 
               {/* Main title with 3D effect */}
-              <div className="mb-4">
-                <AnimatedTitle>
-                  {/* <span className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl block text-white">This is</span> */}
-                  <span className="text-[36px] font-extrabold text-white">
-                   BỘ ĐÈN THỜ CAO CẤP
-                  </span>
-                </AnimatedTitle>
-              </div>
+            <div className="mt-1 flex flex-col space-y-1">
+              <span className="text-white font-medium text-[0.9 rem] block">BỘ SƯU TẬP</span>
+              <span className="text-white uppercase text-[1.5rem] whitespace-nowrap overflow-hidden text-ellipsis block pb-3">ĐÈN THỜ CAO CẤP</span>
+            </div>
 
               {/* Description text with reveal animation */}
               <motion.div

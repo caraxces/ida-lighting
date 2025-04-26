@@ -36,7 +36,7 @@ const ProductShowcase = dynamic(() => import("@/components/product-showcase"), {
 })
 
 const LightingShowcase = dynamic(() => import("@/components/lighting-showcase"), {
-  loading: () => <div className="w-full py-20 bg-black"></div>
+  loading: () => <div className="w-full py-32 md:py-20 bg-black"></div>
 })
 
 export default function Home() {

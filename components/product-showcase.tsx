@@ -104,11 +104,7 @@ function MobileProductShowcase({ hasLoaded, page, direction, paginate, images }:
 
           {/* Main title - smaller for mobile */}
           <div className="mt-1">
-            <AnimatedTitle>
-              {/* <span className="text-3xl block text-white">Our</span> */}
-              <span className="text-3xl font-extrabold text-white">OUTDOOR</span>
-              <span className="text-3xl text-white">LIGHTING.</span>
-            </AnimatedTitle>
+              <span className="text-white uppercase text-[1.5rem] whitespace-nowrap overflow-hidden text-ellipsis pb-3">OUTDOOR LIGHTING</span>
           </div>
 
           {/* Description text - shortened for mobile */}
@@ -541,10 +537,7 @@ export default function ProductShowcase() {
 
               {/* Main title with 3D effect */}
               <div className="mb-4">
-                <AnimatedTitle>
-                  {/* <span className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl block text-white">Our</span> */}
-                  <span className="text-[36px] text-white inline-block">OUTDOOR LIGHTING.</span>
-                </AnimatedTitle>
+                  <span className="text-white uppercase text-[1.5rem] whitespace-nowrap overflow-hidden text-ellipsis pb-3">OUTDOOR LIGHTING</span>
               </div>
 
               {/* Description text with reveal animation */}

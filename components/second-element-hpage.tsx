@@ -7,7 +7,6 @@ import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion"
 import { ChevronRight, ChevronLeft } from "lucide-react"
-import AnimatedTitle from "./animated-title"
 import { useSound } from "@/hooks/use-sound"
 import FloatingElements from "./floating-elements"
 import { cn } from "@/lib/utils"
@@ -397,9 +396,7 @@ export default function SecondElementHpage() {
 
               {/* Main title with 3D effect */}
               <div className="mb-4">
-                <AnimatedTitle>
-                  {/* <span className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl block text-white">This is</span> */}
-                  <span className="text-[36px] font-extrabold text-white">BESPOKE LIGHTING</span>                </AnimatedTitle>
+                  <span className="text-white uppercase text-[1.5rem] whitespace-nowrap overflow-hidden text-ellipsis pb-3">BESPOKE LIGHTING</span>
               </div>
 
               {/* Description text with reveal animation */}

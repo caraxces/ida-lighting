@@ -95,10 +95,9 @@ export default function MobileLayout({ hasLoaded, page, direction, paginate, ima
           </motion.div>
 
           {/* Main title - smaller for mobile */}
-          <div className="mt-1">
-            <AnimatedTitle>
-              <span className="text-3xl block text-white">BỘ SƯU TẬP ĐÈN THỜ CAO CẤP</span>
-            </AnimatedTitle>
+          <div className="mt-1 flex flex-col space-y-1">
+              <span className="text-white font-medium text-[0.9 rem] block">BỘ SƯU TẬP</span>
+              <span className="text-white uppercase text-[1.5rem] whitespace-nowrap overflow-hidden text-ellipsis block pb-3">ĐÈN THỜ CAO CẤP</span>
           </div>
 
           {/* Description text - shortened for mobile */}
