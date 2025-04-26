@@ -12,7 +12,6 @@ import FloatingElements from "./floating-elements"
 import { cn } from "@/lib/utils"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
-import GlowButton from "./glow-button"
 
 // Image array - có thể được thay đổi sau
 const images = [
@@ -131,11 +130,21 @@ function MobileProductShowcase({ hasLoaded, page, direction, paginate, images }:
               transition={{ duration: 0.8, delay: 0.6 }}
               className="mt-4"
             >
-              <GlowButton 
-                text="XEM THÊM" 
+              <button 
                 onClick={() => router.push("/collections")}
-                className="inline-block"
-              />
+                className="relative px-4 py-1.5 text-[14px] font-medium text-white transition-all duration-300 rounded-sm inline-block"
+                style={{
+                  background: "transparent",
+                  boxShadow: "0 0 8px rgba(255, 51, 0, 0.5), 0 0 18px rgba(255, 69, 0, 0.3)",
+                }}
+              >
+                <span className="relative z-10">XEM THÊM</span>
+                <span className="absolute inset-0 rounded-sm overflow-hidden" style={{
+                  background: "transparent",
+                  border: "1px solid rgba(255, 51, 0, 0.5)",
+                  boxShadow: "inset 0 0 5px rgba(255, 51, 0, 0.3)",
+                }}></span>
+              </button>
             </motion.div>
           </motion.div>
         </div>
@@ -560,11 +569,21 @@ export default function ProductShowcase() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.8 }}
               >
-                <GlowButton 
-                  text="XEM THÊM" 
+                <button 
                   onClick={() => router.push("/collections")}
-                  className="inline-block"
-                />
+                  className="relative px-4 py-1.5 text-[14px] font-medium text-white transition-all duration-300 rounded-sm inline-block"
+                  style={{
+                    background: "transparent",
+                    boxShadow: "0 0 8px rgba(255, 51, 0, 0.5), 0 0 18px rgba(255, 69, 0, 0.3)",
+                  }}
+                >
+                  <span className="relative z-10">XEM THÊM</span>
+                  <span className="absolute inset-0 rounded-sm overflow-hidden" style={{
+                    background: "transparent",
+                    border: "1px solid rgba(255, 51, 0, 0.5)",
+                    boxShadow: "inset 0 0 5px rgba(255, 51, 0, 0.3)",
+                  }}></span>
+                </button>
               </motion.div>
             </div>
 

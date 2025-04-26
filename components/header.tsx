@@ -5,7 +5,7 @@ import type React from "react"
 import { useState, useEffect } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { Volume2, VolumeX, Box } from "lucide-react"
+import { Volume2, VolumeX, Box, BookOpen } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { useSound } from "@/hooks/use-sound"
 import { useRouter } from "next/navigation"
@@ -91,12 +91,11 @@ export default function Header({ onButtonClick, onButtonHover }: HeaderProps) {
 
   // Thêm menu item mới cho blog
   const menuItems = [
-    { title: "Trang Chủ", href: "/" },
-    { title: "Về Chúng Tôi", href: "/about" },
-    { title: "Tác Phẩm", href: "/projects" },
-    { title: "Sản Phẩm", href: "/products" },
-    { title: "Blog", href: "/blog" },
-    { title: "Liên Hệ", href: "/contacts" },
+    { title: "Home", href: "/" },
+    { title: "About us", href: "/about" },
+    { title: "Projects", href: "/projects" },
+    { title: "Products", href: "/products" },
+    { title: "Contacts", href: "/contacts" },
   ]
 
   return (
@@ -219,7 +218,7 @@ export default function Header({ onButtonClick, onButtonHover }: HeaderProps) {
         
         {/* Mobile buttons container */}
         <div className="flex space-x-1">
-          {/* Sound Button - Only show icon on mobile */}
+          {/* Sound Button */}
           <button
             onClick={handleSoundToggle}
             className="p-2 rounded-full bg-white/10 backdrop-blur-sm hover:bg-white/20 transition-all duration-300 text-white"
@@ -228,13 +227,26 @@ export default function Header({ onButtonClick, onButtonHover }: HeaderProps) {
             {soundOn ? <Volume2 size={18} /> : <VolumeX size={18} />}
           </button>
           
-          {/* 3D model button - Icon only on mobile */}
+          {/* Catalogue button */}
+          <a
+            href="/IDA LIGHTING 02 03 2025.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="p-2 rounded-full bg-white/10 backdrop-blur-sm hover:bg-white/20 transition-all duration-300 text-white"
+            onClick={() => playSound()}
+            aria-label="Download catalogue"
+          >
+            <BookOpen size={18} />
+          </a>
+          
+          {/* 3D model button */}
           <a
             href="https://1miba.com/"
             target="_blank"
             rel="noopener noreferrer"
             className="p-2 rounded-full bg-white/10 backdrop-blur-sm hover:bg-white/20 transition-all duration-300 text-white"
             onClick={() => playSound()}
+            aria-label="View 3D model"
           >
             <Box size={18} />
           </a>
@@ -270,7 +282,7 @@ export default function Header({ onButtonClick, onButtonHover }: HeaderProps) {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="px-3 py-2 bg-white/10 backdrop-blur-sm rounded-full hover:bg-white/20 transition-all duration-300 hover:shadow-[0_0_15px_rgba(255,255,255,0.5)] text-white text-sm"
-                onClick={() => playSound()}
+                onClick={(e) => handleNavClick(e)}
               >
                 Catalogue
               </a>

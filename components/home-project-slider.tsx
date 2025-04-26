@@ -6,8 +6,6 @@ import Link from "next/link"
 import { useSound } from "@/hooks/use-sound"
 import { ChevronRight, ChevronLeft } from "lucide-react"
 import { useRouter } from "next/navigation"
-import GlowButton from "./glow-button"
-import AnimatedTitle from "./animated-title"
 
 // Types
 type HomeProject = {
@@ -300,18 +298,20 @@ const HomeProjectSlider = ({ onSlideChange }: HomeProjectSliderProps) => {
             >
               {/* Color block content with project info */}
               <div className="relative w-full h-full flex flex-col justify-center px-8 md:px-12 mt-[20px]">
-                <AnimatedTitle 
-                  className="text-[24px] md:text-4xl lg:text-5xl mb-4"
-                  delay={0.3}
-                >
-                  {homeProjects[currentIndex].title}
-                </AnimatedTitle>
-                
-                <motion.p
-                  className="text-sm md:text-base text-white/80 max-w-md mb-8 whitespace-pre-line"
+                <motion.h2 
+                  className="text-white text-[1.6rem] font-bold uppercase"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
+                  transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+                >
+                  {homeProjects[currentIndex].title}
+                </motion.h2>
+                
+                <motion.p
+                  className="text-white/80 text-sm uppercase tracking-wide mb-1 md:mt-6 md:mb-8"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
                 >
                   {homeProjects[currentIndex].description}
                 </motion.p>
@@ -320,16 +320,24 @@ const HomeProjectSlider = ({ onSlideChange }: HomeProjectSliderProps) => {
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, delay: 0.5, ease: "easeOut" }}
-                  className="origin-left"
-                  style={{ transform: 'scale(0.65)' }}
+                  transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
+                  className="md:mt-4"
                 >
-                  <GlowButton 
-                    text="XEM THÊM" 
+                  <button 
                     onClick={() => router.push(homeProjects[currentIndex].link)}
-                    className="inline-block"
-                    // smallGlow={true}
-                  />
+                    className="relative px-4 py-1.5 text-[14px] font-medium text-white transition-all duration-300 rounded-sm"
+                    style={{
+                      background: "transparent",
+                      boxShadow: "0 0 8px rgba(255, 51, 0, 0.5), 0 0 18px rgba(255, 69, 0, 0.3)",
+                    }}
+                  >
+                    <span className="relative z-10">XEM THÊM</span>
+                    <span className="absolute inset-0 rounded-sm overflow-hidden" style={{
+                      background: "transparent",
+                      border: "1px solid rgba(255, 51, 0, 0.5)",
+                      boxShadow: "inset 0 0 5px rgba(255, 51, 0, 0.3)",
+                    }}></span>
+                  </button>
                 </motion.div>
               </div>
             </motion.div>

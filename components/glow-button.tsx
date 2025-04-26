@@ -172,21 +172,22 @@ export default function GlowButton({
         }}
       />
 
-      {/* Button content */}
+      {/* Button content with transparent background */}
       <button
         onClick={onClick}
-        className={`relative z-10 ${glowSize.buttonPadding} ${glowSize.fontSize} ${glowSize.fontWeight} bg-black bg-opacity-90 text-white transition-all duration-300 rounded-sm whitespace-nowrap`}
+        className={`relative z-10 ${glowSize.buttonPadding} ${glowSize.fontSize} ${glowSize.fontWeight} bg-transparent text-white transition-all duration-300 rounded-sm whitespace-nowrap`}
         style={{
-          boxShadow: glowSize.buttonShadow,
+          boxShadow: "none",
           transform: glowSize.buttonSize,
           textShadow: isHovered 
             ? "0 0 4px rgba(255, 255, 255, 0.5)" 
             : "0 0 2px rgba(255, 255, 255, 0.3)",
-          letterSpacing: smallGlow ? "0.02em" : "normal"
+          letterSpacing: smallGlow ? "0.02em" : "normal",
+          background: "transparent"
         }}
       >
         {text}
       </button>
     </div>
   );
-}
+} 
