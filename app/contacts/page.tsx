@@ -7,7 +7,6 @@ import Header from "@/components/header"
 import Footer from "@/components/footer"
 import { motion, HTMLMotionProps, AnimatePresence } from "framer-motion"
 import { Phone, Mail, MapPin, X } from "lucide-react"
-import AnimatedTitle from "@/components/animated-title"
 import type { ComponentProps } from "react"
 import GlowButton from "@/components/glow-button"
 
@@ -143,10 +142,7 @@ export default function ContactPage() {
       <section className="pt-32 pb-16 px-4 md:px-8">
         <div className="container mx-auto">
           <div className="mb-16">
-            <AnimatedTitle>
-              <span className="text-5xl md:text-7xl lg:text-8xl">Liên hệ </span>
-              <span className="font-extrabold ">với chúng tôi</span>
-            </AnimatedTitle>
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold">LIÊN HỆ VỚI CHÚNG TÔI</h1>
           </div>
 
           <div className="flex flex-col md:flex-row gap-12">

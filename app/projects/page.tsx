@@ -208,7 +208,7 @@ export default function WorkPage() {
 
       <div className="pt-32 pb-16 px-4 md:px-8 max-w-[1400px] mx-auto">
         {/* Page title */}
-        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-16">Projects</h1>
+        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-16">PROJECTS</h1>
 
         {/* Projects grid */}
         <div className="w-full">

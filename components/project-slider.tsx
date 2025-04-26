@@ -6,8 +6,6 @@ import Link from "next/link"
 import { useSound } from "@/hooks/use-sound"
 import { ChevronRight } from "lucide-react"
 import { useRouter } from "next/navigation"
-import GlowButton from "./glow-button"
-import AnimatedTitle from "./animated-title"
 
 // Types
 type Service = {
@@ -22,28 +20,28 @@ type Service = {
 const services: Service[] = [
   {
     id: 1,
-    title: "ÁNH SÁNG KHÔNG CHỈ LÀ ÁNH SÁNG – MÀ LÀ ĐỂ CẢM NHẬN!",
+    title: "YOUR LIGHT - YOUR STYLE!",
     image: "/work/long-house/_TRC6964.jpg",
     category: "residential",
     description: "Tại IDA Lighting, mỗi giải pháp chiếu sáng đều được thiết kế để truyền cảm hứng, định hình không gian và nâng tầm trải nghiệm sống."
   },
   {
     id: 2,
-    title: "KHÔNG GIAN CỦA BẠN – ÁNH SÁNG CỦA BẠN!",
+    title: "BESPOKE LIGHTING",
     image: "/work/villa-44/TRC_9461-min.jpg",
     category: "commercial",
     description: "IDA Lighting cung cấp thiết bị chiếu sáng cao cấp kết hợp thiết kế độc quyền, tối ưu cả công năng lẫn thẩm mỹ."
   },
   {
     id: 3,
-    title: "CÔNG NGHỆ CHIẾU SÁNG THÔNG MINH – GIẢI PHÁP CHO CÔNG TRÌNH ĐẲNG CẤP!",
+    title: "SMART LIGHTING",
     image: "/work/vn5/2022_05_07_14_01_IMG_0957.JPG",
     category: "industrial",
     description: "IDA Lighting ứng dụng công nghệ hiện đại để kiến tạo giải pháp chiếu sáng thông minh, tiết kiệm năng lượng và bền vững."
   },
   {
     id: 4,
-    title: "TỪ BẢN VẼ ĐẾN THỰC TẾ – CHÚNG TÔI LÀM ÁNH SÁNG TRỞ NÊN SỐNG ĐỘNG!",
+    title: "FROM DESIGNS TO LIFE",
     image: "/work/IDA_Starlake/TRC_7559.jpg",
     category: "smart",
     description: "Với đội ngũ kiến trúc sư và kỹ sư chuyên sâu, IDA Lighting biến ý tưởng chiếu sáng thành hiện thực hoàn hảo cho mọi công trình."
@@ -312,15 +310,17 @@ const ProjectSlider = ({ onSlideChange }: ProjectSliderProps) => {
             >
               {/* Color block content with project info */}
               <div className="relative w-full h-full flex flex-col justify-center px-8 md:px-12 mt-[20px]">
-                <AnimatedTitle 
-                  className="text-[24px] md:text-4xl lg:text-5xl mb-4"
-                  delay={0.3}
+                <motion.h2 
+                  className="text-white text-[1.6rem] font-bold uppercase"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
                 >
                   {services[currentIndex].title}
-                </AnimatedTitle>
+                </motion.h2>
                 
-                <motion.p 
-                  className="text-sm md:text-base text-white/80 max-w-md mb-8 whitespace-pre-line"
+                <motion.p
+                  className="text-white/80 text-sm uppercase tracking-wide mb-1 md:mt-6 md:mb-8"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
@@ -333,12 +333,23 @@ const ProjectSlider = ({ onSlideChange }: ProjectSliderProps) => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
+                  className="md:mt-4"
                 >
-                  <GlowButton 
-                    text="XEM THÊM" 
+                  <button 
                     onClick={() => router.push("/about")}
-                    className="inline-block"
-                  />
+                    className="relative px-4 py-1.5 text-[14px] font-medium text-white transition-all duration-300 rounded-sm"
+                    style={{
+                      background: "transparent",
+                      boxShadow: "0 0 8px rgba(255, 51, 0, 0.5), 0 0 18px rgba(255, 69, 0, 0.3)",
+                    }}
+                  >
+                    <span className="relative z-10">XEM THÊM</span>
+                    <span className="absolute inset-0 rounded-sm overflow-hidden" style={{
+                      background: "transparent",
+                      border: "1px solid rgba(255, 51, 0, 0.5)",
+                      boxShadow: "inset 0 0 5px rgba(255, 51, 0, 0.3)",
+                    }}></span>
+                  </button>
                 </motion.div>
               </div>
             </motion.div>
