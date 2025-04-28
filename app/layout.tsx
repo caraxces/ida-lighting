@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     description: 'Giải pháp chiếu sáng chuyên nghiệp, thiết kế ánh sáng sáng tạo',
     images: [
       {
-        url: 'https://idalighting.vn/api/og',
+        url: '/og-image.jpg',
         width: 1200,
         height: 630,
         alt: 'IDA Lighting Preview',
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'IDA Lighting - Giải pháp chiếu sáng chuyên nghiệp',
     description: 'Giải pháp chiếu sáng chuyên nghiệp, thiết kế ánh sáng sáng tạo',
-    images: ['https://idalighting.vn/api/og'],
+    images: ['/og-image.jpg'],
   },
   icons: {
     icon: [
