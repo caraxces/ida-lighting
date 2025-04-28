@@ -863,12 +863,106 @@ export default function ProjectPage({ params }: ProjectPageProps) {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null)
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
   const [isZooming, setIsZooming] = useState(false)
+  // Lightbox states
+  const [lightboxOpen, setLightboxOpen] = useState(false)
+  const [lightboxImageIndex, setLightboxImageIndex] = useState<number | null>(null)
+  // Zoom states
+  const [imageZoom, setImageZoom] = useState(1)
+  const [dragPosition, setDragPosition] = useState({ x: 0, y: 0 })
+  const [isDragging, setIsDragging] = useState(false)
   
   // Cache lại mảng hình ảnh để tránh tạo mới mỗi lần render
   const allImages = useMemo(() => 
     project ? [project.banner, ...project.items.map(item => item.image)] : [],
     [project]
   )
+  
+  // Open lightbox with clicked image
+  const openLightbox = useCallback((index: number) => {
+    setLightboxImageIndex(index)
+    setLightboxOpen(true)
+    // Reset zoom when opening
+    setImageZoom(1)
+    setDragPosition({ x: 0, y: 0 })
+    // Prevent body scrolling when lightbox is open
+    document.body.style.overflow = 'hidden'
+  }, [])
+
+  // Close lightbox
+  const closeLightbox = useCallback(() => {
+    setLightboxOpen(false)
+    setLightboxImageIndex(null)
+    // Reset zoom when closing
+    setImageZoom(1)
+    setDragPosition({ x: 0, y: 0 })
+    // Restore body scrolling
+    document.body.style.overflow = 'auto'
+  }, [])
+
+  // Navigate lightbox images
+  const goToNextLightboxImage = useCallback(() => {
+    if (lightboxImageIndex === null || !project) return
+    const nextIndex = (lightboxImageIndex + 1) % project.items.length
+    setLightboxImageIndex(nextIndex)
+    // Reset zoom when navigating
+    setImageZoom(1)
+    setDragPosition({ x: 0, y: 0 })
+  }, [lightboxImageIndex, project])
+
+  const goToPrevLightboxImage = useCallback(() => {
+    if (lightboxImageIndex === null || !project) return
+    const prevIndex = lightboxImageIndex === 0 ? project.items.length - 1 : lightboxImageIndex - 1
+    setLightboxImageIndex(prevIndex)
+    // Reset zoom when navigating
+    setImageZoom(1)
+    setDragPosition({ x: 0, y: 0 })
+  }, [lightboxImageIndex, project])
+
+  // Zoom functionality
+  const zoomIn = useCallback(() => {
+    setImageZoom(prev => Math.min(prev + 0.5, 4)) // Max zoom: 4x
+  }, [])
+
+  const zoomOut = useCallback(() => {
+    setImageZoom(prev => Math.max(prev - 0.5, 1)) // Min zoom: 1x
+  }, [])
+
+  const resetZoom = useCallback(() => {
+    setImageZoom(1)
+    setDragPosition({ x: 0, y: 0 })
+  }, [])
+
+  // Handle keyboard navigation and zoom
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (!lightboxOpen) return
+      
+      switch (e.key) {
+        case 'ArrowRight':
+          goToNextLightboxImage()
+          break
+        case 'ArrowLeft':
+          goToPrevLightboxImage()
+          break
+        case 'Escape':
+          closeLightbox()
+          break
+        case '+':
+        case '=':
+          zoomIn()
+          break
+        case '-':
+          zoomOut()
+          break
+        case '0':
+          resetZoom()
+          break
+      }
+    }
+    
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [lightboxOpen, goToNextLightboxImage, goToPrevLightboxImage, closeLightbox, zoomIn, zoomOut, resetZoom])
   
   // Khởi tạo selected product nếu có
   useEffect(() => {
@@ -919,12 +1013,15 @@ export default function ProjectPage({ params }: ProjectPageProps) {
     return (
       <motion.div 
         ref={ref}
-        className="relative overflow-hidden rounded-md"
+        className="relative overflow-hidden rounded-md cursor-pointer"
         initial={{ opacity: 0, scale: 0.92 }}
         animate={isInView ? 
           { opacity: 1, scale: 1, transition: { duration: 0.8, ease: "easeOut" } } : 
           { opacity: 0, scale: 0.92 }
         }
+        onClick={() => openLightbox(index)}
+        whileHover={{ scale: 1.02 }}
+        transition={{ duration: 0.3 }}
       >
         <motion.div 
           className="aspect-[4/3] w-full h-full"
@@ -942,11 +1039,18 @@ export default function ProjectPage({ params }: ProjectPageProps) {
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
               quality={85}
             />
+            <div className="absolute inset-0 bg-black/0 hover:bg-black/20 transition-colors duration-300 flex items-center justify-center opacity-0 hover:opacity-100">
+              <div className="bg-black/60 rounded-full p-3">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m4-3H6" />
+                </svg>
+              </div>
+            </div>
           </div>
         </motion.div>
       </motion.div>
     )
-  }, [])
+  }, [openLightbox])
 
   // Let's split the JSX to simplify the render tree
   const renderGallery = useMemo(() => {
@@ -1287,6 +1391,153 @@ export default function ProjectPage({ params }: ProjectPageProps) {
       </div>
 
       <Footer />
+      
+      {/* Image Lightbox Modal */}
+      <AnimatePresence>
+        {lightboxOpen && lightboxImageIndex !== null && (
+          <motion.div 
+            className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={imageZoom > 1 ? undefined : closeLightbox}
+          >
+            <div 
+              className="absolute top-4 right-4 z-50"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button 
+                className="bg-black/50 hover:bg-black/70 p-2 rounded-full text-white transition-colors"
+                onClick={closeLightbox}
+                aria-label="Close lightbox"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+            
+            <div className="relative w-full h-full max-w-7xl max-h-[90vh] mx-4 flex items-center justify-center overflow-hidden">
+              <AnimatePresence mode="wait">
+                <motion.div 
+                  key={lightboxImageIndex}
+                  className="relative w-full h-full flex items-center justify-center"
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.9 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <motion.div 
+                    className="relative max-w-full max-h-full cursor-move"
+                    drag={imageZoom > 1}
+                    dragConstraints={{ left: -1000, right: 1000, top: -1000, bottom: 1000 }}
+                    dragElastic={0.1}
+                    style={{ 
+                      scale: imageZoom,
+                      x: dragPosition.x,
+                      y: dragPosition.y
+                    }}
+                    onDragStart={() => setIsDragging(true)}
+                    onDragEnd={(e, info) => {
+                      setIsDragging(false)
+                      setDragPosition({
+                        x: dragPosition.x + info.offset.x,
+                        y: dragPosition.y + info.offset.y
+                      })
+                    }}
+                    onClick={(e) => {
+                      if (isDragging) {
+                        e.stopPropagation()
+                      }
+                    }}
+                  >
+                    <NextImage 
+                      src={project.items[lightboxImageIndex].image}
+                      alt={project.items[lightboxImageIndex].title || `Project image ${lightboxImageIndex + 1}`}
+                      className="object-contain pointer-events-none"
+                      width={1920}
+                      height={1080}
+                      sizes="100vw"
+                      quality={95}
+                      priority
+                    />
+                  </motion.div>
+                </motion.div>
+              </AnimatePresence>
+              
+              {/* Zoom Controls */}
+              <div className="absolute bottom-4 right-4 flex space-x-2 z-10" onClick={(e) => e.stopPropagation()}>
+                <button 
+                  className="bg-black/60 hover:bg-black/80 text-white p-2 rounded-full transition-colors"
+                  onClick={zoomOut}
+                  disabled={imageZoom <= 1}
+                  aria-label="Zoom out"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 12H4" />
+                  </svg>
+                </button>
+                <button 
+                  className="bg-black/60 hover:bg-red-900/80 text-white p-2 rounded-full transition-colors"
+                  onClick={closeLightbox}
+                  aria-label="Exit fullscreen"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+                <button 
+                  className="bg-black/60 hover:bg-black/80 text-white p-2 rounded-full transition-colors"
+                  onClick={zoomIn}
+                  disabled={imageZoom >= 4}
+                  aria-label="Zoom in"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                  </svg>
+                </button>
+              </div>
+              
+              {/* Image counter */}
+              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/60 text-white text-sm px-4 py-2 rounded-full">
+                {lightboxImageIndex + 1} / {project.items.length}
+              </div>
+            </div>
+            
+            {/* Navigation arrows */}
+            <button 
+              onClick={(e) => {
+                e.stopPropagation()
+                goToPrevLightboxImage()
+              }}
+              className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 p-3 rounded-full text-white transition-colors"
+              aria-label="Previous image"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+              </svg>
+            </button>
+            
+            <button 
+              onClick={(e) => {
+                e.stopPropagation()
+                goToNextLightboxImage()
+              }}
+              className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 p-3 rounded-full text-white transition-colors"
+              aria-label="Next image"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+            
+            {/* Zoom instructions */}
+            <div className="absolute top-4 left-1/2 -translate-x-1/2 bg-black/60 text-white text-xs px-4 py-2 rounded-full">
+              Phóng to (+) | Thu nhỏ (-) | Nhấn X để thoát | Kéo để di chuyển
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </main>
   )
 }
