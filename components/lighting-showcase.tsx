@@ -164,7 +164,7 @@ const categories = [
   {
     title: "Outdoor Light",
     description:
-      "Các công đèn ngoài trời của chúng tôi được thiết kế để chịu được điều kiện thời tiết khắc nghiệt, đồng thời mang lại ánh sáng đẹp và hiệu quả cho không gian ngoài trời của bạn.",
+      "Các dòng đèn ngoài trời của chúng tôi được thiết kế để chịu được điều kiện thời tiết khắc nghiệt, đồng thời mang lại ánh sáng đẹp và hiệu quả cho không gian ngoài trời của bạn.",
     image: "/about/outdoor1.JPG",
     link: "/about",
   },

@@ -28,6 +28,15 @@ const projects = [
     image: "/work/koi cafe/2020_11_21_17_37_IMG_0145-min.JPG",
     slug: "koicafe",
   },
+  {
+    id: 3,
+    title: "AN HOUSE CAFE",
+    location: "Vietnam",
+    category: "Hospitality",
+    application: ["Interior", "Entertainment", "Facades"],
+    image: "/work/An-Cafe/273036452_476970200609189_519737183736654516_n.jpg",
+    slug: "an-house",
+  },
 
   {
     id: 11,

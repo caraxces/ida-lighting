@@ -5,6 +5,7 @@ import type React from "react"
 import { useState, useEffect } from "react"
 import Header from "@/components/header"
 import Footer from "@/components/footer"
+import CollectionBanner from "@/components/collection-banner"
 import { motion, HTMLMotionProps, AnimatePresence } from "framer-motion"
 import { Phone, Mail, MapPin, X } from "lucide-react"
 import type { ComponentProps } from "react"
@@ -139,12 +140,31 @@ export default function ContactPage() {
     >
       <Header />
 
-      <section className="pt-32 pb-16 px-4 md:px-8">
-        <div className="container mx-auto">
-          <div className="mb-16">
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold">LIÊN HỆ VỚI CHÚNG TÔI</h1>
-          </div>
+      <div className="contact-banner-container">
+        <CollectionBanner
+          title="LIÊN HỆ VỚI CHÚNG TÔI"
+          subtitle="CONTACT US"
+          image="/og-image.jpg"
+          height="40vh"
+          titlePosition="bottom-left"
+          overlayOpacity={0.7}
+        />
+        <style jsx global>{`
+          .contact-banner-container .max-w-md h1 {
+            font-size: 2rem;
+            line-height: 1.2;
+          }
+          
+          @media (max-width: 768px) {
+            .contact-banner-container .max-w-md h1 {
+              font-size: 1.5rem;
+            }
+          }
+        `}</style>
+      </div>
 
+      <section className="py-16 px-4 md:px-8">
+        <div className="container mx-auto">
           <div className="flex flex-col md:flex-row gap-12">
             <div className="w-full md:w-1/2">
               <motion.div
