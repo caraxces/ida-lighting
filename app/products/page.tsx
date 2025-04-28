@@ -880,40 +880,46 @@ export default function ProductsPage() {
 
       <main className="pt-16 pb-16">
         {/* Downlight Section */}
-        <CollectionBanner 
-          title="SERIES LED MODULE" 
-          subtitle="DOWNLIGHT - SPOTLIGHT"
-          image="/collections/TRC_9988.jpg" 
-        />
+        <section id="downlight">
+          <CollectionBanner 
+            title="SERIES LED MODULE" 
+            subtitle="DOWNLIGHT - SPOTLIGHT"
+            image="/collections/TRC_9988.jpg" 
+          />
 
-        <div className="container mx-auto px-4 space-y-20">
-          <VerticalProductListing products={verticalProducts} showcaseImage="/collections/TRC_9988.jpg" />
-          <CollectionsListing products={downlightProducts} title="Đèn Âm Trần Cao Cấp" />
-        </div>
+          <div className="container mx-auto px-4 space-y-20">
+            <VerticalProductListing products={verticalProducts} showcaseImage="/collections/TRC_9988.jpg" />
+            <CollectionsListing products={downlightProducts} title="Đèn Âm Trần Cao Cấp" />
+          </div>
+        </section>
 
         {/* Outdoor Section */}
-        <CollectionBanner 
-          title="SERIES OUTDOOR" 
-          subtitle="GARDEN LIGHT"
-          image="/collections/outdoor1.JPG" 
-        />
+        <section id="outdoor">
+          <CollectionBanner 
+            title="SERIES OUTDOOR" 
+            subtitle="GARDEN LIGHT"
+            image="/collections/outdoor1.JPG" 
+          />
 
-        <div className="container mx-auto px-4 space-y-20">
-          <VerticalProductListing products={outdoorVerticalProducts} showcaseImage="/collections/outdoor1.JPG" />
-          <CollectionsListing products={outdoorProducts} title="Đèn Sân Vườn" />
-        </div>
+          <div className="container mx-auto px-4 space-y-20">
+            <VerticalProductListing products={outdoorVerticalProducts} showcaseImage="/collections/outdoor1.JPG" />
+            <CollectionsListing products={outdoorProducts} title="Đèn Sân Vườn" />
+          </div>
+        </section>
 
         {/* Decorative Section */}
-        <CollectionBanner 
-          title="SERIES CRYSTAL" 
-          subtitle="DECORATIVE LIGHT"
-          image="/collections/1.png" 
-        />
+        <section id="decorative">
+          <CollectionBanner 
+            title="SERIES CRYSTAL" 
+            subtitle="DECORATIVE LIGHT"
+            image="/collections/1.png" 
+          />
 
-        <div className="container mx-auto px-4 space-y-20">
-          <VerticalProductListing products={decorativeVerticalProducts} showcaseImage="/collections/5.jpg" />
-          <CollectionsListing products={decorativeLightProducts} title="Đèn Trang Trí Pha Lê" />
-        </div>
+          <div className="container mx-auto px-4 space-y-20">
+            <VerticalProductListing products={decorativeVerticalProducts} showcaseImage="/collections/5.jpg" />
+            <CollectionsListing products={decorativeLightProducts} title="Đèn Trang Trí Pha Lê" />
+          </div>
+        </section>
       </main>
 
       <Footer />

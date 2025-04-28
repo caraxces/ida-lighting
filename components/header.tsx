@@ -20,6 +20,7 @@ export default function Header({ onButtonClick, onButtonHover }: HeaderProps) {
   const [soundOn, setSoundOn] = useState(true)
   const [scrolled, setScrolled] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [mobileProductsOpen, setMobileProductsOpen] = useState(false)
   const pathname = usePathname()
   const { playSound, toggleSound, isSoundEnabled } = useSound()
   const router = useRouter()
@@ -94,7 +95,15 @@ export default function Header({ onButtonClick, onButtonHover }: HeaderProps) {
     { title: "Home", href: "/" },
     { title: "About us", href: "/about" },
     { title: "Projects", href: "/projects" },
-    { title: "Products", href: "/products" },
+    {
+      title: "Products",
+      href: "/products",
+      submenu: [
+        { title: "Đèn Downlight", href: "/products#downlight" },
+        { title: "Đèn Trang Trí", href: "/products#decorative" },
+        { title: "Đèn Outdoor", href: "/products#outdoor" },
+      ],
+    },
     { title: "Contacts", href: "/contacts" },
   ]
 
@@ -143,7 +152,7 @@ export default function Header({ onButtonClick, onButtonHover }: HeaderProps) {
               <Link
                 href="/products"
                 className={cn(
-                  "px-3 py-2 font-medium transition-all duration-300 relative",
+                  "px-3 py-2 font-medium transition-all duration-300 relative group/products",
                   pathname === "/products"
                     ? "text-white [text-shadow:0_0_15px_rgba(255,255,255,0.7)]"
                     : "text-gray-400 hover:text-white hover:[text-shadow:0_0_15px_rgba(255,255,255,0.7)]",
@@ -152,6 +161,25 @@ export default function Header({ onButtonClick, onButtonHover }: HeaderProps) {
                 onMouseEnter={onButtonHover}
               >
                 Products
+                <div className="absolute left-0 top-full mt-2 w-56 bg-black/90 rounded-xl shadow-lg opacity-0 group-hover/products:opacity-100 group-hover/products:pointer-events-auto pointer-events-none transition-all duration-300 hover:opacity-100 hover:pointer-events-auto">
+                  <ul className="py-2">
+                    <li>
+                      <Link href="/products#downlight" className="block px-6 py-3 text-white hover:bg-red-600/80 transition-colors duration-200" onClick={e => handleNavClick(e)}>
+                        Đèn Downlight
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href="/products#decorative" className="block px-6 py-3 text-white hover:bg-red-600/80 transition-colors duration-200" onClick={e => handleNavClick(e)}>
+                        Đèn Trang Trí
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href="/products#outdoor" className="block px-6 py-3 text-white hover:bg-red-600/80 transition-colors duration-200" onClick={e => handleNavClick(e)}>
+                        Đèn Outdoor
+                      </Link>
+                    </li>
+                  </ul>
+                </div>
               </Link>
               <Link
                 href="/projects"
@@ -290,16 +318,44 @@ export default function Header({ onButtonClick, onButtonHover }: HeaderProps) {
 
             <div className="flex-1 flex flex-col mt-4 px-4 space-y-4">
               {menuItems.map((item, index) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className="py-6 px-8 text-left text-xl font-medium bg-white/10 backdrop-blur-xl text-white rounded-full transform transition-all duration-300 hover:scale-[1.02] hover:translate-y-[-4px] hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] hover:bg-white/20 animate-slide-down group relative overflow-hidden"
-                  style={{ animationDelay: `${100 + index * 50}ms` }}
-                  onClick={(e) => handleNavClick(e)}
-                >
-                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent group-hover:translate-x-full transition-transform duration-700 ease-in-out"></div>
-                  {item.title}
-                </Link>
+                item.title === "Products" ? (
+                  <div key={item.href} className="relative">
+                    <button
+                      onClick={() => setMobileProductsOpen(!mobileProductsOpen)}
+                      className="w-full py-6 px-8 text-left text-xl font-medium bg-white/10 backdrop-blur-xl text-white rounded-full transform transition-all duration-300 hover:scale-[1.02] hover:translate-y-[-4px] hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] hover:bg-white/20 animate-slide-down group relative overflow-hidden"
+                      style={{ animationDelay: `${100 + index * 50}ms` }}
+                    >
+                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent group-hover:translate-x-full transition-transform duration-700 ease-in-out"></div>
+                      {item.title}
+                    </button>
+                    <div className={`mt-2 space-y-2 overflow-hidden transition-all duration-300 ${mobileProductsOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'}`}>
+                      {item.submenu?.map((subItem) => (
+                        <Link
+                          key={subItem.href}
+                          href={subItem.href}
+                          className="block py-4 px-8 ml-4 text-left text-lg font-medium bg-white/5 backdrop-blur-xl text-white rounded-full transform transition-all duration-300 hover:scale-[1.02] hover:translate-y-[-2px] hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] hover:bg-white/10"
+                          onClick={(e) => {
+                            handleNavClick(e)
+                            setMobileProductsOpen(false)
+                          }}
+                        >
+                          {subItem.title}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                ) : (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className="py-6 px-8 text-left text-xl font-medium bg-white/10 backdrop-blur-xl text-white rounded-full transform transition-all duration-300 hover:scale-[1.02] hover:translate-y-[-4px] hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] hover:bg-white/20 animate-slide-down group relative overflow-hidden"
+                    style={{ animationDelay: `${100 + index * 50}ms` }}
+                    onClick={(e) => handleNavClick(e)}
+                  >
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent group-hover:translate-x-full transition-transform duration-700 ease-in-out"></div>
+                    {item.title}
+                  </Link>
+                )
               ))}
             
               {/* Sound and 3D model buttons without container */}
