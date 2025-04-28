@@ -268,7 +268,7 @@ const ProjectSlider = ({ onSlideChange }: ProjectSliderProps) => {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: isMobile ? -20 : 0 }}
           transition={{ 
-            duration: 2.0, 
+            duration: 1.0, 
             ease: "easeInOut"
           }}
           style={{
@@ -300,7 +300,7 @@ const ProjectSlider = ({ onSlideChange }: ProjectSliderProps) => {
                 x: -20
               }}
               transition={{ 
-                duration: 2.0, 
+                duration: 1.0, 
                 ease: [0.25, 0.1, 0.25, 1.0]
               }}
               style={{
@@ -396,7 +396,7 @@ const ProjectSlider = ({ onSlideChange }: ProjectSliderProps) => {
                     filter: "brightness(1) blur(0px)" 
                   }}
                   transition={{ 
-                    duration: 1.2, 
+                    duration: 1.0, 
                     ease: "easeOut" 
                   }}
                   style={{ transformOrigin: "right center" }}

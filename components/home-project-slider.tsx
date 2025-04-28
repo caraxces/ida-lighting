@@ -35,9 +35,9 @@ const homeProjects: HomeProject[] = [
   {
     id: 3,
     title: "DỰ ÁN | AN HOUSE",
-    image: "/work/vn3/2022_09_26_19_34_IMG_8523.JPG",
+    image: "/work/An-Cafe/273036452_476970200609189_519737183736654516_n.jpg",
     description: "TKKT: MAAR DESIGNS\nĐịa Chỉ: TP Hà Tĩnh\nNăm hoàn thành: 2023",
-    link: "/projects/luxury-villas"
+    link: "/projects/an-house"
   },
   {
     id: 4,
@@ -267,7 +267,7 @@ const HomeProjectSlider = ({ onSlideChange }: HomeProjectSliderProps) => {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: isMobile ? -20 : 0 }}
           transition={{ 
-            duration: 2.0, 
+            duration: 1.0, 
             ease: "easeInOut"
           }}
         >
