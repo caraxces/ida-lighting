@@ -7,6 +7,7 @@ import Header from "@/components/header"
 import Footer from "@/components/footer"
 import { motion, AnimatePresence } from "framer-motion"
 import dynamic from "next/dynamic"
+import CollectionBanner from "@/components/collection-banner"
 
 // Project data
 const projects = [
@@ -37,7 +38,15 @@ const projects = [
     image: "/work/An-Cafe/273036452_476970200609189_519737183736654516_n.jpg",
     slug: "an-house",
   },
-
+  {
+    id: 4,
+    title: "IDA LIGHTING SHOWROOM",
+    location: "Ha Tinh, Vietnam",
+    category: "Retail",
+    application: ["Interior", "Lighting Design", "Showroom"],
+    image: "/work/ida-showroom/TRC_9628.jpg",
+    slug: "ida-showroom",
+  },
   {
     id: 11,
     title: "NHÀ RIÊNG",
@@ -81,7 +90,7 @@ const projects = [
     category: "Entertainment",
     application: ["Facades", "Landscape", "Paths and steps"],
     image: "/work/vn5/2022_04_25_20_35_IMG_3552.JPG",
-    slug: "outdoor-field",
+    slug: "mochi-cafe",
   },
   {
     id: 16,
@@ -215,9 +224,16 @@ export default function WorkPage() {
     <main className="min-h-screen bg-gradient-to-r from-black via-black to-[#8B2323] text-white">
       <Header />
 
+      <CollectionBanner
+        title="DỰ ÁN"
+        description="Các dự án được thực hiện bởi IDA Lighting"
+        image="/work/IDA_Starlake/TRC_7728.jpg"
+        height="45vh"
+      />
+
       <div className="pt-32 pb-16 px-4 md:px-8 max-w-[1400px] mx-auto">
         {/* Page title */}
-        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-16">DỰ ÁN</h1>
+        {/* <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-16">DỰ ÁN</h1> */}
 
         {/* Projects grid */}
         <div className="w-full">

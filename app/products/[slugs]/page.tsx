@@ -133,63 +133,285 @@ const getAllProducts = (): Product[] => {
     // Thêm sản phẩm đèn downlight
     {
       id: 8,
-      title: "PRO.S38 (C)",
-      slug: "downlight-pros38c",
-      image: "/collections/Downlight/IDA0062.JPG",
-      price: 1350000,
-      description: "Đèn âm trần chống chói với chip OSRAM và độ hoàn màu CRI 97Ra, thiết kế tinh tế mang đến hiệu quả chiếu sáng vượt trội. Phù hợp cho không gian văn phòng, trưng bày và các khu vực cần ánh sáng tập trung với góc chiếu 38°.",
-      mainImage: "/collections/Downlight/IDA0062.JPG",
+      title: "KZN0875A",
+      slug: "downlight-kzn0875a",
+      image: "/products/downlight-kzn/KZN0875A.jpg",
+      price: 680000,
+      description: "Chóa đèn âm trần chống chói. <br />Chất liệu: Nhựa PC. <br />Kích thước chóa: Ø85*36mm. <br />Cut out: Ø75mm. <br />Màu sắc: Trắng.",
+      mainImage: "/products/downlight-kzn/KZN0875A.jpg",
       variants: [
-        { name: "PRO.S38 (C)", image: "/collections/Downlight/IDA0062.JPG" },
+        { name: "KZN0875A - Trắng", image: "/products/downlight-kzn/KZN0875A.jpg" },
       ],
       category: "downlight"
     },
     {
       id: 9,
-      title: "E35",
-      slug: "downlight-e35",
-      image: "/collections/Downlight/IDA0069.JPG",
+      title: "KZN0875A Black",
+      slug: "downlight-kzn0875",
+      image: "/products/Downlight/KZN0875A (black).JPG",
       price: 680000,
-      description: "Đèn âm trần chống chói E35 sử dụng chip Osram - Đức với driver Dali lTech, thiết kế hiện đại với kích thước bóng ∅50*H55mm. Với góc chiếu 38° và nhiệt độ màu 4000K, sản phẩm mang đến hiệu quả chiếu sáng chuyên nghiệp.",
-      mainImage: "/collections/Downlight/IDA0069.JPG",
+      description: "Chóa đèn âm trần chống chói. <br />Chất liệu: Nhựa PC. <br />Kích thước chóa: Ø85*36mm. <br />Cut out: Ø75mm. <br />Màu sắc: Đen (son nền khách màu).",
+      mainImage: "/products/Downlight/KZN0875A (black).JPG",
       variants: [
-        { name: "E35", image: "/collections/Downlight/IDA0069.JPG" },
+        { name: "KZN0875A - Đen", image: "/products/Downlight/KZN0875A (black).JPG" },
       ],
       category: "downlight"
     },
     {
       id: 10,
-      title: "PRO.S60 (W)",
-      slug: "downlight-pros60w",
-      image: "/collections/Downlight/IDA0075.JPG",
-      price: 1350000,
-      description: "Đèn âm trần chống chói PRO.S60 (W) với chip OSRAM và độ hoàn màu CRI 97Ra, kích thước bóng ∅50*H75mm. Góc chiếu 60° mang đến vùng chiếu sáng rộng hơn, phù hợp cho các không gian cần ánh sáng đồng đều trên diện tích lớn.",
-      mainImage: "/collections/Downlight/IDA0075.JPG",
+      title: "KZN0885A",
+      slug: "downlight-kzn0885a",
+      image: "/products/downlight-kzn/KZN0885A.jpg",
+      price: 680000,
+      description: "Chóa đèn âm trần chống chói. <br />Chất liệu: Nhựa PC. <br />Kích thước chóa: Ø95*33mm. <br />Cut out: Ø85mm. <br />Màu sắc: Trắng.",
+      mainImage: "/products/downlight-kzn/KZN0885A.jpg",
       variants: [
-        { name: "PRO.S60 (W)", image: "/collections/Downlight/IDA0075.JPG" },
+        { name: "KZN0885A", image: "/products/downlight-kzn/KZN0885A.jpg" },
       ],
       category: "downlight"
     },
     {
       id: 11,
-      title: "KZBS080550",
-      slug: "downlight-kzbs080550",
-      image: "/collections/Downlight/IDA0076.JPG",
+      title: "KZN0885B",
+      slug: "downlight-kzn0885b",
+      image: "/products/downlight-kzn/KZN0885B.jpg",
       price: 680000,
-      description: "Đèn âm trần chống chói KZBS080550 sử dụng chip Osram - Đức và driver Dali lTech, kích thước bóng ∅50*H55mm. Với góc chiếu 60° và nhiệt độ màu 4000K, sản phẩm mang đến hiệu quả chiếu sáng đồng đều cho không gian rộng.",
-      mainImage: "/collections/Downlight/IDA0076.JPG",
+      description: "Chóa đèn âm trần chống chói Flip. <br />Chất liệu: Nhựa PC. <br />Kích thước chóa: Ø 93*H33mm. <br />Cut out: Ø85mm. <br />Màu sắc: Trắng.",
+      mainImage: "/products/downlight-kzn/KZN0885B.jpg",
       variants: [
-        { name: "KZBS080550", image: "/collections/Downlight/IDA0076.JPG" },
+        { name: "KZN0885B", image: "/products/downlight-kzn/KZN0885B.jpg" },
       ],
       category: "downlight"
     },
     {
       id: 12,
+      title: "KZN0775A",
+      slug: "downlight-kzn0775a",
+      image: "/products/downlight-kzn/KZN0775A.jpg",
+      price: 680000,
+      description: "Chóa đèn âm trần chống chói vuông. <br />Chất liệu: Nhựa PC. <br />Kích thước chóa: 85*85*H36mm. <br />Cut out: Ø75mm. <br />Màu sắc: Trắng.",
+      mainImage: "/products/downlight-kzn/KZN0775A.jpg",
+      variants: [
+        { name: "KZN0775A", image: "/products/downlight-kzn/KZN0775A.jpg" },
+      ],
+      category: "downlight"
+    },
+    {
+      id: 13,
+      title: "N11-C-W",
+      slug: "downlight-n11-c-w",
+      image: "/products/downlight-kzn/N11-C-W.jpg",
+      price: 680000,
+      description: "Chóa đèn âm trần chống chói chỉnh hướng góc 15°. <br />Chất liệu: Nhựa PC. <br />Kích thước chóa: Ø88*H39mm. <br />Cut out: Ø75mm. <br />Màu sắc: White.",
+      mainImage: "/products/downlight-kzn/N11-C-W.jpg",
+      variants: [
+        { name: "N11-C-W", image: "/products/downlight-kzn/N11-C-W.jpg" },
+      ],
+      category: "downlight"
+    },
+    {
+      id: 14,
+      title: "N11-C-S",
+      slug: "downlight-n11-c-s",
+      image: "/products/downlight-kzn/N11-C-S.JPG",
+      price: 830000,
+      description: "Chóa đèn âm trần chống chói chỉnh hướng góc 15°. <br />Chất liệu: Nhựa PC. <br />Kích thước chóa: Ø88*H39mm. <br />Cut out: Ø75mm. <br />Màu sắc: White + Plating silver.",
+      mainImage: "/products/downlight-kzn/N11-C-S.JPG",
+      variants: [
+        { name: "N11-C-S", image: "/products/downlight-kzn/N11-C-S.JPG" },
+      ],
+      category: "downlight"
+    },
+    {
+      id: 15,
+      title: "N11-C-G",
+      slug: "downlight-n11-c-g",
+      image: "/products/downlight-kzn/N11-C-G.png",
+      price: 850000,
+      description: "Chóa đèn âm trần chống chói chỉnh hướng góc 15°. <br />Chất liệu: Nhựa PC. <br />Kích thước chóa: Ø88*H39mm. <br />Cut out: Ø75mm. <br />Màu sắc: White + Plating rose gold.",
+      mainImage: "/products/downlight-kzn/N11-C-G.png",
+      variants: [
+        { name: "N11-C-G", image: "/products/downlight-kzn/N11-C-G.png" },
+      ],
+      category: "downlight"
+    },
+    {
+      id: 16,
+      title: "N3100",
+      slug: "downlight-n3100",
+      image: "/products/downlight-kzn/N3100.png",
+      price: 850000,
+      description: "Chóa đèn âm trần chống chói chỉnh hướng. <br />Chất liệu: Nhựa PC. <br />Kích thước chóa: Ø110*H29mm. <br />Cut out: Ø75-100mm. <br />Màu sắc: White.",
+      mainImage: "/products/downlight-kzn/N3100.png",
+      variants: [
+        { name: "N3100", image: "/products/downlight-kzn/N3100.png" },
+      ],
+      category: "downlight"
+    },
+    {
+      id: 17,
+      title: "KZN0875A-G",
+      slug: "downlight-kzn0875a-g",
+      image: "/products/downlight-kzn/KZN0875A-G.jpg",
+      price: 780000,
+      description: "Chóa đèn âm trần chống chói. <br />Chất liệu: Kim loại. <br />Kích thước chóa: Ø85*36mm. <br />Cut out: Ø75mm. <br />Màu sắc: Gold brush.",
+      mainImage: "/products/downlight-kzn/KZN0875A-G.jpg",
+      variants: [
+        { name: "KZN0875A-G", image: "/products/downlight-kzn/KZN0875A-G.jpg" },
+      ],
+      category: "downlight"
+    },
+    {
+      id: 18,
+      title: "YMN-78-WH",
+      slug: "downlight-ymn-78-wh",
+      image: "/products/Downlight/YMN-78-WH.png",
+      price: 750000,
+      description: "Chóa đèn không viền chống chói. Chất liệu: Kim loại. Kích thước chóa: Ø78×H35mm. Màu sắc: White.",
+      mainImage: "/products/Downlight/YMN-78-WH.png",
+      variants: [
+        { name: "YMN-78-WH", image: "/products/Downlight/YMN-78-WH.png" },
+      ],
+      category: "downlight"
+    },
+    {
+      id: 19,
+      title: "YMN-78-BL",
+      slug: "downlight-ymn-78-bl",
+      image: "/products/downlight-kzn/YMN-78-BL.png",
+      price: 750000,
+      description: "Chóa đèn không viền chống chói. Chất liệu: Kim loại. Kích thước chóa: Ø78×H35mm. Màu sắc: Black.",
+      mainImage: "/products/downlight-kzn/YMN-78-BL.png",
+      variants: [
+        { name: "YMN-78-BL", image: "/products/downlight-kzn/YMN-78-BL.png" },
+      ],
+      category: "downlight"
+    },
+    {
+      id: 20,
+      title: "YMN-78-CP",
+      slug: "downlight-ymn-78-cp",
+      image: "/products/downlight-kzn/YMN-78-CP.png",
+      price: 850000,
+      description: "Chóa đèn không viền chống chói. Chất liệu: Kim loại. Kích thước chóa: Ø78×H35mm. Màu sắc: Copper.",
+      mainImage: "/products/downlight-kzn/YMN-78-CP.png",
+      variants: [
+        { name: "YMN-78-CP", image: "/products/downlight-kzn/YMN-78-CP.png" },
+      ],
+      category: "downlight"
+    },
+    {
+      id: 21,
+      title: "YMN-78-CF",
+      slug: "downlight-ymn-78-cf",
+      image: "/products/downlight-kzn/YMN-78-CF.png",
+      price: 850000,
+      description: "Chóa đèn không viền chống chói. Chất liệu: Kim loại. Kích thước chóa: Ø78×H35mm. Màu sắc: Coffee.",
+      mainImage: "/products/downlight-kzn/YMN-78-CF.png",
+      variants: [
+        { name: "YMN-78-CF", image: "/products/downlight-kzn/YMN-78-CF.png" },
+      ],
+      category: "downlight"
+    },
+    {
+      id: 22,
+      title: "YMN-78-RB",
+      slug: "downlight-ymn-78-rb",
+      image: "/products/downlight-kzn/YMN-78-RB.png",
+      price: 950000,
+      description: "Chóa đèn không viền chống chói. Chất liệu: Kim loại. Kích thước chóa: Ø78×H35mm. Màu sắc: Rose Gold Brush.",
+      mainImage: "/products/downlight-kzn/YMN-78-RB.png",
+      variants: [
+        { name: "YMN-78-RB", image: "/products/downlight-kzn/YMN-78-RB.png" },
+      ],
+      category: "downlight"
+    },
+    // Thêm sản phẩm chip LED downlight
+    {
+      id: 23,
+      title: "KZBS08055J",
+      slug: "downlight-kzbs08055j",
+      image: "/products/downlight-kzn/KZBS080550.jpg",
+      price: 1350000,
+      description: "Đèn âm trần chống chói. Kích thước bóng: Ø50*H22mm. Nhiệt độ màu: 4000K. Góc chiếu: 45°. CRI: Ra>90.",
+      mainImage: "/products/downlight-kzn/KZBS080550.jpg",
+      variants: [
+        { name: "KZBS08055J B8-6W", image: "/products/downlight-kzn/KZBS080550.jpg" },
+      ],
+      category: "downlight"
+    },
+    {
+      id: 24,
+      title: "KZB9104502",
+      slug: "downlight-kzb9104502",
+      image: "/collections/Downlight/IDA0069.JPG",
+      price: 1350000,
+      description: "Đèn âm trần chống chói. Kích thước bóng: Ø50*H80mm. Nhiệt độ màu: 4000K. Góc chiếu: 38°. CRI: Ra>92.",
+      mainImage: "/collections/Downlight/IDA0069.JPG",
+      variants: [
+        { name: "KZB9104502 B1-9w", image: "/collections/Downlight/IDA0069.JPG" },
+      ],
+      category: "downlight"
+    },
+    {
+      id: 25,
+      title: "PRO.S38 (C)",
+      slug: "downlight-pros38c",
+      image: "/collections/Downlight/IDA0075.JPG",
+      price: 1450000,
+      description: "Đèn âm trần chống chói. Kích thước bóng: Ø50*H55mm. Nhiệt độ màu: 4000K. Góc chiếu: 38°. CRI: Ra>97.",
+      mainImage: "/collections/Downlight/IDA0075.JPG",
+      variants: [
+        { name: "PRO.S38 (C)", image: "/collections/Downlight/IDA0075.JPG" },
+      ],
+      category: "downlight"
+    },
+    {
+      id: 26,
+      title: "PRO.S38 (M)",
+      slug: "downlight-pros38m",
+      image: "/collections/Downlight/IDA0076.JPG",
+      price: 1450000,
+      description: "Đèn âm trần chống chói. <br />Kích thước bóng: Ø50*H55mm. <br />Nhiệt độ màu: 4000K. <br />Góc chiếu: 38°. <br />CRI: Ra>97. <br />Chip: Osram - Đức. <br />",
+      mainImage: "/collections/Downlight/IDA0076.JPG",
+      variants: [
+        { name: "PRO.S38 (M)", image: "/collections/Downlight/IDA0076.JPG" },
+      ],
+      category: "downlight"
+    },
+    {
+      id: 27,
+      title: "PRO.S60",
+      slug: "downlight-pros60",
+      image: "/products/downlight-kzn/PRO.S60.jpg",
+      price: 1450000,
+      description: "Đèn âm trần chống chói. <br />Kích thước bóng: Ø50*H55mm. <br />Nhiệt độ màu: 3000K. <br />Góc chiếu: 60°. <br />CRI: Ra>97. <br />Chip: Osram - Đức. <br />",
+      mainImage: "/products/downlight-kzn/PRO.S60.jpg",
+      variants: [
+        { name: "PRO.S60", image: "/products/downlight-kzn/PRO.S60.jpg" },
+      ],
+      category: "downlight"
+    },
+    {
+      id: 28,
+      title: "B3-12W",
+      slug: "led-module-b3-12w",
+      image: "/products/downlight-kzn/B3-12W.jpg",
+      price: 1550000,
+      description: "Đèn âm trần chống chói. <br />Kích thước bóng: Ø50*H55mm. <br />Nhiệt độ màu: 3000K. <br />Góc chiếu: 60°. <br />CRI: Ra>97.",
+      mainImage: "/products/downlight-kzn/B3-12W.jpg",
+      variants: [
+        { name: "B3-12W", image: "/collections/Downlight/IDA0087.JPG" },
+      ],
+      category: "downlight"
+    },
+    {
+      id: 29,
       title: "B8-6W",
       slug: "downlight-b8-6w",
       image: "/collections/Downlight/IDA0086.JPG",
       price: 780000,
-      description: "Đèn rọi âm trần Spotlight B8-6W màu trắng, sử dụng chip Full Osram - Đức. Góc chiếu hẹp 15° với CRI>97Ra và nhiệt độ màu 3000K, mang đến hiệu ứng ánh sáng tập trung cao, phù hợp cho trưng bày sản phẩm và trang trí.",
+      description: "Đèn rọi âm trần Spotlight. <br />Màu sắc: Trắng. <br />Góc chiếu: 15°. <br />CRI: > 97Ra. <br />Nhiệt độ màu: 3000K. <br />Chip: Full Osram - Đức. <br />W/lm: 5W/485lm. <br />Lỗ Khoét: ∅35.",
       mainImage: "/collections/Downlight/IDA0086.JPG",
       variants: [
         { name: "B8-6W", image: "/collections/Downlight/IDA0086.JPG" },
@@ -197,12 +419,12 @@ const getAllProducts = (): Product[] => {
       category: "downlight"
     },
     {
-      id: 13,
+      id: 30,
       title: "PRO.S60 (B)",
       slug: "downlight-pros60b",
       image: "/collections/Downlight/IDA0087.JPG",
       price: 680000,
-      description: "Đèn âm trần chống ẩm chóa đen PRO.S60 (B) sử dụng chip Osram - Đức với driver Dali lTech. Kích thước bóng ∅50*H55mm với chóa ∅110*H27mm, góc chiếu 60° mang đến hiệu quả chiếu sáng tối ưu với CRI>97.",
+      description: "Đèn âm trần chống ẩm chóa đen. <br />Kích thước bóng: ∅50*H55mm. <br />Kích thước chóa: ∅110*H27mm. <br />Nhiệt độ màu: 4000K. <br />Góc chiếu: 60°. <br />CRI: Ra>97. <br />Chip: Osram - Đức. <br />W/lm: 12w. <br />Lỗ Khoét: ∅75.",
       mainImage: "/collections/Downlight/IDA0087.JPG",
       variants: [
         { name: "PRO.S60 (B)", image: "/collections/Downlight/IDA0087.JPG" },
@@ -210,28 +432,80 @@ const getAllProducts = (): Product[] => {
       category: "downlight"
     },
     {
-      id: 14,
-      title: "PRO.S60 Combo",
-      slug: "downlight-pros60combo",
-      image: "/collections/Downlight/IDA0086.JPG",
-      price: 830000,
-      description: "Combo đèn âm trần chống chói không chỉnh hướng PRO.S60 Combo sử dụng chip Osram - Đức với driver Dali lTech. Kích thước bóng ∅50*H55mm với chóa ∅88*H39mm, góc chiếu 60° mang đến hiệu quả chiếu sáng đồng đều với CRI>97.",
-      mainImage: "/collections/Downlight/IDA0086.JPG",
+      id: 31,
+      title: "PRO.DLS38",
+      slug: "downlight-prodls38",
+      image: "/collections/Downlight/IDA0075.JPG",
+      price: 1850000,
+      description: "Đèn âm trần chống chói. Kích thước bóng: Ø50*H75mm. COB 15W   AC180-240V. Nhiệt độ màu: 2700-6500K. Góc chiếu: 38°. CRI 97Ra. Chip Dali OSRAM 97Ra, driver Dali iTECH.",
+      mainImage: "/collections/Downlight/IDA0075.JPG",
       variants: [
-        { name: "PRO.S60 Combo", image: "/collections/Downlight/IDA0086.JPG" },
+        { name: "PRO.DLS38", image: "/collections/Downlight/IDA0075.JPG" },
       ],
       category: "downlight"
     },
     {
-      id: 15,
-      title: "PRO.S60 (S)",
-      slug: "downlight-pros60s",
+      id: 32,
+      title: "PRO.DLS60",
+      slug: "downlight-prodls60",
       image: "/collections/Downlight/IDA0075.JPG",
-      price: 795000,
-      description: "Combo đèn âm trần chống chói chỉnh hướng góc 15° PRO.S60 (S) sử dụng chip Osram - Đức với driver Osram. Kích thước bóng ∅50*H55mm với chóa ∅88*H39mm, góc chiếu 60° mang đến hiệu quả chiếu sáng đa dạng với CRI>97.",
+      price: 1850000,
+      description: "Đèn âm trần chống chói. Kích thước bóng: Ø50*H75mm. COB 15W   AC180-240V. Nhiệt độ màu: 2700-6500K. Góc chiếu: 60°. CRI 97Ra. Chip Dali OSRAM 97Ra, driver Dali iTECH.",
       mainImage: "/collections/Downlight/IDA0075.JPG",
       variants: [
-        { name: "PRO.S60 (S)", image: "/collections/Downlight/IDA0075.JPG" },
+        { name: "PRO.DLS60", image: "/collections/Downlight/IDA0075.JPG" },
+      ],
+      category: "downlight"
+    },
+    {
+      id: 33,
+      title: "B9-75-15w",
+      slug: "downlight-b9-75-15w",
+      image: "/collections/Downlight/IDA0075.JPG",
+      price: 1850000,
+      description: "Đèn âm trần chống chói. Kích thước bóng: Ø50*H75mm. COB 15W   AC180-240V. Nhiệt độ màu: 2700-6500K. Góc chiếu: 60°. CRI 97Ra.",
+      mainImage: "/collections/Downlight/IDA0075.JPG",
+      variants: [
+        { name: "B9-75-15w", image: "/collections/Downlight/IDA0075.JPG" },
+      ],
+      category: "downlight"
+    },
+    {
+      id: 34,
+      title: "E35",
+      slug: "downlight-e35",
+      image: "/collections/Downlight/IDA0075.JPG",
+      price: 1250000,
+      description: "Đèn âm trần Spotlight. Màu sắc: Trắng. Góc chiếu: 15°. CRI> 97Ra. Nhiệt độ màu: 3000K. Chip: Osram.",
+      mainImage: "/collections/Downlight/IDA0075.JPG",
+      variants: [
+        { name: "E35", image: "/collections/Downlight/IDA0075.JPG" },
+      ],
+      category: "downlight"
+    },
+    {
+      id: 35,
+      title: "PRO.S60 Combo",
+      slug: "led-module-pros60",
+      image: "/products/downlight-kzn/PRO.S60.jpg",
+      price: 1450000,
+      description: "Combo đèn âm trần chống chói không chỉnh hướng. Kích thước chóa: Ø88*H39mm. Kích thước bóng: Ø50*H55mm. Nhiệt độ màu: 4000K. Góc chiếu: 60°. CRI: Ra>97.",
+      mainImage: "/products/downlight-kzn/PRO.S60.jpg",
+      variants: [
+        { name: "PRO.S60 Combo", image: "/collections/Downlight/IDA0075.JPG" },
+      ],
+      category: "downlight"
+    },
+    {
+      id: 36,
+      title: "PRO.S60 Combo",
+      slug: "downlight-pros60-combo",
+      image: "/collections/Downlight/IDA0075.JPG", 
+      price: 1450000,
+      description: "Combo đèn âm trần chống chói chỉnh hướng góc 15°. Kích thước chóa: Ø88*H39mm. Kích thước bóng: Ø50*H55mm. Nhiệt độ màu: 4000K. Góc chiếu: 60°. CRI: Ra>97.",
+      mainImage: "/collections/Downlight/IDA0075.JPG",
+      variants: [
+        { name: "PRO.S60 Combo", image: "/collections/Downlight/IDA0075.JPG" },
       ],
       category: "downlight"
     },
@@ -802,7 +1076,10 @@ export default function ProductPage({ params }: { params: PageParams }) {
               <h1 className="text-5xl font-bold mb-8">{product.title}</h1>
             </div>
 
-            <p className="text-gray-400 mb-8 hidden md:block">{product.description}</p>
+            <p 
+              className="text-gray-400 mb-8 hidden md:block" 
+              dangerouslySetInnerHTML={{ __html: product.description }}
+            ></p>
 
             {/* Variants section - only show if there are variants */}
             {product.variants && product.variants.length > 0 && (
@@ -853,24 +1130,24 @@ export default function ProductPage({ params }: { params: PageParams }) {
 
             {/* Contact Button */}
             <div className="hidden md:block">
-              <Link href="https://m.me/855258281507149" target="_blank" rel="noopener noreferrer">
-              <Button className="w-full bg-red-600 hover:bg-red-700 text-white rounded-md py-3 flex items-center justify-center space-x-2">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-5 w-5"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
-                    />
-                  </svg>
-                  <span className="font-bold">LIÊN HỆ VÀ NHẬN ƯU ĐÃI</span>
-              </Button>
+              <Link href="https://m.me/855258281507149" target="_blank" rel="noopener noreferrer" className="inline-block w-full">
+                <Button className="w-full bg-red-600 hover:bg-red-700 text-white rounded-md py-3 flex items-center justify-center space-x-2">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-5 w-5"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
+                      />
+                    </svg>
+                    <span className="font-bold">LIÊN HỆ VÀ NHẬN ƯU ĐÃI</span>
+                </Button>
               </Link>
             </div>
           </div>
@@ -878,12 +1155,15 @@ export default function ProductPage({ params }: { params: PageParams }) {
 
         {/* Mobile Content - displayed below the product image */}
         <div className="md:hidden mt-6 bg-zinc-900/50 p-6 rounded-lg space-y-6">
-          <p className="text-gray-400">{product.description}</p>
+          <p 
+            className="text-gray-400"
+            dangerouslySetInnerHTML={{ __html: product.description }}
+          ></p>
           
           {/* Removing variant section for mobile to avoid duplication */}
 
           {/* Contact Button for mobile */}
-          <Link href="https://m.me/855258281507149" target="_blank" rel="noopener noreferrer">
+          <Link href="https://m.me/855258281507149" target="_blank" rel="noopener noreferrer" className="inline-block w-full">
             <Button className="w-full bg-red-600 hover:bg-red-700 text-white rounded-md py-3 flex items-center justify-center space-x-2">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -906,7 +1186,7 @@ export default function ProductPage({ params }: { params: PageParams }) {
 
         {/* Back to Products Button */}
         <div className="mt-12">
-          <Link href="/products">
+          <Link href="/products" className="inline-block">
             <Button variant="outline" className="text-white border-white hover:bg-white/10">
               ← Quay lại trang sản phẩm
             </Button>
@@ -925,7 +1205,11 @@ export default function ProductPage({ params }: { params: PageParams }) {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {suggestedProducts.map((suggestedProduct) => (
-                <Link key={suggestedProduct.id} href={`/products/${suggestedProduct.slug}`}>
+                <Link 
+                  key={suggestedProduct.id} 
+                  href={`/products/${suggestedProduct.slug}`}
+                  className="block"
+                >
                   <div className="group bg-gradient-to-br from-zinc-900 to-black rounded-lg overflow-hidden transition-all duration-300 hover:shadow-lg hover:shadow-red-500/20 border border-zinc-800 hover:border-red-500/30">
                     <div className="aspect-[4/3] overflow-hidden">
                       <Image
@@ -940,7 +1224,10 @@ export default function ProductPage({ params }: { params: PageParams }) {
                       <h3 className="text-xl font-semibold mb-2 group-hover:text-red-400 transition-colors">
                         {suggestedProduct.title}
                       </h3>
-                      <p className="text-gray-400 line-clamp-2 mb-3 text-sm">{suggestedProduct.description}</p>
+                      <p 
+                        className="text-gray-400 line-clamp-2 mb-3 text-sm"
+                        dangerouslySetInnerHTML={{ __html: suggestedProduct.description.substring(0, 150) }}
+                      ></p>
                       <div className="flex justify-end items-center">
                         <span className="text-white text-sm bg-red-600 rounded-full px-3 py-1">Xem chi tiết</span>
                       </div>

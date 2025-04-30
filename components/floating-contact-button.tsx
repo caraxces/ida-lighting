@@ -85,9 +85,9 @@ export default function FloatingContactButton() {
         </div>
 
         {/* Button content */}
-        <button
+        <div
           onClick={() => router.push("/contacts")}
-          className={`relative z-10 flex items-center justify-center w-14 h-14 bg-black bg-opacity-90 text-white font-bold rounded-full transition-all duration-300`}
+          className={`relative z-10 flex items-center justify-center w-14 h-14 bg-black bg-opacity-90 text-white font-bold rounded-full transition-all duration-300 cursor-pointer`}
           style={{
             boxShadow: isHovered 
               ? `0 0 30px rgba(255, 120, 0, ${0.5 + glowIntensity * 0.5}), 0 0 60px rgba(255, 120, 0, ${0.3 + glowIntensity * 0.3})` 
@@ -109,7 +109,7 @@ export default function FloatingContactButton() {
           >
             <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
           </svg>
-        </button>
+        </div>
       </div>
     </div>
   )
