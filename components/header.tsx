@@ -17,12 +17,11 @@ interface HeaderProps {
 }
 
 export default function Header({ onButtonClick, onButtonHover }: HeaderProps) {
-  const [soundOn, setSoundOn] = useState(true)
   const [scrolled, setScrolled] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [mobileProductsOpen, setMobileProductsOpen] = useState(false)
   const pathname = usePathname()
-  const { playSound, toggleSound, isSoundEnabled } = useSound()
+  const { toggleSound, isSoundEnabled, isMusicPlaying } = useSound()
   const router = useRouter()
 
   useEffect(() => {
@@ -37,21 +36,7 @@ export default function Header({ onButtonClick, onButtonHover }: HeaderProps) {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [scrolled])
 
-  useEffect(() => {
-    // Sync sound state with the global sound state
-    setSoundOn(isSoundEnabled)
-  }, [isSoundEnabled])
-
-  const handleSoundToggle = () => {
-    toggleSound()
-    setSoundOn(!soundOn)
-    playSound()
-  }
-
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, section?: string) => {
-    if (isSoundEnabled) {
-      playSound()
-    }
     setMobileMenuOpen(false)
 
     // If we're on the homepage and a section is specified, scroll to it
@@ -71,9 +56,6 @@ export default function Header({ onButtonClick, onButtonHover }: HeaderProps) {
       document.body.style.overflow = 'hidden'
     } else {
       document.body.style.overflow = ''
-    }
-    if (isSoundEnabled) {
-      playSound()
     }
   }
 
@@ -165,7 +147,7 @@ export default function Header({ onButtonClick, onButtonHover }: HeaderProps) {
                   <ul className="py-2">
                     <li>
                       <Link href="/products#downlight" className="block px-6 py-3 text-white hover:bg-red-600/80 transition-colors duration-200" onClick={e => handleNavClick(e)}>
-                        Đèn Downlight
+                      Đèn Downlight
                       </Link>
                     </li>
                     <li>
@@ -221,7 +203,7 @@ export default function Header({ onButtonClick, onButtonHover }: HeaderProps) {
         </div>
 
         {/* Right Buttons - Using the new HeaderButtons component */}
-        <HeaderButtons soundOn={soundOn} onSoundToggle={handleSoundToggle} playSound={playSound} />
+        <HeaderButtons />
       </div>
 
       {/* Mobile Navigation - Updated layout with 3D model button */}
@@ -248,11 +230,11 @@ export default function Header({ onButtonClick, onButtonHover }: HeaderProps) {
         <div className="flex space-x-1">
           {/* Sound Button */}
           <button
-            onClick={handleSoundToggle}
+            onClick={toggleSound}
             className="p-2 rounded-full bg-white/10 backdrop-blur-sm hover:bg-white/20 transition-all duration-300 text-white"
-            aria-label={soundOn ? "Mute sound" : "Enable sound"}
+            aria-label={isSoundEnabled ? "Mute sound" : "Enable sound"}
           >
-            {soundOn ? <Volume2 size={18} /> : <VolumeX size={18} />}
+            {isSoundEnabled && isMusicPlaying ? <Volume2 size={18} /> : <VolumeX size={18} />}
           </button>
           
           {/* Catalogue button */}
@@ -261,7 +243,6 @@ export default function Header({ onButtonClick, onButtonHover }: HeaderProps) {
             target="_blank"
             rel="noopener noreferrer"
             className="p-2 rounded-full bg-white/10 backdrop-blur-sm hover:bg-white/20 transition-all duration-300 text-white"
-            onClick={() => playSound()}
             aria-label="Download catalogue"
           >
             <BookOpen size={18} />
@@ -273,7 +254,6 @@ export default function Header({ onButtonClick, onButtonHover }: HeaderProps) {
             target="_blank"
             rel="noopener noreferrer"
             className="p-2 rounded-full bg-white/10 backdrop-blur-sm hover:bg-white/20 transition-all duration-300 text-white"
-            onClick={() => playSound()}
             aria-label="View 3D model"
           >
             <Box size={18} />
@@ -325,8 +305,8 @@ export default function Header({ onButtonClick, onButtonHover }: HeaderProps) {
                       className="w-full py-6 px-8 text-left text-xl font-medium bg-white/10 backdrop-blur-xl text-white rounded-full transform transition-all duration-300 hover:scale-[1.02] hover:translate-y-[-4px] hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] hover:bg-white/20 animate-slide-down group relative overflow-hidden"
                       style={{ animationDelay: `${100 + index * 50}ms` }}
                     >
+                      <span className="relative z-10">{item.title}</span>
                       <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent group-hover:translate-x-full transition-transform duration-700 ease-in-out"></div>
-                      {item.title}
                     </button>
                     <div className={`mt-2 space-y-2 overflow-hidden transition-all duration-300 ${mobileProductsOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'}`}>
                       {item.submenu?.map((subItem) => (
@@ -339,7 +319,7 @@ export default function Header({ onButtonClick, onButtonHover }: HeaderProps) {
                             setMobileProductsOpen(false)
                           }}
                         >
-                          {subItem.title}
+                          <span className="relative z-10">{subItem.title}</span>
                         </Link>
                       ))}
                     </div>
@@ -352,8 +332,8 @@ export default function Header({ onButtonClick, onButtonHover }: HeaderProps) {
                     style={{ animationDelay: `${100 + index * 50}ms` }}
                     onClick={(e) => handleNavClick(e)}
                   >
+                    <span className="relative z-10">{item.title}</span>
                     <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent group-hover:translate-x-full transition-transform duration-700 ease-in-out"></div>
-                    {item.title}
                   </Link>
                 )
               ))}
@@ -361,11 +341,11 @@ export default function Header({ onButtonClick, onButtonHover }: HeaderProps) {
               {/* Sound and 3D model buttons without container */}
               <div className="flex justify-between items-center px-8 animate-slide-down" style={{ animationDelay: "500ms" }}>
                 <button
-                  onClick={handleSoundToggle}
+                  onClick={toggleSound}
                   className="p-2 rounded-full bg-white/20 hover:bg-white/30 transition-all duration-300 hover:translate-y-[-2px] hover:shadow-[0_0_15px_rgba(255,255,255,0.5)]"
-                  aria-label={soundOn ? "Mute sound" : "Enable sound"}
+                  aria-label={isSoundEnabled ? "Mute sound" : "Enable sound"}
                 >
-                  {soundOn ? <Volume2 size={20} className="text-white" /> : <VolumeX size={20} className="text-white" />}
+                  {isSoundEnabled && isMusicPlaying ? <Volume2 size={20} className="text-white" /> : <VolumeX size={20} className="text-white" />}
                 </button>
 
                 <a
@@ -373,7 +353,6 @@ export default function Header({ onButtonClick, onButtonHover }: HeaderProps) {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="p-2 rounded-full bg-white/20 hover:bg-white/30 transition-all duration-300 hover:translate-y-[-2px] hover:shadow-[0_0_15px_rgba(255,255,255,0.5)] flex items-center space-x-2"
-                  onClick={() => playSound()}
                 >
                   <Box size={20} className="text-white" />
                   <span className="text-white">3D model</span>

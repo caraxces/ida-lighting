@@ -1,9 +1,18 @@
-"use client"
+import React from 'react'
+import { Metadata } from "next"
 import Header from "@/components/header"
 import Footer from "@/components/footer"
 import CollectionsListing from "@/components/collections-listing"
 import VerticalProductListing from "@/components/vertical-product-listing"
 import CollectionBanner from "@/components/collection-banner"
+import Link from "next/link"
+import { ledModules, LEDModule, LEDModuleVariant } from "@/data/led-modules"
+import { antiGlareTrims, AntiGlareTrim, AntiGlareTrimVariant } from "@/data/anti-glare-trims"
+
+export const metadata: Metadata = {
+  title: "Sản phẩm chiếu sáng | IDA Lighting",
+  description: "Các loại đèn cao cấp, chóa đèn, và chip LED chất lượng cao từ IDA Lighting",
+}
 
 // Define types for our data structure
 interface ProductSpec {
@@ -28,98 +37,282 @@ interface Product {
 
 // Sản phẩm Downlight
 const downlightProducts: Product[] = [
+  // LED Modules
   {
-    id: "downlight-1",
+    id: "downlight-pros38c",
     name: "PRO.S38 (C)",
     slug: "downlight-pros38c",
     variants: [
       {
         id: "pros38c",
         name: "PRO.S38 (C)",
-        image: "/collections/Downlight/IDA0062.JPG",
-        price: 1350000,
-        specs: [
-          { label: "Loại đèn", value: "Đèn âm trần chống chói" },
-          { label: "Kích thước bóng", value: "∅50*H75mm" },
-          { label: "Công suất", value: "COB 15W AC180-240V 2700-6500K" },
-          { label: "Góc chiếu", value: "38°" },
-          { label: "CRI", value: "97Ra" },
-          { label: "Chip", value: "Dali OSRAM 97Ra" },
-          { label: "Driver", value: "Dali lTECH" },
-          { label: "W/lm", value: "15w" },
-          { label: "Lỗ Khoét", value: "∅75" },
-        ],
-      },
-    ],
-  },
-  {
-    id: "downlight-2",
-    name: "E35",
-    slug: "downlight-e35",
-    variants: [
-      {
-        id: "e35",
-        name: "E35",
-        image: "/collections/Downlight/IDA0069.JPG",
-        price: 680000,
-        specs: [
-          { label: "Loại đèn", value: "Đèn âm trần chống chói" },
-          { label: "Kích thước bóng", value: "∅50*H55mm" },
-          { label: "Nhiệt độ màu", value: "4000K" },
-          { label: "Góc chiếu", value: "38°" },
-          { label: "CRI", value: "Ra>97" },
-          { label: "Chip", value: "Osram - Đức" },
-          { label: "Driver", value: "Dali lTech (Lắp ráp Trung Quốc)" },
-          { label: "W/lm", value: "12w" },
-          { label: "Lỗ Khoét", value: "∅75" },
-        ],
-      },
-    ],
-  },
-  {
-    id: "downlight-3",
-    name: "PRO.S60 (W)",
-    slug: "downlight-pros60w",
-    variants: [
-      {
-        id: "pros60w",
-        name: "PRO.S60 (W)",
         image: "/collections/Downlight/IDA0075.JPG",
-        price: 1350000,
+        price: 1450000,
         specs: [
           { label: "Loại đèn", value: "Đèn âm trần chống chói" },
-          { label: "Kích thước bóng", value: "∅50*H75mm" },
-          { label: "Công suất", value: "COB 15W AC180-240V 2700-6500K" },
-          { label: "Góc chiếu", value: "60°" },
-          { label: "CRI", value: "97Ra" },
-          { label: "Chip", value: "Dali OSRAM 97Ra" },
-          { label: "Driver", value: "Dali lTECH" },
-          { label: "W/lm", value: "15w" },
+          { label: "Kích thước bóng", value: "∅50*H55mm" },
+          { label: "Nhiệt độ màu", value: "4000K" },
+          { label: "Góc chiếu", value: "38°" },
+          { label: "CRI", value: "Ra>97" },
+          { label: "Chip", value: "Osram - Đức" },
+          { label: "Driver", value: "Dali lTech (Lắp ráp Trung Quốc)" },
+          { label: "W/lm", value: "12w" },
           { label: "Lỗ Khoét", value: "∅75" },
         ],
       },
     ],
   },
   {
-    id: "downlight-4",
-    name: "KZBS080550",
-    slug: "downlight-kzbs080550",
+    id: "downlight-pros38m",
+    name: "PRO.S38 (M)",
+    slug: "downlight-pros38m",
     variants: [
       {
-        id: "kzbs080550",
-        name: "KZBS080550",
+        id: "pros38m",
+        name: "PRO.S38 (M)",
         image: "/collections/Downlight/IDA0076.JPG",
-        price: 680000,
+        price: 1450000,
         specs: [
           { label: "Loại đèn", value: "Đèn âm trần chống chói" },
           { label: "Kích thước bóng", value: "∅50*H55mm" },
           { label: "Nhiệt độ màu", value: "4000K" },
+          { label: "Góc chiếu", value: "38°" },
+          { label: "CRI", value: "Ra>97" },
+          { label: "Chip", value: "Osram - Đức" },
+          { label: "Driver", value: "Dali lTech (Lắp ráp Trung Quốc)" },
+          { label: "W/lm", value: "12w" },
+          { label: "Lỗ Khoét", value: "∅75" },
+        ],
+      },
+    ],
+  },
+  {
+    id: "downlight-pros60",
+    name: "PRO.S60",
+    slug: "downlight-pros60",
+    variants: [
+      {
+        id: "pros60",
+        name: "PRO.S60",
+        image: "/collections/Downlight/PRO.S60.JPG",
+        price: 1450000,
+        specs: [
+          { label: "Loại đèn", value: "Đèn âm trần chống chói" },
+          { label: "Kích thước bóng", value: "∅50*H55mm" },
+          { label: "Nhiệt độ màu", value: "3000K" },
           { label: "Góc chiếu", value: "60°" },
           { label: "CRI", value: "Ra>97" },
           { label: "Chip", value: "Osram - Đức" },
           { label: "Driver", value: "Dali lTech (Lắp ráp Trung Quốc)" },
           { label: "W/lm", value: "12w" },
           { label: "Lỗ Khoét", value: "∅75" },
+        ],
+      },
+    ],
+  },
+  
+  {
+    id: "downlight-b3-12w",
+    name: "B3-12W",
+    slug: "downlight-b3-12w",
+    variants: [
+      {
+        id: "b3-12w",
+        name: "B3-12W",
+        image: "/collections/Downlight/IDA0087.JPG",
+        price: 1550000,
+        specs: [
+          { label: "Loại đèn", value: "Đèn âm trần chống chói" },
+          { label: "Kích thước bóng", value: "∅50*H55mm" },
+          { label: "Nhiệt độ màu", value: "3000K" },
+          { label: "Góc chiếu", value: "60°" },
+          { label: "CRI", value: "Ra>97" },
+          { label: "Chip", value: "Osram - Đức" },
+          { label: "Driver", value: "Dali lTech (Lắp ráp Trung Quốc)" },
+          { label: "W/lm", value: "12w" },
+          { label: "Lỗ Khoét", value: "∅75" },
+        ],
+      },
+    ],
+  },
+  
+  // Anti-glare Trims
+  {
+    id: "downlight-kzn0875a",
+    name: "KZN0875A",
+    slug: "downlight-kzn0875a",
+    variants: [
+      {
+        id: "kzn0875a",
+        name: "KZN0875A - Trắng",
+        image: "/products/downlight-kzn/KZN0875A.jpg",
+        price: 680000,
+        specs: [
+          { label: "Loại đèn", value: "Chóa đèn âm trần chống chói" },
+          { label: "Chất liệu", value: "Nhựa PC" },
+          { label: "Kích thước chóa", value: "Ø85×36mm" },
+          { label: "Cut out", value: "Ø75mm" },
+          { label: "Màu sắc", value: "Trắng" },
+        ],
+      },
+    ],
+  },
+  {
+    id: "downlight-kzn0875a-black",
+    name: "KZN0875A-B",
+    slug: "downlight-kzn0875",
+    variants: [
+      {
+        id: "kzn0875a-black",
+        name: "KZN0875A-B - Đen",
+        image: "/products/downlight-kzn/KZN0875A (black).JPG",
+        price: 680000,
+        specs: [
+          { label: "Loại đèn", value: "Chóa đèn âm trần chống chói" },
+          { label: "Chất liệu", value: "Nhựa PC" },
+          { label: "Kích thước chóa", value: "Ø85×36mm" },
+          { label: "Cut out", value: "Ø75mm" },
+          { label: "Màu sắc", value: "Đen" },
+        ],
+      },
+    ],
+  },
+  {
+    id: "downlight-kzn0885a",
+    name: "KZN0885A",
+    slug: "downlight-kzn0885a",
+    variants: [
+      {
+        id: "kzn0885a",
+        name: "KZN0885A",
+        image: "/products/downlight-kzn/KZN0885A.jpg",
+        price: 680000,
+        specs: [
+          { label: "Loại đèn", value: "Chóa đèn âm trần chống chói" },
+          { label: "Chất liệu", value: "Nhựa PC" },
+          { label: "Kích thước chóa", value: "Ø95*33mm" },
+          { label: "Cut out", value: "Ø85mm" },
+          { label: "Màu sắc", value: "Trắng" },
+        ],
+      },
+    ],
+  },
+  {
+    id: "downlight-kzn0885b",
+    name: "KZN0885B",
+    slug: "downlight-kzn0885b",
+    variants: [
+      {
+        id: "kzn0885b",
+        name: "KZN0885B",
+        image: "/products/downlight-kzn/KZN0885B.jpg",
+        price: 680000,
+        specs: [
+          { label: "Loại đèn", value: "Chóa đèn âm trần chống chói Flip" },
+          { label: "Chất liệu", value: "Nhựa PC" },
+          { label: "Kích thước chóa", value: "Ø93*H33mm" },
+          { label: "Cut out", value: "Ø85mm" },
+          { label: "Màu sắc", value: "Trắng" },
+        ],
+      },
+    ],
+  },
+  {
+    id: "downlight-kzn0775a",
+    name: "KZN0775A",
+    slug: "downlight-kzn0775a",
+    variants: [
+      {
+        id: "kzn0775a",
+        name: "KZN0775A",
+        image: "/products/downlight-kzn/KZN0775A.jpg",
+        price: 680000,
+        specs: [
+          { label: "Loại đèn", value: "Chóa đèn âm trần chống chói vuông" },
+          { label: "Chất liệu", value: "Nhựa PC" },
+          { label: "Kích thước chóa", value: "85*85*H36mm" },
+          { label: "Cut out", value: "Ø75mm" },
+          { label: "Màu sắc", value: "Trắng" },
+        ],
+      },
+    ],
+  },
+  {
+    id: "downlight-n11-c-w",
+    name: "N11-C-W",
+    slug: "downlight-n11-c-w",
+    variants: [
+      {
+        id: "n11-c-w",
+        name: "N11-C-W",
+        image: "/products/downlight-kzn/N11-C-W.jpg",
+        price: 680000,
+        specs: [
+          { label: "Loại đèn", value: "Chóa đèn âm trần chống chói chỉnh hướng góc 15°" },
+          { label: "Chất liệu", value: "Nhựa PC" },
+          { label: "Kích thước chóa", value: "Ø88*H39mm" },
+          { label: "Cut out", value: "Ø75mm" },
+          { label: "Màu sắc", value: "White" },
+        ],
+      },
+    ],
+  },
+  {
+    id: "downlight-n11-c-s",
+    name: "N11-C-S",
+    slug: "downlight-n11-c-s",
+    variants: [
+      {
+        id: "n11-c-s",
+        name: "N11-C-S",
+        image: "/products/downlight-kzn/N11-C-S.JPG",
+        price: 830000,
+        specs: [
+          { label: "Loại đèn", value: "Chóa đèn âm trần chống chói chỉnh hướng góc 15°" },
+          { label: "Chất liệu", value: "Nhựa PC" },
+          { label: "Kích thước chóa", value: "Ø88*H39mm" },
+          { label: "Cut out", value: "Ø75mm" },
+          { label: "Màu sắc", value: "White + Plating silver" },
+        ],
+      },
+    ],
+  },
+  {
+    id: "downlight-n11-c-g",
+    name: "N11-C-G",
+    slug: "downlight-n11-c-g",
+    variants: [
+      {
+        id: "n11-c-g",
+        name: "N11-C-G",
+        image: "/products/downlight-kzn/N11-C-G.png",
+        price: 850000,
+        specs: [
+          { label: "Loại đèn", value: "Chóa đèn âm trần chống chói chỉnh hướng góc 15°" },
+          { label: "Chất liệu", value: "Nhựa PC" },
+          { label: "Kích thước chóa", value: "Ø88*H39mm" },
+          { label: "Cut out", value: "Ø75mm" },
+          { label: "Màu sắc", value: "White + Plating rose gold" },
+        ],
+      },
+    ],
+  },
+  {
+    id: "downlight-n3100",
+    name: "N3100",
+    slug: "downlight-n3100",
+    variants: [
+      {
+        id: "n3100",
+        name: "N3100",
+        image: "/products/downlight-kzn/N3100.png",
+        price: 850000,
+        specs: [
+          { label: "Loại đèn", value: "Chóa đèn âm trần chống chói chỉnh hướng" },
+          { label: "Chất liệu", value: "Nhựa PC" },
+          { label: "Kích thước chóa", value: "Ø110*H29mm" },
+          { label: "Cut out", value: "Ø75-100mm" },
+          { label: "Màu sắc", value: "White" },
         ],
       },
     ],
@@ -340,7 +533,6 @@ const verticalProducts: Product[] = [
         id: "b8-6w",
         name: "B8-6W",
         image: "/collections/Downlight/IDA0086.JPG",
-        price: 780000,
         specs: [
           { label: "Loại đèn", value: "Đèn rọi âm trần Spotlight" },
           { label: "Màu sắc", value: "Trắng" },
@@ -364,7 +556,6 @@ const verticalProducts: Product[] = [
         id: "pros60b",
         name: "PRO.S60 (B)",
         image: "/collections/Downlight/IDA0087.JPG",
-        price: 680000,
         specs: [
           { label: "Loại đèn", value: "Đèn âm trần chống ẩm chóa đen" },
           { label: "Kích thước bóng", value: "∅50*H55mm" },
@@ -375,56 +566,6 @@ const verticalProducts: Product[] = [
           { label: "Chip", value: "Osram - Đức" },
           { label: "Driver", value: "Dali lTech - Đức (Lắp ráp Trung Quốc)" },
           { label: "W/lm", value: "12w" },
-          { label: "Lỗ Khoét", value: "∅75" },
-        ],
-      },
-    ],
-  },
-  {
-    id: "downlight-7",
-    name: "PRO.S60 Combo",
-    slug: "downlight-pros60combo",
-    variants: [
-      {
-        id: "pros60combo",
-        name: "PRO.S60 Combo",
-        image: "/collections/Downlight/IDA0086.JPG",
-        price: 830000,
-        specs: [
-          { label: "Loại đèn", value: "Combo đèn âm trần chống chói không chỉnh hướng" },
-          { label: "Kích thước bóng", value: "∅50*H55mm" },
-          { label: "Kích thước chóa", value: "∅88*H39mm" },
-          { label: "Nhiệt độ màu", value: "4000K" },
-          { label: "Góc chiếu", value: "60°" },
-          { label: "CRI", value: "Ra>97" },
-          { label: "Chip", value: "Osram - Đức" },
-          { label: "Driver", value: "Dali lTech - Đức (Lắp ráp Trung Quốc)" },
-          { label: "W/lm", value: "12w" },
-          { label: "Lỗ Khoét", value: "∅75" },
-        ],
-      },
-    ],
-  },
-  {
-    id: "downlight-8",
-    name: "PRO.S60 (S)",
-    slug: "downlight-pros60s",
-    variants: [
-      {
-        id: "pros60s",
-        name: "PRO.S60 (S)",
-        image: "/collections/Downlight/IDA0075.JPG",
-        price: 795000,
-        specs: [
-          { label: "Loại đèn", value: "Combo đèn âm trần chống chói chỉnh hướng góc 15°" },
-          { label: "Kích thước bóng", value: "∅50*H55mm" },
-          { label: "Kích thước chóa", value: "∅88*H39mm" },
-          { label: "Nhiệt độ màu", value: "4000K" },
-          { label: "Góc chiếu", value: "60°" },
-          { label: "CRI", value: "Ra>97" },
-          { label: "Chip", value: "Osram - Đức" },
-          { label: "Driver", value: "Osram - Đức (Lắp ráp Trung Quốc)" },
-          { label: "W/lm", value: "12W" },
           { label: "Lỗ Khoét", value: "∅75" },
         ],
       },
@@ -677,7 +818,9 @@ const decorativeLightProducts: Product[] = [
         ],
       },
     ],
-  },
+  }]
+
+const decorativeLightProducts2: Product[] = [
   {
     id: "decorative-4",
     name: "ĐÈN CHÙM HOA BAY",
@@ -785,6 +928,9 @@ const decorativeLightProducts: Product[] = [
   },
 ]
 
+// Merge decorative light products
+const allDecorativeLightProducts = [...decorativeLightProducts, ...decorativeLightProducts2] 
+
 // Sản phẩm Đèn Trang Trí Vertical
 const decorativeVerticalProducts: Product[] = [
   {
@@ -871,9 +1017,69 @@ const decorativeVerticalProducts: Product[] = [
       },
     ],
   },
-]
+] 
 
 export default function ProductsPage() {
+  // Convert the LED modules data to the Product format
+  const ledModulesProducts: Product[] = ledModules.map((module: LEDModule) => ({
+    id: module.id,
+    name: module.name,
+    slug: module.slug,
+    variants: module.variants.map((variant: LEDModuleVariant) => ({
+      id: variant.id,
+      name: variant.name,
+      image: variant.image,
+      price: variant.price,
+      specs: variant.specs
+    }))
+  }));
+
+  // Convert the anti-glare trims data to the Product format
+  const antiGlareTrimsProducts: Product[] = antiGlareTrims.map((trim: AntiGlareTrim) => ({
+    id: trim.id,
+    name: trim.name,
+    slug: trim.slug,
+    variants: trim.variants.map((variant: AntiGlareTrimVariant) => ({
+      id: variant.id,
+      name: variant.name,
+      image: variant.image,
+      specs: variant.specs
+    }))
+  }));
+
+  // Group LED modules by type
+  const standardLEDModules = ledModulesProducts.filter(p => 
+    p.id === "kzbs08055j" || p.id === "kzb9104502"
+  );
+
+  const proSeriesLEDModules = ledModulesProducts.filter(p => 
+    p.id === "pros38" || p.id === "pros60" || p.id === "b3-12w" || p.id === "b9-12w"
+  );
+
+  const daliSeriesLEDModules = ledModulesProducts.filter(p => 
+    p.id === "pro-dali"
+  );
+
+  // Group anti-glare trims by type
+  const rimmedTrims = antiGlareTrimsProducts.filter(p => 
+    p.id.includes("kzn0875a") || 
+    p.id.includes("kzn0885") ||
+    p.id.includes("kzn075a") ||
+    p.id.includes("kzn0775a") ||
+    p.id.includes("kzn0781a") ||
+    p.id.includes("kzn0785a") ||
+    p.id.includes("n11-c") ||
+    p.id.includes("p04-w") ||
+    p.id.includes("p06") ||
+    p.id.includes("f201975")
+  );
+
+  const rimlessTrims = antiGlareTrimsProducts.filter(p => 
+    p.id.includes("kzn01875c") || 
+    p.id.includes("ymn-78") ||
+    p.id.includes("n3100") 
+  );
+  
   return (
     <div className="min-h-screen bg-black text-white">
       <Header />
@@ -888,10 +1094,53 @@ export default function ProductsPage() {
           />
 
           <div className="container mx-auto px-4 space-y-20">
-            <VerticalProductListing products={verticalProducts} showcaseImage="/collections/TRC_9988.jpg" />
-            <CollectionsListing products={downlightProducts} title="Đèn Âm Trần Cao Cấp" />
+            {/* Featured Downlight Products in Vertical Layout */}
+            <div>
+              <h2 className="text-2xl font-bold mb-6 text-white">Đèn Âm Trần Nổi Bật</h2>
+              <VerticalProductListing products={verticalProducts} showcaseImage="/collections/TRC_9988.jpg" />
+            </div>
+            
+            {/* Anti-glare Trims Listing */}
+            
+              <div className="space-y-16">
+                {/* Rimmed Anti-glare Trims */}
+                <CollectionsListing 
+                  products={rimmedTrims} 
+                  title="Chóa Đèn Có Viền" 
+                />
+                
+                {/* Rimless Anti-glare Trims */}
+                <CollectionsListing 
+                  products={rimlessTrims} 
+                  title="Chóa Đèn Không Viền" 
+                />
+              </div>
+            
           </div>
         </section>
+
+        {/* Chip LED Section */}
+        
+          <div className="container mx-auto px-4 space-y-20">
+            {/* All Chip LED Products */}
+            <CollectionsListing 
+              products={[
+                ledModulesProducts.find(p => p.id === "kzbs08055j") || {id: "", name: "", slug: "", variants: []},
+                ledModulesProducts.find(p => p.id === "kzb9104502") || {id: "", name: "", slug: "", variants: []},
+                ledModulesProducts.find(p => p.id === "pros38-c") || {id: "", name: "", slug: "", variants: []},
+                ledModulesProducts.find(p => p.id === "pros38-m") || {id: "", name: "", slug: "", variants: []},
+                ledModulesProducts.find(p => p.id === "pros60") || {id: "", name: "", slug: "", variants: []},
+                ledModulesProducts.find(p => p.id === "b3-12w") || {id: "", name: "", slug: "", variants: []},
+                ledModulesProducts.find(p => p.id === "b9-12w-3000k") || {id: "", name: "", slug: "", variants: []},
+                ledModulesProducts.find(p => p.id === "b9-12w-4000k") || {id: "", name: "", slug: "", variants: []},
+                ledModulesProducts.find(p => p.id === "pro-dls38") || {id: "", name: "", slug: "", variants: []},
+                ledModulesProducts.find(p => p.id === "pro-dls60") || {id: "", name: "", slug: "", variants: []},
+                ledModulesProducts.find(p => p.id === "b9-75-15w") || {id: "", name: "", slug: "", variants: []},
+                ledModulesProducts.find(p => p.id === "e35") || {id: "", name: "", slug: "", variants: []}
+              ]}
+              title="Chip LED cao cấp" 
+            />
+          </div>
 
         {/* Outdoor Section */}
         <section id="outdoor">
@@ -917,7 +1166,7 @@ export default function ProductsPage() {
 
           <div className="container mx-auto px-4 space-y-20">
             <VerticalProductListing products={decorativeVerticalProducts} showcaseImage="/collections/5.jpg" />
-            <CollectionsListing products={decorativeLightProducts} title="Đèn Trang Trí Pha Lê" />
+            <CollectionsListing products={allDecorativeLightProducts} title="Đèn Trang Trí Pha Lê" />
           </div>
         </section>
       </main>
@@ -925,4 +1174,4 @@ export default function ProductsPage() {
       <Footer />
     </div>
   )
-}
+} 

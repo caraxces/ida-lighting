@@ -4,6 +4,8 @@ import { Inter } from "next/font/google"
 import "./globals.css"
 import Script from "next/script"
 import FloatingContactButton from "@/components/floating-contact-button"
+import { MusicPopup } from "@/components/music-popup"
+import { SoundProvider } from "@/hooks/use-sound"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -73,7 +75,7 @@ export default function RootLayout({
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
-        <meta name="theme-color" content="#ffffff" />
+        <meta name="theme-color" content="#000000" />
         <link rel="canonical" href="https://idalighting.vn" />
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
         
@@ -106,13 +108,25 @@ export default function RootLayout({
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
         <link rel="manifest" href="/site.webmanifest" />
       </head>
-      <body className={inter.className} suppressHydrationWarning>
-        {children}
+      <body className={`${inter.className} entry-active`} suppressHydrationWarning>
+        <SoundProvider>
+          {/* Entry screen that requires user interaction */}
+          <MusicPopup />
+          
+          {/* Main content */}
+          {children}
+        </SoundProvider>
 
         {/* GSAP Scripts */}
         <Script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" strategy="beforeInteractive" />
         <Script
           src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"
+          strategy="beforeInteractive"
+        />
+        
+        {/* Howler.js for audio */}
+        <Script 
+          src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"
           strategy="beforeInteractive"
         />
 
