@@ -46,7 +46,7 @@ const downlightProducts: Product[] = [
       {
         id: "pros38c",
         name: "PRO.S38 (C)",
-        image: "/collections/Downlight/IDA0075.JPG",
+        image: "/collections/Downlight/IDA0075.png",
         price: 1450000,
         specs: [
           { label: "Loại đèn", value: "Đèn âm trần chống chói" },
@@ -70,7 +70,7 @@ const downlightProducts: Product[] = [
       {
         id: "pros38m",
         name: "PRO.S38 (M)",
-        image: "/collections/Downlight/IDA0076.JPG",
+        image: "/collections/Downlight/IDA0076.png",
         price: 1450000,
         specs: [
           { label: "Loại đèn", value: "Đèn âm trần chống chói" },
@@ -94,7 +94,7 @@ const downlightProducts: Product[] = [
       {
         id: "pros60",
         name: "PRO.S60",
-        image: "/collections/Downlight/PRO.S60.JPG",
+        image: "/collections/Downlight/PRO.S60.png",
         price: 1450000,
         specs: [
           { label: "Loại đèn", value: "Đèn âm trần chống chói" },
@@ -119,7 +119,7 @@ const downlightProducts: Product[] = [
       {
         id: "b3-12w",
         name: "B3-12W",
-        image: "/collections/Downlight/IDA0087.JPG",
+        image: "/products/Downlight/IDA0087.png",
         price: 1550000,
         specs: [
           { label: "Loại đèn", value: "Đèn âm trần chống chói" },
@@ -165,7 +165,7 @@ const downlightProducts: Product[] = [
       {
         id: "kzn0875a-black",
         name: "KZN0875A-B - Đen",
-        image: "/products/downlight-kzn/KZN0875A (black).JPG",
+        image: "/products/Downlight/KZN0875A (black).png",
         price: 680000,
         specs: [
           { label: "Loại đèn", value: "Chóa đèn âm trần chống chói" },
@@ -185,7 +185,7 @@ const downlightProducts: Product[] = [
       {
         id: "kzn0885a",
         name: "KZN0885A",
-        image: "/products/downlight-kzn/KZN0885A.jpg",
+        image: "/products/Downlight/KZN0885A.png",
         price: 680000,
         specs: [
           { label: "Loại đèn", value: "Chóa đèn âm trần chống chói" },
@@ -205,8 +205,7 @@ const downlightProducts: Product[] = [
       {
         id: "kzn0885b",
         name: "KZN0885B",
-        image: "/products/downlight-kzn/KZN0885B.jpg",
-        price: 680000,
+        image: "/products/Downlight/KZN0885B.png",
         specs: [
           { label: "Loại đèn", value: "Chóa đèn âm trần chống chói Flip" },
           { label: "Chất liệu", value: "Nhựa PC" },
@@ -245,7 +244,7 @@ const downlightProducts: Product[] = [
       {
         id: "n11-c-w",
         name: "N11-C-W",
-        image: "/products/downlight-kzn/N11-C-W.jpg",
+        image: "/products/Downlight/N11-C-W.png",
         price: 680000,
         specs: [
           { label: "Loại đèn", value: "Chóa đèn âm trần chống chói chỉnh hướng góc 15°" },
@@ -265,7 +264,7 @@ const downlightProducts: Product[] = [
       {
         id: "n11-c-s",
         name: "N11-C-S",
-        image: "/products/downlight-kzn/N11-C-S.JPG",
+        image: "/products/Downlight/N11-C-S.png",
         price: 830000,
         specs: [
           { label: "Loại đèn", value: "Chóa đèn âm trần chống chói chỉnh hướng góc 15°" },
@@ -305,7 +304,7 @@ const downlightProducts: Product[] = [
       {
         id: "n3100",
         name: "N3100",
-        image: "/products/downlight-kzn/N3100.png",
+        image: "/products/Downlight/N3100.png",
         price: 850000,
         specs: [
           { label: "Loại đèn", value: "Chóa đèn âm trần chống chói chỉnh hướng" },
@@ -532,7 +531,7 @@ const verticalProducts: Product[] = [
       {
         id: "b8-6w",
         name: "B8-6W",
-        image: "/collections/Downlight/IDA0086.JPG",
+        image: "/products/Downlight/IDA0086.png",
         specs: [
           { label: "Loại đèn", value: "Đèn rọi âm trần Spotlight" },
           { label: "Màu sắc", value: "Trắng" },
@@ -555,7 +554,7 @@ const verticalProducts: Product[] = [
       {
         id: "pros60b",
         name: "PRO.S60 (B)",
-        image: "/collections/Downlight/IDA0087.JPG",
+        image: "/products/Downlight/IDA0087.png",
         specs: [
           { label: "Loại đèn", value: "Đèn âm trần chống ẩm chóa đen" },
           { label: "Kích thước bóng", value: "∅50*H55mm" },

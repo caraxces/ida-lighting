@@ -63,7 +63,7 @@ const projects: Record<string, Project> = {
         name: "PRO.S60 (W)",
         description: "Đèn âm trần chống chói với góc chiếu rộng",
         specs: "∅50*H75mm, 15W, 60°, 97Ra",
-        image: "/collections/Downlight/IDA0075.JPG"
+        image: "/products/Downlight/IDA0075.png"
       },
       {
         id: "track-light-ida",
@@ -636,7 +636,7 @@ const projects: Record<string, Project> = {
         name: "B8-6W",
         description: "Đèn rọi âm trần Spotlight",
         specs: "Trắng, 15°, >97Ra, 3000K",
-        image: "/collections/Downlight/IDA0086.JPG"
+        image: "/products/Downlight/IDA0086.png"
       },
       {
         id: "outdoor-4",

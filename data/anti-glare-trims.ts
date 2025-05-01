@@ -48,13 +48,13 @@ export const antiGlareTrims: AntiGlareTrim[] = [
       {
         id: "kzn0875a-black",
         name: "KZN0875A-B - Đen",
-        image: "/products/downlight-kzn/KZN0875A (black).JPG",
+        image: "/products/Downlight/KZN0875A (black).png",
         specs: [
           { label: "Chất liệu", value: "Nhựa PC" },
           { label: "Kích thước chóa", value: "Ø85×36mm" },
           { label: "Cut out", value: "Ø75mm" },
           { label: "Màu sắc", value: "Đen" },
-          { label: "Chip LED", value: "Tương thích Osram/CREE/Samsung" }
+          { label: "Chip LED", value: "Tương thích Osram/CREE" }
         ]
       }
     ]
@@ -67,7 +67,7 @@ export const antiGlareTrims: AntiGlareTrim[] = [
       {
         id: "kzn0885a",
         name: "KZN0885A - Trắng",
-        image: "/products/downlight-kzn/KZN0885A.jpg",
+        image: "/products/Downlight/KZN0885A.png",
         specs: [
           { label: "Chất liệu", value: "Nhựa PC" },
           { label: "Kích thước chóa", value: "Ø95×51mm" },
@@ -86,7 +86,7 @@ export const antiGlareTrims: AntiGlareTrim[] = [
       {
         id: "kzn0885b",
         name: "KZN0885B",
-        image: "/products/downlight-kzn/KZN0885B.jpg",
+        image: "/products/Downlight/KZN0885B.png",
         specs: [
           { label: "Chất liệu", value: "Nhựa PC" },
           { label: "Kích thước chóa", value: "Ø93×H33mm" },
@@ -124,13 +124,13 @@ export const antiGlareTrims: AntiGlareTrim[] = [
       {
         id: "n11-c-w",
         name: "N11-C-W",
-        image: "/products/downlight-kzn/N11-C-W.jpg",
+        image: "/products/Downlight/N11-C-W.png",
         specs: [
           { label: "Chất liệu", value: "Nhựa PC" },
           { label: "Kích thước chóa", value: "Ø88×H39mm" },
           { label: "Cut out", value: "Ø75mm" },
           { label: "Màu sắc", value: "White" },
-          { label: "Chip LED", value: "Tương thích Osram/CREE/Samsung" }
+          { label: "Chip LED", value: "Tương thích Osram/CREE" }
         ]
       }
     ]
@@ -143,13 +143,13 @@ export const antiGlareTrims: AntiGlareTrim[] = [
       {
         id: "n11-c-s",
         name: "N11-C-S",
-        image: "/products/downlight-kzn/N11-C-S.JPG",
+        image: "/products/Downlight/N11-C-S.png",
         specs: [
           { label: "Chất liệu", value: "Nhựa PC" },
           { label: "Kích thước chóa", value: "Ø88×H39mm" },
           { label: "Cut out", value: "Ø75mm" },
           { label: "Màu sắc", value: "White + Plating silver" },
-          { label: "Chip LED", value: "Tương thích Osram/CREE/Samsung" }
+          { label: "Chip LED", value: "Tương thích Osram/CREE" }
         ]
       }
     ]
@@ -181,7 +181,7 @@ export const antiGlareTrims: AntiGlareTrim[] = [
       {
         id: "n3100",
         name: "N3100",
-        image: "/products/downlight-kzn/N3100.png",
+        image: "/products/Downlight/N3100.png",
         specs: [
           { label: "Chất liệu", value: "Nhựa PC" },
           { label: "Kích thước chóa", value: "Ø110×H29mm" },
@@ -219,7 +219,7 @@ export const antiGlareTrims: AntiGlareTrim[] = [
       {
         id: "p06-w",
         name: "P06-W",
-        image: "/products/downlight-kzn/P06-W.png",
+        image: "/products/Downlight/P06-W.png",
         specs: [
           { label: "Chất liệu", value: "Nhựa PC" },
           { label: "Kích thước chóa", value: "Ø88×H39mm" },

@@ -135,12 +135,12 @@ const getAllProducts = (): Product[] => {
       id: 8,
       title: "KZN0875A",
       slug: "downlight-kzn0875a",
-      image: "/products/downlight-kzn/KZN0875A.jpg",
+      image: "/products/Downlight/KZN0875A.png",
       price: 680000,
       description: "Chóa đèn âm trần chống chói. <br />Chất liệu: Nhựa PC. <br />Kích thước chóa: Ø85*36mm. <br />Cut out: Ø75mm. <br />Màu sắc: Trắng.",
-      mainImage: "/products/downlight-kzn/KZN0875A.jpg",
+      mainImage: "/products/Downlight/KZN0875A.png",
       variants: [
-        { name: "KZN0875A - Trắng", image: "/products/downlight-kzn/KZN0875A.jpg" },
+        { name: "KZN0875A - Trắng", image: "/products/Downlight/KZN0875A.png" },
       ],
       category: "downlight"
     },
@@ -148,12 +148,12 @@ const getAllProducts = (): Product[] => {
       id: 9,
       title: "KZN0875A Black",
       slug: "downlight-kzn0875",
-      image: "/products/Downlight/KZN0875A (black).JPG",
+      image: "/products/Downlight/KZN0875A (black).png",
       price: 680000,
-      description: "Chóa đèn âm trần chống chói. <br />Chất liệu: Nhựa PC. <br />Kích thước chóa: Ø85*36mm. <br />Cut out: Ø75mm. <br />Màu sắc: Đen (son nền khách màu).",
-      mainImage: "/products/Downlight/KZN0875A (black).JPG",
+      description: "Chóa đèn âm trần chống chói. <br />Chất liệu: Nhựa PC. <br />Kích thước chóa: Ø85*36mm. <br />Cut out: Ø75mm. <br />Màu sắc: Đen (màu theo khách chọn).",
+      mainImage: "/products/Downlight/KZN0875A (black).png",
       variants: [
-        { name: "KZN0875A - Đen", image: "/products/Downlight/KZN0875A (black).JPG" },
+        { name: "KZN0875A - Đen", image: "/products/Downlight/KZN0875A (black).png" },
       ],
       category: "downlight"
     },
@@ -161,12 +161,12 @@ const getAllProducts = (): Product[] => {
       id: 10,
       title: "KZN0885A",
       slug: "downlight-kzn0885a",
-      image: "/products/downlight-kzn/KZN0885A.jpg",
+      image: "/products/Downlight/KZN0885A.png",
       price: 680000,
       description: "Chóa đèn âm trần chống chói. <br />Chất liệu: Nhựa PC. <br />Kích thước chóa: Ø95*33mm. <br />Cut out: Ø85mm. <br />Màu sắc: Trắng.",
-      mainImage: "/products/downlight-kzn/KZN0885A.jpg",
+      mainImage: "/products/Downlight/KZN0885A.png",
       variants: [
-        { name: "KZN0885A", image: "/products/downlight-kzn/KZN0885A.jpg" },
+        { name: "KZN0885A", image: "/products/Downlight/KZN0885A.png" },
       ],
       category: "downlight"
     },
@@ -174,12 +174,12 @@ const getAllProducts = (): Product[] => {
       id: 11,
       title: "KZN0885B",
       slug: "downlight-kzn0885b",
-      image: "/products/downlight-kzn/KZN0885B.jpg",
+      image: "/products/Downlight/KZN0885B.png",
       price: 680000,
       description: "Chóa đèn âm trần chống chói Flip. <br />Chất liệu: Nhựa PC. <br />Kích thước chóa: Ø 93*H33mm. <br />Cut out: Ø85mm. <br />Màu sắc: Trắng.",
-      mainImage: "/products/downlight-kzn/KZN0885B.jpg",
+      mainImage: "/products/Downlight/KZN0885B.png",
       variants: [
-        { name: "KZN0885B", image: "/products/downlight-kzn/KZN0885B.jpg" },
+        { name: "KZN0885B", image: "/products/Downlight/KZN0885B.png" },
       ],
       category: "downlight"
     },
@@ -200,12 +200,12 @@ const getAllProducts = (): Product[] => {
       id: 13,
       title: "N11-C-W",
       slug: "downlight-n11-c-w",
-      image: "/products/downlight-kzn/N11-C-W.jpg",
+      image: "/products/Downlight/N11-C-W.png",
       price: 680000,
       description: "Chóa đèn âm trần chống chói chỉnh hướng góc 15°. <br />Chất liệu: Nhựa PC. <br />Kích thước chóa: Ø88*H39mm. <br />Cut out: Ø75mm. <br />Màu sắc: White.",
-      mainImage: "/products/downlight-kzn/N11-C-W.jpg",
+      mainImage: "/products/Downlight/N11-C-W.png",
       variants: [
-        { name: "N11-C-W", image: "/products/downlight-kzn/N11-C-W.jpg" },
+        { name: "N11-C-W", image: "/products/Downlight/N11-C-W.png" },
       ],
       category: "downlight"
     },
@@ -213,12 +213,12 @@ const getAllProducts = (): Product[] => {
       id: 14,
       title: "N11-C-S",
       slug: "downlight-n11-c-s",
-      image: "/products/downlight-kzn/N11-C-S.JPG",
+      image: "/products/Downlight/N11-C-S.png",
       price: 830000,
       description: "Chóa đèn âm trần chống chói chỉnh hướng góc 15°. <br />Chất liệu: Nhựa PC. <br />Kích thước chóa: Ø88*H39mm. <br />Cut out: Ø75mm. <br />Màu sắc: White + Plating silver.",
-      mainImage: "/products/downlight-kzn/N11-C-S.JPG",
+      mainImage: "/products/Downlight/N11-C-S.png",
       variants: [
-        { name: "N11-C-S", image: "/products/downlight-kzn/N11-C-S.JPG" },
+        { name: "N11-C-S", image: "/products/Downlight/N11-C-S.png" },
       ],
       category: "downlight"
     },
@@ -239,12 +239,12 @@ const getAllProducts = (): Product[] => {
       id: 16,
       title: "N3100",
       slug: "downlight-n3100",
-      image: "/products/downlight-kzn/N3100.png",
+      image: "/products/Downlight/N3100.png",
       price: 850000,
       description: "Chóa đèn âm trần chống chói chỉnh hướng. <br />Chất liệu: Nhựa PC. <br />Kích thước chóa: Ø110*H29mm. <br />Cut out: Ø75-100mm. <br />Màu sắc: White.",
-      mainImage: "/products/downlight-kzn/N3100.png",
+      mainImage: "/products/Downlight/N3100.png",
       variants: [
-        { name: "N3100", image: "/products/downlight-kzn/N3100.png" },
+        { name: "N3100", image: "/products/Downlight/N3100.png" },
       ],
       category: "downlight"
     },
@@ -331,12 +331,12 @@ const getAllProducts = (): Product[] => {
       id: 23,
       title: "KZBS08055J",
       slug: "downlight-kzbs08055j",
-      image: "/products/downlight-kzn/KZBS080550.jpg",
+      image: "/products/Downlight/KZBS080550.png",
       price: 1350000,
       description: "Đèn âm trần chống chói. Kích thước bóng: Ø50*H22mm. Nhiệt độ màu: 4000K. Góc chiếu: 45°. CRI: Ra>90.",
-      mainImage: "/products/downlight-kzn/KZBS080550.jpg",
+      mainImage: "/products/Downlight/KZBS080550.png",
       variants: [
-        { name: "KZBS08055J B8-6W", image: "/products/downlight-kzn/KZBS080550.jpg" },
+        { name: "KZBS08055J B8-6W", image: "/products/Downlight/KZBS080550.png" },
       ],
       category: "downlight"
     },
@@ -344,12 +344,13 @@ const getAllProducts = (): Product[] => {
       id: 24,
       title: "KZB9104502",
       slug: "downlight-kzb9104502",
-      image: "/collections/Downlight/IDA0069.JPG",
+      image: "/products/Downlight/KZB010450.png",
       price: 1350000,
       description: "Đèn âm trần chống chói. Kích thước bóng: Ø50*H80mm. Nhiệt độ màu: 4000K. Góc chiếu: 38°. CRI: Ra>92.",
-      mainImage: "/collections/Downlight/IDA0069.JPG",
+      mainImage: "/products/Downlight/KZB010450.png",
       variants: [
-        { name: "KZB9104502 B1-9w", image: "/collections/Downlight/IDA0069.JPG" },
+        { name: "KZB9104502 B1-9w", image: "/products/Downlight/IDA0069.png" },
+        { name: "Chip LED B1-9W", image: "/products/Downlight/KZB010450.png" },
       ],
       category: "downlight"
     },
@@ -357,12 +358,12 @@ const getAllProducts = (): Product[] => {
       id: 25,
       title: "PRO.S38 (C)",
       slug: "downlight-pros38c",
-      image: "/collections/Downlight/IDA0075.JPG",
+      image: "/collections/Downlight/IDA0075.png",
       price: 1450000,
       description: "Đèn âm trần chống chói. Kích thước bóng: Ø50*H55mm. Nhiệt độ màu: 4000K. Góc chiếu: 38°. CRI: Ra>97.",
-      mainImage: "/collections/Downlight/IDA0075.JPG",
+      mainImage: "/collections/Downlight/IDA0075.png",
       variants: [
-        { name: "PRO.S38 (C)", image: "/collections/Downlight/IDA0075.JPG" },
+        { name: "PRO.S38 (C)", image: "/collections/Downlight/IDA0075.png" },
       ],
       category: "downlight"
     },
@@ -383,12 +384,12 @@ const getAllProducts = (): Product[] => {
       id: 27,
       title: "PRO.S60",
       slug: "downlight-pros60",
-      image: "/products/downlight-kzn/PRO.S60.jpg",
+      image: "/products/Downlight/PRO.S60.png",
       price: 1450000,
       description: "Đèn âm trần chống chói. <br />Kích thước bóng: Ø50*H55mm. <br />Nhiệt độ màu: 3000K. <br />Góc chiếu: 60°. <br />CRI: Ra>97. <br />Chip: Osram - Đức. <br />",
-      mainImage: "/products/downlight-kzn/PRO.S60.jpg",
+      mainImage: "/products/Downlight/PRO.S60.png",
       variants: [
-        { name: "PRO.S60", image: "/products/downlight-kzn/PRO.S60.jpg" },
+        { name: "PRO.S60", image: "/products/Downlight/PRO.S60.png" },
       ],
       category: "downlight"
     },
@@ -396,12 +397,13 @@ const getAllProducts = (): Product[] => {
       id: 28,
       title: "B3-12W",
       slug: "led-module-b3-12w",
-      image: "/products/downlight-kzn/B3-12W.jpg",
+      image: "/products/Downlight/IDA0087.png",
       price: 1550000,
       description: "Đèn âm trần chống chói. <br />Kích thước bóng: Ø50*H55mm. <br />Nhiệt độ màu: 3000K. <br />Góc chiếu: 60°. <br />CRI: Ra>97.",
-      mainImage: "/products/downlight-kzn/B3-12W.jpg",
+      mainImage: "/products/Downlight/B3-12W.png",
       variants: [
-        { name: "B3-12W", image: "/collections/Downlight/IDA0087.JPG" },
+        { name: "B3-12W", image: "/products/Downlight/IDA0087.png" },
+        { name: "Chip LED B3-12W", image: "/products/Downlight/B3-12W.png" },
       ],
       category: "downlight"
     },
@@ -409,12 +411,12 @@ const getAllProducts = (): Product[] => {
       id: 29,
       title: "B8-6W",
       slug: "downlight-b8-6w",
-      image: "/collections/Downlight/IDA0086.JPG",
+      image: "/products/Downlight/IDA0086.png",
       price: 780000,
       description: "Đèn rọi âm trần Spotlight. <br />Màu sắc: Trắng. <br />Góc chiếu: 15°. <br />CRI: > 97Ra. <br />Nhiệt độ màu: 3000K. <br />Chip: Full Osram - Đức. <br />W/lm: 5W/485lm. <br />Lỗ Khoét: ∅35.",
-      mainImage: "/collections/Downlight/IDA0086.JPG",
+      mainImage: "/products/Downlight/IDA0086.png",
       variants: [
-        { name: "B8-6W", image: "/collections/Downlight/IDA0086.JPG" },
+        { name: "B8-6W", image: "/products/Downlight/IDA0086.png" },
       ],
       category: "downlight"
     },
@@ -422,12 +424,12 @@ const getAllProducts = (): Product[] => {
       id: 30,
       title: "PRO.S60 (B)",
       slug: "downlight-pros60b",
-      image: "/collections/Downlight/IDA0087.JPG",
+      image: "/products/Downlight/IDA0087.png",
       price: 680000,
       description: "Đèn âm trần chống ẩm chóa đen. <br />Kích thước bóng: ∅50*H55mm. <br />Kích thước chóa: ∅110*H27mm. <br />Nhiệt độ màu: 4000K. <br />Góc chiếu: 60°. <br />CRI: Ra>97. <br />Chip: Osram - Đức. <br />W/lm: 12w. <br />Lỗ Khoét: ∅75.",
-      mainImage: "/collections/Downlight/IDA0087.JPG",
+      mainImage: "/products/Downlight/IDA0087.png",
       variants: [
-        { name: "PRO.S60 (B)", image: "/collections/Downlight/IDA0087.JPG" },
+        { name: "PRO.S60 (B)", image: "/products/Downlight/IDA0087.png" },
       ],
       category: "downlight"
     },
@@ -435,12 +437,12 @@ const getAllProducts = (): Product[] => {
       id: 31,
       title: "PRO.DLS38",
       slug: "downlight-prodls38",
-      image: "/collections/Downlight/IDA0075.JPG",
+      image: "/products/Downlight/IDA0075.png",
       price: 1850000,
       description: "Đèn âm trần chống chói. Kích thước bóng: Ø50*H75mm. COB 15W   AC180-240V. Nhiệt độ màu: 2700-6500K. Góc chiếu: 38°. CRI 97Ra. Chip Dali OSRAM 97Ra, driver Dali iTECH.",
-      mainImage: "/collections/Downlight/IDA0075.JPG",
+      mainImage: "/products/Downlight/IDA0075.png",
       variants: [
-        { name: "PRO.DLS38", image: "/collections/Downlight/IDA0075.JPG" },
+        { name: "PRO.DLS38", image: "/products/Downlight/IDA0075.png" },
       ],
       category: "downlight"
     },
@@ -448,12 +450,12 @@ const getAllProducts = (): Product[] => {
       id: 32,
       title: "PRO.DLS60",
       slug: "downlight-prodls60",
-      image: "/collections/Downlight/IDA0075.JPG",
+      image: "/products/Downlight/IDA0075.png",
       price: 1850000,
       description: "Đèn âm trần chống chói. Kích thước bóng: Ø50*H75mm. COB 15W   AC180-240V. Nhiệt độ màu: 2700-6500K. Góc chiếu: 60°. CRI 97Ra. Chip Dali OSRAM 97Ra, driver Dali iTECH.",
-      mainImage: "/collections/Downlight/IDA0075.JPG",
+      mainImage: "/products/Downlight/IDA0075.png",
       variants: [
-        { name: "PRO.DLS60", image: "/collections/Downlight/IDA0075.JPG" },
+        { name: "PRO.DLS60", image: "/products/Downlight/IDA0075.png" },
       ],
       category: "downlight"
     },
@@ -461,12 +463,12 @@ const getAllProducts = (): Product[] => {
       id: 33,
       title: "B9-75-15w",
       slug: "downlight-b9-75-15w",
-      image: "/collections/Downlight/IDA0075.JPG",
+      image: "/products/Downlight/B9-75-15w.png",
       price: 1850000,
       description: "Đèn âm trần chống chói. Kích thước bóng: Ø50*H75mm. COB 15W   AC180-240V. Nhiệt độ màu: 2700-6500K. Góc chiếu: 60°. CRI 97Ra.",
-      mainImage: "/collections/Downlight/IDA0075.JPG",
+      mainImage: "/products/Downlight/B9-75-15w.png",
       variants: [
-        { name: "B9-75-15w", image: "/collections/Downlight/IDA0075.JPG" },
+        { name: "B9-75-15w", image: "/products/Downlight/B9-75-15w.png" },
       ],
       category: "downlight"
     },
@@ -487,12 +489,13 @@ const getAllProducts = (): Product[] => {
       id: 35,
       title: "PRO.S60 Combo",
       slug: "led-module-pros60",
-      image: "/products/downlight-kzn/PRO.S60.jpg",
+      image: "/products/Downlight/PRO.S60.png",
       price: 1450000,
       description: "Combo đèn âm trần chống chói không chỉnh hướng. Kích thước chóa: Ø88*H39mm. Kích thước bóng: Ø50*H55mm. Nhiệt độ màu: 4000K. Góc chiếu: 60°. CRI: Ra>97.",
-      mainImage: "/products/downlight-kzn/PRO.S60.jpg",
+      mainImage: "/products/Downlight/PRO.S60.png",
       variants: [
-        { name: "PRO.S60 Combo", image: "/collections/Downlight/IDA0075.JPG" },
+        { name: "PRO.S60 Combo", image: "/products/Downlight/IDA0075.png" },
+        { name: "Chip LED S60", image: "/products/Downlight/PRO.S60.png" },
       ],
       category: "downlight"
     },
@@ -700,6 +703,267 @@ const getAllProducts = (): Product[] => {
         { name: "Góc nhìn 3", image: "/collections/out-door/CP202456/3.jpg" }
       ],
       category: "outdoor"
+    },
+    // Add anti-glare trim products from data file
+    {
+      id: 28,
+      title: "KZN0875A",
+      slug: "downlight-kzn0875a-white",
+      image: "/products/Downlight/KZN0875A.png",
+      price: 680000,
+      description: "Đèn chóa âm trần chống chói với chất liệu nhựa PC, kích thước chóa Ø85×36mm, cut out Ø75mm. Màu trắng tinh tế phù hợp với nhiều loại trần nhà, tương thích với chip LED Osram/CREE/Samsung.",
+      mainImage: "/products/Downlight/KZN0875A.png",
+      variants: [
+        { name: "KZN0875A - Trắng", image: "/products/Downlight/KZN0875A.png" }
+      ],
+      category: "downlight"
+    },
+    {
+      id: 29,
+      title: "KZN0875A-B",
+      slug: "downlight-kzn0875a-black",
+      image: "/products/Downlight/KZN0875A (black).png",
+      price: 680000,
+      description: "Đèn chóa âm trần chống chói màu đen với chất liệu nhựa PC, kích thước chóa Ø85×36mm, cut out Ø75mm. Thiết kế màu đen sang trọng tạo điểm nhấn cho không gian nội thất, tương thích với chip LED Osram/CREE/Samsung.",
+      mainImage: "/products/Downlight/KZN0875A (black).png",
+      variants: [
+        { name: "KZN0875A-B - Đen", image: "/products/Downlight/KZN0875A (black).png" }
+      ],
+      category: "downlight"
+    },
+    {
+      id: 30,
+      title: "KZN0885A",
+      slug: "downlight-kzn0885a",
+      image: "/products/Downlight/KZN0885A.png",
+      price: 680000,
+      description: "Đèn chóa âm trần chống chói với chất liệu nhựa PC, kích thước chóa Ø95×51mm, cut out Ø85mm. Màu trắng tinh tế phù hợp với nhiều không gian nội thất, tương thích với chip LED Osram/CREE/Samsung.",
+      mainImage: "/products/Downlight/KZN0885A.png",
+      variants: [
+        { name: "KZN0885A - Trắng", image: "/products/Downlight/KZN0885A.png" }
+      ],
+      category: "downlight"
+    },
+    {
+      id: 31,
+      title: "KZN0885B",
+      slug: "downlight-kzn0885b",
+      image: "/products/Downlight/KZN0885B.png",
+      price: 680000,
+      description: "Đèn chóa âm trần chống chói với chất liệu nhựa PC, kích thước chóa Ø93×H33mm, cut out Ø85mm. Màu trắng thanh lịch, thiết kế tinh tế phù hợp cho nhiều không gian, tương thích với chip LED Osram/CREE/Samsung.",
+      mainImage: "/products/Downlight/KZN0885B.png",
+      variants: [
+        { name: "KZN0885B", image: "/products/Downlight/KZN0885B.png" }
+      ],
+      category: "downlight"
+    },
+    {
+      id: 32,
+      title: "KZN0775A",
+      slug: "downlight-kzn0775a",
+      image: "/products/downlight-kzn/KZN0775A.jpg",
+      price: 680000,
+      description: "Đèn chóa âm trần chống chói hình vuông với chất liệu nhựa PC, kích thước chóa 85×85×H36mm, cut out Ø75mm. Thiết kế vuông màu trắng hiện đại, tương thích với chip LED Osram/CREE/Samsung.",
+      mainImage: "/products/downlight-kzn/KZN0775A.jpg",
+      variants: [
+        { name: "KZN0775A - Trắng", image: "/products/downlight-kzn/KZN0775A.jpg" }
+      ],
+      category: "downlight"
+    },
+    {
+      id: 33,
+      title: "N11-C-W",
+      slug: "downlight-n11-c-w",
+      image: "/products/Downlight/N11-C-W.png",
+      price: 750000,
+      description: "Đèn chóa âm trần chống chói với chất liệu nhựa PC, kích thước chóa Ø88×H39mm, cut out Ø75mm. Màu trắng tinh tế, tương thích với chip LED Osram/CREE/Samsung mang lại ánh sáng chất lượng cao.",
+      mainImage: "/products/Downlight/N11-C-W.png",
+      variants: [
+        { name: "N11-C-W", image: "/products/Downlight/N11-C-W.png" }
+      ],
+      category: "downlight"
+    },
+    {
+      id: 34,
+      title: "N11-C-S",
+      slug: "downlight-n11-c-s",
+      image: "/products/Downlight/N11-C-S.png",
+      price: 800000,
+      description: "Đèn chóa âm trần chống chói với chất liệu nhựa PC, kích thước chóa Ø88×H39mm, cut out Ø75mm. Màu trắng kết hợp với mạ bạc tinh tế, tương thích với chip LED Osram/CREE.",
+      mainImage: "/products/Downlight/N11-C-S.png",
+      variants: [
+        { name: "N11-C-S", image: "/products/Downlight/N11-C-S.png" }
+      ],
+      category: "downlight"
+    },
+    {
+      id: 35,
+      title: "N11-C-G",
+      slug: "downlight-n11-c-g",
+      image: "/products/downlight-kzn/N11-C-G.png",
+      price: 850000,
+      description: "Đèn chóa âm trần chống chói với chất liệu nhựa PC, kích thước chóa Ø88×H39mm, cut out Ø75mm. Màu trắng kết hợp với mạ vàng hồng sang trọng, tương thích với chip LED Osram/CREE/Samsung.",
+      mainImage: "/products/downlight-kzn/N11-C-G.png",
+      variants: [
+        { name: "N11-C-G", image: "/products/downlight-kzn/N11-C-G.png" }
+      ],
+      category: "downlight"
+    },
+    {
+      id: 36,
+      title: "N3100",
+      slug: "downlight-n3100",
+      image: "/products/Downlight/N3100.png",
+      price: 780000,
+      description: "Đèn chóa âm trần chống chói với chất liệu nhựa PC, kích thước chóa Ø110×H29mm, cut out Ø75-100mm. Màu trắng tinh tế, tương thích với chip LED Osram/CREE/Samsung.",
+      mainImage: "/products/Downlight/N3100.png",
+      variants: [
+        { name: "N3100", image: "/products/Downlight/N3100.png" }
+      ],
+      category: "downlight"
+    },
+    {
+      id: 37,
+      title: "P04-W",
+      slug: "downlight-p04-w",
+      image: "/products/Downlight/P04-W.png",
+      price: 720000,
+      description: "Đèn chóa âm trần chống chói với chất liệu nhựa PC, kích thước chóa Ø88×H39mm, cut out Ø75mm. Màu trắng tinh tế, tương thích với chip LED Osram/CREE/Samsung.",
+      mainImage: "/products/Downlight/P04-W.png",
+      variants: [
+        { name: "P04-W", image: "/products/Downlight/P04-W.png" }
+      ],
+      category: "downlight"
+    },
+    {
+      id: 38,
+      title: "P06-W",
+      slug: "downlight-p06-w",
+      image: "/products/Downlight/P06-W.png",
+      price: 720000,
+      description: "Đèn chóa âm trần chống chói với chất liệu nhựa PC, kích thước chóa Ø88×H39mm, cut out Ø75mm. Màu trắng tinh tế, tương thích với chip LED Osram/CREE/Samsung.",
+      mainImage: "/products/Downlight/P06-W.png",
+      variants: [
+        { name: "P06-W", image: "/products/Downlight/P06-W.png" }
+      ],
+      category: "downlight"
+    },
+    {
+      id: 39,
+      title: "P06-CP",
+      slug: "downlight-p06-cp",
+      image: "/products/downlight-kzn/P06-CP.png",
+      price: 780000,
+      description: "Đèn chóa âm trần chống chói với chất liệu nhựa PC, kích thước chóa Ø88×H39mm, cut out Ø75mm. Màu đồng sang trọng, tương thích với chip LED Osram/CREE/Samsung.",
+      mainImage: "/products/downlight-kzn/P06-CP.png",
+      variants: [
+        { name: "P06-CP", image: "/products/downlight-kzn/P06-CP.png" }
+      ],
+      category: "downlight"
+    },
+    {
+      id: 40,
+      title: "F201975",
+      slug: "downlight-f201975",
+      image: "/products/downlight-kzn/F201975.png",
+      price: 820000,
+      description: "Đèn chóa âm trần chống chói với chất liệu nhựa PC, kích thước chóa Ø120×H40mm, cut out Ø90×H35mm. Màu trắng thanh lịch, tương thích với chip LED Osram/CREE/Samsung.",
+      mainImage: "/products/downlight-kzn/F201975.png",
+      variants: [
+        { name: "F201975", image: "/products/downlight-kzn/F201975.png" }
+      ],
+      category: "downlight"
+    },
+    {
+      id: 41,
+      title: "KZN01875C",
+      slug: "downlight-kzn01875c",
+      image: "/products/downlight-kzn/KZN01875C.jpg",
+      price: 750000,
+      description: "Đèn chóa âm trần không viền với chất liệu nhựa PC, kích thước chóa Ø110×H40mm, cut out Ø75mm. Màu trắng tinh tế, tương thích với chip LED Osram/CREE/Samsung.",
+      mainImage: "/products/downlight-kzn/KZN01875C.jpg",
+      variants: [
+        { name: "KZN01875C - Trắng", image: "/products/downlight-kzn/KZN01875C.jpg" }
+      ],
+      category: "downlight"
+    },
+    {
+      id: 42,
+      title: "YMN-78-WH",
+      slug: "downlight-ymn-78-wh",
+      image: "/products/downlight-kzn/YMN-78-WH.png",
+      price: 950000,
+      description: "Đèn chóa âm trần không viền với chất liệu kim loại cao cấp, kích thước chóa Ø78×H35mm. Màu trắng sang trọng, tương thích với chip LED Osram/CREE/Samsung.",
+      mainImage: "/products/downlight-kzn/YMN-78-WH.png",
+      variants: [
+        { name: "YMN-78-WH", image: "/products/downlight-kzn/YMN-78-WH.png" }
+      ],
+      category: "downlight"
+    },
+    {
+      id: 43,
+      title: "YMN-78-BL",
+      slug: "downlight-ymn-78-bl",
+      image: "/products/downlight-kzn/YMN-78-BL.png",
+      price: 950000,
+      description: "Đèn chóa âm trần không viền với chất liệu kim loại cao cấp, kích thước chóa Ø78×H35mm. Màu đen sang trọng, tương thích với chip LED Osram/CREE/Samsung.",
+      mainImage: "/products/downlight-kzn/YMN-78-BL.png",
+      variants: [
+        { name: "YMN-78-BL", image: "/products/downlight-kzn/YMN-78-BL.png" }
+      ],
+      category: "downlight"
+    },
+    {
+      id: 44,
+      title: "YMN-78-CP",
+      slug: "downlight-ymn-78-cp",
+      image: "/products/downlight-kzn/YMN-78-CP.png",
+      price: 980000,
+      description: "Đèn chóa âm trần không viền với chất liệu kim loại cao cấp, kích thước chóa Ø78×H35mm. Màu đồng sang trọng, tương thích với chip LED Osram/CREE/Samsung.",
+      mainImage: "/products/downlight-kzn/YMN-78-CP.png",
+      variants: [
+        { name: "YMN-78-CP", image: "/products/downlight-kzn/YMN-78-CP.png" }
+      ],
+      category: "downlight"
+    },
+    {
+      id: 45,
+      title: "YMN-78-CF",
+      slug: "downlight-ymn-78-cf",
+      image: "/products/downlight-kzn/YMN-78-CF.png",
+      price: 980000,
+      description: "Đèn chóa âm trần không viền với chất liệu kim loại cao cấp, kích thước chóa Ø78×H35mm. Màu coffee sang trọng, tương thích với chip LED Osram/CREE/Samsung.",
+      mainImage: "/products/downlight-kzn/YMN-78-CF.png",
+      variants: [
+        { name: "YMN-78-CF", image: "/products/downlight-kzn/YMN-78-CF.png" }
+      ],
+      category: "downlight"
+    },
+    {
+      id: 46,
+      title: "YMN-78-RB",
+      slug: "downlight-ymn-78-rb",
+      image: "/products/downlight-kzn/YMN-78-RB.png",
+      price: 980000,
+      description: "Đèn chóa âm trần không viền với chất liệu kim loại cao cấp, kích thước chóa Ø78×H35mm. Màu nâu đỏ (Redish brown) sang trọng, tương thích với chip LED Osram/CREE/Samsung.",
+      mainImage: "/products/downlight-kzn/YMN-78-RB.png",
+      variants: [
+        { name: "YMN-78-RB", image: "/products/downlight-kzn/YMN-78-RB.png" }
+      ],
+      category: "downlight"
+    },
+    {
+      id: 47,
+      title: "B9-12W-3000K",
+      slug: "led-module-b9-12w-3000k",
+      image: "/products/downlight-kzn/B9-12W-3000K.png",
+      price: 1250000,
+      description: "Module LED cao cấp với công suất 12W, kích thước Ø50×H55mm, nhiệt độ màu 3000K. CRI>97, sử dụng chip LED Osram - Đức và driver Dali lTech (Lắp ráp Trung Quốc).",
+      mainImage: "/products/downlight-kzn/B9-12W-3000K.png",
+      variants: [
+        { name: "B9-12W-3000K", image: "/products/downlight-kzn/B9-12W-3000K.png" }
+      ],
+      category: "downlight"
     }
   ];
   

@@ -30,7 +30,7 @@ export const ledModules: LEDModule[] = [
       { 
         id: "b8-6w",
         name: "KZBS08055J B8-6W",
-        image: "/products/downlight-kzn/KZBS080550.jpg",
+        image: "/products/Downlight/KZBS080550.png",
         specs: [
           { label: "Công suất", value: "6W" },
           { label: "Kích thước", value: "Ø50×H22mm" },
@@ -46,12 +46,12 @@ export const ledModules: LEDModule[] = [
   {
     id: "kzb9104502",
     name: "KZB9104502",
-    slug: "led-module-kzb9104502",
+    slug: "downlight-kzb9104502",
     variants: [
       {
         id: "b1-9w",
         name: "KZB9104502 B1-9W",
-        image: "/products/downlight-kzn/KZB010450.jpg",
+        image: "/products/Downlight/KZB010450.png",
         specs: [
           { label: "Công suất", value: "9W" },
           { label: "Kích thước", value: "Ø50×H80mm" },
@@ -107,7 +107,7 @@ export const ledModules: LEDModule[] = [
       {
         id: "pros60-standard",
         name: "PRO.S60",
-        image: "/products/downlight-kzn/PRO.S60.jpg",
+        image: "/products/Downlight/PRO.S60.png",
         specs: [
           { label: "Công suất", value: "12W" },
           { label: "Kích thước", value: "Ø50×H55mm" },
@@ -149,7 +149,7 @@ export const ledModules: LEDModule[] = [
       {
         id: "b9-12w-3000k",
         name: "B9-12W (3000K)",
-        image: "/collections/Downlight/IDA0086.jpg",
+        image: "/products/Downlight/IDA0086.png",
         specs: [
           { label: "Công suất", value: "12W" },
           { label: "Kích thước", value: "Ø50×H55mm" },
@@ -163,7 +163,7 @@ export const ledModules: LEDModule[] = [
       {
         id: "b9-12w-4000k",
         name: "B9-12W (4000K)",
-        image: "/collections/Downlight/IDA0075.jpg",
+        image: "/collections/Downlight/IDA0075.png",
         specs: [
           { label: "Công suất", value: "12W" },
           { label: "Kích thước", value: "Ø50×H55mm" },
@@ -184,7 +184,7 @@ export const ledModules: LEDModule[] = [
       {
         id: "pro-dls38",
         name: "PRO.DLS38",
-        image: "/products/downlight-kzn/PRO.DLS38.jpg",
+        image: "/products/downlight-kzn/PRO.DLS38.png",
         specs: [
           { label: "Công suất", value: "15W" },
           { label: "Kích thước", value: "Ø50×H75mm" },
@@ -198,7 +198,7 @@ export const ledModules: LEDModule[] = [
       {
         id: "pro-dls60",
         name: "PRO.DLS60",
-        image: "/products/downlight-kzn/PRO.DLS60.jpg",
+        image: "/products/downlight-kzn/PRO.DLS60.png",
         specs: [
           { label: "Công suất", value: "15W" },
           { label: "Kích thước", value: "Ø50×H75mm" },
@@ -214,12 +214,12 @@ export const ledModules: LEDModule[] = [
   {
     id: "b9-75-15w",
     name: "B9-75-15W",
-    slug: "led-module-b9-75-15w",
+    slug: "downlight-b9-75-15w",
     variants: [
       {
         id: "b9-75-15w",
         name: "B9-75-15w",
-        image: "/products/downlight-kzn/B9-75-15w.jpg",
+        image: "/products/Downlight/B9-75-15w.png",
         specs: [
           { label: "Công suất", value: "15W" },
           { label: "Kích thước", value: "Ø50×H75mm" },

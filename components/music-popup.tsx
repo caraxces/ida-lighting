@@ -1,6 +1,7 @@
 "use client"
 import { useState, useEffect, useCallback } from "react";
 import { useSound } from "@/hooks/use-sound";
+import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion"
 import Image from "next/image";
 
 // Define types for Howler
@@ -87,14 +88,10 @@ function MusicPopup() {
         <Image 
           src="/Ida B-W2.png" 
           alt="IDA Lighting" 
-          width={180} 
-          height={90}
-          className="mx-auto mb-16"
+          width={200} 
+          height={100}
+          className="mx-auto mb-8"
         />
-        
-        <h1 className="mb-16 text-3xl md:text-5xl font-bold text-white tracking-wider">
-          GIẢI PHÁP CHIẾU SÁNG CHUYÊN NGHIỆP
-        </h1>
         
         <p
           className={`mb-12 text-lg md:text-xl text-white tracking-wider transition-opacity duration-300 ${
@@ -105,26 +102,43 @@ function MusicPopup() {
         </p>
         
         <div className="flex flex-col items-center justify-center gap-6">
-          <div className="mb-4">
+          {/* <div className="mb-4">
             <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-white/80">
               <path d="M9 18V5l12-2v13"></path>
               <circle cx="6" cy="18" r="3"></circle>
               <circle cx="18" cy="16" r="3"></circle>
             </svg>
-          </div>
+          </div> */}
           
-          <button
-            onClick={handleEnterWebsite}
-            className="w-64 h-12 bg-white/10 hover:bg-white/20 text-white font-medium border border-white/30 rounded-sm transition-all duration-300 uppercase tracking-wider"
-          >
-            BẮT ĐẦU
-          </button>
+          {/* CTA Button with 3D effect and hover animation */}
+          <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                animate-bounce
+                transition={{ duration: 0.8, delay: 0.8 }}
+              >
+                <button 
+                  onClick={handleEnterWebsite}
+                  className="relative px-4 py-1.5 text-[14px] font-medium text-white transition-all duration-300 rounded-sm"
+                  style={{
+                    background: "transparent",
+                    boxShadow: "0 0 8px rgba(255, 51, 0, 0.5), 0 0 18px rgba(255, 69, 0, 0.3)",
+                  }}
+                >
+                  <span className="relative z-10">BẮT ĐẦU</span>
+                  <span className="absolute inset-0 rounded-sm overflow-hidden" style={{
+                    background: "transparent",
+                    border: "1px solid rgba(255, 51, 0, 0.5)",
+                    boxShadow: "inset 0 0 5px rgba(255, 51, 0, 0.3)",
+                  }}></span>
+                </button>
+              </motion.div>
           
-          <div className="mt-6 animate-bounce">
+          {/* <div className="mt-6 animate-bounce">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-white/60">
               <path d="M12 5V19M12 19L5 12M12 19L19 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>
