@@ -12,6 +12,32 @@ import { antiGlareTrims, AntiGlareTrim, AntiGlareTrimVariant } from "@/data/anti
 export const metadata: Metadata = {
   title: "Sản phẩm chiếu sáng | IDA Lighting",
   description: "Các loại đèn cao cấp, chóa đèn, và chip LED chất lượng cao từ IDA Lighting",
+  keywords: "IDA Lighting, đèn LED, chiếu sáng, PRO.S38, KZN0875A, KZN0885A, sản phẩm chiếu sáng, đèn cao cấp, chóa đèn, chip LED",
+  openGraph: {
+    title: "Sản phẩm chiếu sáng | IDA Lighting",
+    description: "Các loại đèn cao cấp, chóa đèn, và chip LED chất lượng cao từ IDA Lighting",
+    images: [
+      {
+        url: "https://idalighting.vn/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "IDA Lighting Products",
+      },
+    ],
+    type: 'website',
+    locale: 'vi_VN',
+    url: 'https://idalighting.vn/products',
+    siteName: 'IDA Lighting',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: "Sản phẩm chiếu sáng | IDA Lighting",
+    description: "Các loại đèn cao cấp, chóa đèn, và chip LED chất lượng cao từ IDA Lighting",
+    images: ["https://idalighting.vn/og-image.jpg"],
+  },
+  alternates: {
+    canonical: 'https://idalighting.vn/products',
+  },
 }
 
 // Define types for our data structure
@@ -145,7 +171,7 @@ const downlightProducts: Product[] = [
       {
         id: "kzn0875a",
         name: "KZN0875A - Trắng",
-        image: "/products/downlight-kzn/KZN0875A.jpg",
+        image: "/products/Downlight/KZN0875A.png",
         price: 680000,
         specs: [
           { label: "Loại đèn", value: "Chóa đèn âm trần chống chói" },
@@ -224,7 +250,7 @@ const downlightProducts: Product[] = [
       {
         id: "kzn0775a",
         name: "KZN0775A",
-        image: "/products/downlight-kzn/KZN0775A.jpg",
+        image: "/products/Downlight/KZN0775A.png",
         price: 680000,
         specs: [
           { label: "Loại đèn", value: "Chóa đèn âm trần chống chói vuông" },
@@ -284,7 +310,7 @@ const downlightProducts: Product[] = [
       {
         id: "n11-c-g",
         name: "N11-C-G",
-        image: "/products/downlight-kzn/N11-C-G.png",
+        image: "/products/Downlight/N11-C-G.png",
         price: 850000,
         specs: [
           { label: "Loại đèn", value: "Chóa đèn âm trần chống chói chỉnh hướng góc 15°" },

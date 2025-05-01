@@ -83,7 +83,7 @@ export default function RootLayout({
         <meta property="zalo:app_id" content="2654601455431390089" />
         <meta property="zalo:title" content="IDA Lighting - Giải pháp chiếu sáng chuyên nghiệp" />
         <meta property="zalo:description" content="Giải pháp chiếu sáng chuyên nghiệp, thiết kế ánh sáng sáng tạo" />
-        <meta property="zalo:image" content="/og-image.jpg" />
+        <meta property="zalo:image" content="https://idalighting.vn/og-image.jpg" />
         
         <script
           type="application/ld+json"

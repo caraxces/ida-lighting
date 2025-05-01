@@ -37,9 +37,7 @@ export const ledModules: LEDModule[] = [
           { label: "Nhiệt độ màu", value: "4000K" },
           { label: "Góc chiếu", value: "45°" },
           { label: "CRI", value: "Ra>90" },
-          { label: "Chip", value: "Chip Sanan" },
-          { label: "Driver", value: "Kin tích hợp ổ đĩa (Trung Quốc)" }
-        ]
+          { label: "Chip", value: "Chip Sanan" }        ]
       }
     ]
   },
@@ -58,9 +56,7 @@ export const ledModules: LEDModule[] = [
           { label: "Nhiệt độ màu", value: "4000K" },
           { label: "Góc chiếu", value: "38°" },
           { label: "CRI", value: "Ra>92" },
-          { label: "Chip", value: "Chip Sanan" },
-          { label: "Driver", value: "Kinsuny (Trung Quốc)" }
-        ]
+          { label: "Chip", value: "Chip Sanan" }        ]
       }
     ]
   },
@@ -72,30 +68,26 @@ export const ledModules: LEDModule[] = [
       {
         id: "pros38-c",
         name: "PRO.S38 (C)",
-        image: "/products/downlight-kzn/PRO.S38.jpg",
+        image: "/products/Downlight/PRO.S38.png",
         specs: [
           { label: "Công suất", value: "12W" },
           { label: "Kích thước", value: "Ø50×H55mm" },
           { label: "Nhiệt độ màu", value: "4000K" },
           { label: "Góc chiếu", value: "38°" },
           { label: "CRI", value: "Ra>97" },
-          { label: "Chip", value: "Chip Osram - Đức" },
-          { label: "Driver", value: "Osram - Đức (Lắp ráp Trung Quốc)" }
-        ]
+          { label: "Chip", value: "Chip Osram - Đức" }        ]
       },
       {
         id: "pros38-m",
         name: "PRO.S38 (M)",
-        image: "/collections/Downlight/IDA0076.jpg",
+        image: "/products/Downlight/PRO.S38.png",
         specs: [
           { label: "Công suất", value: "12W" },
           { label: "Kích thước", value: "Ø50×H55mm" },
           { label: "Nhiệt độ màu", value: "4000K" },
           { label: "Góc chiếu", value: "38°" },
           { label: "CRI", value: "Ra>97" },
-          { label: "Chip", value: "Chip Osram - Đức" },
-          { label: "Driver", value: "Osram - Đức (Lắp ráp Trung Quốc)" }
-        ]
+          { label: "Chip", value: "Chip Osram - Đức" }        ]
       }
     ]
   },
@@ -114,9 +106,7 @@ export const ledModules: LEDModule[] = [
           { label: "Nhiệt độ màu", value: "4000K" },
           { label: "Góc chiếu", value: "60°" },
           { label: "CRI", value: "Ra>97" },
-          { label: "Chip", value: "Chip Osram - Đức" },
-          { label: "Driver", value: "Osram - Đức (Lắp ráp Trung Quốc)" }
-        ]
+          { label: "Chip", value: "Chip Osram - Đức" }        ]
       }
     ]
   },
@@ -128,16 +118,14 @@ export const ledModules: LEDModule[] = [
       {
         id: "b3-12w-standard",
         name: "B3-12W",
-        image: "/products/downlight-kzn/B3-12W.jpg",
+        image: "/products/Downlight/B3-12W.png",
         specs: [
           { label: "Công suất", value: "12W" },
           { label: "Kích thước", value: "Ø50×H55mm" },
           { label: "Nhiệt độ màu", value: "3000K" },
           { label: "Góc chiếu", value: "60°" },
           { label: "CRI", value: "Ra>97" },
-          { label: "Chip", value: "Chip Osram - Đức" },
-          { label: "Driver", value: "Osram - Đức (Lắp ráp Trung Quốc)" }
-        ]
+          { label: "Chip", value: "Chip Osram - Đức" }        ]
       }
     ]
   },
@@ -156,9 +144,7 @@ export const ledModules: LEDModule[] = [
           { label: "Nhiệt độ màu", value: "3000K" },
           { label: "Góc chiếu", value: "60°" },
           { label: "CRI", value: "Ra>97" },
-          { label: "Chip", value: "Chip Osram - Đức" },
-          { label: "Driver", value: "Osram - Đức (Lắp ráp Trung Quốc)" }
-        ]
+          { label: "Chip", value: "Chip Osram - Đức" }        ]
       },
       {
         id: "b9-12w-4000k",
@@ -170,9 +156,7 @@ export const ledModules: LEDModule[] = [
           { label: "Nhiệt độ màu", value: "4000K" },
           { label: "Góc chiếu", value: "60°" },
           { label: "CRI", value: "Ra>97" },
-          { label: "Chip", value: "Chip Osram - Đức" },
-          { label: "Driver", value: "Osram - Đức (Lắp ráp Trung Quốc)" }
-        ]
+          { label: "Chip", value: "Chip Osram - Đức" }        ]
       }
     ]
   },
@@ -184,30 +168,26 @@ export const ledModules: LEDModule[] = [
       {
         id: "pro-dls38",
         name: "PRO.DLS38",
-        image: "/products/downlight-kzn/PRO.DLS38.png",
+        image: "/products/Downlight/PRO.DLS38.png",
         specs: [
           { label: "Công suất", value: "15W" },
           { label: "Kích thước", value: "Ø50×H75mm" },
           { label: "Nhiệt độ màu", value: "2700-6500K" },
           { label: "Góc chiếu", value: "38°" },
           { label: "CRI", value: "Ra>97" },
-          { label: "Chip", value: "Chip Osram - Đức" },
-          { label: "Driver", value: "Dali lTech (Lắp ráp Trung Quốc)" }
-        ]
+          { label: "Chip", value: "Chip Osram - Đức" }        ]
       },
       {
         id: "pro-dls60",
         name: "PRO.DLS60",
-        image: "/products/downlight-kzn/PRO.DLS60.png",
+        image: "/products/Downlight/PRO.DLS60.png",
         specs: [
           { label: "Công suất", value: "15W" },
           { label: "Kích thước", value: "Ø50×H75mm" },
           { label: "Nhiệt độ màu", value: "2700-6500K" },
           { label: "Góc chiếu", value: "60°" },
           { label: "CRI", value: "Ra>97" },
-          { label: "Chip", value: "Chip Osram - Đức" },
-          { label: "Driver", value: "Dali lTech (Lắp ráp Trung Quốc)" }
-        ]
+          { label: "Chip", value: "Chip Osram - Đức" }        ]
       }
     ]
   },
@@ -226,8 +206,7 @@ export const ledModules: LEDModule[] = [
           { label: "Nhiệt độ màu", value: "2700-6500K" },
           { label: "Góc chiếu", value: "60°" },
           { label: "CRI", value: "Ra>97" },
-          { label: "Chip", value: "GreatShine Chip" },
-          { label: "Driver", value: "JINK (Lắp ráp Trung Quốc)" }
+          { label: "Chip", value: "GreatShine Chip" }
         ]
       }
     ]

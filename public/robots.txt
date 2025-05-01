@@ -3,4 +3,10 @@ User-agent: *
 Allow: /api/og
 Disallow:
 
+# Explicitly allow Zalo bot
+User-agent: ZaloBot
+Allow: /
+Allow: /products/
+Allow: /projects/
+
 Sitemap: https://idalighting.vn/sitemap.xml 

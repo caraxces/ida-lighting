@@ -29,13 +29,13 @@ export const antiGlareTrims: AntiGlareTrim[] = [
       {
         id: "kzn0875a-white",
         name: "KZN0875A - Trắng",
-        image: "/products/downlight-kzn/KZN0875A.jpg",
+        image: "/products/Downlight/KZN0875A.png",
         specs: [
           { label: "Chất liệu", value: "Nhựa PC" },
           { label: "Kích thước chóa", value: "Ø85×36mm" },
           { label: "Cut out", value: "Ø75mm" },
           { label: "Màu sắc", value: "Trắng" },
-          { label: "Chip LED", value: "Tương thích Osram/CREE/Samsung" }
+          { label: "Chip LED", value: "Tương thích Osram/CREE" }
         ]
       }
     ]
@@ -73,7 +73,7 @@ export const antiGlareTrims: AntiGlareTrim[] = [
           { label: "Kích thước chóa", value: "Ø95×51mm" },
           { label: "Cut out", value: "Ø85mm" },
           { label: "Màu sắc", value: "Trắng" },
-          { label: "Chip LED", value: "Tương thích Osram/CREE/Samsung" }
+          { label: "Chip LED", value: "Tương thích Osram/CREE" }
         ]
       }
     ]
@@ -92,7 +92,7 @@ export const antiGlareTrims: AntiGlareTrim[] = [
           { label: "Kích thước chóa", value: "Ø93×H33mm" },
           { label: "Cut out", value: "Ø85mm" },
           { label: "Màu sắc", value: "Trắng" },
-          { label: "Chip LED", value: "Tương thích Osram/CREE/Samsung" }
+          { label: "Chip LED", value: "Tương thích Osram/CREE" }
         ]
       }
     ]
@@ -105,13 +105,13 @@ export const antiGlareTrims: AntiGlareTrim[] = [
       {
         id: "kzn0775a",
         name: "KZN0775A - Trắng",
-        image: "/products/downlight-kzn/KZN0775A.jpg",
+        image: "/products/Downlight/KZN0775A.png",
         specs: [
           { label: "Chất liệu", value: "Nhựa PC" },
           { label: "Kích thước chóa", value: "85×85×H36mm" },
           { label: "Cut out", value: "Ø75mm" },
           { label: "Màu sắc", value: "Trắng" },
-          { label: "Chip LED", value: "Tương thích Osram/CREE/Samsung" }
+          { label: "Chip LED", value: "Tương thích Osram/CREE" }
         ]
       }
     ]
@@ -162,13 +162,13 @@ export const antiGlareTrims: AntiGlareTrim[] = [
       {
         id: "n11-c-g",
         name: "N11-C-G",
-        image: "/products/downlight-kzn/N11-C-G.png",
+        image: "/products/Downlight/N11-C-G.png",
         specs: [
           { label: "Chất liệu", value: "Nhựa PC" },
           { label: "Kích thước chóa", value: "Ø88×H39mm" },
           { label: "Cut out", value: "Ø75mm" },
           { label: "Màu sắc", value: "White + Plating rose gold" },
-          { label: "Chip LED", value: "Tương thích Osram/CREE/Samsung" }
+          { label: "Chip LED", value: "Tương thích Osram/CREE" }
         ]
       }
     ]
@@ -187,7 +187,7 @@ export const antiGlareTrims: AntiGlareTrim[] = [
           { label: "Kích thước chóa", value: "Ø110×H29mm" },
           { label: "Cut out", value: "Ø75-100mm" },
           { label: "Màu sắc", value: "White" },
-          { label: "Chip LED", value: "Tương thích Osram/CREE/Samsung" }
+          { label: "Chip LED", value: "Tương thích Osram/CREE" }
         ]
       }
     ]
@@ -200,13 +200,13 @@ export const antiGlareTrims: AntiGlareTrim[] = [
       {
         id: "p04-w",
         name: "P04-W",
-        image: "/products/downlight-kzn/P04-W.png",
+        image: "/products/Downlight/P04-W.png",
         specs: [
           { label: "Chất liệu", value: "Nhựa PC" },
           { label: "Kích thước chóa", value: "Ø88×H39mm" },
           { label: "Cut out", value: "Ø75mm" },
           { label: "Màu sắc", value: "White" },
-          { label: "Chip LED", value: "Tương thích Osram/CREE/Samsung" }
+          { label: "Chip LED", value: "Tương thích Osram/CREE" }
         ]
       }
     ]
@@ -225,7 +225,7 @@ export const antiGlareTrims: AntiGlareTrim[] = [
           { label: "Kích thước chóa", value: "Ø88×H39mm" },
           { label: "Cut out", value: "Ø75mm" },
           { label: "Màu sắc", value: "White" },
-          { label: "Chip LED", value: "Tương thích Osram/CREE/Samsung" }
+          { label: "Chip LED", value: "Tương thích Osram/CREE" }
         ]
       }
     ]
@@ -238,13 +238,13 @@ export const antiGlareTrims: AntiGlareTrim[] = [
       {
         id: "p06-cp",
         name: "P06-CP",
-        image: "/products/downlight-kzn/P06-CP.png",
+        image: "/products/Downlight/P06-CP.png",
         specs: [
           { label: "Chất liệu", value: "Nhựa PC" },
           { label: "Kích thước chóa", value: "Ø88×H39mm" },
           { label: "Cut out", value: "Ø75mm" },
           { label: "Màu sắc", value: "Copper" },
-          { label: "Chip LED", value: "Tương thích Osram/CREE/Samsung" }
+          { label: "Chip LED", value: "Tương thích Osram/CREE" }
         ]
       }
     ]
@@ -257,13 +257,13 @@ export const antiGlareTrims: AntiGlareTrim[] = [
       {
         id: "f201975",
         name: "F201975",
-        image: "/products/downlight-kzn/F201975.png",
+        image: "/products/Downlight/F201975.png",
         specs: [
           { label: "Chất liệu", value: "Nhựa PC" },
           { label: "Kích thước chóa", value: "Ø120×H40mm" },
           { label: "Cut out", value: "Ø90×H35mm" },
           { label: "Màu sắc", value: "Trắng" },
-          { label: "Chip LED", value: "Tương thích Osram/CREE/Samsung" }
+          { label: "Chip LED", value: "Tương thích Osram/CREE" }
         ]
       }
     ]
@@ -278,13 +278,13 @@ export const antiGlareTrims: AntiGlareTrim[] = [
       {
         id: "kzn01875c",
         name: "KZN01875C - Trắng",
-        image: "/products/downlight-kzn/KZN01875C.jpg",
+        image: "/products/Downlight/KZN01875C.png",
         specs: [
           { label: "Chất liệu", value: "Nhựa PC" },
           { label: "Kích thước chóa", value: "Ø110×H40mm" },
           { label: "Cut out", value: "Ø75mm" },
           { label: "Màu sắc", value: "Trắng" },
-          { label: "Chip LED", value: "Tương thích Osram/CREE/Samsung" }
+          { label: "Chip LED", value: "Tương thích Osram/CREE" }
         ]
       }
     ]
@@ -297,12 +297,12 @@ export const antiGlareTrims: AntiGlareTrim[] = [
       {
         id: "ymn-78-wh",
         name: "YMN-78-WH",
-        image: "/products/downlight-kzn/YMN-78-WH.png",
+        image: "/products/Downlight/YMN-78-WH.png",
         specs: [
           { label: "Chất liệu", value: "Kim loại" },
           { label: "Kích thước chóa", value: "Ø78×H35mm" },
           { label: "Màu sắc", value: "Trắng" },
-          { label: "Chip LED", value: "Tương thích Osram/CREE/Samsung" }
+          { label: "Chip LED", value: "Tương thích Osram/CREE" }
         ]
       }
     ]
@@ -315,12 +315,12 @@ export const antiGlareTrims: AntiGlareTrim[] = [
       {
         id: "ymn-78-bl",
         name: "YMN-78-BL",
-        image: "/products/downlight-kzn/YMN-78-BL.png",
+        image: "/products/Downlight/YMN-78-BL.png",
         specs: [
           { label: "Chất liệu", value: "Kim loại" },
           { label: "Kích thước chóa", value: "Ø78×H35mm" },
           { label: "Màu sắc", value: "Đen" },
-          { label: "Chip LED", value: "Tương thích Osram/CREE/Samsung" }
+          { label: "Chip LED", value: "Tương thích Osram/CREE" }
         ]
       }
     ]
@@ -333,12 +333,12 @@ export const antiGlareTrims: AntiGlareTrim[] = [
       {
         id: "ymn-78-cp",
         name: "YMN-78-CP",
-        image: "/products/downlight-kzn/YMN-78-CP.png",
+        image: "/products/Downlight/YMN-78-CP.png",
         specs: [
           { label: "Chất liệu", value: "Kim loại" },
           { label: "Kích thước chóa", value: "Ø78×H35mm" },
           { label: "Màu sắc", value: "Đồng" },
-          { label: "Chip LED", value: "Tương thích Osram/CREE/Samsung" }
+          { label: "Chip LED", value: "Tương thích Osram/CREE" }
         ]
       }
     ]
@@ -351,12 +351,12 @@ export const antiGlareTrims: AntiGlareTrim[] = [
       {
         id: "ymn-78-cf",
         name: "YMN-78-CF",
-        image: "/products/downlight-kzn/YMN-78-CF.png",
+        image: "/products/Downlight/YMN-78-CF.png",
         specs: [
           { label: "Chất liệu", value: "Kim loại" },
           { label: "Kích thước chóa", value: "Ø78×H35mm" },
           { label: "Màu sắc", value: "Coffee" },
-          { label: "Chip LED", value: "Tương thích Osram/CREE/Samsung" }
+          { label: "Chip LED", value: "Tương thích Osram/CREE" }
         ]
       }
     ]
@@ -369,12 +369,12 @@ export const antiGlareTrims: AntiGlareTrim[] = [
       {
         id: "ymn-78-rb",
         name: "YMN-78-RB",
-        image: "/products/downlight-kzn/YMN-78-RB.png",
+        image: "/products/Downlight/YMN-78-RB.png",
         specs: [
           { label: "Chất liệu", value: "Kim loại" },
           { label: "Kích thước chóa", value: "Ø78×H35mm" },
           { label: "Màu sắc", value: "Redish brown" },
-          { label: "Chip LED", value: "Tương thích Osram/CREE/Samsung" }
+          { label: "Chip LED", value: "Tương thích Osram/CREE" }
         ]
       }
     ]
@@ -387,7 +387,7 @@ export const antiGlareTrims: AntiGlareTrim[] = [
       {
         id: "b9-12w-3000k",
         name: "B9-12W-3000K",
-        image: "/products/downlight-kzn/B9-12W-3000K.png",
+        image: "/products/Downlight/B9-12W-3000K.png",
         specs: [
           { label: "Công suất", value: "12W" },
           { label: "Kích thước", value: "Ø50×H55mm" },
