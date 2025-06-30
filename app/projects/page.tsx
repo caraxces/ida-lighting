@@ -80,7 +80,7 @@ const projects = [
     location: "Vietnam",
     category: "Corporate",
     application: ["Facades", "Interior", "Public spaces"],
-    image: "/work/vn4/2020_12_26_19_53_IMG_0314-min.JPG",
+    image: "/work/vn4/2020_12_26_19_53_IMG_0314.JPG",
     slug: "retail",
   },
   {

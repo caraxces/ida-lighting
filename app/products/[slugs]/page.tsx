@@ -476,12 +476,12 @@ const getAllProducts = (): Product[] => {
       id: 34,
       title: "E35",
       slug: "downlight-e35",
-      image: "/collections/Downlight/IDA0075.JPG",
+      image: "/products/Downlight/IDA0075.png",
       price: 1250000,
       description: "Đèn âm trần Spotlight. Màu sắc: Trắng. Góc chiếu: 15°. CRI> 97Ra. Nhiệt độ màu: 3000K. Chip: Osram.",
-      mainImage: "/collections/Downlight/IDA0075.JPG",
+      mainImage: "/products/Downlight/IDA0075.png",
       variants: [
-        { name: "E35", image: "/collections/Downlight/IDA0075.JPG" },
+        { name: "E35", image: "/products/Downlight/IDA0075.png" },
       ],
       category: "downlight"
     },
@@ -503,12 +503,12 @@ const getAllProducts = (): Product[] => {
       id: 36,
       title: "PRO.S60 Combo",
       slug: "downlight-pros60-combo",
-      image: "/collections/Downlight/IDA0075.JPG", 
+      image: "/products/Downlight/PRO.S60.png", 
       price: 1450000,
       description: "Combo đèn âm trần chống chói chỉnh hướng góc 15°. Kích thước chóa: Ø88*H39mm. Kích thước bóng: Ø50*H55mm. Nhiệt độ màu: 4000K. Góc chiếu: 60°. CRI: Ra>97.",
-      mainImage: "/collections/Downlight/IDA0075.JPG",
+      mainImage: "/products/Downlight/PRO.S60.png",
       variants: [
-        { name: "PRO.S60 Combo", image: "/collections/Downlight/IDA0075.JPG" },
+        { name: "PRO.S60 Combo", image: "/products/Downlight/PRO.S60.png" },
       ],
       category: "downlight"
     },

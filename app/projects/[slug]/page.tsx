@@ -221,7 +221,7 @@ const projects: Record<string, Project> = {
         name: "PRO.S60 (W)",
         description: "Đèn âm trần chống chói với góc chiếu rộng, phù hợp cho không gian cafe cần ánh sáng đồng đều",
         specs: "∅50*H75mm, COB 15W, 60°, 97Ra",
-        image: "/collections/Downlight/IDA0075.JPG"
+        image: "/products/Downlight/IDA0075.png"
       }
     ],
     items: [
@@ -328,14 +328,14 @@ const projects: Record<string, Project> = {
         name: "Pendant Light Cafe",
         description: "Đèn thả trang trí với ánh sáng ấm áp",
         specs: "2700K, 12W, IP20",
-        image: "/placeholder.svg?text=Pendant+Light"
+        image: "/collections/chad/ĐÈN CIRCULAR/ĐÈN CIRCULAR/3.jpg"
       },
       {
         id: "track-light-cafe",
         name: "Track Light Cafe",
         description: "Đèn rọi ray điều chỉnh được góc chiếu",
         specs: "3000K, 9W, 24°, IP20",
-        image: "/placeholder.svg?text=Track+Light"
+        image: "/collections/out-door/CP20183/5.jpg"
       }
     ],
     items: [
@@ -585,7 +585,7 @@ const projects: Record<string, Project> = {
         name: "PRO.S60 (W)",
         description: "Đèn âm trần chống chói",
         specs: "∅50*H75mm, 15W, 60°, 97Ra",
-        image: "/collections/Downlight/IDA0075.JPG"
+        image: "/products/Downlight/IDA0075.png"
       },
       {
         id: "outdoor-3",
@@ -663,29 +663,10 @@ const projects: Record<string, Project> = {
       { id: 31, image: "/work/vn4/2020_12_26_19_52_IMG_0311-min.JPG" },
       { id: 32, image: "/work/vn4/2020_12_26_19_52_IMG_0312-min.JPG" },
       { id: 33, image: "/work/vn4/2020_12_26_19_53_IMG_0313-min.JPG" },
-      { id: 34, image: "/work/vn4/2020_12_26_19_53_IMG_0314-min.JPG" },
       { id: 35, image: "/work/vn4/2020_12_26_20_07_IMG_0315-min.JPG" },
       { id: 36, image: "/work/vn4/2021_01_21_21_09_IMG_0340-min.JPG" },
       { id: 37, image: "/work/vn4/2021_01_21_21_09_IMG_0341-min.JPG" },
-      { id: 38, image: "/work/vn4/2021_01_21_21_09_IMG_0342-min.JPG" },
-      { id: 39, image: "/work/vn4/2021_01_24_20_15_IMG_0353-min.JPG" },
-      { id: 40, image: "/work/vn4/2021_01_24_20_16_IMG_0354-min.JPG" },
-      { id: 41, image: "/work/vn4/2021_01_24_20_18_IMG_0358-min.JPG" },
-      { id: 42, image: "/work/vn4/2021_02_01_11_03_IMG_0377-min.JPG" },
-      { id: 43, image: "/work/vn4/2021_02_01_11_04_IMG_0378-min.JPG" },
-      { id: 44, image: "/work/vn4/2021_02_09_23_18_IMG_0412-min.JPG" },
-      { id: 45, image: "/work/vn4/2021_02_09_23_19_IMG_0413-min.JPG" },
-      { id: 46, image: "/work/vn4/2021_02_09_23_20_IMG_0414-min.JPG" },
-      { id: 47, image: "/work/vn4/2021_02_09_23_20_IMG_0415-min.JPG" },
-      { id: 48, image: "/work/vn4/2021_02_10_20_53_IMG_0416-min.JPG" },
-      { id: 49, image: "/work/vn4/2021_02_10_20_53_IMG_0417-min.JPG" },
-      { id: 50, image: "/work/vn4/2021_02_10_20_53_IMG_0418-min.JPG" },
-      { id: 51, image: "/work/vn4/2021_02_10_20_53_IMG_0419-min.JPG" },
-      { id: 52, image: "/work/vn4/2021_03_01_22_20_IMG_0879-min.JPG" },
-      { id: 53, image: "/work/vn4/2021_03_24_20_55_IMG_0422-min.JPG" },
-      { id: 54, image: "/work/vn4/2021_03_24_20_56_IMG_0423-min.JPG" },
-      { id: 55, image: "/work/vn4/2021_04_14_20_43_IMG_0426-min.JPG" },
-      { id: 56, image: "/work/vn4/2021_04_14_20_44_IMG_0429-min.JPG" }
+      { id: 38, image: "/work/vn4/2021_01_21_21_09_IMG_0342-min.JPG" }
     ],
   },
   "mochi-cafe": {
@@ -767,7 +748,7 @@ const projects: Record<string, Project> = {
         name: "PRO.S60 (S)",
         description: "Combo đèn âm trần chống chói chỉnh hướng góc 15°",
         specs: "∅50*H55mm, 4000K, 60°, Ra>97",
-        image: "/collections/Downlight/IDA0075.JPG"
+        image: "/products/Downlight/PRO.S60.png"
       },
       {
         id: "outdoor-v1",
@@ -825,7 +806,7 @@ const projects: Record<string, Project> = {
         name: "PRO.S60 (W)",
         description: "Đèn âm trần chống chói",
         specs: "∅50*H75mm, 15W, 60°, 97Ra",
-        image: "/collections/Downlight/IDA0075.JPG"
+        image: "/products/Downlight/IDA0075.png"
       },
       {
         id: "outdoor-lh",
@@ -887,7 +868,7 @@ const projects: Record<string, Project> = {
         name: "PRO.S60 (W)",
         description: "Recessed downlight with adjustable beam angle",
         specs: "3000K, 15W, 60°, IP44, 97Ra",
-        image: "/collections/Downlight/IDA0075.JPG"
+        image: "/products/Downlight/IDA0075.png"
       },
       {
         id: "outdoor-v44",
