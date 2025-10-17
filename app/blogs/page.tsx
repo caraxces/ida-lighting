@@ -49,8 +49,6 @@ export default async function BlogsPage() {
     getFeaturedBlogPosts()
   ])
 
-  console.log('Blog data fetched:', { allPosts: allPosts.length, featuredPosts: featuredPosts.length })
-  console.log('Sample post:', allPosts[0])
 
   // Group posts by category
   const postsByCategory = allPosts.reduce((acc, post) => {
@@ -76,11 +74,6 @@ export default async function BlogsPage() {
           />
 
           <div className="container mx-auto px-4 space-y-20">
-            {/* Debug info - Remove in production */}
-            <div className="text-center text-gray-400 text-sm mb-4">
-              <p>Debug: {allPosts.length} bài viết, {featuredPosts.length} bài nổi bật</p>
-              <p>Categories: {Object.keys(postsByCategory).join(', ')}</p>
-            </div>
 
             {/* Featured Posts in Vertical Layout */}
             {featuredPosts.length > 0 ? (
