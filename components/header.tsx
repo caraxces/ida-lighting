@@ -86,6 +86,7 @@ export default function Header({ onButtonClick, onButtonHover }: HeaderProps) {
         { title: "Đèn Outdoor", href: "/products#outdoor" },
       ],
     },
+    { title: "Blog", href: "/blogs" },
     { title: "Contacts", href: "/contacts" },
   ]
 
@@ -175,6 +176,19 @@ export default function Header({ onButtonClick, onButtonHover }: HeaderProps) {
                 onMouseEnter={onButtonHover}
               >
                 Projects
+              </Link>
+              <Link
+                href="/blogs"
+                className={cn(
+                  "px-3 py-2 font-medium transition-all duration-300 relative",
+                  pathname === "/blogs"
+                    ? "text-white [text-shadow:0_0_15px_rgba(255,255,255,0.7)]"
+                    : "text-gray-400 hover:text-white hover:[text-shadow:0_0_15px_rgba(255,255,255,0.7)]",
+                )}
+                onClick={(e) => handleNavClick(e)}
+                onMouseEnter={onButtonHover}
+              >
+                Blog
               </Link>
               <Link
                 href="/contacts"
