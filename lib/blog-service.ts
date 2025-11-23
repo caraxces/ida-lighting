@@ -1,5 +1,6 @@
 import { supabase } from './supabase'
-import { BlogPost, BlogAuthor, BlogCategory, BlogTag } from '@/src/types/blog'
+import { createClient } from './supabase/server'
+import { BlogPost, BlogAuthor, BlogCategory, BlogTag, ContentBlock } from '@/src/types/blog'
 
 export async function getBlogPosts(): Promise<BlogPost[]> {
   try {
@@ -143,6 +144,60 @@ export async function getBlogTags(): Promise<BlogTag[]> {
     }
 
     return data || []
+  } catch (error) {
+    return []
+  }
+}
+
+/**
+ * Fetch content blocks for a specific blog post
+ */
+export async function getContentBlocks(postId: string): Promise<ContentBlock[]> {
+  try {
+    if (!postId) {
+      return []
+    }
+    
+    const { data, error } = await supabase
+      .from('blog_content_blocks')
+      .select('*')
+      .eq('post_id', postId)
+      .order('position', { ascending: true })
+
+    if (error || !data || data.length === 0) {
+      return []
+    }
+
+    // Parse and normalize data
+    const parsedData = data.map((block: any) => {
+      // Handle table_data if it's a JSON string
+      if (block.table_data && typeof block.table_data === 'string') {
+        try {
+          block.table_data = JSON.parse(block.table_data)
+        } catch (e) {
+          // Silently ignore parsing errors
+        }
+      }
+      
+      // Normalize column names - support various naming conventions
+      const normalizedBlock: ContentBlock = {
+        id: block.id,
+        post_id: block.post_id,
+        block_type: (block.block_type || block.type) as 'image_content' | 'comparison_table' | 'text_content',
+        position: block.position || block.order || block.sort_order || 0,
+        heading: block.heading || block.title || block.headline || undefined,
+        content: block.content || block.text || block.body || undefined,
+        image_url: block.image_url || block.image_path || block.image || undefined,
+        image_position: (block.image_position || block.image_align || block.align || 'left') as 'left' | 'right',
+        table_data: block.table_data || block.table || block.comparison_data || undefined,
+        created_at: block.created_at,
+        updated_at: block.updated_at,
+      }
+      
+      return normalizedBlock
+    })
+
+    return parsedData
   } catch (error) {
     return []
   }

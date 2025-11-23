@@ -49,3 +49,27 @@ export interface BlogPostTag {
   post_id: string
   tag_id: string
 }
+
+// Content Blocks Types
+export interface ComparisonTableData {
+  title?: string
+  columns: string[]
+  rows: {
+    label: string
+    values: string[]
+  }[]
+}
+
+export interface ContentBlock {
+  id: string
+  post_id: string
+  block_type: 'image_content' | 'comparison_table' | 'text_content'
+  position: number
+  heading?: string
+  content?: string
+  image_url?: string
+  image_position?: 'left' | 'right'
+  table_data?: ComparisonTableData
+  created_at: string
+  updated_at: string
+}

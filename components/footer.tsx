@@ -23,16 +23,6 @@ export default function Footer() {
       labelText: "Zalo khách hàng",
     },
     {
-      id: "zalo-contractor",
-      title: "Zalo đối tác",
-      subtitle: "Dành cho chủ thầu & đối tác",
-      image: "/about/zlida.jpg",
-      buttonText: "Mở Zalo",
-      buttonLink: "https://zaloapp.com/qr/p/1edp1nqjncqgm",
-      labelColor: "text-blue-400",
-      labelText: "Zalo đối tác",
-    },
-    {
       id: "wechat",
       title: "WeChat",
       subtitle: "For international customers",
@@ -163,12 +153,10 @@ export default function Footer() {
               >
                 <div className={`relative w-full h-full p-3 border-2 ${
                   qr.id === "zalo-customer" ? "border-blue-500/40 bg-gradient-to-br from-slate-900/80 to-red-900/30 group-hover:border-blue-500/70" :
-                  qr.id === "zalo-contractor" ? "border-blue-500/40 bg-gradient-to-br from-slate-900/80 to-blue-900/30 group-hover:border-blue-500/70" :
                   "border-green-500/40 bg-gradient-to-br from-slate-900/80 to-green-900/30 group-hover:border-green-500/70"
                 } backdrop-blur-sm rounded-xl overflow-hidden transition duration-300`}>
                   <div className={`absolute inset-0 ${
                     qr.id === "zalo-customer" ? "bg-gradient-to-br from-red-500/5 to-blue-500/5" :
-                    qr.id === "zalo-contractor" ? "bg-gradient-to-br from-blue-500/5 to-purple-500/5" :
                     "bg-gradient-to-br from-green-500/5 to-teal-500/5"
                   } opacity-0 group-hover:opacity-100 transition-opacity duration-300`}></div>
                   <div className="relative z-10 flex flex-col h-full">

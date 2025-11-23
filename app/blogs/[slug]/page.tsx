@@ -5,7 +5,8 @@ import Image from 'next/image'
 import Link from 'next/link'
 import Header from "@/components/header"
 import Footer from "@/components/footer"
-import { getBlogPost, getBlogPosts } from "@/lib/blog-service"
+import { ContentBlocksDisplay } from "@/components/content-blocks-display"
+import { getBlogPost, getBlogPosts, getContentBlocks } from "@/lib/blog-service"
 
 interface PageParams {
   slug: string
@@ -68,6 +69,9 @@ export default async function BlogPostPage({ params }: { params: PageParams }) {
     notFound()
   }
 
+  // Fetch content blocks for this post
+  const contentBlocks = await getContentBlocks(post.id)
+
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString('vi-VN', {
       year: 'numeric',
@@ -124,31 +128,29 @@ export default async function BlogPostPage({ params }: { params: PageParams }) {
             </div>
           </div>
 
-          {/* Content */}
-          <div className="prose prose-invert prose-lg max-w-none">
-            <div 
-              className="text-gray-300 leading-relaxed"
-              dangerouslySetInnerHTML={{ __html: post.content }}
-            />
-          </div>
+          {/* Main Content */}
+          {post.content && (
+            <div className="prose prose-invert prose-lg max-w-none">
+              <div 
+                className="text-gray-300 leading-relaxed"
+                dangerouslySetInnerHTML={{ __html: post.content }}
+              />
+            </div>
+          )}
+
+          {/* Content Blocks */}
+          {contentBlocks && contentBlocks.length > 0 && (
+            <ContentBlocksDisplay blocks={contentBlocks} />
+          )}
 
           {/* Author Section */}
           {post.author && (
             <div className="mt-12 p-6 bg-gray-900 rounded-lg">
-              <div className="flex items-center gap-4">
-                <div className="w-16 h-16 rounded-full overflow-hidden">
-                  <Image
-                    src={post.author.avatar_url || "/placeholder-user.jpg"}
-                    alt={post.author.name}
-                    width={64}
-                    height={64}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <div>
-                  <h3 className="text-xl font-semibold text-white">{post.author.name}</h3>
-                  <p className="text-gray-400">{post.author.bio}</p>
-                </div>
+              <div>
+                <h3 className="text-xl font-semibold text-white">{post.author.name}</h3>
+                {post.author.bio && (
+                  <p className="text-gray-400 mt-2">{post.author.bio}</p>
+                )}
               </div>
             </div>
           )}
